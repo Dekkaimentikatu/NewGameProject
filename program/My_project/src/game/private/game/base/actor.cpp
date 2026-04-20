@@ -8,19 +8,14 @@ void C_ACTOR_BASE::Init()
 
 	m_hp = 0;					//HP
 
-	m_animIndex = 0;			//アニメーションのインデックス
-
-	m_animPlayTime = 0;			//アニメーションの再生時間
-
-	m_animAllPlayTime = 0;		//アニメーションの総再生時間
-
-	m_animPlaySpeed = 1;		//アニメーションの再生速度
-
 	m_isActive = true;			//生存フラグ
 
 }
 
-
+void C_ACTOR_BASE::Request(T_OBJECT_DATA _objectData)
+{
+	m_objectData = _objectData;		//オブジェクトデータの保存
+}
 
 int C_ACTOR_BASE::GetAtt()
 {

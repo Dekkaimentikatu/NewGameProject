@@ -36,4 +36,5 @@ public:
 	void Draw() override;
 	void Exit() override;
 	void HitCalc();
+	void Request(T_OBJECT_DATA _objectData);
 };

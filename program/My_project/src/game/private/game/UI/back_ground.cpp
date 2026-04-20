@@ -1,4 +1,5 @@
 #include "game/UI/back_ground.h"
+#include "lib/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_BACK_GROUND::Init(VECTOR _pos)
@@ -15,7 +16,9 @@ void C_BACK_GROUND::Init(VECTOR _pos)
 //“Çž
 void C_BACK_GROUND::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/background.png");
+	C_2D_HNDL_MANAGER* instance = C_2D_HNDL_MANAGER::GetInstance();
+	instance->Load2DImage("data/graphic/TitleBackGround.png");
+	m_hndl1 = instance->Get2DImageHndl("data/graphic/TitleBackGround.png");
 }
 
 //XV
@@ -33,13 +36,15 @@ void C_BACK_GROUND::Update()
 //•`‰æ
 void C_BACK_GROUND::Draw()
 {
-	c_drawGrap->DrawRota(m_hndl1, 0, m_pos, 1.0f, 0);
+	C_2D_HNDL_MANAGER* instance = C_2D_HNDL_MANAGER::GetInstance();
+	instance->DrawRota(&m_hndl1, m_pos, 0, 1.0f);
 }
 
 //I—¹
 void C_BACK_GROUND::Exit()
 {
-
+	C_2D_HNDL_MANAGER* instance = C_2D_HNDL_MANAGER::GetInstance();
+	instance->Delete2DData("data/graphic/TitleBackGround.png");
 }
 
 void C_BACK_GROUND::SetSize(int _sizeX, int _sizeY)

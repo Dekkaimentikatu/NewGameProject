@@ -44,24 +44,24 @@ void C_COLLISION_MANAGER::PlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* _
 	}
 
 	//マネージャー1の攻撃判定
-	if (_player->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_player->GetAttackPos(), _enemy->GetPos(),
-			_player->GetAttackRedius(), _enemy->GetRedius()))
-	{
-		//ノックバックの速度の設定
-		_enemy->SetKonckBackSpeed(_player->GetPos());
+	//if (_player->GetIsAttack() &&
+	//	C_COLLISION::CheckHitSphereToSphere(_player->GetAttackPos(), _enemy->GetPos(),
+	//		_player->GetAttackRedius(), _enemy->GetRedius()))
+	//{
+	//	//ノックバックの速度の設定
+	//	_enemy->SetKonckBackSpeed(_player->GetPos());
 
-		//当たり判定処理
-		_enemy->DamageCalc(_player->GetAtt());
-	}
+	//	//当たり判定処理
+	//	_enemy->DamageCalc(_player->GetAtt());
+	//}
 
-	//マネージャー2の攻撃判定
-	if (_enemy->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_enemy->GetAttackPos(), _player->GetCenter(),
-			_enemy->GetAttackRedius(), _player->GetRedius()))
-	{
-		_player->DamageCalc(_enemy->GetAtt());
-	}
+	////マネージャー2の攻撃判定
+	//if (_enemy->GetIsAttack() &&
+	//	C_COLLISION::CheckHitSphereToSphere(_enemy->GetAttackPos(), _player->GetCenter(),
+	//		_enemy->GetAttackRedius(), _player->GetRedius()))
+	//{
+	//	_player->DamageCalc(_enemy->GetAtt());
+	//}
 }
 
 void C_COLLISION_MANAGER::PlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block)
@@ -149,10 +149,10 @@ void C_COLLISION_MANAGER::PlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _
 	_player->AddPos(result);
 
 
-	if (_block->GetIsAttack())
-	{
-		_player->DamageCalc(_block->GetAtt());
-	}
+	//if (_block->GetIsAttack())
+	//{
+	//	_player->DamageCalc(_block->GetAtt());
+	//}
 
 	MV1CollResultPolyDimTerminate(col);
 }

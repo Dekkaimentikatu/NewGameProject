@@ -78,6 +78,9 @@ public:
 
 	VECTOR GetAttackPos();
 
+	//リクエスト処理
+	void Request(T_OBJECT_DATA _objectData);
+
 	//ATT取得
 	int GetAtt();
 };

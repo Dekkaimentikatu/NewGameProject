@@ -22,6 +22,15 @@ void C_HOLO_BLOCK::Load()
 	SetUpCollInfo();
 }
 
+void C_HOLO_BLOCK::Request(T_OBJECT_DATA _objectData)
+{
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot = _objectData.modelRot;
+	m_objectType = OBJECT_TYPE_BLCOK;
+	m_moveLen = _objectData.moveLen;
+}
+
 void C_HOLO_BLOCK::Step()
 {
 	//イージングの加減速
@@ -79,14 +88,7 @@ void C_HOLO_BLOCK::Exit()
 	DeleteCollInfo();
 }
 
-void C_HOLO_BLOCK::Request(T_OBJECT_DATA _objectData)
-{
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
-	m_objectType = OBJECT_TYPE_BLCOK;
-	m_moveLen = _objectData.moveLen;
-}
+
 
 void C_HOLO_BLOCK::HitCalc()
 {

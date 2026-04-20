@@ -6,6 +6,12 @@ void C_SKY::Init()
 	m_pos = VGet(0, 0, 0);
 }
 
+void C_SKY::Request(T_OBJECT_DATA _objectData)
+{
+	//モデル情報のリクエスト
+	m_objectData = _objectData;
+}
+
 void C_SKY::Load()
 {
 	//モデル情報の読込

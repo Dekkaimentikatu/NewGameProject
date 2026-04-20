@@ -45,15 +45,29 @@ public:
 	//@param int _YNum:画像の横の分割数
 	//@param int _XSize:画像の縦の分割サイズ(px)
 	//@param int _YSize:画像の横の分割サイズ(px)
-	void Load2DImage(char* _imgaeFilePath, int _allNum = 1, int _XNum = 0, int _YNum = 0, int _XSize = 0, int _YSize = 0);
+	void Load2DImage(const char* _imgaeFilePath, int _allNum = 1, int _XNum = 0, int _YNum = 0, int _XSize = 0, int _YSize = 0);
 
 	//画像の取得
 	//@param _modelFilePath:参照したいモデルのファイルパス
 	//@returns 参照したモデルのハンドル
-	int Get2DImageHndl(char* _imgaeFilePath, int _graphNum = 0);
+	int Get2DImageHndl(const char* _imgaeFilePath, int _graphNum = 0);
+
+	//描画機能群
+	int DrawRota(int* _graphID, VECTOR _pos, int _graphNum = 0, float _rate = 1.0f, float _angle = 0.0f, 
+				int _traceFlag = TRUE, int _revarseX = 0, int _rebarseY = 0);
+
+	int DrawModi(int* _graphID, VECTOR _pos, int sizeX, int sizeY,
+				int _graphNum = 0, int _traceFlag = TRUE);
+
+	int DrawRect(int* _graphID, VECTOR _pos, int _graphPosX, int _graphPosY,
+				int sizeX, int sizeY, int _graphNum = 0, int _traceFlag = TRUE,
+				int _revarseX = 0, int _rebarseY = 0);
+
+	int DrawCircleGauge(int* _graphID, VECTOR _pos, double _percent, int _graphNum = 0,
+						double _startPercent = 0.0, double _scale = 1.0f,int _revarseX = 0, int _rebarseY = 0);
 
 	//画像情報の削除
-	void Delete2DData(char* _imgaeFilePath);
+	void Delete2DData(const char* _imgaeFilePath);
 
 	//すべての画像情報の削除
 	void DeleteAll2DData();

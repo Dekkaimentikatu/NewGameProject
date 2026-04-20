@@ -10,4 +10,3 @@ void C_OBJECT_BASE::Init()
 
 	m_isActive = false;	//¶‘¶ƒtƒ‰ƒO
 }
-

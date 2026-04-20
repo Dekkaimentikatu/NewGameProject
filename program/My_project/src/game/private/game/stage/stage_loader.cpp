@@ -14,12 +14,14 @@
 #include "game/object/static/enemy_spawn_point.h"
 #include "game/object/static/darts_emitter.h"
 #include "game/object/static/board.h"
+#include "lib/3Dhndlmanager.h"
 
 void C_STAGE_LOADER::LoadMapResource()
 {
+	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
 	//モデルの読み込み
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/Floor_1.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/Floor_2.mv1"));
+	hndlManager3D->Load3DModel("data/model/field/Floor_1.mv1");
+	hndlManager3D->Load3DModel(BLOCK_MOVE_MODEL_PATH);
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/DamageFloor.mv1"));
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/goal.mv1"));
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/roulette1.mv1"));
@@ -87,7 +89,8 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _objectArray)
 {
 	//各オブジェクトのポインタ変数
-	C_OBJECT_BASE* tmp;
+	C_OBJECT_BASE* tmp = nullptr;
+	C_OBJECT_BASE::T_OBJECT_DATA data = { 0 };
 
 	//
 	int objectID = _stageData.objectID;
@@ -95,6 +98,10 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _ob
 	VECTOR scale = VGet(_stageData.scaleX,_stageData.scaleY,_stageData.scaleZ);
 	VECTOR rot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
 	int moveLen = _stageData.moveLen;
+	data.initPos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
+	data.modelScale = VGet(_stageData.scaleX, _stageData.scaleY, _stageData.scaleZ);
+	data.modelScale = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
+	data.moveLen = _stageData.moveLen;
 
 	//インスタンスの生成処理
 	switch (_stageData.objectID)
@@ -136,6 +143,10 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _ob
 		tmp = new C_BOARD;
 		break;
 	}
+
+	tmp->Init();
+	tmp->Request(data);
+	tmp->Load();
 
 	//オブジェクトリストに追加
 	_objectArray.push_back(tmp);

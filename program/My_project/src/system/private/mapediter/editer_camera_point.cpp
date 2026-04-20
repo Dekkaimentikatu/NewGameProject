@@ -25,6 +25,12 @@ void C_EDITER_CAMERA_POINT::Init()
 	SetCameraNearFar(0.25f, 3000.0f);
 }
 
+
+void C_EDITER_CAMERA_POINT::Request(T_OBJECT_DATA _objectData)
+{
+	m_objectData = _objectData;
+}
+
 void C_EDITER_CAMERA_POINT::Load()
 {
 	
@@ -92,7 +98,7 @@ void C_EDITER_CAMERA_POINT::Step()
 		moveVec.y = mat2.m[3][1];
 		moveVec.z = mat1.m[3][2];
 		// ˆÚ“®‘¬“x‚©‚çYŽ²‰ñ“]Šp“x‚ðŽæ“¾
-		m_modelRota.y = atan2f(-moveVec.x, -moveVec.z);
+		m_objectData.modelRot.y = atan2f(-moveVec.x, -moveVec.z);
 	}
 
 	m_pos = VAdd(m_pos, moveVec);

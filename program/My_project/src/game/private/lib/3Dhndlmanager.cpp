@@ -28,6 +28,11 @@ void C_3D_HNDL_MANAGER::DeleteInstance()
 
 void C_3D_HNDL_MANAGER::Load3DModel(const char *_modelFilePath)
 {
+	for (auto itr = m_data.begin(); itr != m_data.end(); ++itr)
+	{
+		if (strcmp((*itr).modelFilePath.c_str(), _modelFilePath) == 0)return;
+	}
+
 	//一時保存用のローカル変数
 	T_3D_HNDL_DATA tmp;
 	//モデルのファイルパスをコピー

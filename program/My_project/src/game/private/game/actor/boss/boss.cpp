@@ -24,6 +24,11 @@ void C_BOSS::Init()
 	memset(m_moveCount, 0, sizeof(m_moveCount));
 }
 
+void C_BOSS::Request(T_OBJECT_DATA _objectData)
+{
+	m_objectData = _objectData;
+}
+
 void C_BOSS::Load()
 {
 	m_pos = VGet(0.0f,0.0f,100.0f);

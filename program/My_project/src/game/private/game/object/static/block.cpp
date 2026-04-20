@@ -1,4 +1,5 @@
 #include "game/object/static/block.h"
+#include "lib/3Dhndlmanager.h"
 
 C_BLOCK::C_BLOCK()
 {
@@ -29,8 +30,8 @@ void C_BLOCK::Request(T_OBJECT_DATA _objectData)
 
 void C_BLOCK::Load()
 {
-	DuplicateModel(m_modelHndl);
-	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	DuplicateModel(instace->Get3DModelHndl("data/model/field/Floor_1.mv1"));
 	UpdateModel();
 	SetUpCollInfo();
 	m_objectType = OBJECT_TYPE_BLCOK;

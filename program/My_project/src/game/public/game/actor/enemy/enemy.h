@@ -154,12 +154,13 @@ public:
 	void AddPos(VECTOR _addPos);
 
 	//リクエスト処理
-	void Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl, int _effektHndl1, int _effektHndl2);
+	void Request(T_OBJECT_DATA _objectData);
 
 	//ATT取得
 	int GetAtt() const;
 
 	void SetKonckBackSpeed(VECTOR _knockBackSpeed);
+
 
 };
 

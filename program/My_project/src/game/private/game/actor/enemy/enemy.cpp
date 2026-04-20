@@ -389,17 +389,10 @@ void C_ENEMY::AddPos(VECTOR _addPos)
 	m_isJump = false;
 }
 
-void C_ENEMY::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl, int _effektHndl1, int _effektHndl2)
+//リクエスト処理
+void C_ENEMY::Request(T_OBJECT_DATA _objectData)
 {
-	//リクエストされた座標、スケール、回転を設定する
-	m_pos = m_startPos = _pos;
-	m_objectData.modelScale = _scale;
-	m_objectData.modelRot = _rotation;
-	//モデルのハンドルを複製して保存する
-	DuplicateModel(_modelHndl);
-	//エフェクトのハンドルを保存する
-	m_effektHndl[0] = _effektHndl1;
-	m_effektHndl[1] = _effektHndl2;
+	m_objectData = _objectData;
 }
 
 int C_ENEMY::GetAtt() const

@@ -28,7 +28,7 @@ void C_ENEMY_MANAGER::LoadSync()
 	{
 		enemy = new C_ENEMY;
 		enemy->Init();
-		enemy->Request((*itr).pos, (*itr).scale, (*itr).rot, m_modelHndl, eff1,  eff2);
+		//enemy->Request((*itr).pos, (*itr).scale, (*itr).rot, m_modelHndl, eff1,  eff2);
 		enemy->Load();
 		c_actorArray.push_back(enemy);
 	}

@@ -2,6 +2,8 @@
 #include "game/base/object.h"
 #include "game/data/global_data.h"
 
+static const char* BLOCK_MOVE_MODEL_PATH = "data/model/field/Floor_2.mv1";
+
 class C_BLOCK_MOVE : public C_OBJECT_BASE
 {
 private:

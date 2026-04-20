@@ -15,7 +15,6 @@ void C_PLAYER::Init()
 	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
 	m_objectData.modelRot = VGet(0.0f, 0.0f, 0.0f);	//回転
 	m_objectData.modelScale = VGet(10.0f, 10.0f, 10.0f);	//スケール
-	m_size = VGet(1.0f, 2.0f, 1.0f);	//大きさ
 	m_redius = 50;	//当たり判定の半径
 	m_nowState = PLAYER_STATE_WAIT;	//状態を待機に設定
 
@@ -40,6 +39,11 @@ void C_PLAYER::Init()
 
 	//ジャンプ中待機時間の初期化
 	m_jumpingWait = 0;
+}
+
+void C_PLAYER::Request(T_OBJECT_DATA _objectData)
+{
+	m_objectData = _objectData;
 }
 
 void C_PLAYER::Load()

@@ -137,6 +137,7 @@ public:
 		m_hp = m_hpMax;
 	}
 
+	void Request(T_OBJECT_DATA _objectData);
 
 	//UŒ‚”»’è‚ÌÀ•Wæ“¾
 	inline virtual VECTOR GetAttackPos() const

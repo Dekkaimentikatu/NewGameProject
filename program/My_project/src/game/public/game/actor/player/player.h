@@ -151,6 +151,8 @@ public:
 
 	void AddPos(VECTOR _addPos);
 
+	void Request(T_OBJECT_DATA _objectData);
+
 	//ATTŽæ“¾
 	int GetAtt();
 };

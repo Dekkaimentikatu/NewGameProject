@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/object.h"
 
+static const char* BLOCK_MODEL_PATH = "data/model/field/Floor_1.mv1";
+
 class C_BLOCK : public C_OBJECT_BASE
 {
 private:

@@ -1,5 +1,6 @@
 #include "game/object/dynamic/block_move.h"
 #include "lib/2Ddirection/easing/easing.h"
+#include "lib/3Dhndlmanager.h"
 #include "block_common.h"
 
 C_BLOCK_MOVE::~C_BLOCK_MOVE()
@@ -17,9 +18,10 @@ void C_BLOCK_MOVE::Init()
 
 void C_BLOCK_MOVE::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot.y = _objectData.modelRot.y;
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(BLOCK_MOVE_MODEL_PATH);
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_moveRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_BLCOK;
 	m_isActive = true;

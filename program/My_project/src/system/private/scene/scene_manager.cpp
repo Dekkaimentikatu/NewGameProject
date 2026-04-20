@@ -15,6 +15,8 @@
 #include "game/data/global_data.h"
 #include "effekseer/effekseer.h"
 
+#include "lib/3Dhndlmanager.h"
+#include "lib/2Dhndlmanager.h"
 
 void C_SCENE_MANAGER::Init()
 {
@@ -114,13 +116,18 @@ void C_SCENE_MANAGER::Exit()
 
 	C_BGM_MANAGER* bgmMgr = C_BGM_MANAGER::GetInstance();
 	C_SE_MANAGER* seMgr = C_SE_MANAGER::GetInstance();
+	C_2D_HNDL_MANAGER* hndl2dMgr = C_2D_HNDL_MANAGER::GetInstance();
+	C_3D_HNDL_MANAGER* hndl3dMgr = C_3D_HNDL_MANAGER::GetInstance();
 
 	bgmMgr->Exit();
 	seMgr->Exit();
+	hndl2dMgr->DeleteAll2DData();
+	hndl3dMgr->DeleteAll3DModel();
 
 	bgmMgr->DeleteInstance();
-
 	seMgr->DeleteInstance();
+	hndl2dMgr->DeleteInstance();
+	hndl3dMgr->DeleteInstance();
 
 	c_sceneData->DeleteInstance();			//シーン間データ共有クラスのインスタンスを削除
 

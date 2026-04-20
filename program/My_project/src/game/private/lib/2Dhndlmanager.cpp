@@ -29,7 +29,7 @@ void C_2D_HNDL_MANAGER::DeleteInstance()
 }
 
 //画像の読み込み
-void C_2D_HNDL_MANAGER::Load2DImage(char* _imgaeFilePath, int _allNum, int _XNum, int _YNum, int _XSize, int _YSize)
+void C_2D_HNDL_MANAGER::Load2DImage(const char* _imgaeFilePath, int _allNum, int _XNum, int _YNum, int _XSize, int _YSize)
 {
 	//一時保存用のローカル変数
 	T_2D_HNDL_DATA tmp;
@@ -58,7 +58,7 @@ void C_2D_HNDL_MANAGER::Load2DImage(char* _imgaeFilePath, int _allNum, int _XNum
 }
 
 //画像の取得
-int C_2D_HNDL_MANAGER::Get2DImageHndl(char* _imgaeFilePath, int _graphNum)
+int C_2D_HNDL_MANAGER::Get2DImageHndl(const char* _imgaeFilePath, int _graphNum)
 {
 	//保存されている情報からファイルパスが一致するモデルハンドルを探索
 	for (auto itr = m_data.begin(); itr != m_data.end(); ++itr)
@@ -73,8 +73,53 @@ int C_2D_HNDL_MANAGER::Get2DImageHndl(char* _imgaeFilePath, int _graphNum)
 	return -1;
 }
 
+int C_2D_HNDL_MANAGER::DrawRota(int* _graphID, VECTOR _pos, int _graphNum, float _rate, float _angle,
+								int _traceFlag, int _revarseX, int _rebarseY)
+{
+	DrawRotaGraph(static_cast<int>(_pos.x), static_cast<int>(_pos.y), static_cast<double>(_rate), static_cast<double>(_angle),
+		_graphID[_graphNum], _traceFlag, _revarseX, _rebarseY);	//描画処理
+
+	return 1;
+}
+
+int C_2D_HNDL_MANAGER::DrawModi(int* _graphID, VECTOR _pos, int _graphNum,
+								int sizeX, int sizeY, int _traceFlag)
+{
+	int x1, x2;
+	int y1, y2;
+
+	x1 = static_cast<int>(_pos.x) - (sizeX / 2);
+	y1 = static_cast<int>(_pos.y) - (sizeY / 2);
+	x2 = static_cast<int>(_pos.x) + (sizeX / 2);
+	y2 = static_cast<int>(_pos.y) + (sizeY / 2);
+
+	DrawModiGraph(x1, y1, x2, y1, x1, y2, x2, y2, _graphID[_graphNum], TRUE);
+
+	return 1;
+}
+
+int C_2D_HNDL_MANAGER::DrawRect(int* _graphID, VECTOR _pos, int _graphPosX,
+								int _graphPosY, int sizeX, int sizeY, int _graphNum, int _traceFlag,
+								int _revarseX, int _rebarseY)
+{
+	DrawRectGraph(static_cast<int>(_pos.x), static_cast<int>(_pos.y), _graphPosX, _graphPosY,
+		sizeX, sizeY, _graphID[_graphNum], TRUE, _revarseX, _rebarseY);
+
+	return 1;
+}
+
+int C_2D_HNDL_MANAGER::DrawCircleGauge(int* _graphID, VECTOR _pos, double _percent, int _graphNum, 
+										double _startPercent, double _scale, int _revarseX, int _rebarseY)
+{
+	//percentは0.0～100.0の範囲
+	DrawCircleGaugeF(_pos.x, _pos.y, _percent, _graphID[_graphNum], 
+					_startPercent, _scale, _revarseX ,_rebarseY);
+
+	return 1;
+}
+
 //画像情報の削除
-void C_2D_HNDL_MANAGER::Delete2DData(char* _imgaeFilePath)
+void C_2D_HNDL_MANAGER::Delete2DData(const char* _imgaeFilePath)
 {
 	//保存されている情報からファイルパスが一致するモデルハンドルを探索
 	for (auto itr = m_data.begin(); itr != m_data.end(); ++itr)

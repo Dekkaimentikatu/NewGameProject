@@ -129,7 +129,7 @@ public:
 	virtual void AddPos(VECTOR _addPos) { m_pos = VAdd(m_pos, _addPos); }
 
 	//リクエスト
-	virtual void Request(T_OBJECT_DATA _objectData);
+	virtual void Request(T_OBJECT_DATA _objectData) = 0;
 
 	//生存フラグ取得
 	inline bool GetIsActive() const
