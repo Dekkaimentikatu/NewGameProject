@@ -1,0 +1,7 @@
+SceneID,File_path,GrapWight,GrapHeight,Xnum,YNum,AllNum
+0,data/graphic/image/back.png,1920,1080,1,1,1
+1,data/graphic/image/TitleLogo1.png,192,64,1,1,1
+2,data/graphic/image/TitleLogo2.png,192,64,1,1,1
+3,data/graphic/image/ResultLogo1.png,192,64,1,1,1
+4,data/graphic/image/GameLogo1.png,64,64,1,1,1
+-1,-1,-1,-1,-1,-1,-1

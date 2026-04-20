@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\block_common.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\game\public\effekseer\effekseer.h" />
+    <ClInclude Include="src\game\public\game\actor\boss\boss.h" />
+    <ClInclude Include="src\game\public\game\actor\enemy\enemy.h" />
+    <ClInclude Include="src\game\public\game\actor\player\player.h" />
+    <ClInclude Include="src\game\public\game\base\actor.h" />
+    <ClInclude Include="src\game\public\game\base\manager_base.h" />
+    <ClInclude Include="src\game\public\game\base\object.h" />
+    <ClInclude Include="src\game\public\game\base\UI_object.h" />
+    <ClInclude Include="src\game\public\game\camera\camera.h" />
+    <ClInclude Include="src\game\public\game\camera\camera_manager.h" />
+    <ClInclude Include="src\game\public\game\camera\player_camera.h" />
+    <ClInclude Include="src\game\public\game\collision\collision_manager.h" />
+    <ClInclude Include="src\game\public\game\data\global_data.h" />
+    <ClInclude Include="src\game\public\game\data\stage_data.h" />
+    <ClInclude Include="src\game\public\game\manager\enemy_manager.h" />
+    <ClInclude Include="src\game\public\game\manager\map_manager.h" />
+    <ClInclude Include="src\game\public\game\manager\player_manager.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\block_move.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\car.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\circular_motion.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\damage_floor.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\darts.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\holo_block.h" />
+    <ClInclude Include="src\game\public\game\object\dynamic\rot_floor.h" />
+    <ClInclude Include="src\game\public\game\object\static\block.h" />
+    <ClInclude Include="src\game\public\game\object\static\board.h" />
+    <ClInclude Include="src\game\public\game\object\static\car_emitter.h" />
+    <ClInclude Include="src\game\public\game\object\static\check_point.h" />
+    <ClInclude Include="src\game\public\game\object\static\darts_emitter.h" />
+    <ClInclude Include="src\game\public\game\object\static\enemy_spawn_point.h" />
+    <ClInclude Include="src\game\public\game\object\static\goal.h" />
+    <ClInclude Include="src\game\public\game\object\static\sky.h" />
+    <ClInclude Include="src\game\public\game\object\static\start.h" />
+    <ClInclude Include="src\game\public\game\stage\stage_loader.h" />
+    <ClInclude Include="src\game\public\game\UI\back_ground.h" />
+    <ClInclude Include="src\game\public\game\UI\button\button.h" />
+    <ClInclude Include="src\game\public\game\UI\load_anim.h" />
+    <ClInclude Include="src\game\public\game\UI\respawn_back.h" />
+    <ClInclude Include="src\game\public\game\UI\result.h" />
+    <ClInclude Include="src\game\public\game\UI\select_disp.h" />
+    <ClInclude Include="src\game\public\game\UI\stop_effect.h" />
+    <ClInclude Include="src\game\public\game\UI\title_back.h" />
+    <ClInclude Include="src\game\public\game\UI\UI_hpber.h" />
+    <ClInclude Include="src\game\public\game\UI\UI_shop.h" />
+    <ClInclude Include="src\game\public\game\UI\UI_stmber.h" />
+    <ClInclude Include="src\game\public\lib\2Dcollosion.h" />
+    <ClInclude Include="src\game\public\lib\2Ddirection\easing\easing.h" />
+    <ClInclude Include="src\game\public\lib\2Dhndlmanager.h" />
+    <ClInclude Include="src\game\public\lib\3Dhndlmanager.h" />
+    <ClInclude Include="src\game\public\lib\bgm_manager.h" />
+    <ClInclude Include="src\game\public\lib\collision.h" />
+    <ClInclude Include="src\game\public\lib\drawgrap.h" />
+    <ClInclude Include="src\game\public\lib\drawGrap2D.h" />
+    <ClInclude Include="src\game\public\lib\effect.h" />
+    <ClInclude Include="src\game\public\lib\fade.h" />
+    <ClInclude Include="src\game\public\lib\fps.h" />
+    <ClInclude Include="src\game\public\lib\imagehndlmanager.h" />
+    <ClInclude Include="src\game\public\lib\input.h" />
+    <ClInclude Include="src\game\public\lib\input_config.h" />
+    <ClInclude Include="src\game\public\lib\math2D.h" />
+    <ClInclude Include="src\game\public\lib\mouseinput.h" />
+    <ClInclude Include="src\game\public\lib\mymath.h" />
+    <ClInclude Include="src\game\public\lib\rand.h" />
+    <ClInclude Include="src\game\public\lib\score.h" />
+    <ClInclude Include="src\game\public\lib\se_manager.h" />
+    <ClInclude Include="src\game\public\lib\xinput.h" />
+    <ClInclude Include="src\imgui\imconfig.h" />
+    <ClInclude Include="src\imgui\imgui.h" />
+    <ClInclude Include="src\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="src\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="src\imgui\imgui_internal.h" />
+    <ClInclude Include="src\imgui\imstb_rectpack.h" />
+    <ClInclude Include="src\imgui\imstb_textedit.h" />
+    <ClInclude Include="src\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\system\public\imguiCtrl\imguiCtrl.h" />
+    <ClInclude Include="src\system\public\mapediter\editer_camera_point.h" />
+    <ClInclude Include="src\system\public\mapediter\mapediter.h" />
+    <ClInclude Include="src\system\public\scene\scene.h" />
+    <ClInclude Include="src\system\public\scene\scene_data.h" />
+    <ClInclude Include="src\system\public\scene\scene_editer.h" />
+    <ClInclude Include="src\system\public\scene\scene_factory.h" />
+    <ClInclude Include="src\system\public\scene\scene_manager.h" />
+    <ClInclude Include="src\system\public\scene\scene_play.h" />
+    <ClInclude Include="src\system\public\scene\scene_result.h" />
+    <ClInclude Include="src\system\public\scene\scene_select.h" />
+    <ClInclude Include="src\system\public\scene\scene_title.h" />
+    <ClInclude Include="src\system\public\UI\UI_manager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\game\private\effekseer\effekseer.cpp" />
+    <ClCompile Include="src\game\private\game\actor\boss\boss.cpp" />
+    <ClCompile Include="src\game\private\game\actor\enemy\enemy.cpp" />
+    <ClCompile Include="src\game\private\game\actor\player\player.cpp" />
+    <ClCompile Include="src\game\private\game\base\actor.cpp" />
+    <ClCompile Include="src\game\private\game\base\object.cpp" />
+    <ClCompile Include="src\game\private\game\camera\camera.cpp" />
+    <ClCompile Include="src\game\private\game\camera\camera_manager.cpp" />
+    <ClCompile Include="src\game\private\game\camera\player_camera.cpp" />
+    <ClCompile Include="src\game\private\game\collision\collision_manager.cpp" />
+    <ClCompile Include="src\game\private\game\data\global_data.cpp" />
+    <ClCompile Include="src\game\private\game\manager\enemy_manager.cpp" />
+    <ClCompile Include="src\game\private\game\manager\map_manager.cpp" />
+    <ClCompile Include="src\game\private\game\manager\player_manager.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\block_move.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\car.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\circular_motion.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\damage_area.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\damage_floor.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\darts.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\holo_block.cpp" />
+    <ClCompile Include="src\game\private\game\object\dynamic\rot_floor.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\block.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\board.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\car_emitter.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\check_point.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\darts_emitter.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\enemy_spawn_point.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\goal.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\sky.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\start.cpp" />
+    <ClCompile Include="src\game\private\game\stage\stage_loader.cpp" />
+    <ClCompile Include="src\game\private\game\UI\back_ground.cpp" />
+    <ClCompile Include="src\game\private\game\UI\button\button.cpp" />
+    <ClCompile Include="src\game\private\game\UI\load_anim.cpp" />
+    <ClCompile Include="src\game\private\game\UI\respawn_back.cpp" />
+    <ClCompile Include="src\game\private\game\UI\result.cpp" />
+    <ClCompile Include="src\game\private\game\UI\select_disp.cpp" />
+    <ClCompile Include="src\game\private\game\UI\stop_effect.cpp" />
+    <ClCompile Include="src\game\private\game\UI\title_back.cpp" />
+    <ClCompile Include="src\game\private\game\UI\UI_hpber.cpp" />
+    <ClCompile Include="src\game\private\game\UI\UI_stmber.cpp" />
+    <ClCompile Include="src\game\private\lib\2Dcollision.cpp" />
+    <ClCompile Include="src\game\private\lib\2Ddirection\easing\easing.cpp" />
+    <ClCompile Include="src\game\private\lib\2Dhndlmanager.cpp" />
+    <ClCompile Include="src\game\private\lib\3Dhndlmanager.cpp" />
+    <ClCompile Include="src\game\private\lib\bgm_manager.cpp" />
+    <ClCompile Include="src\game\private\lib\collision.cpp" />
+    <ClCompile Include="src\game\private\lib\drawgrap.cpp" />
+    <ClCompile Include="src\game\private\lib\drawGrap2D.cpp" />
+    <ClCompile Include="src\game\private\lib\effect.cpp" />
+    <ClCompile Include="src\game\private\lib\fade.cpp" />
+    <ClCompile Include="src\game\private\lib\fps.cpp" />
+    <ClCompile Include="src\game\private\lib\input.cpp" />
+    <ClCompile Include="src\game\private\lib\input_config.cpp" />
+    <ClCompile Include="src\game\private\lib\math2D.cpp" />
+    <ClCompile Include="src\game\private\lib\mouseinput.cpp" />
+    <ClCompile Include="src\game\private\lib\mymath.cpp" />
+    <ClCompile Include="src\game\private\lib\rand.cpp" />
+    <ClCompile Include="src\game\private\lib\score.cpp" />
+    <ClCompile Include="src\game\private\lib\se_manager .cpp" />
+    <ClCompile Include="src\game\private\lib\Xinput.cpp" />
+    <ClCompile Include="src\imgui\imgui.cpp" />
+    <ClCompile Include="src\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\system\private\imguiCtrl\imguiCtrl.cpp" />
+    <ClCompile Include="src\system\private\mapediter\editer_camera_point.cpp" />
+    <ClCompile Include="src\system\private\mapediter\mapediter.cpp" />
+    <ClCompile Include="src\system\private\scene\scene.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_data.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_editer.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_factory.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_manager.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_play.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_result.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_select.cpp" />
+    <ClCompile Include="src\system\private\scene\scene_title.cpp" />
+    <ClCompile Include="src\system\private\UI\UI_manager.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1d2bf413-a458-4f87-96c2-a8cc2f328ead}</ProjectGuid>
+    <RootNamespace>Myproject</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\effekseerに必要な物;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions> /FS
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include;$(ProjectDir)lib\effekseerに必要な物;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\effekseerに必要な物;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions> /FS
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include;$(ProjectDir)lib\effekseerに必要な物;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\effekseerに必要な物;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions> /FS
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include;$(ProjectDir)lib\effekseerに必要な物;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\effekseerに必要な物;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions> /FS
+ %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib\imgui;$(ProjectDir)lib\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)lib\effekseerに必要な物\include;$(ProjectDir)lib\effekseerに必要な物;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

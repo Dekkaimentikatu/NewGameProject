@@ -1,0 +1,111 @@
+	//待機処理
+	void WaitCalc();
+
+	//攻撃処理
+	void AttackCalc();
+
+	//停止処理
+	void StopCalc();
+
+	//落下処理
+	void FallCalc();
+
+	//リスポーン処理
+	void ReSpawnCalc();
+
+void C_PLAYER::WaitCalc()
+{
+
+}
+
+void C_PLAYER::AttackCalc()
+{
+	//攻撃処理
+	if (C_XINPUT::GetButtanInputTrg(PAD_ID, XINPUT_BUTTON_X) ||
+		C_INPUT::IsInputTrg(KEY_INPUT_E))
+	{
+		m_attackWait = 30;
+		AttachAnim(ANIM_STATE_ATTACK);
+	}
+
+	//攻撃判定の有無
+	if (m_attackWait > 0)
+	{
+		m_isAttack = true;
+		m_state = PLAYER_STATE_ATTACK;
+	}
+	else
+	{
+		m_isAttack = false;
+		m_state = PLAYER_STATE_WAIT;
+	}
+}
+
+void C_PLAYER::StopCalc()
+{
+	//停止の切り替え
+	if ((C_XINPUT::GetButtanInputTrg(PAD_ID, XINPUT_BUTTON_B) || C_INPUT::IsInputTrg(KEY_INPUT_RETURN)) &&
+		m_playerData->stm == m_staminaMax)
+	{
+		m_playerData->isStop = true;
+	}
+	else if ((C_XINPUT::GetButtanInputTrg(PAD_ID, XINPUT_BUTTON_B) || C_INPUT::IsInputTrg(KEY_INPUT_RETURN)) &&
+		m_playerData->isStop)
+	{
+		m_playerData->isStop = false;
+	}
+
+	//スタミナの更新
+	if (m_playerData->isStop)
+	{
+		m_playerData->stm--;
+	}
+	else
+	{
+		if (m_playerData->stm < m_staminaMax)
+		{
+			m_playerData->stm += STM_HEEL_SPD;
+			if (m_playerData->stm > m_staminaMax)
+			{
+				m_playerData->stm = m_staminaMax;
+			}
+		}
+	}
+
+	//スタミナが0以下になったら停止を解除
+	if (m_playerData->stm <= 0)
+	{
+		m_stamina = 0;
+		m_playerData->isStop = false;
+	}
+}
+
+void C_PLAYER::FallCalc()
+{
+	//落下速度の更新
+	m_fallSpeed -= GRAVITY;
+
+	if (m_fallSpeed < -PLAYER_FALLSPEED_MAX)
+	{
+		m_fallSpeed = -PLAYER_FALLSPEED_MAX;
+	}
+
+	//落下処理
+	m_moveVec.y += m_fallSpeed;
+}
+
+void C_PLAYER::ReSpawnCalc()
+{
+	//地面に到達したらリスポーン
+	if (m_pos.y <= RESPAWN_POS_Y)
+	{
+		m_pos = VAdd(c_globalData->GetFlagData()->StartPos, VGet(0.0f, 40.0f, 0.0f));	//位置
+	}
+
+	//HPが0以下ならリスポーン
+	if (m_hp <= 0)
+	{
+		m_pos = VAdd(c_globalData->GetFlagData()->StartPos, VGet(0.0f, 40.0f, 0.0f));	//位置
+		m_hp = m_hpMax;
+	}
+}

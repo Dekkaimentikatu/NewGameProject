@@ -1,0 +1,124 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\enemy\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\enemy\\Enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\enemy\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\enemy\\Enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\camera\\CameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\camera\\CameraManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\model\\Model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\model\\Model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\camera\\DebugCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D7780FD0-25A7-47D9-A694-3DA5CDDCF0A5}|HitCheck.vcxproj|solutionrelative:src\\camera\\DebugCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 319,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Enemy.cpp",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Enemy\\Enemy.cpp",
+              "RelativeDocumentMoniker": "Src\\Enemy\\Enemy.cpp",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Enemy\\Enemy.cpp",
+              "RelativeToolTip": "Src\\Enemy\\Enemy.cpp",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAAAFcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-03T04:35:51.293Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CameraManager.h",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Camera\\CameraManager.h",
+              "RelativeDocumentMoniker": "Src\\Camera\\CameraManager.h",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Camera\\CameraManager.h",
+              "RelativeToolTip": "Src\\Camera\\CameraManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvx0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-03T04:22:25.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DebugCamera.h",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Camera\\DebugCamera.h",
+              "RelativeDocumentMoniker": "Src\\Camera\\DebugCamera.h",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Camera\\DebugCamera.h",
+              "RelativeToolTip": "Src\\Camera\\DebugCamera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-03T04:21:35.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Model.cpp",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Model\\Model.cpp",
+              "RelativeDocumentMoniker": "Src\\Model\\Model.cpp",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Model\\Model.cpp",
+              "RelativeToolTip": "Src\\Model\\Model.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-03T03:00:44.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\player\\Player.cpp",
+              "RelativeDocumentMoniker": "src\\player\\Player.cpp",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\src\\player\\Player.cpp",
+              "RelativeToolTip": "src\\player\\Player.cpp",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAIwB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-09-03T01:49:50.564Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 81,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Enemy.h",
+              "DocumentMoniker": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Enemy\\Enemy.h",
+              "RelativeDocumentMoniker": "Src\\Enemy\\Enemy.h",
+              "ToolTip": "D:\\Users\\2409406\\Desktop\\GitHun_Desktop\\My_project\\\u53C2\u8003\u8CC7\u6599\\03_\u30D1\u30B9\u3092\u4F7F\u3063\u305F\u79FB\u52D5\\Src\\Enemy\\Enemy.h",
+              "RelativeToolTip": "Src\\Enemy\\Enemy.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-09-03T09:31:20.907Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

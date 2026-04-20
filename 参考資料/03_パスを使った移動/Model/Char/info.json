@@ -1,0 +1,13 @@
+{
+	"name": "char:ﾐｸﾀﾞﾖｰ:HR-01SuR式",
+	"character":
+		{
+			"height":1.60,
+			"motions":
+				{
+					"stand":"mikudayo_stand.vmd",
+					"walk": 	"basic_walk.vmd",
+					"run":	"mikudayo_run.vmd"
+				}
+		}
+}
