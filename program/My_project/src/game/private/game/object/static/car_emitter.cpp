@@ -7,8 +7,7 @@ void C_CAR_EMITTER::RequestToObject()
 	C_DARTS* tmp = new C_DARTS;
 
 	tmp->Init();
-	tmp->Request(m_pos, m_scale, m_modelRota, m_modelHndl, m_moveDir,
-		static_cast<float>(m_moveLen));
+	tmp->Request(m_objectData);
 	tmp->Load();
 
 	m_objectList.push_back(tmp);
@@ -71,14 +70,13 @@ void C_CAR_EMITTER::Exit()
 	m_objectList.clear();
 }
 
-void C_CAR_EMITTER::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl, int _moveLen)
+void C_CAR_EMITTER::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_startPos = _pos;
-	m_scale = _scale;
-	m_modelRota = _rotation;
-	m_modelHndl = _modelHndl;
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot = _objectData.modelRot;
 	m_redius = 16;
-	m_moveLen = _moveLen;
+	m_moveLen = _objectData.moveLen;
 }
 
 void C_CAR_EMITTER::HitCalc()

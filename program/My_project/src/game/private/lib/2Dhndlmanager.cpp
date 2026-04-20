@@ -35,17 +35,20 @@ void C_2D_HNDL_MANAGER::Load2DImage(char* _imgaeFilePath, int _allNum, int _XNum
 	T_2D_HNDL_DATA tmp;
 	//画像のファイルパスをコピー
 	tmp.imageFilePath = _imgaeFilePath;
-	//画像の総枚数を保存
-	tmp.grapAllNum = _allNum;
+
 	//画像を分割せずに読み込み
-	if (_allNum <= 0)
+	if (_allNum <= 1)
 	{
+		//画像の総枚数を保存
+		tmp.grapAllNum = 1;
 		tmp.hndl = new int;
 		tmp.hndl[0] = LoadGraph(tmp.imageFilePath.c_str());
 	}
 	//画像を分割して読み込み
 	else
 	{
+		//画像の総枚数を保存
+		tmp.grapAllNum = _allNum;
 		tmp.hndl = new int[_allNum];
 		LoadDivGraph(tmp.imageFilePath.c_str(), _allNum, _XNum, _YNum, _XSize, _YSize, tmp.hndl);
 	}

@@ -10,7 +10,7 @@ void C_SKY::Load()
 {
 	//ƒ‚ƒfƒ‹î•ñ‚Ì“Ç
 	m_pos = VGet(0, 0, 0);	//ˆÊ’u
-	m_scale = VGet(16.0f, 16.0f, 16.0f);
+	m_objectData.modelScale = VGet(16.0f, 16.0f, 16.0f);
 	m_objectType = OBJECT_TYPE_STATIC;
 	LoadModel("data/model/field/sky.mv1");
 	UpdateModel();
@@ -19,7 +19,7 @@ void C_SKY::Load()
 void C_SKY::Step()
 {
 	//ƒ‚ƒfƒ‹‚Ì‰ñ“]
-	m_modelRota = VAdd(m_modelRota, VGet(0, 0.0001f, 0));
+	m_objectData.modelRot = VAdd(m_objectData.modelRot, VGet(0, 0.0001f, 0));
 }
 
 void C_SKY::Update()

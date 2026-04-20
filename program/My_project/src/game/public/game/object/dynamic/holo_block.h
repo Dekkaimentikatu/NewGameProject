@@ -17,12 +17,14 @@ private:
 
 	int m_moveLen;
 
+	bool m_isHit;
+
 public:
 
 	C_HOLO_BLOCK(float _speedUp = 0.0f, int _graphHndl1 = 0, int _graphHndl2 = 0,
 		int _moveLen = 0):
 		m_speedUp(_speedUp), m_graphHndl1(_graphHndl1), m_graphHndl2(_graphHndl2),
-		c_globalData(nullptr), m_playerData(nullptr), m_moveLen(_moveLen) { }
+		c_globalData(nullptr), m_playerData(nullptr), m_moveLen(_moveLen), m_isHit(false){ }
 
 	~C_HOLO_BLOCK(){}
 

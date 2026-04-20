@@ -45,7 +45,7 @@ public:
 	//@param int _YNum:画像の横の分割数
 	//@param int _XSize:画像の縦の分割サイズ(px)
 	//@param int _YSize:画像の横の分割サイズ(px)
-	void Load2DImage(char* _imgaeFilePath, int _allNum = 0, int _XNum = 0, int _YNum = 0, int _XSize = 0, int _YSize = 0);
+	void Load2DImage(char* _imgaeFilePath, int _allNum = 1, int _XNum = 0, int _YNum = 0, int _XSize = 0, int _YSize = 0);
 
 	//画像の取得
 	//@param _modelFilePath:参照したいモデルのファイルパス

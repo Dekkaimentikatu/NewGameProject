@@ -9,23 +9,21 @@ C_BLOCK_MOVE::~C_BLOCK_MOVE()
 
 void C_BLOCK_MOVE::Init()
 {
-	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
-	m_scale = VGet(1.0f, 1.0f, 1.0f);	//スケール
+	m_objectData = { 0 };
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ハンドル
 	m_speedUp = MAX_TIME;
 }
 
-void C_BLOCK_MOVE::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _moveLen, int _modelHndl)
+void C_BLOCK_MOVE::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_startPos = _pos;
-	m_scale = _scale;
-	m_modelRota.y = _rotation.y;
-	m_moveRot = _rotation;
-	m_modelHndl = _modelHndl;
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot.y = _objectData.modelRot.y;
+	m_moveRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_BLCOK;
 	m_isActive = true;
-	m_moveLen = _moveLen;
+	m_moveLen = _objectData.moveLen;
 	m_moveDir = true;	//移動方向（true:正、false:負）
 }
 
@@ -68,7 +66,7 @@ void C_BLOCK_MOVE::Step()
 	m_pos = VAdd(m_pos, m_moveVec);
 
 	//移動限界到達判定
-	VECTOR tmp = VSub(m_pos, m_startPos);
+	VECTOR tmp = VSub(m_pos, m_objectData.initPos);
 	float len = VSize(tmp);
 	if (len >= MOVE_LIMIT)
 	{
@@ -78,7 +76,7 @@ void C_BLOCK_MOVE::Step()
 
 	if (m_playerData->isRespawn)
 	{
-		m_pos = m_startPos;
+		m_pos = m_objectData.initPos;
 		m_moveDir = true;
 	}
 }
@@ -86,8 +84,8 @@ void C_BLOCK_MOVE::Step()
 VECTOR C_BLOCK_MOVE::Circular()
 {
 	//ベクトルの外積で方向ベクトルを算出
-	VECTOR vResult = VGet(m_moveLen * cosf(m_moveRot.y) + m_startPos.x, 0.0f,
-		m_moveLen * sinf(m_moveRot.y) + m_startPos.z);
+	VECTOR vResult = VGet(m_moveLen * cosf(m_moveRot.y) + m_objectData.initPos.x, 0.0f,
+		m_moveLen * sinf(m_moveRot.y) + m_objectData.initPos.z);
 
 	return vResult;
 }
@@ -166,11 +164,11 @@ void C_BLOCK_MOVE::Draw()
 		return tmp;
 	};
 
-	VECTOR tmp1 = LineLen(m_startPos, MoveCalc(), MOVE_LIMIT);
-	VECTOR tmp2 = LineLen(m_startPos, MoveCalc(), -MOVE_LIMIT);
+	VECTOR tmp1 = LineLen(m_objectData.initPos, MoveCalc(), MOVE_LIMIT);
+	VECTOR tmp2 = LineLen(m_objectData.initPos, MoveCalc(), -MOVE_LIMIT);
 
-	DrawLine3D(tmp1, m_startPos, GetColor(255, 0, 0));
-	DrawLine3D(tmp2, m_startPos, GetColor(0, 0, 255));
+	DrawLine3D(tmp1, m_objectData.initPos, GetColor(255, 0, 0));
+	DrawLine3D(tmp2, m_objectData.initPos, GetColor(0, 0, 255));
 
 #endif
 

@@ -5,7 +5,7 @@
 void C_HOLO_BLOCK::Init()
 {
 	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
-	m_scale = VGet(1.0f, 1.0f, 1.0f);	//スケール
+	m_objectData.modelScale = VGet(1.0f, 1.0f, 1.0f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ハンドル
 	m_isActive = true;	//生存フラグ
@@ -52,9 +52,9 @@ void C_HOLO_BLOCK::Step()
 	m_pos = VAdd(m_pos, m_moveVec);
 
 	//元の位置まで戻ったら位置固定
-	if (m_isHit && m_pos.y < m_startPos.y - m_moveLen)
+	if (m_isHit && m_pos.y < m_objectData.initPos.y - m_moveLen)
 	{
-		m_pos.y = m_startPos.y;
+		m_pos.y = m_objectData.initPos.y;
 		m_moveVec = { 0 };
 		m_isHit = false;	//当たり判定リセット
 	}
@@ -79,17 +79,13 @@ void C_HOLO_BLOCK::Exit()
 	DeleteCollInfo();
 }
 
-void C_HOLO_BLOCK::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation,
-	int _modelHndl, int _graphHndl1, int _graphHndl2, int _moveLen)
+void C_HOLO_BLOCK::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_startPos = _pos;
-	m_scale = _scale;
-	m_modelRota = _rotation;
-	m_modelHndl = _modelHndl;
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_BLCOK;
-	m_graphHndl1 = _graphHndl1;
-	m_graphHndl2 = _graphHndl2;
-	m_moveLen = _moveLen;
+	m_moveLen = _objectData.moveLen;
 }
 
 void C_HOLO_BLOCK::HitCalc()

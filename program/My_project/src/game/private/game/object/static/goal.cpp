@@ -13,17 +13,16 @@ C_GOAL::~C_GOAL()
 void C_GOAL::Init()
 {
 	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
-	m_scale = VGet(0.1f, 0.1f, 0.1f);	//スケール
+	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ハンドル
 }
 
-void C_GOAL::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl)
+void C_GOAL::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_startPos = _pos;
-	m_scale = _scale;
-	m_modelRota = _rotation;
-	m_modelHndl = _modelHndl;
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_FLAG;
 	m_redius = 16;
 }
