@@ -20,7 +20,7 @@ void C_STAGE_LOADER::LoadMapResource()
 {
 	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
 	//モデルの読み込み
-	hndlManager3D->Load3DModel("data/model/field/Floor_1.mv1");
+	hndlManager3D->Load3DModel(BLOCK_MODEL_PATH);
 	hndlManager3D->Load3DModel(BLOCK_MOVE_MODEL_PATH);
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/DamageFloor.mv1"));
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/goal.mv1"));
@@ -100,7 +100,7 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _ob
 	int moveLen = _stageData.moveLen;
 	data.initPos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
 	data.modelScale = VGet(_stageData.scaleX, _stageData.scaleY, _stageData.scaleZ);
-	data.modelScale = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
+	data.modelRot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
 	data.moveLen = _stageData.moveLen;
 
 	//インスタンスの生成処理

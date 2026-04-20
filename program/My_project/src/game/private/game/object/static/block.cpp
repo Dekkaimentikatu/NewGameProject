@@ -21,9 +21,8 @@ void C_BLOCK::Init()
 
 void C_BLOCK::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_objectType = OBJECT_TYPE_BLCOK;
 	m_isActive = true;
 }
@@ -31,7 +30,7 @@ void C_BLOCK::Request(T_OBJECT_DATA _objectData)
 void C_BLOCK::Load()
 {
 	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
-	DuplicateModel(instace->Get3DModelHndl("data/model/field/Floor_1.mv1"));
+	DuplicateModel(instace->Get3DModelHndl(BLOCK_MODEL_PATH));
 	UpdateModel();
 	SetUpCollInfo();
 	m_objectType = OBJECT_TYPE_BLCOK;
