@@ -13,8 +13,8 @@ void C_PLAYER::Init()
 	m_playerData = c_globalData->GetPlayerData();
 
 	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
-	m_modelRota = VGet(0.0f, 0.0f, 0.0f);	//回転
-	m_scale = VGet(10.0f, 10.0f, 10.0f);	//スケール
+	m_objectData.modelRot = VGet(0.0f, 0.0f, 0.0f);	//回転
+	m_objectData.modelScale = VGet(10.0f, 10.0f, 10.0f);	//スケール
 	m_size = VGet(1.0f, 2.0f, 1.0f);	//大きさ
 	m_redius = 50;	//当たり判定の半径
 	m_nowState = PLAYER_STATE_WAIT;	//状態を待機に設定
@@ -49,9 +49,9 @@ void C_PLAYER::Load()
 	//座標、回転、スケールの設定
 	m_pos = c_globalData->GetFlagData()->StartPos;	//位置
 
-	m_scale = VGet(0.2f, 0.2f, 0.2f);
+	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);
 
-	m_modelRota.y = 3.14f;
+	m_objectData.modelRot.y = 3.14f;
 
 	//カメラの回転の設定
 	m_cameraRot.y = 3.14f;
@@ -262,7 +262,7 @@ void C_PLAYER::ReSpawnCalc()
 		m_pos = c_globalData->GetFlagData()->StartPos;
 
 		//モデルのY軸回転を設定
-		m_modelRota.y = 3.14f;
+		m_objectData.modelRot.y = 3.14f;
 
 		//カメラの回転の設定
 		m_cameraRot.y = 3.14f;
@@ -335,7 +335,7 @@ void C_PLAYER::MoveCalc()
 		m_moveVec.x = mat1.m[3][0];
 		m_moveVec.z = mat1.m[3][2];
 		// 移動速度からY軸回転角度を取得
-		m_modelRota.y = atan2f(-m_moveVec.x, -m_moveVec.z);
+		m_objectData.modelRot.y = atan2f(-m_moveVec.x, -m_moveVec.z);
 
 		if (m_nowAnimState != ANIM_STATE_JUMP)
 		{

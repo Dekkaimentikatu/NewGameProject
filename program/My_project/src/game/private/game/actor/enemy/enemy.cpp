@@ -15,7 +15,7 @@ void C_ENEMY::Init()
 	C_ACTOR_BASE::Init();
 
 	//拡大縮小率の初期化
-	m_scale = VGet(0.1f, 0.1f, 0.1f);
+	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
 	//当たり判定用の半径の初期化
 	m_redius = 16;
@@ -51,7 +51,7 @@ void C_ENEMY::Load()
 	m_startPos = m_pos;
 
 	//拡大縮小率の設定
-	m_scale = VGet(0.1f, 0.1f, 0.1f);
+	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
 	//モデルの更新
 	UpdateModel();
@@ -246,7 +246,7 @@ void C_ENEMY::MoveCalc()
 		{
 			m_pos.x = m_startPos.x;
 			m_pos.z = m_startPos.z;
-			m_modelRota.y = 0.0f;
+			m_objectData.modelRot.y = 0.0f;
 			m_moveVec = { 0 };
 		}
 	}
@@ -255,7 +255,7 @@ void C_ENEMY::MoveCalc()
 	{
 		//移動処理
 		tmp = VSub(m_targetPos, m_pos);
-		m_modelRota.y = atan2f(-tmp.x, -tmp.z);
+		m_objectData.modelRot.y = atan2f(-tmp.x, -tmp.z);
 		tmp = VNorm(tmp);
 		m_moveVec = VScale(tmp, ENEMY_MOVE_SPEED * m_easingSpeed);
 		m_nowState = ENEMY_STATE_MOVE;
@@ -393,8 +393,8 @@ void C_ENEMY::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHn
 {
 	//リクエストされた座標、スケール、回転を設定する
 	m_pos = m_startPos = _pos;
-	m_scale = _scale;
-	m_modelRota = _rotation;
+	m_objectData.modelScale = _scale;
+	m_objectData.modelRot = _rotation;
 	//モデルのハンドルを複製して保存する
 	DuplicateModel(_modelHndl);
 	//エフェクトのハンドルを保存する

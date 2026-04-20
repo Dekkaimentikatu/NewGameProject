@@ -7,7 +7,7 @@ void C_BOSS::Init()
 
 	/*m_pos = VGet(0.0f,0.0f, -100.0f);*/
 
-	m_scale = VGet(BOSS_SCALE_X, BOSS_SCALE_Y, BOSS_SCALE_Z);
+	m_objectData.modelScale = VGet(BOSS_SCALE_X, BOSS_SCALE_Y, BOSS_SCALE_Z);
 
 	m_redius = BOSS_RADIUS;
 
@@ -128,7 +128,7 @@ void C_BOSS::MoveCalc()
 
 	tmp = VNorm(tmp);
 
-	m_modelRota.y = atan2f(-tmp.x, -tmp.z);
+	m_objectData.modelRot.y = atan2f(-tmp.x, -tmp.z);
 
 	m_moveVec = VScale(tmp, BOSS_MOVE_SPEED);
 
@@ -194,7 +194,7 @@ void C_BOSS::JumpAttackCalc()
 
 	tmp = VNorm(tmp);
 
-	m_modelRota.y = atan2f(-tmp.x, -tmp.z);
+	m_objectData.modelRot.y = atan2f(-tmp.x, -tmp.z);
 
 	m_moveVec = VScale(tmp, 1.0f);
 
@@ -231,7 +231,7 @@ void C_BOSS::RotAttackCalc()
 
 	tmp = VNorm(tmp);
 
-	m_modelRota.y += 0.01f;
+	m_objectData.modelRot.y += 0.01f;
 
 	m_moveVec = VScale(tmp, 1.0f);
 
@@ -306,7 +306,7 @@ VECTOR C_BOSS::GetAttackPos()
 	tmp = VGet(0.0f, 0.0f, 10.0f);
 	MATRIX	mat1, mat2;
 	mat1 = MGetTranslate(tmp);
-	mat2 = MGetRotY(m_modelRota.y);
+	mat2 = MGetRotY(m_objectData.modelRot.y);
 	mat1 = MMult(mat1, mat2);
 	tmp = VGet(-mat1.m[3][0], mat1.m[3][1], -mat1.m[3][2]);
 

@@ -21,8 +21,7 @@ void C_CAR::Init()
 	m_speedUp = MAX_TIME;
 }
 
-void C_CAR::Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation,
-	int _modelHndl, int _moveDir, float _endLen)
+void C_CAR::Request(T_OBJECT_DATA _objectData)
 {
 	m_pos = m_startPos = _pos;
 	m_scale = _scale;

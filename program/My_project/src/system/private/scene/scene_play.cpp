@@ -178,7 +178,7 @@ void C_SCENE_PLAY::Step()
 
 	c_cameraManager.Step(c_playerManager.GetPlayerInstance()->GetTargetPos(),
 		c_playerManager.GetPlayerInstance()->GetCenter(),
-		c_playerManager.GetPlayerInstance()->GetRota().y,
+		c_playerManager.GetPlayerInstance()->GetRot().y,
 		DX_INPUT_PAD1);
 
 	c_cameraManager.Update();

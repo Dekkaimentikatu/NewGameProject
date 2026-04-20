@@ -87,133 +87,58 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _objectArray)
 {
 	//各オブジェクトのポインタ変数
-	C_BLOCK* block = nullptr;
-	C_BLOCK_MOVE* floor = nullptr;
-	C_ROT_FLOOR* rotFloor = nullptr;
-	C_CIRCULAR_MOTION* circular = nullptr;
-	C_DAMAGE_FLOOR* damageFloor = nullptr;
-	C_HOLO_BLOCK* holoBlock = nullptr;
-	C_GOAL* goal = nullptr;
-	C_START* start = nullptr;
-	C_CHECK_POINT* checkPoint = nullptr;
-	C_ENEMY_SPAWN_POINT* spawnPoint = nullptr;
-	C_DARTS_EMITTER* emitter = nullptr;
-	C_BOARD* board = nullptr;
-
-	//
-	C_GLOBAL_DATA::T_ENEMY_SPOWN tmpSpawnData = {0};
+	C_OBJECT_BASE* tmp;
 
 	//
 	int objectID = _stageData.objectID;
 	VECTOR pos = VGet(_stageData.posX,_stageData.posY,_stageData.posZ);
 	VECTOR scale = VGet(_stageData.scaleX,_stageData.scaleY,_stageData.scaleZ);
 	VECTOR rot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
-	int moveDir = _stageData.moveDir;
 	int moveLen = _stageData.moveLen;
 
 	//インスタンスの生成処理
 	switch (_stageData.objectID)
 	{
 	case OBJECT_ID_BOX:
-		block = new C_BLOCK;
-		block->Init();
-		block->Request(pos, scale, rot, m_modelHndl[0]);
-		block->Load();
-		_objectArray.push_back(block);
+		tmp = new C_BLOCK;
 		break;
 	case OBJECT_ID_BOX_MOVE:
-		floor = new C_BLOCK_MOVE;
-		floor->Init();
-		floor->Request(pos, scale, rot, moveLen, m_modelHndl[1]);
-		floor->Load();
-		_objectArray.push_back(floor);
+		tmp = new C_BLOCK_MOVE;
 		break;
 	case OBJECT_ID_ROT_FLOOR:
-		circular = new C_CIRCULAR_MOTION;
-		circular->Init(); 
-		circular->Request(pos, scale, rot,
-			m_modelHndl[1], m_graphicHndl[0],
-				moveDir, static_cast<float>(moveLen));
-		circular->Load();
-		_objectArray.push_back(circular);
+		tmp = new C_CIRCULAR_MOTION;
 		break;
 	case OBJECT_ID_DAMAGE_FLOOR:
-		damageFloor = new C_DAMAGE_FLOOR;
-		damageFloor->Init();
-		damageFloor->Request(pos, scale, rot, m_modelHndl[2], moveDir, m_graphicHndl[2], m_graphicHndl[1]);
-		damageFloor->Load();
-		_objectArray.push_back(damageFloor);
+		tmp = new C_DAMAGE_FLOOR;
 		break;
 	case OBJECT_ID_ROT_DAMAGE:
-		rotFloor= new C_ROT_FLOOR;
-		rotFloor->Init();
-		rotFloor->Request(pos, scale, rot, m_modelHndl[4],moveDir, static_cast<float>(moveLen));
-		rotFloor->Load();
-		_objectArray.push_back(rotFloor);
-		rotFloor = new C_ROT_FLOOR;
-		rotFloor->Init();
-		rot.y += 3.14f/ 2.0f;
-		rotFloor->Request(pos, scale, rot, m_modelHndl[5], moveDir, static_cast<float>(moveLen));
-		rotFloor->SetIsAttack(true);
-		rotFloor->Load();
-		_objectArray.push_back(rotFloor);
+		tmp = new C_ROT_FLOOR;
 		break;
 	case OBJECT_ID_HOLOBLOCK:
-		holoBlock = new C_HOLO_BLOCK;
-		holoBlock->Init();
-		holoBlock->Request(pos, scale, rot, m_modelHndl[6], m_graphicHndl[0], m_graphicHndl[3],
-			moveLen);
-		holoBlock->Load();
-		_objectArray.push_back(holoBlock);
+		tmp = new C_HOLO_BLOCK;
 		break;
 	case OBJECT_ID_GOAL:
-		goal = new C_GOAL;
-		goal->Init();
-		goal->Request(pos, scale, rot, m_modelHndl[3]);
-		goal->Load();
-		_objectArray.push_back(goal);
+		tmp = new C_GOAL;
 		break;
 	case OBJECT_ID_START:
-		start = new C_START;
-		start->Init();
-		start->Request(pos, scale, rot, m_modelHndl[3]);
-		start->Load();
-		_objectArray.push_back(start);
+		tmp = new C_START;
 		break;
 	case OBJECT_ID_CHECKPOINT:
-		checkPoint = new C_CHECK_POINT;
-		checkPoint->Init();
-		checkPoint->Request(pos, scale, rot, m_modelHndl[3]);
-		checkPoint->Load();
-		_objectArray.push_back(checkPoint);
+		tmp = new C_CHECK_POINT;
 		break;
 	case OBJECT_ID_ENEMY_SPAWN:
-		spawnPoint = new C_ENEMY_SPAWN_POINT;
-		spawnPoint->Init();
-		spawnPoint->Request(pos, scale, rot, m_modelHndl[3]);
-		spawnPoint->Load();
-		tmpSpawnData.pos = pos;
-		tmpSpawnData.scale = scale;
-		tmpSpawnData.rot = rot;
-		_objectArray.push_back(spawnPoint);
-		m_golobalData->GetEnemySpawnPointList()->push_back(tmpSpawnData);
+		tmp = new C_ENEMY_SPAWN_POINT;
 		break;
 	case OBJECT_ID_EMITTER:
-		emitter = new C_DARTS_EMITTER;
-		emitter->Init();
-		emitter->Request(pos, scale, rot, m_modelHndl[7], moveLen);
-		emitter->Load();
-		_objectArray.push_back(emitter);
+		tmp = new C_DARTS_EMITTER;
 		break;
 	case OBJECT_ID_BOARD:
-		board = new C_BOARD;
-		board->Init();
-		board->Request(pos, scale, rot, m_modelHndl[8], m_graphicHndl[moveLen]);
-		board->Load();
-		_objectArray.push_back(board);
+		tmp = new C_BOARD;
 		break;
 	}
 
+	//オブジェクトリストに追加
+	_objectArray.push_back(tmp);
 	//ステージデータリストに情報を追加
 	m_stageDataList.push_back(_stageData);
 }

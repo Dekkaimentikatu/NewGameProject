@@ -26,6 +26,7 @@
     <ClInclude Include="src\game\public\game\actor\enemy\enemy.h" />
     <ClInclude Include="src\game\public\game\actor\player\player.h" />
     <ClInclude Include="src\game\public\game\base\actor.h" />
+    <ClInclude Include="src\game\public\game\base\character.h" />
     <ClInclude Include="src\game\public\game\base\manager_base.h" />
     <ClInclude Include="src\game\public\game\base\object.h" />
     <ClInclude Include="src\game\public\game\base\UI_object.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="src\game\private\game\actor\enemy\enemy.cpp" />
     <ClCompile Include="src\game\private\game\actor\player\player.cpp" />
     <ClCompile Include="src\game\private\game\base\actor.cpp" />
+    <ClCompile Include="src\game\private\game\base\character.cpp" />
     <ClCompile Include="src\game\private\game\base\object.cpp" />
     <ClCompile Include="src\game\private\game\camera\camera.cpp" />
     <ClCompile Include="src\game\private\game\camera\camera_manager.cpp" />

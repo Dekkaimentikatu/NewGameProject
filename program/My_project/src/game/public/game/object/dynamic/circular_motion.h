@@ -37,8 +37,7 @@ public:
 	void Update();
 	void Draw();
 	void Exit();
-	void Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl, int _grapHndl, int _moveDir, float _movelen);
-	void Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl);
+	void Request(T_OBJECT_DATA _objectData);
 	void HitCalc();
 };
 

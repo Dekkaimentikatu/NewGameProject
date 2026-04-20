@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game/base/actor.h"
+#include "game/base/character.h"
 
 constexpr int PAD_ID = DX_INPUT_PAD1;
 
@@ -26,7 +26,7 @@ constexpr float RESPAWN_POS_Y = -500.0f;
 
 constexpr int JUMPING_WAIT_MAX = 10;
 
-class C_PLAYER : public C_ACTOR_BASE
+class C_PLAYER : public C_CHARACTER
 {
 private:
 

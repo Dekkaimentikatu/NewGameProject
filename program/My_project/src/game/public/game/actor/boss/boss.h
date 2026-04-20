@@ -1,5 +1,5 @@
 #pragma once
-#include "game/base/actor.h"
+#include "game/base/character.h"
 
 constexpr float BOSS_MOVE_SPEED = 0.1f;
 
@@ -16,7 +16,7 @@ constexpr int BOSS_ATT = 10;
 
 constexpr float BOSS_ANIM_PLAYSPEED = 0.5f;
 
-class C_BOSS : public C_ACTOR_BASE
+class C_BOSS : public C_CHARACTER
 {
 protected:
 

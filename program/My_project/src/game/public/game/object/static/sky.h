@@ -13,6 +13,7 @@ public:
 	void Update() override;
 	void Draw() override;	//ï`âÊ
 	void Exit() override;	//èIóπ
+	void Request(T_OBJECT_DATA _objectData);
 	void HitCalc();
 };
 

@@ -140,9 +140,9 @@ void C_MAP_EDITER::DeleteObject()
 {
 	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
 	{
-		if ((*itr)->GetStartPos().x == m_pos.x &&
-			(*itr)->GetStartPos().y == m_pos.y &&
-			(*itr)->GetStartPos().z == m_pos.z)
+		if ((*itr)->GetInitPos().x == m_pos.x &&
+			(*itr)->GetInitPos().y == m_pos.y &&
+			(*itr)->GetInitPos().z == m_pos.z)
 		{
 			//オブジェクトを削除
 			(*itr)->Exit();

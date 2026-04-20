@@ -442,6 +442,9 @@
     <ClInclude Include="src\game\public\lib\2Dhndlmanager.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\public\game\base\character.h">
+      <Filter>src\game\public\game\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">
@@ -689,6 +692,9 @@
     </ClCompile>
     <ClCompile Include="src\game\private\lib\2Dhndlmanager.cpp">
       <Filter>src\game\private\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\private\game\base\character.cpp">
+      <Filter>src\game\private\game\base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

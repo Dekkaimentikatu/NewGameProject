@@ -37,7 +37,7 @@ public:
 
 	void Exit();
 
-	void Request(VECTOR _pos, VECTOR _scale, VECTOR _rotation, int _modelHndl, int _moveLen);
+	void Request(T_OBJECT_DATA _objectData);
 
 	void HitCalc();
 

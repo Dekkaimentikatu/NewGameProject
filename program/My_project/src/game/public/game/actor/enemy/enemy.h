@@ -4,7 +4,7 @@
 
 #include "lib/rand.h"
 
-#include "game/base/actor.h"
+#include "game/base/character.h"
 
 //攻撃待機時間の最大値
 constexpr int ENEMY_ATTACK_WAIT_MAX = 30;
@@ -39,7 +39,7 @@ constexpr float ENEMY_KONCKBACK_SPEED = 2.0f;
 //ノックバックのY成分の速度
 constexpr float ENEMY_KONCKBACK_SPEED_Y = 8.0f;
 
-class C_ENEMY : public C_ACTOR_BASE
+class C_ENEMY : public C_CHARACTER
 {
 private:
 

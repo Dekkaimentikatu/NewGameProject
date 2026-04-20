@@ -10,23 +10,23 @@ class C_ACTOR_BASE : public C_OBJECT_BASE
 {
 protected:
 
-	//アニメーションのインデックス
-	int m_animIndex;
+	//HP
+	int m_hp;
 
-	//アニメーションの再生時間
-	float m_animPlayTime;
+	//HP最大値
+	int m_hpMax;
 
-	//アニメーションの総再生時間
-	float m_animAllPlayTime;
+	//攻撃力
+	int m_att;
 
-	//アニメーションの再生速度
-	float m_animPlaySpeed;
+	//ジャンプ中フラグ
+	bool m_isJump;
 
-	//現在再生しているアニメーション
-	int m_nowAnimState;
+	//当たり判定フラグ
+	bool m_isHit;
 
-	//前回再生していたアニメーション
-	int m_prveAnimState;
+	//攻撃中フラグ
+	bool m_isAttack;
 
 	//目標の座標
 	VECTOR m_targetPos;
@@ -37,35 +37,21 @@ protected:
 	//リスポーンフラグ
 	bool m_isRespawn;
 
-	//死亡処理
-	void DeathCalc();
+	//当たり判定待機時間
+	int m_hitWait;
 
-	//アニメーションのアタッチ
-	void AttachAnim(int _animIndex, int _animSrcModelHndl = -1);
+	//攻撃待機時間
+	float m_attackWait;
 
-	//アニメーションのデタッチ
-	void DettuchAnim();
+	//攻撃判定の半径
+	int m_attackRedius;
 
-	//アニメーションの更新処理
-	void UppdateAnim();
 
-	//アニメーションのループ処理
-	void LoopAnim();
-
-	//アニメーションの終了処理
-	void EndAnim();
-
-	//ノックバック処理
-	virtual void KnockBackCalc() {}
 
 public:
 
 	//コンストラクタ
-	C_ACTOR_BASE(int _animIndex = 0, float _animPlayTime = 0.0f, float _animAllPlayTime = 0.0f,
-		float _animPlaySpeed = 0.0f, int _nowAnimState = 0, int _prveAnimState = 0,
-		VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, bool _isRespawn = false) :
-		m_animIndex(_animIndex), m_animPlayTime(_animPlayTime), m_animAllPlayTime(_animAllPlayTime),
-		m_animPlaySpeed(_animPlaySpeed), m_nowAnimState(_nowAnimState), m_prveAnimState(_prveAnimState),
+	C_ACTOR_BASE(VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, bool _isRespawn = false) :
 		m_targetPos(_targetPos), m_cameraRot(_modelRot), m_isRespawn(_isRespawn) { }
 
 	//デストラクタ
@@ -88,6 +74,42 @@ public:
 
 	//終了
 	virtual void Exit() = 0;
+
+	//ダメージ判定処理
+	virtual void DamageCalc(int att) { m_hp -= att; }
+
+	//ATT取得
+	virtual int GetAtt();
+
+	//攻撃中フラグ設定
+	inline void SetIsAttack(const bool _isAttack)
+	{
+		m_isAttack = _isAttack;
+	}
+
+	//攻撃中フラグ取得
+	inline bool GetIsAttack() const
+	{
+		return m_isAttack;
+	}
+
+	//攻撃判定の半径取得
+	inline int GetAttackRedius() const
+	{
+		return m_attackRedius;
+	}
+
+	//HP取得
+	inline int GetHp() const
+	{
+		return m_hp;
+	}
+
+	//HP設定
+	inline void SetHp(int _hp)
+	{
+		m_hp = _hp;
+	}
 
 	inline void SetTargetPos(VECTOR _targetPos)
 	{
@@ -113,6 +135,20 @@ public:
 	{
 		m_hpMax = _hpMax;
 		m_hp = m_hpMax;
+	}
+
+
+	//攻撃判定の座標取得
+	inline virtual VECTOR GetAttackPos() const
+	{
+		VECTOR tmp = VGet(0.0f, 0.0f, static_cast<float>(m_redius));
+		MATRIX	mat1, mat2;
+		mat1 = MGetTranslate(tmp);
+		mat2 = MGetRotY(m_objectData.modelRot.y);
+		mat1 = MMult(mat1, mat2);
+		tmp = VGet(-mat1.m[3][0], mat1.m[3][1], -mat1.m[3][2]);
+
+		return VAdd(m_pos, tmp);
 	}
 };
 
