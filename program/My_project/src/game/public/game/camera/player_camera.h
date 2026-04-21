@@ -71,6 +71,9 @@ public:
 	//カメラの初期化
 	void Init(VECTOR _pos, VECTOR _focus, VECTOR _up);
 
+	//カメラの初期化
+	void Init(VECTOR _pos, VECTOR _focus, VECTOR _up, CAMERA_EVENT_STATE _state);
+
 	//カメラの終了処理
 	void Exit();
 

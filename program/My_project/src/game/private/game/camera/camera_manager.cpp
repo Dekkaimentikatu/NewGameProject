@@ -10,6 +10,12 @@ void C_CAMERA_MANAGER_::Init()
 	c_playerCamera.Init(DEFAULT_EYE_POS, DEFAULT_FOCUS_POS, DEFAULT_UP_VEC);
 }
 
+void C_CAMERA_MANAGER_::InitEdit()
+{
+	c_playerCamera.Init(DEFAULT_EYE_POS, DEFAULT_FOCUS_POS, DEFAULT_UP_VEC);
+	c_playerCamera.SetEventState(C_PALYER_CAMERA_VEC::CAM_EVENT_PLAY);
+}
+
 // èIóπèàóù
 void C_CAMERA_MANAGER_::Exit()
 {

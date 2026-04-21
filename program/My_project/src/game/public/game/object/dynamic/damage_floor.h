@@ -8,6 +8,8 @@ constexpr int ATTACK_POWER = 500;
 
 constexpr int ATTACK_MODE = 1;
 
+static const char* DAMAGE_FLOOR_MODEL_PATH = "data/model/field/damage_floor.mv1";
+
 class C_DAMAGE_FLOOR : public C_OBJECT_BASE
 {
 private:

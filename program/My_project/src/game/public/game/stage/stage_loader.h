@@ -77,7 +77,7 @@ public:
 
 	void AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _objectArray);
 
-	void AndoAddObject();
+	void AndoAddObject(list<C_OBJECT_BASE*>& _objectArray);
 
 	void RedoAddObject(list<C_OBJECT_BASE*>& _objectArray);
 

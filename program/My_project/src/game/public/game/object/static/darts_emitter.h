@@ -2,6 +2,8 @@
 #include "game/base/object.h"
 #include <list>
 
+static const char* DARTS_MODEL_PATH = "data/model/field/paper_plane.mv1";
+
 using namespace std;
 
 constexpr int OBJECT_MAX = 1;

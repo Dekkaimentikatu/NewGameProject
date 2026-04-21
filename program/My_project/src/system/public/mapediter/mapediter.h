@@ -40,7 +40,7 @@ private:
 
 	int m_editerMode;
 
-	list<C_OBJECT_BASE*> m_objectArray;
+	list<C_OBJECT_BASE*> c_objectArray;
 
 	VECTOR m_pos;
 
@@ -87,7 +87,7 @@ public:
 
 	void Step();
 
-	void Updata();
+	void Update();
 
 	void Draw();
 

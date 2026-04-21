@@ -2,6 +2,8 @@
 #include "game/base/object.h"
 #include "game/data/global_data.h"
 
+static const char* CHECK_POINT_MODEL_PATH = "data/model/field/goal.mv1";
+
 class C_CHECK_POINT : public C_OBJECT_BASE
 {
 private:

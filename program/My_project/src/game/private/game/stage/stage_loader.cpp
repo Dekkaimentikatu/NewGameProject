@@ -23,12 +23,13 @@ void C_STAGE_LOADER::LoadMapResource()
 	hndlManager3D->Load3DModel(BLOCK_MODEL_PATH);
 	hndlManager3D->Load3DModel(BLOCK_MOVE_MODEL_PATH);
 	hndlManager3D->Load3DModel(HOLO_BLOCK_MODEL_PATH);
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/goal.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/roulette1.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/roulette2.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/holo_block.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/paper_plane.mv1"));
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/board.mv1"));
+	hndlManager3D->Load3DModel(GOAL_MODEL_PATH);
+	hndlManager3D->Load3DModel(START_MODEL_PATH);
+	hndlManager3D->Load3DModel(CHECK_POINT_MODEL_PATH);
+	hndlManager3D->Load3DModel(ROT_FLOOR_MODEL_PATH);
+	hndlManager3D->Load3DModel(DAMAGE_FLOOR_MODEL_PATH);
+	hndlManager3D->Load3DModel(DARTS_MODEL_PATH);
+	hndlManager3D->Load3DModel(BOARD_MODEL_PATH);
 	//âÊëúÇÃì«Ç›çûÇ›
 	m_graphicHndl.push_back(LoadGraph("data/graphic/texture_01_black.png"));
 	m_graphicHndl.push_back(LoadGraph("data/graphic/texture_01_red.png"));
@@ -154,20 +155,25 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _o
 	m_stageDataList.push_back(_stageData);
 }
 
-void C_STAGE_LOADER::AndoAddObject()
+void C_STAGE_LOADER::AndoAddObject(list<C_OBJECT_BASE*>& _objectArray)
 {
-	auto itr = m_stageDataList.end();
-	if (itr == m_stageDataList.begin())return;
-	m_RedoList.push_back(*(--itr));
-	m_stageDataList.erase(--itr);
+	if (_objectArray.size() == 0)return;
+	if (m_stageDataList.size() == 0)return;
+	auto itr1 = --m_stageDataList.end();
+	auto itr2 = --_objectArray.end();
+	(*itr2)->Exit();
+	delete (*itr2);
+	m_RedoList.push_back(*itr1);
+	m_stageDataList.erase(itr1);
+	_objectArray.erase(itr2);
 }
 
 void C_STAGE_LOADER::RedoAddObject(list<C_OBJECT_BASE*>& _objectArray)
 {
-	auto itr = m_RedoList.end();
-	if (itr == m_RedoList.begin())return;
-	AddObject(*(--itr), _objectArray);
-	m_stageDataList.push_back(*(--itr));
+	if (m_RedoList.size() == 0)return;
+	auto itr = m_RedoList.begin();
+	AddObject((*itr), _objectArray);
+	m_RedoList.erase(itr);
 }
 
 void C_STAGE_LOADER::DeleteObject(VECTOR _pos)
@@ -224,14 +230,6 @@ void C_STAGE_LOADER::SaveMapData(char* _filePath)
 
 void C_STAGE_LOADER::Exit()
 {
-	//ÉnÉìÉhÉãÇâï˙
-	for (auto itr = m_modelHndl.begin(); itr != m_modelHndl.end(); ++itr)
-	{
-		if (MV1DeleteModel((*itr)) == 0)
-		{
-			(*itr) = 0;
-		}
-	}
 
 	for (auto itr = m_graphicHndl.begin(); itr != m_graphicHndl.end(); ++itr)
 	{
@@ -240,6 +238,19 @@ void C_STAGE_LOADER::Exit()
 			(*itr) = 0;
 		}
 	}
+
+	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
+
+	hndlManager3D->Delete3DModel(BLOCK_MODEL_PATH);
+	hndlManager3D->Delete3DModel(BLOCK_MOVE_MODEL_PATH);
+	hndlManager3D->Delete3DModel(HOLO_BLOCK_MODEL_PATH);
+	hndlManager3D->Delete3DModel(GOAL_MODEL_PATH);
+	hndlManager3D->Delete3DModel(START_MODEL_PATH);
+	hndlManager3D->Delete3DModel(CHECK_POINT_MODEL_PATH);
+	hndlManager3D->Delete3DModel(ROT_FLOOR_MODEL_PATH);
+	hndlManager3D->Delete3DModel(DAMAGE_FLOOR_MODEL_PATH);
+	hndlManager3D->Delete3DModel(DARTS_MODEL_PATH);
+	hndlManager3D->Delete3DModel(BOARD_MODEL_PATH);
 
 	m_modelHndl.clear();
 	m_graphicHndl.clear();

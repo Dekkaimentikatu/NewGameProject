@@ -23,6 +23,23 @@ void C_PALYER_CAMERA_VEC::Init(VECTOR _pos, VECTOR _focus, VECTOR _up)
 	Update();
 }
 
+//カメラの初期化
+void C_PALYER_CAMERA_VEC::Init(VECTOR _pos, VECTOR _focus, VECTOR _up, CAMERA_EVENT_STATE _state)
+{
+	m_pos = _pos;
+	m_focus = _focus;
+	m_up = _up;
+	m_speed = 0.0f;
+	m_moveTime = 0.0f;
+	m_state = CAMERA_STATE_PLAYER;
+	m_eventState = CAM_EVENT_START;
+	m_comPoint = m_pos;
+	m_rot.y = DX_PI_F * 180.0f / 180.0f;
+
+	CamMoveStart();
+	Update();
+}
+
 //リスポーン処理
 void C_PALYER_CAMERA_VEC::Respwan(VECTOR _pos, VECTOR _focus, VECTOR _up)
 {

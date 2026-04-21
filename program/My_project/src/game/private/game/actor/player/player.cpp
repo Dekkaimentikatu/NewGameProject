@@ -310,19 +310,19 @@ void C_PLAYER::MoveCalc()
 	}
 	else
 	{
-		if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::MOVE_FRONT))
+		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::MOVE_FRONT))
 		{
 			m_moveVec.z -= speed;
 		}
-		if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::MOVE_REAR))
+		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::MOVE_REAR))
 		{
 			m_moveVec.z += speed;
 		}
-		if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::MOVE_LEFT))
+		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::MOVE_LEFT))
 		{
 			m_moveVec.x -= speed;
 		}
-		if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::MOVE_RIGHT))
+		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::MOVE_RIGHT))
 		{
 			m_moveVec.x += speed;
 		}

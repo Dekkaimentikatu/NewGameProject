@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/object.h"
 
+static const char* SKY_MODEL_PATH = "data/model/field/sky.mv1";
+
 class C_SKY : public C_OBJECT_BASE
 {
 private:

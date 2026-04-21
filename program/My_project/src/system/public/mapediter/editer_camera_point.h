@@ -24,17 +24,21 @@ private:
 	VECTOR m_camUp;
 	//ÉJÉÅÉâ
 	C_CAMERA_MANAGER_ c_camManager;
+	//à⁄ìÆë¨ìx
+	float m_speed;
 
 public:
 
 	C_EDITER_CAMERA_POINT();
 	virtual ~C_EDITER_CAMERA_POINT();
 	void Init() override;
+	void Init(C_PALYER_CAMERA_VEC::CAMERA_EVENT_STATE _state);
 	void Load() override;
 	void Step() override;
 	void Update() override;
 	void Draw() override;
 	void Exit() override;
 	void HitCalc();
-	void Request(T_OBJECT_DATA _objectData);
+	void Request(T_OBJECT_DATA _objectData){};
+	void SetSpeed(float _speed) { m_speed = _speed; }
 };

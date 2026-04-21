@@ -1,4 +1,5 @@
 #include "game/object/static/sky.h"
+#include "lib/3Dhndlmanager.h"
 
 void C_SKY::Init()
 {
@@ -14,11 +15,12 @@ void C_SKY::Request(T_OBJECT_DATA _objectData)
 
 void C_SKY::Load()
 {
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(SKY_MODEL_PATH);
 	//ƒ‚ƒfƒ‹î•ñ‚Ì“Ç
 	m_pos = VGet(0, 0, 0);	//ˆÊ’u
 	m_objectData.modelScale = VGet(16.0f, 16.0f, 16.0f);
 	m_objectType = OBJECT_TYPE_STATIC;
-	LoadModel("data/model/field/sky.mv1");
 	UpdateModel();
 }
 

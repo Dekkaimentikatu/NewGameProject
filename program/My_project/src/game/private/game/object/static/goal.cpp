@@ -1,4 +1,5 @@
 #include "game/object/static/goal.h"
+#include "lib/3Dhndlmanager.h"
 
 C_GOAL::C_GOAL()
 {
@@ -20,6 +21,8 @@ void C_GOAL::Init()
 
 void C_GOAL::Request(T_OBJECT_DATA _objectData)
 {
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(GOAL_MODEL_PATH);
 	m_pos = m_objectData.initPos = _objectData.initPos;
 	m_objectData.modelScale = _objectData.modelScale;
 	m_objectData.modelRot = _objectData.modelRot;

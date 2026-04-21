@@ -4,6 +4,8 @@
 
 constexpr float ROT_SPEED = 0.5f;
 
+static const char* ROT_FLOOR_MODEL_PATH = "data/model/field/roulette1.mv1";
+
 class C_ROT_FLOOR : public C_OBJECT_BASE
 {
 private:

@@ -1,6 +1,7 @@
 #include "game/object/dynamic/rot_floor.h"
 #include "lib/2Ddirection/easing/easing.h"
 #include "block_common.h"
+#include "lib/3Dhndlmanager.h"
 
 
 void C_ROT_FLOOR::Init()
@@ -14,6 +15,8 @@ void C_ROT_FLOOR::Init()
 
 void C_ROT_FLOOR::Request(T_OBJECT_DATA _objectData)
 {
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(ROT_FLOOR_MODEL_PATH);
 	m_pos = m_objectData.initPos = _objectData.initPos;
 	m_objectData.modelScale = _objectData.modelScale;
 	m_objectData.modelRot = _objectData.modelRot;

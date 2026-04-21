@@ -39,6 +39,7 @@ public:
 	//‰Šú‰»ˆ—
 	void Init(VECTOR pos, VECTOR focus, VECTOR up);
 	void Init();
+	void InitEdit();
 	// I—¹ˆ—
 	void Exit();
 	// XVˆ—

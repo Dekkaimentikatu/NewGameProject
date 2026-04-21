@@ -2,7 +2,10 @@
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
 
+#include "lib/3Dhndlmanager.h"
+
 #include "lib/input.h"
+#include "game/object/static/sky.h"
 
 // ツールバーのボタンの状態
 //#define TOOLBUTTON_STATE_ENABLE // 入力可能な状態
@@ -17,7 +20,7 @@
 
 void C_MAP_EDITER::Init()
 {
-	m_objectArray.clear();
+	c_objectArray.clear();
 	m_pos = VGet(0.0f, 0.0f, 0.0f);
 	m_scl = VGet(0.1f, 0.1f, 0.1f);
 	m_rot = VGet(0.0f, 0.0f, 0.0f);
@@ -30,28 +33,31 @@ void C_MAP_EDITER::Init()
 void C_MAP_EDITER::LoadAnSync()
 {
 	m_stageLoader.LoadMapResource();
-	m_hndl = MV1LoadModel("data/model/field/pointer.mv1");
+	
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	instance->Load3DModel(SKY_MODEL_PATH);
+	instance->Load3DModel("data/model/field/pointer.mv1");
 }
 
 void C_MAP_EDITER::LoadSync()
 {
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	m_hndl = instance->Get3DModelHndl("data/model/field/pointer.mv1");
 	MV1SetPosition(m_hndl, m_pos);
 	MV1SetScale(m_hndl, VGet(0.1f, 0.1f, 0.1f));
 	memcpy(m_filePath, const_cast<char*>(FILE_PATH), sizeof(char[256]));
 	memcpy(m_prevfilePath, const_cast<char*>(FILE_PATH), sizeof(char[256]));
-	m_stageLoader.LoadMapData(m_objectArray, m_filePath);
-	//for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
-	//{
-	//	(*itr)->Load();
-	//}
+	m_stageLoader.LoadMapData(c_objectArray, m_filePath);
+
+	C_OBJECT_BASE* tmp = new C_SKY;
+	tmp->Init();
+	tmp->Load();
+
+	c_objectArray.push_back(tmp);
 }
 
 void C_MAP_EDITER::Step()
 {
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-
-	ImGui::NewFrame();
 	// ウィンドウの背景を半透明に設定
 	ImGui::SetNextWindowBgAlpha(0.5f);
 	// ウィンドウの位置を設定
@@ -60,8 +66,6 @@ void C_MAP_EDITER::Step()
 	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Always);
 	// ウィンドウのタイトルを設定して開始
 	ImGui::Begin("Stats");
-	ImGui::LabelText("", "FPS:%4.2f (%4.2f ms)", 0.0f);
-	ImGui::LabelText("", "Camera Pos:(%.2f, %.2f, %.2f )", 0.0f, 0.0f, 0.0f);
 	ImGui::Spacing();
 	ImGui::Separator();
 	if (ImGui::CollapsingHeader("Object"))
@@ -82,11 +86,6 @@ void C_MAP_EDITER::Step()
 		ImGui::InputFloat3("Rot", &m_rot.x, "%.3f");
 	}
 	ImGui::Separator();
-	if (ImGui::CollapsingHeader("moveLen"))
-	{
-		ImGui::InputInt("Len", &m_moveLen, 1);
-	}
-	ImGui::Separator();
 	if (ImGui::CollapsingHeader("Loadcsv"))
 	{
 		ImGui::InputText("FilePath", m_filePath, sizeof(m_filePath));
@@ -98,7 +97,7 @@ void C_MAP_EDITER::Step()
 
 			memcpy(m_prevfilePath, m_filePath, sizeof(m_filePath));
 
-			m_stageLoader.LoadMapData(m_objectArray, m_filePath);
+			m_stageLoader.LoadMapData(c_objectArray, m_filePath);
 		}
 	}
 	ImGui::Separator();
@@ -113,14 +112,24 @@ void C_MAP_EDITER::Step()
 	if (ImGui::Button("Delete")) {
 		DeleteObject();
 	}
+	ImGui::SameLine();
+	if (ImGui::Button("Ando")) {
+		m_stageLoader.AndoAddObject(c_objectArray);
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Redo")) {
+		m_stageLoader.RedoAddObject(c_objectArray);
+	}
 	ImGui::End();
+
+
 
 	MV1SetPosition(m_hndl, m_pos);
 }
 
 void C_MAP_EDITER::AddObject()
 {
-	T_STAGE_DATA tmp;
+	T_STAGE_DATA tmp = { 0 };
 	tmp.objectID = m_index;
 	tmp.posX = m_pos.x;
 	tmp.posY = m_pos.y;
@@ -131,23 +140,21 @@ void C_MAP_EDITER::AddObject()
 	tmp.scaleX = m_scl.x;
 	tmp.scaleY = m_scl.y;
 	tmp.scaleZ = m_scl.z;
-	tmp.moveDir = m_moveDir;
-	tmp.moveLen = m_moveLen;
-	m_stageLoader.AddObject(tmp, m_objectArray);
+	m_stageLoader.AddObject(tmp, c_objectArray);
 }
 
 void C_MAP_EDITER::DeleteObject()
 {
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
 	{
-		if ((*itr)->GetInitPos().x == m_pos.x &&
-			(*itr)->GetInitPos().y == m_pos.y &&
-			(*itr)->GetInitPos().z == m_pos.z)
+		if ((*itr)->GetPos().x == m_pos.x &&
+			(*itr)->GetPos().y == m_pos.y &&
+			(*itr)->GetPos().z == m_pos.z)
 		{
 			//オブジェクトを削除
 			(*itr)->Exit();
 			delete (*itr);
-			m_objectArray.erase(itr);
+			c_objectArray.erase(itr);
 			m_stageLoader.DeleteObject(m_pos);
 			return;
 		}
@@ -155,9 +162,9 @@ void C_MAP_EDITER::DeleteObject()
 
 }
 
-void C_MAP_EDITER::Updata()
+void C_MAP_EDITER::Update()
 {
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
 	{
 		(*itr)->Update();
 	}
@@ -167,7 +174,7 @@ void C_MAP_EDITER::Updata()
 
 void C_MAP_EDITER::Draw()
 {
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
 	{
 		(*itr)->Draw();
 	}
@@ -182,19 +189,22 @@ void C_MAP_EDITER::Draw()
 
 void C_MAP_EDITER::DeleteObjectAll()
 {
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
 	{
 		(*itr)->Exit();
 		delete (*itr);
 	}
 
-	m_objectArray.clear();
+	c_objectArray.clear();
 }
 
 void C_MAP_EDITER::Exit()
 {
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+
 	DeleteObjectAll();
-	MV1DeleteModel(m_hndl);
+	instance->Delete3DModel(SKY_MODEL_PATH);
+	instance->Delete3DModel("data/model/field/pointer.mv1");
 	m_stageLoader.SaveMapData(m_filePath);
 	m_stageLoader.Exit();
 	SetupToolBar(NULL, NULL);

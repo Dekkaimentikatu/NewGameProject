@@ -1,4 +1,6 @@
 #include "scene/scene_editer.h"
+#include "imgui/imgui_impl_dx11.h"
+#include "imgui/imgui_impl_win32.h"
 
 C_SCENE_EDITER::~C_SCENE_EDITER()
 {
@@ -70,13 +72,15 @@ void C_SCENE_EDITER::Step()
 {
 	m_loadState = LOAD_OUT;
 
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
 	c_mapEditer.Step();
 
 	m_sky.Step();
 
 	m_cam.Step();
-
-	c_mapEditer.Updata();
 
 	m_sky.Update();
 

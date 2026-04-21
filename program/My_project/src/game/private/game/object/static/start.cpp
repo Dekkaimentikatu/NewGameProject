@@ -1,4 +1,5 @@
 #include "game/object/static/start.h"
+#include "lib/3Dhndlmanager.h"
 
 C_START::~C_START()
 {
@@ -15,6 +16,8 @@ void C_START::Init()
 
 void C_START::Request(T_OBJECT_DATA _objectData)
 {
+	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = hndlManager3D->Get3DModelHndl(START_MODEL_PATH);
 	m_pos = m_objectData.initPos = _objectData.initPos;
 	m_objectData.modelScale = _objectData.modelScale;
 	m_objectData.modelRot = _objectData.modelRot;
@@ -25,7 +28,6 @@ void C_START::Request(T_OBJECT_DATA _objectData)
 void C_START::Load()
 {
 	m_golobalData = C_GLOBAL_DATA::GetInstace();
-
 	m_flagData = m_golobalData->GetFlagData();
 	DuplicateModel(m_modelHndl);
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//ÉXÉPÅ[Éã

@@ -1,4 +1,5 @@
 #include "game/object/static/check_point.h"
+#include "lib/3Dhndlmanager.h"
 
 C_CHECK_POINT::C_CHECK_POINT()
 {
@@ -21,6 +22,8 @@ void C_CHECK_POINT::Init()
 
 void C_CHECK_POINT::Request(T_OBJECT_DATA _objectData)
 {
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(CHECK_POINT_MODEL_PATH);
 	m_pos = m_objectData.initPos = _objectData.initPos;
 	m_objectData.modelScale = _objectData.modelScale;
 	m_objectData.modelRot = _objectData.modelRot;

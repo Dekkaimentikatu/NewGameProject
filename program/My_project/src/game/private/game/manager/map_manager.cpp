@@ -2,6 +2,8 @@
 #include "game/collision/collision_manager.h"
 #include "game/object/static/sky.h"
 
+#include "lib/3Dhndlmanager.h"
+
 void C_MAP_MANAGER::Init()
 {
 	c_objectArray.clear();
@@ -12,6 +14,9 @@ void C_MAP_MANAGER::Init()
 void C_MAP_MANAGER::LoadAnSync()
 {
 	m_stageLoader.LoadMapResource();
+	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
+	incetanse->Load3DModel(SKY_MODEL_PATH);
+
 }
 
 void C_MAP_MANAGER::LoadSync()

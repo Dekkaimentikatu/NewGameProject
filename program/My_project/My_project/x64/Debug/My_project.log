@@ -1,6 +1,2 @@
-﻿  block.cpp
-  stage_loader.cpp
-C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\game\stage\stage_loader.cpp(104,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  コードを生成中...
-  LINK : 前回のインクリメンタル リンクで C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\x64\Debug\My_project.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+﻿  start.cpp
   My_project.vcxproj -> C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\x64\Debug\My_project.exe

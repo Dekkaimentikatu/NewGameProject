@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/object.h"
 
+static const char* BOARD_MODEL_PATH = "data/model/field/board.mv1";
+
 
 class C_BOARD : public C_OBJECT_BASE
 {

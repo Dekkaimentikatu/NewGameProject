@@ -1,6 +1,7 @@
 #include "game/object/dynamic/darts.h"
 #include "lib/2Ddirection/easing/easing.h"
 #include "block_common.h"
+#include "lib/3Dhndlmanager.h"
 
 C_DARTS::C_DARTS()
 {
@@ -23,6 +24,8 @@ void C_DARTS::Init()
 
 void C_DARTS::Request(T_OBJECT_DATA _objectData)
 {
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(_DARTS_MODEL_PATH);
 	m_pos = m_objectData.initPos = _objectData.initPos;
 	m_objectData.modelScale = _objectData.modelScale;
 	m_objectData.modelRot = _objectData.modelRot;
