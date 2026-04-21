@@ -2,6 +2,8 @@
 #include "game/base/object.h"
 #include "game/data/global_data.h"
 
+static const char* HOLO_BLOCK_MODEL_PATH = "data/model/field/holo_block.mv1";
+
 class C_HOLO_BLOCK : public C_OBJECT_BASE
 {
 private:

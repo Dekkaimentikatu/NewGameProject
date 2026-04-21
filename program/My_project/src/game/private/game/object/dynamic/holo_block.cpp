@@ -1,5 +1,6 @@
 #include "game/object/dynamic/holo_block.h"
 #include "lib/2Ddirection/easing/easing.h"
+#include "lib/3Dhndlmanager.h"
 #include "block_common.h"
 
 void C_HOLO_BLOCK::Init()
@@ -13,15 +14,6 @@ void C_HOLO_BLOCK::Init()
 	m_isHit = false;	//“–‚½‚è”»’èƒŠƒZƒbƒg
 }
 
-void C_HOLO_BLOCK::Load()
-{
-	c_globalData = C_GLOBAL_DATA::GetInstace();
-	m_playerData = c_globalData->GetPlayerData();
-	DuplicateModel(m_modelHndl);
-	UpdateModel();
-	SetUpCollInfo();
-}
-
 void C_HOLO_BLOCK::Request(T_OBJECT_DATA _objectData)
 {
 	m_pos = m_objectData.initPos = _objectData.initPos;
@@ -29,6 +21,17 @@ void C_HOLO_BLOCK::Request(T_OBJECT_DATA _objectData)
 	m_objectData.modelRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_BLCOK;
 	m_moveLen = _objectData.moveLen;
+}
+
+void C_HOLO_BLOCK::Load()
+{
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	DuplicateModel(instace->Get3DModelHndl(HOLO_BLOCK_MODEL_PATH));
+	c_globalData = C_GLOBAL_DATA::GetInstace();
+	m_playerData = c_globalData->GetPlayerData();
+	DuplicateModel(m_modelHndl);
+	UpdateModel();
+	SetUpCollInfo();
 }
 
 void C_HOLO_BLOCK::Step()

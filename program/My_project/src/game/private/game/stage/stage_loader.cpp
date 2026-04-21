@@ -22,7 +22,7 @@ void C_STAGE_LOADER::LoadMapResource()
 	//モデルの読み込み
 	hndlManager3D->Load3DModel(BLOCK_MODEL_PATH);
 	hndlManager3D->Load3DModel(BLOCK_MOVE_MODEL_PATH);
-	m_modelHndl.push_back(MV1LoadModel("data/model/field/DamageFloor.mv1"));
+	hndlManager3D->Load3DModel(HOLO_BLOCK_MODEL_PATH);
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/goal.mv1"));
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/roulette1.mv1"));
 	m_modelHndl.push_back(MV1LoadModel("data/model/field/roulette2.mv1"));
@@ -62,9 +62,9 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 			FileRead_scanf(m_hndl, "%f,", &tmp.posY) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.posZ) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.scaleX) == -1 ||
-			FileRead_scanf(m_hndl, "%f,", &tmp.scaleY) == -1 || 
-			FileRead_scanf(m_hndl, "%f,", &tmp.scaleZ) == -1 || 
-			FileRead_scanf(m_hndl, "%f,", &tmp.rotX) == -1 || 
+			FileRead_scanf(m_hndl, "%f,", &tmp.scaleY) == -1 ||
+			FileRead_scanf(m_hndl, "%f,", &tmp.scaleZ) == -1 ||
+			FileRead_scanf(m_hndl, "%f,", &tmp.rotX) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.rotY) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.rotZ) == -1 ||
 			FileRead_scanf(m_hndl, "%d,", &tmp.moveDir) == -1 ||
@@ -86,7 +86,7 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 	m_hndl = 0;
 }
 
-void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _objectArray)
+void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _objectArray)
 {
 	//各オブジェクトのポインタ変数
 	C_OBJECT_BASE* tmp = nullptr;
@@ -94,8 +94,8 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData,list<C_OBJECT_BASE*>& _ob
 
 	//
 	int objectID = _stageData.objectID;
-	VECTOR pos = VGet(_stageData.posX,_stageData.posY,_stageData.posZ);
-	VECTOR scale = VGet(_stageData.scaleX,_stageData.scaleY,_stageData.scaleZ);
+	VECTOR pos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
+	VECTOR scale = VGet(_stageData.scaleX, _stageData.scaleY, _stageData.scaleZ);
 	VECTOR rot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
 	int moveLen = _stageData.moveLen;
 	data.initPos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
