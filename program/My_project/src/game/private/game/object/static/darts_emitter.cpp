@@ -72,11 +72,9 @@ void C_DARTS_EMITTER::Exit()
 
 void C_DARTS_EMITTER::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_redius = 16;
-	m_moveLen = _objectData.moveLen;
 }
 
 void C_DARTS_EMITTER::HitCalc()

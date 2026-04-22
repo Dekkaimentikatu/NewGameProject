@@ -26,12 +26,10 @@ void C_DARTS::Request(T_OBJECT_DATA _objectData)
 {
 	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
 	m_modelHndl = instace->Get3DModelHndl(_DARTS_MODEL_PATH);
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);	//スケール
 	m_objectType = OBJECT_TYPE_BLCOK;
-	m_endLen = static_cast<int>(_objectData.moveLen);
 	m_isActive = true;
 	m_isHit = false;
 }
@@ -68,7 +66,7 @@ void C_DARTS::Step()
 	float len = VSize(lenVec);
 
 	//範囲外に出たら初期位置に戻す
-	if (len > m_endLen || m_playerData->isRespawn)
+	if (len > m_objectData.moveLen || m_playerData->isRespawn)
 	{
 		m_pos = m_objectData.initPos;
 	}

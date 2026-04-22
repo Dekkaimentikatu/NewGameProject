@@ -68,7 +68,6 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 			FileRead_scanf(m_hndl, "%f,", &tmp.rotX) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.rotY) == -1 ||
 			FileRead_scanf(m_hndl, "%f,", &tmp.rotZ) == -1 ||
-			FileRead_scanf(m_hndl, "%d,", &tmp.moveDir) == -1 ||
 			FileRead_scanf(m_hndl, "%d,", &tmp.moveLen) == -1)
 		{
 			//読み込み失敗で終了
@@ -209,7 +208,7 @@ void C_STAGE_LOADER::SaveMapData(char* _filePath)
 	for (auto itr = m_stageDataList.begin(); itr != m_stageDataList.end(); ++itr)
 	{
 		//ファイルに情報を保存
-		fprintf_s(fp, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%d\n",
+		fprintf_s(fp, "%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d\n",
 			(*itr).objectID,
 			(*itr).posX,
 			(*itr).posY,
@@ -220,7 +219,6 @@ void C_STAGE_LOADER::SaveMapData(char* _filePath)
 			(*itr).rotX,
 			(*itr).rotY,
 			(*itr).rotZ,
-			(*itr).moveDir,
 			(*itr).moveLen);
 	}
 
