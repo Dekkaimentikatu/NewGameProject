@@ -1,7 +1,7 @@
 #include "game/actor/enemy/enemy.h"
 #include "effekseer/effekseer.h"
 #include "lib/se_manager.h"
-
+#include "lib/3Dhndlmanager.h"
 
 
 void C_ENEMY::Init()
@@ -393,6 +393,8 @@ void C_ENEMY::AddPos(VECTOR _addPos)
 void C_ENEMY::Request(T_OBJECT_DATA _objectData)
 {
 	m_objectData = _objectData;
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instance->Get3DModelHndl(ENEMY_MODEL_PATH);
 }
 
 int C_ENEMY::GetAtt() const

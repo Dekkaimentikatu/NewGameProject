@@ -39,6 +39,8 @@ constexpr float ENEMY_KONCKBACK_SPEED = 2.0f;
 //ノックバックのY成分の速度
 constexpr float ENEMY_KONCKBACK_SPEED_Y = 8.0f;
 
+static const char* ENEMY_MODEL_PATH = "data/model/enemy/Enemy.mv1";
+
 class C_ENEMY : public C_CHARACTER
 {
 private:

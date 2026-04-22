@@ -13,6 +13,7 @@ C_ENEMY_SPAWN_POINT::~C_ENEMY_SPAWN_POINT()
 void C_ENEMY_SPAWN_POINT::Init()
 {
 	//
+	m_golobalData = C_GLOBAL_DATA::GetInstace();
 	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
 	m_objectData.modelScale = VGet(1.0f, 1.0f, 1.0f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
@@ -28,12 +29,13 @@ void C_ENEMY_SPAWN_POINT::Request(T_OBJECT_DATA _objectData)
 	m_objectData.modelRot = _objectData.modelRot;
 	m_objectType = OBJECT_TYPE_STATIC;
 	m_redius = 16;
+	C_GLOBAL_DATA::T_ENEMY_SPOWN tmp;
+
+	m_golobalData->GetEnemySpawnPointList()->push_back(tmp);
 }
 
 void C_ENEMY_SPAWN_POINT::Load()
 {
-	m_golobalData = C_GLOBAL_DATA::GetInstace();
-
 	m_flagData = m_golobalData->GetFlagData();
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 

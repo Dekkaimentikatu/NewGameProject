@@ -15,6 +15,7 @@
 #include "game/object/static/darts_emitter.h"
 #include "game/object/static/board.h"
 #include "lib/3Dhndlmanager.h"
+#include "lib/2Dhndlmanager.h"
 
 void C_STAGE_LOADER::LoadMapResource()
 {
@@ -30,17 +31,15 @@ void C_STAGE_LOADER::LoadMapResource()
 	hndlManager3D->Load3DModel(DAMAGE_FLOOR_MODEL_PATH);
 	hndlManager3D->Load3DModel(DARTS_MODEL_PATH);
 	hndlManager3D->Load3DModel(BOARD_MODEL_PATH);
+
+	C_2D_HNDL_MANAGER* hndlManager2D = C_2D_HNDL_MANAGER::GetInstance();
 	//‰æ‘œ‚Ì“Ç‚Ýž‚Ý
-	m_graphicHndl.push_back(LoadGraph("data/graphic/texture_01_black.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/texture_01_red.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/texture_02_white.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/holo.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_move.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_cam.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_jump.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_stop.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_attack.png"));
-	m_graphicHndl.push_back(LoadGraph("data/graphic/tutorial_denger.png"));
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[0]);
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[1]);
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[2]);
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[3]);
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[4]);
+	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[5]);
 }
 
 void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _filePath)
@@ -238,7 +237,7 @@ void C_STAGE_LOADER::Exit()
 	}
 
 	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
-
+	//ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
 	hndlManager3D->Delete3DModel(BLOCK_MODEL_PATH);
 	hndlManager3D->Delete3DModel(BLOCK_MOVE_MODEL_PATH);
 	hndlManager3D->Delete3DModel(HOLO_BLOCK_MODEL_PATH);
@@ -249,6 +248,15 @@ void C_STAGE_LOADER::Exit()
 	hndlManager3D->Delete3DModel(DAMAGE_FLOOR_MODEL_PATH);
 	hndlManager3D->Delete3DModel(DARTS_MODEL_PATH);
 	hndlManager3D->Delete3DModel(BOARD_MODEL_PATH);
+
+	C_2D_HNDL_MANAGER* hndlManager2D = C_2D_HNDL_MANAGER::GetInstance();
+	//‰æ‘œ‚Ì“Ç‚Ýž‚Ý
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[0]);
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[1]);
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[2]);
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[3]);
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[4]);
+	hndlManager2D->Delete2DData(BOARD_IMAGE_PATH[5]);
 
 	m_modelHndl.clear();
 	m_graphicHndl.clear();

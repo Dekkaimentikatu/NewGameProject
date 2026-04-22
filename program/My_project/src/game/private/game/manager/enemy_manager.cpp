@@ -1,6 +1,7 @@
 #include "game/manager/enemy_manager.h"
 #include "game/collision/collision_manager.h"
 #include "effekseer/effekseer.h"
+#include "lib/3Dhndlmanager.h"
 
 void C_ENEMY_MANAGER::Init()
 {
@@ -13,12 +14,14 @@ void C_ENEMY_MANAGER::Init()
 
 void C_ENEMY_MANAGER::LoadAnSync()
 {
-	m_modelHndl = MV1LoadModel("data/model/enemy/Enemy.mv1");
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	instance->Load3DModel(ENEMY_MODEL_PATH);
 }
 
 void C_ENEMY_MANAGER::LoadSync()
 {
 	C_ENEMY* enemy = nullptr;
+	C_OBJECT_BASE::T_OBJECT_DATA tmp = {0};
 
 	int eff1 = CEffekseerCtrl::LoadData("data/effect/ToonHit.efk");
 	int eff2 = CEffekseerCtrl::LoadData("data/effect/FireWorks.efk");
@@ -28,7 +31,11 @@ void C_ENEMY_MANAGER::LoadSync()
 	{
 		enemy = new C_ENEMY;
 		enemy->Init();
-		//enemy->Request((*itr).pos, (*itr).scale, (*itr).rot, m_modelHndl, eff1,  eff2);
+		tmp.initPos = (*itr).pos;
+		tmp.modelScale = (*itr).scale;
+		tmp.modelRot = (*itr).rot;
+		tmp.moveLen = 0;
+		enemy->Request(tmp);
 		enemy->Load();
 		c_actorArray.push_back(enemy);
 	}
@@ -65,7 +72,8 @@ void C_ENEMY_MANAGER::Draw()
 
 void C_ENEMY_MANAGER::Exit()
 {
-	MV1DeleteModel(m_modelHndl);
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	instance->Delete3DModel(ENEMY_MODEL_PATH);
 
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{

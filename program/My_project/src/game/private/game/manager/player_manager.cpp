@@ -96,8 +96,8 @@ void C_PLAYER_MANAGER::Exit()
 	}
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
-	incetanse->Load3DModel("data/model/player/character-human.mv1");
-	incetanse->Load3DModel("data/model/player/weapon-sword.mv1");
+	incetanse->Delete3DModel("data/model/player/character-human.mv1");
+	incetanse->Delete3DModel("data/model/player/weapon-sword.mv1");
 
 	c_actorArray.clear();
 
