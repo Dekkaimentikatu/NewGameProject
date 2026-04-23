@@ -25,7 +25,7 @@ void C_BOARD::Request(T_OBJECT_DATA _objectData)
 	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
 	m_modelHndl = hndlManager3D->Get3DModelHndl(BOARD_MODEL_PATH);
 	C_2D_HNDL_MANAGER* hndlManager2D = C_2D_HNDL_MANAGER::GetInstance();
-	m_modelHndl = hndlManager2D->Get2DImageHndl(BOARD_IMAGE_PATH[static_cast<int>(m_objectData.moveLen)]);
+	m_imageHndl = hndlManager2D->Get2DImageHndl(BOARD_IMAGE_PATH[static_cast<int>(m_objectData.moveLen)]);
 }
 
 void C_BOARD::Load()

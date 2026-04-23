@@ -1,17 +1,12 @@
 #include "game/UI/load_anim.h"
-
-constexpr int GRAPH_MAX = 8;
+#include "lib/2Dhndlmanager.h"
 
 //èâä˙âª
 void C_LOAD_ANIM::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_pos = _pos;
-
-	m_hndl1 = 0;
 
 	m_index = 0;
 }
@@ -19,7 +14,12 @@ void C_LOAD_ANIM::Init(VECTOR _pos)
 //
 void C_LOAD_ANIM::LoadSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/load_anim.png", GRAPH_MAX, 4, 2, 32, 32);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+
+	for (int i = 0; i < LOAD_GRAPH_MAX; i++)
+	{
+		m_hndl[i] = inctanse->Get2DImageHndl(LOAD_GRAPH_PATH, i);
+	}
 }
 
 //ì«çû
@@ -31,7 +31,7 @@ void C_LOAD_ANIM::LoadAnSync()
 void C_LOAD_ANIM::StepLoading()
 {
 	m_index++;
-	if (m_index >= GRAPH_MAX)m_index = 0;
+	if (m_index >= LOAD_GRAPH_MAX)m_index = 0;
 }
 
 //çXêV
@@ -48,7 +48,8 @@ void C_LOAD_ANIM::Update()
 
 void C_LOAD_ANIM::DrawLoading()
 {
-	c_drawGrap->DrawRota(m_hndl1, m_index, m_pos, 5.0f);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->DrawRota(m_hndl, m_pos, m_index, 5.0f);
 }
 
 //ï`âÊ
@@ -60,7 +61,13 @@ void C_LOAD_ANIM::Draw()
 //èIóπ
 void C_LOAD_ANIM::Exit()
 {
+	for (int i = 0; i < LOAD_GRAPH_MAX; i++)
+	{
+		m_hndl[i] = 0;
+	}
 
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->Delete2DData(LOAD_GRAPH_PATH);
 }
 
 void C_LOAD_ANIM::SetSize(int _sizeX, int _sizeY)

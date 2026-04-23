@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/UI_object.h"
 
+static const char* TITLE_BACK_GRAPH_PATH = "data/graphic/Title.png";
+
 class C_TITLE_BACK : public C_UI_OBJECT_BASE
 {
 protected:

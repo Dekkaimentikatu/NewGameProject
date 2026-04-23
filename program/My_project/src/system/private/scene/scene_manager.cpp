@@ -4,7 +4,6 @@
 #include "lib/fade.h"
 #include "lib/fps.h"
 #include "lib/input.h"
-#include "lib/drawgrap.h"
 #include "lib/xinput.h"
 
 #include "lib/bgm_manager.h"
@@ -28,8 +27,6 @@ void C_SCENE_MANAGER::Init()
 
 	c_scene = C_SCENE_FACTORY::Create(c_sceneData->GetSceneType());	//次のシーンクラスインスタンスの生成
 
-	c_drawGraph = C_DRAW_GRAPH::GetInstance();		//画像描画クラスのインスタンスを格納
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	C_BGM_MANAGER* bgmMgr = C_BGM_MANAGER::GetInstance();
@@ -42,8 +39,6 @@ void C_SCENE_MANAGER::Init()
 	C_INPUT_CONFIG::Init();
 
 	C_FPS::Init();			//FPS管理クラスの初期化
-
-	c_drawGraph->Init();	//画像描画クラスの初期化
 
 	c_golobalData->Init();
 
@@ -131,8 +126,6 @@ void C_SCENE_MANAGER::Exit()
 
 	c_sceneData->DeleteInstance();			//シーン間データ共有クラスのインスタンスを削除
 
-	c_drawGraph->DeleteInstance();
-
 	c_golobalData->DeleteInstance();
 
 	CEffekseerCtrl::Exit();
@@ -154,8 +147,6 @@ void C_SCENE_MANAGER::Next()
 {
 	if (!c_sceneData->GetIsEnd())return;	//終了フラグが折れているなら処理を行わない
 
-	c_drawGraph->DeleteAllGrapData();	//画像描画クラスの画像データを全て削除
-
 	if (c_scene != nullptr)delete c_scene;	//前回のシーンクラスのインスタンスの削除
 	c_scene = nullptr;				//ポインタの初期化
 
@@ -164,8 +155,6 @@ void C_SCENE_MANAGER::Next()
 	CEffekseerCtrl::Exit();
 
 	CEffekseerCtrl::Init(10000, 20000);
-
-	c_drawGraph->DeleteAllGrapData();
 
 	m_pravSceneType = c_sceneData->GetSceneType();	//前回のシーンのタイプを現在のシーンのタイプに更新
 	c_sceneData->SetIsEnd(false);

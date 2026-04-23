@@ -5,9 +5,9 @@ void C_CAMERA_MANAGER_::Init(VECTOR pos, VECTOR focus, VECTOR up)
 	c_playerCamera.Init(pos, focus, up);
 }
 
-void C_CAMERA_MANAGER_::Init()
+void C_CAMERA_MANAGER_::Init(C_PALYER_CAMERA_VEC::CAMERA_EVENT_STATE _eventState)
 {
-	c_playerCamera.Init(DEFAULT_EYE_POS, DEFAULT_FOCUS_POS, DEFAULT_UP_VEC);
+	c_playerCamera.Init(DEFAULT_EYE_POS, DEFAULT_FOCUS_POS, DEFAULT_UP_VEC, _eventState);
 }
 
 void C_CAMERA_MANAGER_::InitEdit()

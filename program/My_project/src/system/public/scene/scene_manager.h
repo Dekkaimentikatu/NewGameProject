@@ -23,8 +23,6 @@ private:
 
 protected:
 
-	C_DRAW_GRAPH* c_drawGraph;
-
 public:
 
 	void Init();			//‰Šú‰»

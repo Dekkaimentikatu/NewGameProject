@@ -32,11 +32,21 @@ void C_PALYER_CAMERA_VEC::Init(VECTOR _pos, VECTOR _focus, VECTOR _up, CAMERA_EV
 	m_speed = 0.0f;
 	m_moveTime = 0.0f;
 	m_state = CAMERA_STATE_PLAYER;
-	m_eventState = CAM_EVENT_START;
+	m_eventState = _state;
 	m_comPoint = m_pos;
+	m_rot.x = 0.0f;
 	m_rot.y = DX_PI_F * 180.0f / 180.0f;
 
-	CamMoveStart();
+	void (C_PALYER_CAMERA_VEC:: * stateFunc[])() = {
+		&C_PALYER_CAMERA_VEC::CamMoveStart,
+		&C_PALYER_CAMERA_VEC::CamMovePlayWait,
+		&C_PALYER_CAMERA_VEC::CamMovePlay,
+		&C_PALYER_CAMERA_VEC::CamMoveRespawn,
+		&C_PALYER_CAMERA_VEC::CamMoveGoal,
+		&C_PALYER_CAMERA_VEC::CamMoveGoal,
+	};
+
+	(this->*stateFunc[m_eventState])();
 	Update();
 }
 
@@ -51,6 +61,7 @@ void C_PALYER_CAMERA_VEC::Respwan(VECTOR _pos, VECTOR _focus, VECTOR _up)
 	m_state = CAMERA_STATE_PLAYER;
 	m_eventState = CAM_EVENT_PLAY;
 	m_comPoint = m_pos;
+	m_rot.x = 0.0f;
 	m_rot.y = DX_PI_F * 180.0f / 180.0f;
 }
 

@@ -184,15 +184,6 @@
     <ClInclude Include="src\game\public\lib\collision.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\lib\drawgrap.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\drawGrap2D.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\effect.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\public\lib\fade.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
@@ -215,9 +206,6 @@
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
     <ClInclude Include="src\game\public\lib\rand.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\score.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
     <ClInclude Include="src\game\public\lib\se_manager.h">
@@ -433,9 +421,6 @@
     <ClInclude Include="src\imgui\imstb_truetype.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\lib\imagehndlmanager.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\public\lib\3Dhndlmanager.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
@@ -504,15 +489,6 @@
     <ClCompile Include="src\game\private\lib\collision.cpp">
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\private\lib\drawgrap.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\drawGrap2D.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\effect.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\private\lib\fade.cpp">
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
@@ -535,9 +511,6 @@
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
     <ClCompile Include="src\game\private\lib\rand.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\score.cpp">
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
     <ClCompile Include="src\game\private\lib\se_manager .cpp">

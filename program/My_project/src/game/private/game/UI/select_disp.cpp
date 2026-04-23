@@ -2,11 +2,11 @@
 #include "lib/XInput.h"
 #include "lib/Input.h"
 
+#include "lib/2Dhndlmanager.h"
+
 //èâä˙âª
 void C_SELECT_DISP::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_index = c_golobalData->GetStageData()->stage_index;
@@ -21,9 +21,11 @@ void C_SELECT_DISP::Init(VECTOR _pos)
 //ì«çû
 void C_SELECT_DISP::LoadAnSync()
 {
-	m_hndl[0] = c_drawGrap->LoadGraphData("data/graphic/Stage1.png");
-	m_hndl[1] = c_drawGrap->LoadGraphData("data/graphic/Stage2.png");
-	m_hndl[2] = c_drawGrap->LoadGraphData("data/graphic/Stage3.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	for (int i = 0; i < C_MAP_MANAGER::SELECT_STAGE_MAX; i++)
+	{
+		m_hndl[i] = inctanse->Get2DImageHndl(DISP_GRAPH_PATH[i]);
+	}
 }
 
 //çXêV
@@ -86,10 +88,10 @@ void C_SELECT_DISP::Update()
 //ï`âÊ
 void C_SELECT_DISP::Draw()
 {
-
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
 	for (int i = 0; i < C_MAP_MANAGER::SELECT_STAGE_MAX; i++)
 	{
-		c_drawGrap->DrawRota(m_hndl[i], 0, m_dispPos[i], m_dispScale[i]);
+		inctanse->DrawRota(m_hndl, m_dispPos[i], i,m_dispScale[i]);
 	}
 }
 

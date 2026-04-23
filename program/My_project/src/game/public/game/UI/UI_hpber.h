@@ -5,6 +5,9 @@
 constexpr int HP_GRAPH_SIZEX = 512;
 constexpr int HP_GRAPH_SIZEY = 16;
 
+static const char* HP_GRAPH_PATH[2] = { "data/graphic/hp_ber.png", 
+										"data/graphic/hp_ber_frame.png" };
+
 class C_UI_HPBER : public C_UI_OBJECT_BASE
 {
 protected:

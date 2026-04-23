@@ -1,6 +1,7 @@
 #include "scene/scene_play.h"
 #include "game/data/global_data.h"
 #include "lib/bgm_manager.h"
+#include "lib/input_config.h"
 
 C_SCENE_PLAY::~C_SCENE_PLAY()
 {
@@ -72,7 +73,7 @@ void C_SCENE_PLAY::LoadEnd()
 
 void C_SCENE_PLAY::StartWait()
 {
-	c_cameraManager.Init();
+	c_cameraManager.Init(C_PALYER_CAMERA_VEC::CAM_EVENT_START);
 	c_cameraManager.SetNearFar(0.25f, 3000.0f);
 
 	C_FADE::RequestFadeIn();	//フェードインのリクエスト
@@ -92,7 +93,8 @@ void C_SCENE_PLAY::Step()
 
 		if (!C_FADE::IsEndFadeIn())return;	//フェードインが終わっていなければ抜ける
 
-		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_PLAYWAIT)
+		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_PLAYWAIT ||
+			C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 		{
 			C_FADE::RequestFadeOut();
 			m_playState = PLAYWAIT;
@@ -104,7 +106,7 @@ void C_SCENE_PLAY::Step()
 		if (C_FADE::IsEndFadeOut())
 		{
 			C_FADE::RequestFadeIn();
-			c_cameraManager.GetPlayerCamera()->SetEventState(C_PALYER_CAMERA_VEC::CAM_EVENT_PLAY);
+			c_cameraManager.Init(C_PALYER_CAMERA_VEC::CAM_EVENT_PLAY);
 			m_playState = PLAY;
 		}
 		break;

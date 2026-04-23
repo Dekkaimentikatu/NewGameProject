@@ -4,8 +4,6 @@
 //‰Šú‰»
 void C_BACK_GROUND::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_pos = _pos;
@@ -16,9 +14,8 @@ void C_BACK_GROUND::Init(VECTOR _pos)
 //“Ç
 void C_BACK_GROUND::LoadAnSync()
 {
-	C_2D_HNDL_MANAGER* instance = C_2D_HNDL_MANAGER::GetInstance();
-	instance->Load2DImage("data/graphic/TitleBackGround.png");
-	m_hndl1 = instance->Get2DImageHndl("data/graphic/TitleBackGround.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(BACK_GROUND_GRAPH_PATH);
 }
 
 //XV

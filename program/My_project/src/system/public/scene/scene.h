@@ -5,7 +5,6 @@
 #include "lib/fade.h"		//フェードイン/フェードアウト管理クラス
 #include "lib/input.h"	//入力管理クラス
 #include "lib/xinput.h"
-#include "lib/drawgrap.h"
 #include "UI/UI_manager.h"
 #include "game/data/global_data.h"
 

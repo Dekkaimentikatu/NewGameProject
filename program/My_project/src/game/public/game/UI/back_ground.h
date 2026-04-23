@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/UI_object.h"
 
+static const char* BACK_GROUND_GRAPH_PATH = "data/graphic/TitleBackGround.png";
+
 class C_BACK_GROUND : public C_UI_OBJECT_BASE
 {
 protected:

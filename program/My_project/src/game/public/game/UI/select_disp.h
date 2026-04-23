@@ -6,6 +6,11 @@ constexpr int DISP_MOVE_LIMIT = 600;
 
 constexpr float DISP_MOVE_SPEED = 20.0f;
 
+static const char* DISP_GRAPH_PATH[3] = { "data/graphic/Stage1.png",
+										"data/graphic/Stage2.png",
+										"data/graphic/Stage3.png" };
+
+
 class C_SELECT_DISP : public C_UI_OBJECT_BASE
 {
 protected:

@@ -1,10 +1,9 @@
 #include "game/UI/UI_hpber.h"
+#include "lib/2Dhndlmanager.h"
 
 //èâä˙âª
 void C_UI_HPBER::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_playerData = c_golobalData->GetPlayerData();
@@ -20,8 +19,9 @@ void C_UI_HPBER::Init(VECTOR _pos)
 //ì«çû
 void C_UI_HPBER::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/hp_ber.png");
-	m_hndl2 = c_drawGrap->LoadGraphData("data/graphic/hp_ber_frame.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(HP_GRAPH_PATH[0]);
+	m_hndl2 = inctanse->Get2DImageHndl(HP_GRAPH_PATH[1]);
 }
 
 //çXêV
@@ -39,8 +39,9 @@ void C_UI_HPBER::Update()
 //ï`âÊ
 void C_UI_HPBER::Draw()
 {
-	c_drawGrap->DrawRect(m_hndl2, 0, m_pos, 0, 0, HP_GRAPH_SIZEX, m_sizeY);
-	c_drawGrap->DrawRect(m_hndl1, 0, m_pos, 0, 0, m_sizeX, m_sizeY);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->DrawRect(&m_hndl2, m_pos, 0, 0, HP_GRAPH_SIZEX, m_sizeY);
+	inctanse->DrawRect(&m_hndl1, m_pos, 0, 0, m_sizeX, m_sizeY);
 }
 
 //èIóπ

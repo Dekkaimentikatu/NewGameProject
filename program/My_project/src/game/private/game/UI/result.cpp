@@ -1,9 +1,9 @@
 #include "game/UI/result.h"
+#include "lib/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_RESULT::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
 
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
@@ -15,7 +15,8 @@ void C_RESULT::Init(VECTOR _pos)
 //“Ç
 void C_RESULT::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/result.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(RESULT_GRAPH_PATH);
 }
 
 //XV
@@ -33,7 +34,8 @@ void C_RESULT::Update()
 //•`‰æ
 void C_RESULT::Draw()
 {
-	c_drawGrap->DrawRota(m_hndl1, 0, m_pos, 1.0f);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->DrawRota(&m_hndl1, m_pos, 0, 1.0f);
 }
 
 //I—¹

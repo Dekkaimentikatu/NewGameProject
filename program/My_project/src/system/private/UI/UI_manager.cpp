@@ -9,6 +9,8 @@
 #include "game/UI/respawn_back.h"
 #include "game/UI/select_disp.h"
 
+#include "lib/2Dhndlmanager.h"
+
 
 //‰Šú‰»
 void C_UI_MANAGER::Init()
@@ -17,97 +19,53 @@ void C_UI_MANAGER::Init()
 	t_stageData = c_golobalData->GetStageData();
 	c_sceneData = C_SCENE_DATA::GetInstance();
 
-	C_UI_HPBER* tmp1 = nullptr;
-
-	C_UI_STMBER* tmp2 = nullptr;
-
-	C_STOP_EFFECT* tmp3 = nullptr;
-
-	C_LOAD_ANIM* tmp4 = nullptr;
-
-	C_TITLE_BACK* tmp5 = nullptr;
-
-	C_BACK_GROUND* tmp6 = nullptr;
-
-	C_RESULT* tmp7 = nullptr;
-
-	C_RESPAWN_BACK* tmp8 = nullptr;
-
-	C_SELECT_DISP* tmp9 = nullptr;
+	C_UI_OBJECT_BASE* tmp = nullptr;
 
 	switch (c_sceneData->GetSceneType())
 	{
 	case C_SCENE_DATA::SCENE_TYPE::TITLE:
 
-		tmp4 = new C_LOAD_ANIM;
-		tmp4->Init(VGet(1180.0f, 700.0f, 0.0f));
-		c_UIObject.push_back(tmp4);
 
-		tmp6 = new C_BACK_GROUND;
-		tmp6->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp6);
+		Request(VGet(1180.0f, 700.0f, 0.0f), new C_LOAD_ANIM);
 
-		tmp5 = new C_TITLE_BACK;
-		tmp5->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp5);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_BACK_GROUND);
+
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_TITLE_BACK);
 
 		break;
 
 	case C_SCENE_DATA::SCENE_TYPE::SELECT:
 
-		tmp4 = new C_LOAD_ANIM;
-		tmp4->Init(VGet(1180.0f, 700.0f, 0.0f));
-		c_UIObject.push_back(tmp4);
+		Request(VGet(1180.0f, 700.0f, 0.0f), new C_LOAD_ANIM);
 
-		tmp6 = new C_BACK_GROUND;
-		tmp6->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp6);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_BACK_GROUND);
 
-		tmp9 = new C_SELECT_DISP;
-		tmp9->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp9);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), tmp = new C_SELECT_DISP);
 
 		break;
 
 	case C_SCENE_DATA::SCENE_TYPE::PLAY:
 
-		tmp3 = new C_STOP_EFFECT;
+		Request(VGet(static_cast<float>(WINDOW_CENTER_WIDTH),
+			static_cast<float>(WINDOW_CENTER_HEIGHT), 0.0f), new C_STOP_EFFECT);
 
-		tmp3->Init(VGet(static_cast<float>(WINDOW_CENTER_WIDTH),
-			static_cast<float>(WINDOW_CENTER_HEIGHT), 0.0f));
-		c_UIObject.push_back(tmp3);
+		Request(VGet(60.0f, 32.0f, 0.0f), new C_UI_HPBER);
 
-		tmp1 = new C_UI_HPBER;
-		tmp1->Init(VGet(60.0f, 32.0f, 0.0f));
-		c_UIObject.push_back(tmp1);
+		Request(VGet(128.0f, 128.0f, 0.0f), new C_UI_STMBER);
 
-		tmp2 = new C_UI_STMBER;
-		tmp2->Init(VGet(128.0f, 128.0f, 0.0f));
-		c_UIObject.push_back(tmp2);
+		Request(VGet(1180.0f, 700.0f, 0.0f), new C_LOAD_ANIM);
 
-		tmp4 = new C_LOAD_ANIM;
-		tmp4->Init(VGet(1180.0f, 700.0f, 0.0f));
-		c_UIObject.push_back(tmp4);
-
-		tmp8 = new C_RESPAWN_BACK;
-		tmp8->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp8);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_RESPAWN_BACK);
 
 		break;
 
 	case C_SCENE_DATA::SCENE_TYPE::RESULT:
 
-		tmp4 = new C_LOAD_ANIM;
-		tmp4->Init(VGet(1180.0f, 700.0f, 0.0f));
-		c_UIObject.push_back(tmp4);
+		Request(VGet(1180.0f, 700.0f, 0.0f), new C_LOAD_ANIM);
 
-		tmp6 = new C_BACK_GROUND;
-		tmp6->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp6);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_BACK_GROUND);
 
-		tmp7 = new C_RESULT;
-		tmp7->Init(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
-		c_UIObject.push_back(tmp7);
+		Request(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f), new C_RESULT);
 
 		break;
 
@@ -119,8 +77,19 @@ void C_UI_MANAGER::Init()
 
 }
 
+void C_UI_MANAGER::Request(VECTOR _pos, C_UI_OBJECT_BASE* _object)
+{
+	C_UI_OBJECT_BASE* tmp = nullptr;
+	tmp = _object;
+	tmp->Init(_pos);
+	c_UIObject.push_back(tmp);
+}
+
 void C_UI_MANAGER::LoadSync()
 {
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->Load2DImage(LOAD_GRAPH_PATH, LOAD_GRAPH_MAX, LOAD_GRAPH_X_NUM, LOAD_GRAPH_Y_NUM, LOAD_GRAPH_SIZE, LOAD_GRAPH_SIZE);
+
 	for (auto itr = c_UIObject.begin(); itr != c_UIObject.end(); ++itr)
 	{
 		(*itr)->LoadSync();
@@ -130,6 +99,20 @@ void C_UI_MANAGER::LoadSync()
 //“Çž
 void C_UI_MANAGER::LoadAnSync()
 {
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->Load2DImage(STM_GRAPH_PATH[0]);
+	inctanse->Load2DImage(STM_GRAPH_PATH[1]);
+	inctanse->Load2DImage(HP_GRAPH_PATH[0]);
+	inctanse->Load2DImage(HP_GRAPH_PATH[1]);
+	inctanse->Load2DImage(TITLE_BACK_GRAPH_PATH);
+	inctanse->Load2DImage(STOP_GRAPH_PATH);
+	inctanse->Load2DImage(DISP_GRAPH_PATH[0]);
+	inctanse->Load2DImage(DISP_GRAPH_PATH[1]);
+	inctanse->Load2DImage(DISP_GRAPH_PATH[2]);
+	inctanse->Load2DImage(RESULT_GRAPH_PATH);
+	inctanse->Load2DImage(RESPAWN_GRAPH_PATH);
+	inctanse->Load2DImage(BACK_GROUND_GRAPH_PATH);
+
 	for (auto itr = c_UIObject.begin(); itr != c_UIObject.end(); ++itr)
 	{
 		(*itr)->LoadAnSync();
@@ -181,6 +164,20 @@ void C_UI_MANAGER::Draw()
 //I—¹
 void C_UI_MANAGER::Exit()
 {
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->Delete2DData(STM_GRAPH_PATH[0]);
+	inctanse->Delete2DData(STM_GRAPH_PATH[1]);
+	inctanse->Delete2DData(HP_GRAPH_PATH[0]);
+	inctanse->Delete2DData(HP_GRAPH_PATH[1]);
+	inctanse->Delete2DData(TITLE_BACK_GRAPH_PATH);
+	inctanse->Delete2DData(STOP_GRAPH_PATH);
+	inctanse->Delete2DData(DISP_GRAPH_PATH[0]);
+	inctanse->Delete2DData(DISP_GRAPH_PATH[1]);
+	inctanse->Delete2DData(DISP_GRAPH_PATH[2]);
+	inctanse->Delete2DData(RESULT_GRAPH_PATH);
+	inctanse->Delete2DData(RESPAWN_GRAPH_PATH);
+	inctanse->Delete2DData(BACK_GROUND_GRAPH_PATH);
+
 	for (auto itr = c_UIObject.begin(); itr != c_UIObject.end(); ++itr)
 	{
 		(*itr)->Exit();

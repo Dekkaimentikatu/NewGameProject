@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/UI_object.h"
 
+static const char* STOP_GRAPH_PATH = "data/graphic/stop_effect.png";
+
 class C_STOP_EFFECT : public C_UI_OBJECT_BASE
 {
 protected:

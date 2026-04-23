@@ -38,7 +38,7 @@ public:
 
 	//初期化処理
 	void Init(VECTOR pos, VECTOR focus, VECTOR up);
-	void Init();
+	void Init(C_PALYER_CAMERA_VEC::CAMERA_EVENT_STATE _eventState);
 	void InitEdit();
 	// 終了処理
 	void Exit();
@@ -51,7 +51,6 @@ public:
 
 	//リスポーン
 	void Respawn(VECTOR pos, VECTOR focus, VECTOR up);
-
 
 	C_PALYER_CAMERA_VEC* GetPlayerCamera() { return &c_playerCamera; }
 

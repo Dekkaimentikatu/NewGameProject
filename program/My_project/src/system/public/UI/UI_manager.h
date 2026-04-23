@@ -4,7 +4,6 @@
 #include "common.h"
 
 #include "game/data/global_data.h"
-#include "lib/drawgrap.h"
 #include "scene/scene_data.h"
 #include "lib/xinput.h"
 #include "lib/input.h"
@@ -38,6 +37,8 @@ public:
 
 	//èâä˙âª
 	void Init();
+
+	void Request(VECTOR _pos, C_UI_OBJECT_BASE* _object);
 
 	void LoadSync();
 

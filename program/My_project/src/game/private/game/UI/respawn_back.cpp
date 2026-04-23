@@ -1,10 +1,9 @@
 #include "game/UI/respawn_back.h"
+#include "lib//2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_RESPAWN_BACK::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_playerData = c_golobalData->GetPlayerData();
@@ -17,7 +16,8 @@ void C_RESPAWN_BACK::Init(VECTOR _pos)
 //“Ç
 void C_RESPAWN_BACK::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/respawn_back.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(RESPAWN_GRAPH_PATH);
 }
 
 //XV
@@ -35,7 +35,8 @@ void C_RESPAWN_BACK::Update()
 //•`‰æ
 void C_RESPAWN_BACK::Draw()
 {
-	if(m_playerData->isRespawn)c_drawGrap->DrawRota(m_hndl1, 0, m_pos, 1.0f);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	if (m_playerData->isRespawn)inctanse->DrawRota(&m_hndl1, m_pos, 0, 1.0f);
 }
 
 //I—¹

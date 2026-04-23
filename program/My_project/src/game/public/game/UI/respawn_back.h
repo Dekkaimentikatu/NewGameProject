@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/UI_object.h"
 
+static const char* RESPAWN_GRAPH_PATH = "data/graphic/respawn_back.png";
+
 class C_RESPAWN_BACK : public C_UI_OBJECT_BASE
 {
 protected:

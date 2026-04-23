@@ -1,4 +1,5 @@
 #include "game/UI/stop_effect.h"
+#include "lib/2Dhndlmanager.h"
 
 constexpr int SPEFF_GRAPH_SIZEX = 512;
 constexpr int SPEFF_GRAPH_SIZEY = 16;
@@ -6,8 +7,6 @@ constexpr int SPEFF_GRAPH_SIZEY = 16;
 //‰Šú‰»
 void C_STOP_EFFECT::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_playerData = c_golobalData->GetPlayerData();
@@ -23,7 +22,8 @@ void C_STOP_EFFECT::Init(VECTOR _pos)
 //“Ç
 void C_STOP_EFFECT::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/stop_effect.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(STOP_GRAPH_PATH);
 }
 
 //XV
@@ -41,7 +41,8 @@ void C_STOP_EFFECT::Update()
 //•`‰æ
 void C_STOP_EFFECT::Draw()
 {
-	if(m_playerData->isStop)c_drawGrap->DrawRota(m_hndl1, 0, m_pos);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->DrawRota(&m_hndl1, m_pos);
 }
 
 //I—¹

@@ -1,9 +1,8 @@
 #include "game/UI/UI_stmber.h"
+#include "lib/2Dhndlmanager.h"
 
 void C_UI_STMBER::Init(VECTOR _pos)
 {
-	c_drawGrap = C_DRAW_GRAPH::GetInstance();
-
 	c_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	m_playerData = c_golobalData->GetPlayerData();
@@ -18,8 +17,9 @@ void C_UI_STMBER::Init(VECTOR _pos)
 
 void C_UI_STMBER::LoadAnSync()
 {
-	m_hndl1 = c_drawGrap->LoadGraphData("data/graphic/stop_gage.png");
-	m_hndl2 = c_drawGrap->LoadGraphData("data/graphic/stop_gage_frame.png");
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	m_hndl1 = inctanse->Get2DImageHndl(STM_GRAPH_PATH[0]);
+	m_hndl2 = inctanse->Get2DImageHndl(STM_GRAPH_PATH[1]);
 }
 
 void C_UI_STMBER::Step()
@@ -34,7 +34,8 @@ void C_UI_STMBER::Update()
 
 void C_UI_STMBER::Draw()
 {
-	c_drawGrap->DrawCircleGauge(m_hndl2, 0, m_pos, 100.0);
-	c_drawGrap->DrawCircleGauge(m_hndl1, 0, m_pos, m_percent);
+	C_2D_HNDL_MANAGER* inctanse = C_2D_HNDL_MANAGER::GetInstance();
+	inctanse->DrawCircleGauge(&m_hndl2, m_pos, 100.0);
+	inctanse->DrawCircleGauge(&m_hndl1, m_pos, m_percent);
 
 }

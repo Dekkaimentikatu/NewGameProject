@@ -73,19 +73,14 @@
     <ClInclude Include="src\game\public\lib\3Dhndlmanager.h" />
     <ClInclude Include="src\game\public\lib\bgm_manager.h" />
     <ClInclude Include="src\game\public\lib\collision.h" />
-    <ClInclude Include="src\game\public\lib\drawgrap.h" />
-    <ClInclude Include="src\game\public\lib\drawGrap2D.h" />
-    <ClInclude Include="src\game\public\lib\effect.h" />
     <ClInclude Include="src\game\public\lib\fade.h" />
     <ClInclude Include="src\game\public\lib\fps.h" />
-    <ClInclude Include="src\game\public\lib\imagehndlmanager.h" />
     <ClInclude Include="src\game\public\lib\input.h" />
     <ClInclude Include="src\game\public\lib\input_config.h" />
     <ClInclude Include="src\game\public\lib\math2D.h" />
     <ClInclude Include="src\game\public\lib\mouseinput.h" />
     <ClInclude Include="src\game\public\lib\mymath.h" />
     <ClInclude Include="src\game\public\lib\rand.h" />
-    <ClInclude Include="src\game\public\lib\score.h" />
     <ClInclude Include="src\game\public\lib\se_manager.h" />
     <ClInclude Include="src\game\public\lib\xinput.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
@@ -160,9 +155,6 @@
     <ClCompile Include="src\game\private\lib\3Dhndlmanager.cpp" />
     <ClCompile Include="src\game\private\lib\bgm_manager.cpp" />
     <ClCompile Include="src\game\private\lib\collision.cpp" />
-    <ClCompile Include="src\game\private\lib\drawgrap.cpp" />
-    <ClCompile Include="src\game\private\lib\drawGrap2D.cpp" />
-    <ClCompile Include="src\game\private\lib\effect.cpp" />
     <ClCompile Include="src\game\private\lib\fade.cpp" />
     <ClCompile Include="src\game\private\lib\fps.cpp" />
     <ClCompile Include="src\game\private\lib\input.cpp" />
@@ -171,7 +163,6 @@
     <ClCompile Include="src\game\private\lib\mouseinput.cpp" />
     <ClCompile Include="src\game\private\lib\mymath.cpp" />
     <ClCompile Include="src\game\private\lib\rand.cpp" />
-    <ClCompile Include="src\game\private\lib\score.cpp" />
     <ClCompile Include="src\game\private\lib\se_manager .cpp" />
     <ClCompile Include="src\game\private\lib\Xinput.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />

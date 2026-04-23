@@ -67,6 +67,9 @@ void C_MAP_MANAGER::Exit()
 		delete (*itr);
 	}
 
+	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
+	incetanse->Delete3DModel(SKY_MODEL_PATH);
+
 	c_objectArray.clear();
 	m_stageLoader.Exit();
 }

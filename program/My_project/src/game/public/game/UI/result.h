@@ -1,6 +1,8 @@
 #pragma once
 #include "game/base/UI_object.h"
 
+static const char* RESULT_GRAPH_PATH = "data/graphic/result.png";
+
 class C_RESULT : public C_UI_OBJECT_BASE
 {
 protected:
