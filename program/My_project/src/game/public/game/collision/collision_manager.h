@@ -21,19 +21,23 @@ private:
 	static list<C_OBJECT_BASE*> m_objectPool;
 
 	//プレイヤーとエネミーの当たり判定
-	static void PlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* enemy);
+	static void CollisionPlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* enemy);
 
 	//プレイヤーとブロックの当たり判定
-	static void PlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block);
+	static void CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block);
 
 	//プレイヤーとアイテムの当たり判定
-	static void PlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag);
+	static void CollisionPlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag);
 
 	//エネミーとエネミーの当たり判定
-	static void EnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2);
+	static void CollisionEnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2);
 
 	//エネミーとブロックの当たり判定
-	static void EnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block);
+	static void CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block);
+
+	static list<C_ACTOR_BASE*> m_actorPool;
+
+	static void AttackPlayerToEnemy(C_ACTOR_BASE* _player, C_ACTOR_BASE* _enemy);
 
 public:
 

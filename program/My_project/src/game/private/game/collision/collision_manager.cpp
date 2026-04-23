@@ -7,7 +7,9 @@ bool C_COLLISION_MANAGER::isHitWall = false;
 
 list<C_OBJECT_BASE*> C_COLLISION_MANAGER::m_objectPool;
 
-void C_COLLISION_MANAGER::PlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* _enemy)
+list<C_ACTOR_BASE*> C_COLLISION_MANAGER::m_actorPool;
+
+void C_COLLISION_MANAGER::CollisionPlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* _enemy)
 {
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
@@ -42,29 +44,9 @@ void C_COLLISION_MANAGER::PlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* _
 		else _enemy->AddPos(vec);
 
 	}
-
-	//マネージャー1の攻撃判定
-	//if (_player->GetIsAttack() &&
-	//	C_COLLISION::CheckHitSphereToSphere(_player->GetAttackPos(), _enemy->GetPos(),
-	//		_player->GetAttackRedius(), _enemy->GetRedius()))
-	//{
-	//	//ノックバックの速度の設定
-	//	_enemy->SetKonckBackSpeed(_player->GetPos());
-
-	//	//当たり判定処理
-	//	_enemy->DamageCalc(_player->GetAtt());
-	//}
-
-	////マネージャー2の攻撃判定
-	//if (_enemy->GetIsAttack() &&
-	//	C_COLLISION::CheckHitSphereToSphere(_enemy->GetAttackPos(), _player->GetCenter(),
-	//		_enemy->GetAttackRedius(), _player->GetRedius()))
-	//{
-	//	_player->DamageCalc(_enemy->GetAtt());
-	//}
 }
 
-void C_COLLISION_MANAGER::PlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block)
+void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block)
 {
 	//生存フラグが折れているなら次の要素へ
 	if (!_player->GetIsActive())return;
@@ -157,7 +139,7 @@ void C_COLLISION_MANAGER::PlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _
 	MV1CollResultPolyDimTerminate(col);
 }
 
-void C_COLLISION_MANAGER::PlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag)
+void C_COLLISION_MANAGER::CollisionPlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag)
 {
 	//生存フラグが折れているなら次の要素へ
 	if (!_player->GetIsActive())return;
@@ -169,7 +151,7 @@ void C_COLLISION_MANAGER::PlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _f
 	}
 }
 
-void C_COLLISION_MANAGER::EnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2)
+void C_COLLISION_MANAGER::CollisionEnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2)
 {
 	//生存フラグが折れているなら次の要素へ
 	if (!_enemy1->GetIsActive())return;
@@ -198,7 +180,7 @@ void C_COLLISION_MANAGER::EnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _e
 	}
 }
 
-void C_COLLISION_MANAGER::EnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block)
+void C_COLLISION_MANAGER::CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block)
 {
 	VECTOR HitPos = { 0 };	//ポリゴンとの最近点を格納する変数
 	VECTOR result = { 0 };	//リザルトを格納する変数
@@ -274,12 +256,35 @@ void C_COLLISION_MANAGER::EnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _bl
 	MV1CollResultPolyDimTerminate(col);
 }
 
+void C_COLLISION_MANAGER::AttackPlayerToEnemy(C_ACTOR_BASE* _player, C_ACTOR_BASE* _enemy)
+{
+	//マネージャー1の攻撃判定
+	if (_player->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_player->GetAttackPos(), _enemy->GetPos(),
+			_player->GetAttackRedius(), _enemy->GetRedius()))
+	{
+		//ノックバックの速度の設定
+		_enemy->SetKonckBackSpeed(_player->GetPos());
+
+		//当たり判定処理
+		_enemy->DamageCalc(_player->GetAtt());
+	}
+
+	//マネージャー2の攻撃判定
+	if (_enemy->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_enemy->GetAttackPos(), _player->GetCenter(),
+			_enemy->GetAttackRedius(), _player->GetRedius()))
+	{
+		_player->DamageCalc(_enemy->GetAtt());
+	}
+}
+
 //当たり判定処理
 void C_COLLISION_MANAGER::CollisionCalc()
 {
 	//関数ポインタを作成
-	void (*Calc[])(C_OBJECT_BASE*, C_OBJECT_BASE*) = { C_COLLISION_MANAGER::PlayerToEnemy, C_COLLISION_MANAGER::PlayerToBlock,
-		C_COLLISION_MANAGER::PlayerToFlag, C_COLLISION_MANAGER::EnemyToEnemy, C_COLLISION_MANAGER::EnemyToBlock };
+	void (*Calc[])(C_OBJECT_BASE*, C_OBJECT_BASE*) = { C_COLLISION_MANAGER::CollisionPlayerToEnemy, C_COLLISION_MANAGER::CollisionPlayerToBlock,
+		C_COLLISION_MANAGER::CollisionPlayerToFlag, C_COLLISION_MANAGER::CollisionEnemyToEnemy, C_COLLISION_MANAGER::CollisionEnemyToBlock };
 
 	int funkIndex = 0;
 
@@ -325,29 +330,20 @@ void C_COLLISION_MANAGER::CollisionCalc()
 
 			//コールバック関数
 			Calc[funkIndex]((*itr1), (*itr2));
-
-			//参照した要素の生存フラグが折れているならリストから削除する
-			//if (!(*itr2)->GetIsActive())
-			//{
-			//	m_objectList.erase(itr2);
-			//	if (itr2 != m_objectList.begin())
-			//	{
-			//		--itr2;
-			//	}
-			//	continue;
-			//}
 		}
+	}
 
-		//参照した要素の生存フラグが折れているならリストから削除する
-		//if (!(*itr1)->GetIsActive())
-		//{
-		//	m_objectList.erase(itr1);
-		//	if (itr1 != m_objectList.begin())
-		//	{
-		//		--itr1;
-		//	}
-		//	continue;
-		//}
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
+	{
+		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
+		{
+			if ((*itr1) == (*itr2))continue;
+			if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+			{
+				AttackPlayerToEnemy((*itr1), (*itr2));
+			}
+		}
 	}
 }
 
