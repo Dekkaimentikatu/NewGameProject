@@ -82,9 +82,6 @@ private:
 	//エフェクトハンドル
 	int m_effektHndl[2];	
 
-	//スポーン地点
-	VECTOR m_startPos;
-
 	//初期回転座標
 	VECTOR m_startRot;
 
@@ -121,11 +118,11 @@ private:
 public:
 
 	//コンストラクタ
-	C_ENEMY(ENEMY_STATE _enemyState = ENEMY_STATE_MOVE,  float _fallSpeed = 0.0f,VECTOR _startPos = {0},
+	C_ENEMY(ENEMY_STATE _enemyState = ENEMY_STATE_MOVE,  float _fallSpeed = 0.0f,
 		VECTOR _startRot = {0}, float _easingSpeed = 0.0f, int _damageAtt = 0, float _konckBackSubCount = 0.0f, 
 		float _fallSubCount = 0.0f) :
 	m_nowState(_enemyState), m_prevState(_enemyState), m_waitCount(), m_fallSpeed(_fallSpeed), m_effektHndl(),
-	m_startPos(_startPos), m_startRot(_startRot), m_easingSpeed(_easingSpeed), m_damegeAtt(_damageAtt), t_playerData(nullptr),
+	m_startRot(_startRot), m_easingSpeed(_easingSpeed), m_damegeAtt(_damageAtt), t_playerData(nullptr),
 	m_konckBackSubCount(_konckBackSubCount), m_fallSubCount(_fallSubCount){ }
 
 	//デストラクタ
@@ -162,6 +159,8 @@ public:
 	int GetAtt() const;
 
 	void SetKonckBackSpeed(VECTOR _knockBackSpeed);
+
+	void SetEffectHndl(int _effektHndl, int _index) { m_effektHndl[_index] = _effektHndl; }
 
 
 };

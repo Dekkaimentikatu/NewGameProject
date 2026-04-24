@@ -36,6 +36,8 @@ void C_ENEMY_MANAGER::LoadSync()
 		tmp.modelRot = (*itr).rot;
 		tmp.moveLen = 0;
 		enemy->Request(tmp);
+		enemy->SetEffectHndl(eff1, 0);
+		enemy->SetEffectHndl(eff2, 1);
 		enemy->Load();
 		c_actorArray.push_back(enemy);
 	}
@@ -43,6 +45,7 @@ void C_ENEMY_MANAGER::LoadSync()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		C_COLLISION_MANAGER::AddObject(*itr);
+		C_COLLISION_MANAGER::AddActor(*itr);
 	}
 }
 

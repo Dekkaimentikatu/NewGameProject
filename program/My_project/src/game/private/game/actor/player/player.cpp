@@ -109,7 +109,7 @@ void C_PLAYER::Step()
 	ReSpawnCalc();
 
 	//ŽžŠÔ’âŽ~ˆ—
-	//StopCalc();
+	StopCalc();
 
 	//—Ž‰ºˆ—
 	FallCalc();

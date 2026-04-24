@@ -41,20 +41,24 @@ void C_ENEMY::Init()
 	//各行動のカウントの初期化
 	memset(m_waitCount, 0, sizeof(m_waitCount));
 
-	//アニメーションの初期化
-	AttachAnim(ANIM_WAIT);
+
 }
 
 void C_ENEMY::Load()
 {
 	//スポーン地点を保存する
-	m_startPos = m_pos;
+	m_pos = m_objectData.initPos;
 
 	//拡大縮小率の設定
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
+	C_OBJECT_BASE::DuplicateModel(m_modelHndl);
+
 	//モデルの更新
 	UpdateModel();
+
+	//アニメーションの初期化
+	AttachAnim(ANIM_WAIT);
 
 	//オブジェクトの種類を敵に設定する
 	m_objectType = OBJECT_TYPE_ENEMY;
@@ -112,7 +116,7 @@ void C_ENEMY::RespawnCalc()
 	//プレイヤーがリスポーンしたら敵もリスポーンする
 	if (t_playerData->isRespawn)
 	{
-		m_pos = m_startPos;
+		m_pos = m_objectData.initPos;
 		m_hp = 1;
 		m_isActive = true;
 	}
@@ -226,7 +230,7 @@ void C_ENEMY::MoveCalc()
 	VECTOR tmp = { 0 };
 
 	//スポーン地点とプレイヤーの位置の差分を計算する
-	tmp = VSub(m_startPos, m_targetPos);
+	tmp = VSub(m_objectData.initPos, m_targetPos);
 
 	//高さは考慮しない
 	tmp.y = 0.0f;
@@ -237,15 +241,15 @@ void C_ENEMY::MoveCalc()
 	//スポーン地点とプレイヤーの距離が一定以上ならスポーン地点に向かう
 	if (len > 72.0f)
 	{
-		tmp = VSub(m_startPos, m_pos);
+		tmp = VSub(m_objectData.initPos, m_pos);
 		len = VSize(tmp);
 		tmp = VNorm(tmp);
 		m_moveVec = VScale(tmp, ENEMY_MOVE_SPEED * m_easingSpeed);
 
 		if (len < 5)
 		{
-			m_pos.x = m_startPos.x;
-			m_pos.z = m_startPos.z;
+			m_pos.x = m_objectData.initPos.x;
+			m_pos.z = m_objectData.initPos.z;
 			m_objectData.modelRot.y = 0.0f;
 			m_moveVec = { 0 };
 		}

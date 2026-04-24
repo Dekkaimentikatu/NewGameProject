@@ -47,6 +47,8 @@ public:
 	//オブジェクト追加
 	static void AddObject(C_OBJECT_BASE* _object) { m_objectPool.push_back(_object); }
 
+	static void AddActor(C_ACTOR_BASE* _actor) { m_actorPool.push_back(_actor); }
+
 	//終了処理
 	static void Exit();
 

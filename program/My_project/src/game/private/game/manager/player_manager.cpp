@@ -40,6 +40,7 @@ void C_PLAYER_MANAGER::LoadSync()
 		(*itr)->DuplicateModel(m_modelHndl);
 		(*itr)->Load();
 		C_COLLISION_MANAGER::AddObject(*itr);
+		C_COLLISION_MANAGER::AddActor(*itr);
 		c_globalData->GetPlayerData()->pos = (*itr)->GetPos();
 	}
 }

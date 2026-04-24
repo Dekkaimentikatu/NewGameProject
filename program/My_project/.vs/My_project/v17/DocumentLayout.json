@@ -3,12 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\collision\\collision_manager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\enemy\\enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\actor\\enemy\\enemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\enemy\\enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\public\\game\\actor\\enemy\\enemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\manager\\enemy_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\player_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\manager\\player_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\collision\\collision_manager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\public\\game\\collision\\collision_manager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\actor\\player\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\manager\\enemy_manager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\public\\game\\manager\\enemy_manager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\player\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\public\\game\\actor\\player\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\collision\\collision_manager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\character.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -19,16 +51,8 @@
       "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\public\\game\\base\\actor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\manager\\enemy_manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\private\\scene\\scene_play.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\system\\private\\scene\\scene_play.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|solutionrelative:src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1D2BF413-A458-4F87-96C2-A8CC2F328EAD}|My_project.vcxproj|C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\camera\\player_camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -86,11 +110,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "UI_manager.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\private\\UI\\UI_manager.cpp",
               "RelativeDocumentMoniker": "src\\system\\private\\UI\\UI_manager.cpp",
@@ -103,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "title_back.h",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\UI\\title_back.h",
               "RelativeDocumentMoniker": "src\\game\\public\\game\\UI\\title_back.h",
@@ -116,54 +140,44 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "collision_manager.cpp",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\private\\game\\collision\\collision_manager.cpp",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp",
-              "RelativeToolTip": "src\\game\\private\\game\\collision\\collision_manager.cpp",
-              "ViewState": "AgIAAEEBAAAAAAAAAAAAAEwBAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-23T15:35:09.805Z",
+              "DocumentIndex": 7,
+              "Title": "enemy_manager.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\manager\\enemy_manager.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\manager\\enemy_manager.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\manager\\enemy_manager.h",
+              "RelativeToolTip": "src\\game\\public\\game\\manager\\enemy_manager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-24T14:07:45.376Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "collision_manager.h",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\collision\\collision_manager.h",
-              "RelativeDocumentMoniker": "src\\game\\public\\game\\collision\\collision_manager.h",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\collision\\collision_manager.h",
-              "RelativeToolTip": "src\\game\\public\\game\\collision\\collision_manager.h",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Title": "enemy.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\enemy\\enemy.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\actor\\enemy\\enemy.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\enemy\\enemy.h",
+              "RelativeToolTip": "src\\game\\public\\game\\actor\\enemy\\enemy.h",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHgAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-23T15:33:55.602Z",
+              "WhenOpened": "2026-04-24T14:07:51.141Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "character.h",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\character.h",
-              "RelativeDocumentMoniker": "src\\game\\public\\game\\base\\character.h",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\character.h",
-              "RelativeToolTip": "src\\game\\public\\game\\base\\character.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-23T15:33:38.536Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "actor.h",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\actor.h",
-              "RelativeDocumentMoniker": "src\\game\\public\\game\\base\\actor.h",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\actor.h",
-              "RelativeToolTip": "src\\game\\public\\game\\base\\actor.h",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-04-23T15:33:28.126Z",
+              "Title": "enemy_manager.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\manager\\enemy_manager.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\manager\\enemy_manager.cpp",
+              "ViewState": "AgIAABQAAAAAAAAAAAAkwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-23T09:57:01.094Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -173,31 +187,121 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "enemy_spawn_point.cpp",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
-              "RelativeDocumentMoniker": "src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
-              "RelativeToolTip": "src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAADYAAAABAAAAAAAAAA==",
+              "Title": "player.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\player\\player.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\actor\\player\\player.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\player\\player.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\actor\\player\\player.cpp",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAAAFUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-23T09:57:33.607Z"
+              "WhenOpened": "2026-04-24T14:38:39.577Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "enemy_manager.cpp",
-              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp",
-              "RelativeDocumentMoniker": "src\\game\\private\\game\\manager\\enemy_manager.cpp",
-              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\enemy_manager.cpp",
-              "RelativeToolTip": "src\\game\\private\\game\\manager\\enemy_manager.cpp",
-              "ViewState": "AgIAABMAAAAAAAAAAAAowCUAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "player_manager.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\player_manager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\manager\\player_manager.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\manager\\player_manager.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\manager\\player_manager.cpp",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-23T09:57:01.094Z",
+              "WhenOpened": "2026-04-24T14:08:43.935Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "player.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\player\\player.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\actor\\player\\player.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\actor\\player\\player.h",
+              "RelativeToolTip": "src\\game\\public\\game\\actor\\player\\player.h",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-24T14:07:56.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "enemy.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\enemy\\enemy.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\actor\\enemy\\enemy.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\actor\\enemy\\enemy.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\actor\\enemy\\enemy.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIcBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-24T14:07:20.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "collision_manager.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\collision\\collision_manager.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\collision\\collision_manager.cpp",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEwBAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-23T15:35:09.805Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "collision_manager.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\collision\\collision_manager.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\collision\\collision_manager.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\collision\\collision_manager.h",
+              "RelativeToolTip": "src\\game\\public\\game\\collision\\collision_manager.h",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-23T15:33:55.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "character.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\character.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\base\\character.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\character.h",
+              "RelativeToolTip": "src\\game\\public\\game\\base\\character.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-23T15:33:38.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "actor.h",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\actor.h",
+              "RelativeDocumentMoniker": "src\\game\\public\\game\\base\\actor.h",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\base\\actor.h",
+              "RelativeToolTip": "src\\game\\public\\game\\base\\actor.h",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-04-23T15:33:28.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "enemy_spawn_point.cpp",
+              "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
+              "RelativeDocumentMoniker": "src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
+              "ToolTip": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
+              "RelativeToolTip": "src\\game\\private\\game\\object\\static\\enemy_spawn_point.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-23T09:57:33.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "camera_manager.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\camera\\camera_manager.cpp",
               "RelativeDocumentMoniker": "src\\game\\private\\game\\camera\\camera_manager.cpp",
@@ -209,7 +313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "camera_manager.h",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\camera\\camera_manager.h",
               "RelativeDocumentMoniker": "src\\game\\public\\game\\camera\\camera_manager.h",
@@ -221,7 +325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "scene_play.h",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\public\\scene\\scene_play.h",
               "RelativeDocumentMoniker": "src\\system\\public\\scene\\scene_play.h",
@@ -233,7 +337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "title_back.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\UI\\title_back.cpp",
               "RelativeDocumentMoniker": "src\\game\\private\\game\\UI\\title_back.cpp",
@@ -245,7 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "scene_play.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\private\\scene\\scene_play.cpp",
               "RelativeDocumentMoniker": "src\\system\\private\\scene\\scene_play.cpp",
@@ -253,12 +357,11 @@
               "RelativeToolTip": "src\\system\\private\\scene\\scene_play.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-04-23T09:21:26.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-23T09:21:26.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "scene_manager.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\private\\scene\\scene_manager.cpp",
               "RelativeDocumentMoniker": "src\\system\\private\\scene\\scene_manager.cpp",
@@ -270,7 +373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "scene_manager.h",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\system\\public\\scene\\scene_manager.h",
               "RelativeDocumentMoniker": "src\\system\\public\\scene\\scene_manager.h",
@@ -282,7 +385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "board.h",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\public\\game\\object\\static\\board.h",
               "RelativeDocumentMoniker": "src\\game\\public\\game\\object\\static\\board.h",
@@ -294,7 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "board.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\object\\static\\board.cpp",
               "RelativeDocumentMoniker": "src\\game\\private\\game\\object\\static\\board.cpp",
@@ -306,7 +409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "stage_loader.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\stage\\stage_loader.cpp",
               "RelativeDocumentMoniker": "src\\game\\private\\game\\stage\\stage_loader.cpp",
@@ -318,7 +421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "player_camera.cpp",
               "DocumentMoniker": "C:\\Users\\reono\\Desktop\\\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u30FC\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\camera\\player_camera.cpp",
               "RelativeDocumentMoniker": "src\\game\\private\\game\\camera\\player_camera.cpp",

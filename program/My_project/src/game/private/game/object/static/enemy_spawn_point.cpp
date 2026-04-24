@@ -24,12 +24,14 @@ void C_ENEMY_SPAWN_POINT::Init()
 void C_ENEMY_SPAWN_POINT::Request(T_OBJECT_DATA _objectData)
 {
 	//
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_objectType = OBJECT_TYPE_STATIC;
 	m_redius = 16;
 	C_GLOBAL_DATA::T_ENEMY_SPOWN tmp;
+	tmp.pos = m_pos;
+	tmp.rot = m_objectData.modelRot;
+	tmp.scale = m_objectData.modelScale;
 
 	m_golobalData->GetEnemySpawnPointList()->push_back(tmp);
 }
