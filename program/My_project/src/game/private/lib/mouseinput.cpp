@@ -1,5 +1,4 @@
 #include "lib/mouseinput.h"
-#include "lib/math2D.h"
 
 MOUSE_INPUT_DATA C_MOUSE_INPUT::c_mouseInputData;
 

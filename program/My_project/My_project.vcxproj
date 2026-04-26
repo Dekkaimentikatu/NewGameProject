@@ -22,7 +22,6 @@
     <ClInclude Include="src\block_common.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\game\public\effekseer\effekseer.h" />
-    <ClInclude Include="src\game\public\game\actor\boss\boss.h" />
     <ClInclude Include="src\game\public\game\actor\enemy\enemy.h" />
     <ClInclude Include="src\game\public\game\actor\player\player.h" />
     <ClInclude Include="src\game\public\game\base\actor.h" />
@@ -77,7 +76,6 @@
     <ClInclude Include="src\game\public\lib\fps.h" />
     <ClInclude Include="src\game\public\lib\input.h" />
     <ClInclude Include="src\game\public\lib\input_config.h" />
-    <ClInclude Include="src\game\public\lib\math2D.h" />
     <ClInclude Include="src\game\public\lib\mouseinput.h" />
     <ClInclude Include="src\game\public\lib\mymath.h" />
     <ClInclude Include="src\game\public\lib\rand.h" />
@@ -107,7 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp" />
-    <ClCompile Include="src\game\private\game\actor\boss\boss.cpp" />
     <ClCompile Include="src\game\private\game\actor\enemy\enemy.cpp" />
     <ClCompile Include="src\game\private\game\actor\player\player.cpp" />
     <ClCompile Include="src\game\private\game\base\actor.cpp" />
@@ -159,7 +156,6 @@
     <ClCompile Include="src\game\private\lib\fps.cpp" />
     <ClCompile Include="src\game\private\lib\input.cpp" />
     <ClCompile Include="src\game\private\lib\input_config.cpp" />
-    <ClCompile Include="src\game\private\lib\math2D.cpp" />
     <ClCompile Include="src\game\private\lib\mouseinput.cpp" />
     <ClCompile Include="src\game\private\lib\mymath.cpp" />
     <ClCompile Include="src\game\private\lib\rand.cpp" />

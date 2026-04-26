@@ -30,30 +30,28 @@ typedef unsigned long ULong;
 typedef unsigned long long ULgLg;
 
 //âÊñ ÇÃâ°ïùÇ∆ècïù
-static constexpr int WINDOW_WIDTH = 1280;
-static constexpr int WINDOW_HEIGHT = 800;
+constexpr int WINDOW_WIDTH = 1280;
+constexpr int WINDOW_HEIGHT = 800;
 
 //âÊñ ÇÃíÜêS
-static constexpr int WINDOW_CENTER_WIDTH = WINDOW_WIDTH / 2;
-static constexpr int WINDOW_CENTER_HEIGHT = WINDOW_HEIGHT / 2;
+constexpr int WINDOW_CENTER_WIDTH = WINDOW_WIDTH / 2;
+constexpr int WINDOW_CENTER_HEIGHT = WINDOW_HEIGHT / 2;
 
-static constexpr int PLAYER_MOVE_LIMIT_LEFT = WINDOW_CENTER_WIDTH - 224;
+constexpr int PLAYER_MOVE_LIMIT_LEFT = WINDOW_CENTER_WIDTH - 224;
 
-static constexpr int PLAYER_MOVE_LIMIT_RIGHT = WINDOW_CENTER_WIDTH + 224;
+constexpr int PLAYER_MOVE_LIMIT_RIGHT = WINDOW_CENTER_WIDTH + 224;
 
-static constexpr int BLOCK_COL = 5;
-static constexpr int BLOCK_ROW = 5;
+constexpr int BLOCK_COL = 5;
+constexpr int BLOCK_ROW = 5;
 
-static constexpr int BLOCK_MAX = BLOCK_COL * BLOCK_ROW;
+constexpr int BLOCK_MAX = BLOCK_COL * BLOCK_ROW;
 
 
-static constexpr int ENEMY_MAX = 1;
+constexpr int ENEMY_MAX = 1;
 
 
 //âÊñ ÇÃâ°ïùÇ∆ècïùÇÃç≈ëÂíl
-static constexpr int WINDOW_WIDTH_MAX = 1920;
-static constexpr int WINDOW_HEIGHT_MAX = 1080;
-
-static const char* GRAP_FILE_PATH = "data/csv/graphic.csv";
+constexpr int WINDOW_WIDTH_MAX = 1920;
+constexpr int WINDOW_HEIGHT_MAX = 1080;
 
 

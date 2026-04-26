@@ -1,5 +1,4 @@
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\effekseer\effekseer.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\effekseer.obj
-C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\game\actor\boss\boss.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\boss.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\game\actor\enemy\enemy.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\enemy.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\game\actor\player\player.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\player.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\game\base\actor.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\actor.obj
@@ -51,7 +50,6 @@ C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_projec
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\fps.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\fps.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\input.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\input.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\input_config.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\input_config.obj
-C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\math2D.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\math2D.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\mouseinput.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\mouseinput.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\mymath.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\mymath.obj
 C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\src\game\private\lib\rand.cpp;C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\My_project\x64\Debug\rand.obj

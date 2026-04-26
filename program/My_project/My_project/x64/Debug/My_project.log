@@ -1,2 +1,6 @@
-﻿  enemy.cpp
+﻿  enemy_manager.cpp
+  mouseinput.cpp
+  scene_factory.cpp
+  scene_play.cpp
+  コードを生成中...
   My_project.vcxproj -> C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\x64\Debug\My_project.exe

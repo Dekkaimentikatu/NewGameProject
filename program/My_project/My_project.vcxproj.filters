@@ -41,9 +41,6 @@
     <Filter Include="src\game\private\game\actor">
       <UniqueIdentifier>{7d17fbcf-ecc7-48f1-af3f-9b233138614b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\private\game\actor\boss">
-      <UniqueIdentifier>{e5b8a072-e8d2-44a6-8707-de8971e8d1c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\private\game\actor\player">
       <UniqueIdentifier>{c7c2e423-58f9-4cf7-b338-4862bca83d83}</UniqueIdentifier>
     </Filter>
@@ -128,9 +125,6 @@
     <Filter Include="src\game\public\game\actor">
       <UniqueIdentifier>{0b34de91-1075-458b-94cd-a097fdf46851}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\public\game\actor\boss">
-      <UniqueIdentifier>{773df575-2da7-426a-9461-a4a765f2642f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\public\game\actor\enemy">
       <UniqueIdentifier>{55e61c3e-a1f7-4439-9129-a4795b01b608}</UniqueIdentifier>
     </Filter>
@@ -196,9 +190,6 @@
     <ClInclude Include="src\game\public\lib\input_config.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\lib\math2D.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\public\lib\mouseinput.h">
       <Filter>src\game\public\lib</Filter>
     </ClInclude>
@@ -216,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
       <Filter>src\game\public\effekseer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\game\actor\boss\boss.h">
-      <Filter>src\game\public\game\actor\boss</Filter>
     </ClInclude>
     <ClInclude Include="src\game\public\game\actor\enemy\enemy.h">
       <Filter>src\game\public\game\actor\enemy</Filter>
@@ -435,9 +423,6 @@
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">
       <Filter>src\game\private\effekseer</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\private\game\actor\boss\boss.cpp">
-      <Filter>src\game\private\game\actor\boss</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\private\game\actor\enemy\enemy.cpp">
       <Filter>src\game\private\game\actor\enemy</Filter>
     </ClCompile>
@@ -501,13 +486,7 @@
     <ClCompile Include="src\game\private\lib\input_config.cpp">
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\private\lib\math2D.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\private\lib\mouseinput.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\mymath.cpp">
       <Filter>src\game\private\lib</Filter>
     </ClCompile>
     <ClCompile Include="src\game\private\lib\rand.cpp">
@@ -668,6 +647,9 @@
     </ClCompile>
     <ClCompile Include="src\game\private\game\base\character.cpp">
       <Filter>src\game\private\game\base</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\private\lib\mymath.cpp">
+      <Filter>src\game\private\lib</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
