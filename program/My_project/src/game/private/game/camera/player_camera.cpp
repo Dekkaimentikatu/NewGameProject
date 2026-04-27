@@ -110,10 +110,10 @@ void C_PALYER_CAMERA_VEC::Step(VECTOR _focus, VECTOR _pos, float _rot, int _padI
 void C_PALYER_CAMERA_VEC::CamMoveStart()
 {
 	m_center = { 0 };
-	m_rot.y += 0.01f;
-	m_rot.x = -15.0f;
+	m_rot.y += COM_START_ROT_SPEED_Y;
+	m_rot.x = COM_START_ROT_X;
 
-	VECTOR offset = { 0.0f, 20.0f, 800.0f };
+	VECTOR offset = COM_START_OFFSET;
 
 	MATRIX RotY = MGetRotY(m_rot.y);
 	MATRIX RotX = MGetRotX(m_rot.x);
@@ -126,7 +126,7 @@ void C_PALYER_CAMERA_VEC::CamMoveStart()
 	//注視点にプレイヤーの座標を代入
 	m_focus = m_center;
 	//注視点の高さを調整
-	m_focus.y += 30.0f;
+	m_focus.y += COM_START_FOCUS_Y;
 
 	if (m_rot.y > DX_PI_F * 2.0f)
 	{
@@ -147,29 +147,29 @@ void C_PALYER_CAMERA_VEC::CamMovePlay()
 {
 	if (C_XINPUT::GetConnectPad(DX_INPUT_PAD1))
 	{
-		m_rot.x += 0.05f * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_UD);
-		m_rot.y += 0.05f * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_LR);
+		m_rot.x += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_UD);
+		m_rot.y += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_LR);
 	}
 	else
 	{
 		//キーコンフィグを利用した入力に変更する
 		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::COM_ROT_L))	//左回転処理
 		{
-			m_rot.y += 0.05f;
+			m_rot.y += COM_PLAY_ROT_SPEED;
 		}
 		else if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::COM_ROT_R))	//右回転処理
 		{
-			m_rot.y -= 0.05f;
+			m_rot.y -= COM_PLAY_ROT_SPEED;
 		}
 
 		//キーコンフィグを利用した入力に変更する
 		if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::COM_ROT_U))	//左回転処理
 		{
-			m_rot.x += 0.05f;
+			m_rot.x += COM_PLAY_ROT_SPEED;
 		}
 		else if (C_INPUT_CONFIG::IsButtanInputRep(C_INPUT_CONFIG::COM_ROT_D))	//右回転処理
 		{
-			m_rot.x -= 0.05f;
+			m_rot.x -= COM_PLAY_ROT_SPEED;
 		}
 	}
 
@@ -185,7 +185,7 @@ void C_PALYER_CAMERA_VEC::CamMovePlay()
 		m_rot.x = -limitMin;
 	}
 
-	VECTOR offset = { 0.0f, 20.0f, 80.0f };
+	VECTOR offset = COM_PLAY_OFFSET;
 
 	MATRIX RotY = MGetRotY(m_rot.y);
 	MATRIX RotX = MGetRotX(m_rot.x);
@@ -198,7 +198,7 @@ void C_PALYER_CAMERA_VEC::CamMovePlay()
 	//注視点にプレイヤーの座標を代入
 	m_focus = m_center;
 	//注視点の高さを調整
-	m_focus.y += 30.0f;
+	m_focus.y += COM_PLAY_FOCUS_Y;
 }
 
 //

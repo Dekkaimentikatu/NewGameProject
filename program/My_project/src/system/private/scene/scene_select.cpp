@@ -1,5 +1,6 @@
 #include "scene/scene_select.h"
 #include "lib/bgm_manager.h"
+#include "lib/input_config.h"
 
 C_SCENE_SELECT::~C_SCENE_SELECT()
 {
@@ -65,39 +66,20 @@ void C_SCENE_SELECT::Step()
 
 	c_UIManager.Step();
 
-	//遷移テスト用の処理
-	if (C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_A))
+	//シーン遷移処理
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::PLAY);	//次に遷移したいシーンのタイプを代入
 
 		m_sceneState = ENDWAIT;		//ステータスを更新
 	}
 
-	if (C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_B))
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::CANCEL))
 	{
-		c_sceneData->SetSceneType(C_SCENE_DATA::TITLE);	//次に遷移したいシーンのタイプを代入
+		c_sceneData->SetSceneType(C_SCENE_DATA::RESULT);	//次に遷移したいシーンのタイプを代入
 
 		m_sceneState = ENDWAIT;		//ステータスを更新
 	}
-
-#ifdef DEBUG_MODE
-
-	//遷移テスト用の処理
-	if (C_INPUT::IsInputTrg(KEY_INPUT_Z))
-	{
-		c_sceneData->SetSceneType(C_SCENE_DATA::PLAY);	//次に遷移したいシーンのタイプを代入
-
-		m_sceneState = ENDWAIT;		//ステータスを更新
-	}
-
-	if (C_INPUT::IsInputTrg(KEY_INPUT_X))
-	{
-		c_sceneData->SetSceneType(C_SCENE_DATA::TITLE);	//次に遷移したいシーンのタイプを代入
-
-		m_sceneState = ENDWAIT;		//ステータスを更新
-	}
-
-#endif
 }
 
 void C_SCENE_SELECT::Exit()

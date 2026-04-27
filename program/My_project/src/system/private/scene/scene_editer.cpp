@@ -1,6 +1,7 @@
 #include "scene/scene_editer.h"
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
+#include "lib/input_config.h"
 
 C_SCENE_EDITER::~C_SCENE_EDITER()
 {
@@ -87,14 +88,15 @@ void C_SCENE_EDITER::Step()
 	m_cam.Update();
 	//ここよりも上に処理を書く
 
-	//遷移テスト用の処理
-	if (C_INPUT::IsInputTrg(KEY_INPUT_Z) || C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_B))
+	//シーン遷移処理
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::END);	//次に遷移したいシーンのタイプを代入
 
 		m_sceneState = ENDWAIT;		//ステータスを更新
 	}
-	else if (C_INPUT::IsInputTrg(KEY_INPUT_X) || C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_A))
+
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::CANCEL))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::TITLE);	//次に遷移したいシーンのタイプを代入
 

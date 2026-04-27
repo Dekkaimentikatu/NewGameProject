@@ -187,19 +187,17 @@ void C_SCENE_PLAY::Step()
 
 	//ここよりも上に処理を書く
 
+#ifdef DEBUG_MODE
+
 	//遷移テスト用の処理
-	if (C_INPUT::IsInputTrg(KEY_INPUT_Z))
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
 
 		m_sceneState = ENDWAIT;		//ステータスを更新
 	}
 
-	//ステージクリア
-	if (tmp->GetPlayerData()->isGoal)
-	{
-
-	}
+#endif // DEBUG_MODE
 }
 
 void C_SCENE_PLAY::EndWait()

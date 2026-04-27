@@ -21,11 +21,17 @@ public:
 		COM_ROT_U,	//カメラ上回転
 		COM_ROT_D,	//カメラ下回転
 
+		SELECT_L,	//セレクト左
+		SELECT_R,	//セレクト右
+		SELECT_U,	//セレクト上
+		SELECT_D,	//セレクト下
+
 		DECISION,	//決定
 		CANCEL,		//キャンセル
 
 		ATTACK,		//攻撃
 		JUMP,		//ジャンプ
+		STOP,
 		TARGET,		//ターゲット
 
 		I_CONFIG_STATE_NUM

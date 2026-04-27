@@ -177,12 +177,12 @@ void C_PLAYER::AttackCalc()
 void C_PLAYER::StopCalc()
 {
 	//’âŽ~‚ÌØ‚è‘Ö‚¦
-	if ((C_XINPUT::GetButtanInputTrg(PAD_ID, XINPUT_BUTTON_B) || C_INPUT::IsInputTrg(KEY_INPUT_RETURN)) &&
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::STOP) &&
 		m_playerData->stm == m_staminaMax)
 	{
 		m_playerData->isStop = true;
 	}
-	else if ((C_XINPUT::GetButtanInputTrg(PAD_ID, XINPUT_BUTTON_B) || C_INPUT::IsInputTrg(KEY_INPUT_RETURN)) &&
+	else if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::STOP) &&
 		m_playerData->isStop)
 	{
 		m_playerData->isStop = false;

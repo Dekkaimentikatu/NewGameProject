@@ -2,6 +2,8 @@
 #include "lib/XInput.h"
 #include "lib/Input.h"
 
+#include "lib/input_config.h"
+
 #include "lib/2Dhndlmanager.h"
 
 //èâä˙âª
@@ -31,12 +33,12 @@ void C_SELECT_DISP::LoadAnSync()
 //çXêV
 void C_SELECT_DISP::Step()
 {
-	if (C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_DPAD_RIGHT))
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::SELECT_R))
 	{
 		m_index++;
 		m_dispMove.x = -DISP_MOVE_SPEED;
 	}
-	else if (C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_DPAD_LEFT))
+	else if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::SELECT_L))
 	{
 		m_index--;
 		m_dispMove.x = DISP_MOVE_SPEED;

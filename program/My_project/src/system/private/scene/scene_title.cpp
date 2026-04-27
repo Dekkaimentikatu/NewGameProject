@@ -1,6 +1,6 @@
 #include "scene/scene_title.h"
 #include "lib/bgm_manager.h"
-#include <DxLib.h>			// DxLibを使用するために必須
+#include "lib/input_config.h"
 
 C_SCENE_TITLE::~C_SCENE_TITLE()
 {
@@ -64,16 +64,17 @@ void C_SCENE_TITLE::Step()
 
 	//ここよりも上に処理を書く
 
-	//遷移テスト用の処理
-	if (C_INPUT::IsInputTrg(KEY_INPUT_Z) || C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_A))
+	//シーン遷移処理
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
 
 		m_sceneState = ENDWAIT;		//ステータスを更新
 	}
+
 #ifdef DEBUG_MODE
 
-	else if (C_INPUT::IsInputTrg(KEY_INPUT_X) || C_XINPUT::GetButtanInputTrg(DX_INPUT_PAD1, XINPUT_BUTTON_B))
+	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::CANCEL))
 	{
 		c_sceneData->SetSceneType(C_SCENE_DATA::EDITER);	//次に遷移したいシーンのタイプを代入
 

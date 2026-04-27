@@ -6,6 +6,16 @@
 constexpr float COM_SPEED_MAX = 10.0f;
 constexpr float COM_MOVE_TIME = 10.0f;
 
+constexpr float COM_START_ROT_SPEED_Y = 0.01f;
+constexpr float COM_START_ROT_X = -15.0f;
+constexpr float COM_START_FOCUS_Y = 30.0f;
+constexpr VECTOR COM_START_OFFSET = { 0.0f, 20.0f, 800.0f };
+
+constexpr float COM_PLAY_ROT_SPEED = 0.05f;
+constexpr float COM_PLAY_FOCUS_Y = 30.0f;
+constexpr VECTOR COM_PLAY_OFFSET = { 0.0f, 20.0f, 80.0f };
+
+
 class C_PALYER_CAMERA_VEC : public C_CAMERA_BASE_VECTOR
 {
 public:

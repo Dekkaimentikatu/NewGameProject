@@ -85,6 +85,10 @@ void C_MAP_EDITER::Step()
 	{
 		ImGui::InputFloat3("Rot", &m_rot.x, "%.3f");
 	}
+	if (ImGui::CollapsingHeader("MoveLen"))
+	{
+		ImGui::SliderInt("Len", &m_moveLen, 0, 200);
+	}
 	ImGui::Separator();
 	if (ImGui::CollapsingHeader("Loadcsv"))
 	{
