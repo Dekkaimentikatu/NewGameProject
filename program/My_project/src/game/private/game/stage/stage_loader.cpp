@@ -14,8 +14,8 @@
 #include "game/object/static/enemy_spawn_point.h"
 #include "game/object/static/darts_emitter.h"
 #include "game/object/static/board.h"
-#include "lib/3Dhndlmanager.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 void C_STAGE_LOADER::LoadMapResource()
 {

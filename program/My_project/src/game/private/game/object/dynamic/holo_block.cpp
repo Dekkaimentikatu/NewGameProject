@@ -1,6 +1,6 @@
 #include "game/object/dynamic/holo_block.h"
-#include "lib/2Ddirection/easing/easing.h"
-#include "lib/3Dhndlmanager.h"
+#include "2Ddirection/easing/easing.h"
+#include "hndlmanager/3Dhndlmanager.h"
 #include "block_common.h"
 
 void C_HOLO_BLOCK::Init()

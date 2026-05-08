@@ -1,5 +1,5 @@
 #include "game/object/static/goal.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 C_GOAL::C_GOAL()
 {

@@ -1,5 +1,5 @@
 #include "game/UI/load_anim.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_LOAD_ANIM::Init(VECTOR _pos)

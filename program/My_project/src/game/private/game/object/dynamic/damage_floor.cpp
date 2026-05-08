@@ -1,7 +1,7 @@
 #include "game/object/dynamic/damage_floor.h"
-#include "lib/2Ddirection/easing/easing.h"
+#include "2Ddirection/easing/easing.h"
 #include "block_common.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 
 C_DAMAGE_FLOOR::~C_DAMAGE_FLOOR()

@@ -1,7 +1,7 @@
 #include "game/actor/enemy/enemy.h"
 #include "effekseer/effekseer.h"
-#include "lib/se_manager.h"
-#include "lib/3Dhndlmanager.h"
+#include "soundmanager/se_manager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 
 void C_ENEMY::Init()

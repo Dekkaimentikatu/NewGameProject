@@ -1,5 +1,5 @@
 #include "game/UI/back_ground.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_BACK_GROUND::Init(VECTOR _pos)

@@ -1,6 +1,6 @@
 #include "game/object/static/board.h"
-#include "lib/3Dhndlmanager.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 C_BOARD::~C_BOARD()
 {

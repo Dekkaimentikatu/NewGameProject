@@ -1,21 +1,19 @@
 #include "scene/scene_manager.h"
-#include "lib/input_config.h"
+#include "input_config.h"
 
-#include "lib/fade.h"
-#include "lib/fps.h"
-#include "lib/input.h"
-#include "lib/xinput.h"
+#include "fade/fade.h"
+#include "fps/fps.h"
 
-#include "lib/bgm_manager.h"
-#include "lib/se_manager.h"
+#include "soundmanager/bgm_manager.h"
+#include "soundmanager/se_manager.h"
 
 #include "scene/scene_factory.h"
 
 #include "game/data/global_data.h"
 #include "effekseer/effekseer.h"
 
-#include "lib/3Dhndlmanager.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 void C_SCENE_MANAGER::Init()
 {

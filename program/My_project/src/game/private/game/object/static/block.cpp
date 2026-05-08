@@ -1,5 +1,5 @@
 #include "game/object/static/block.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 C_BLOCK::C_BLOCK()
 {

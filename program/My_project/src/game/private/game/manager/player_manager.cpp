@@ -1,7 +1,7 @@
 #include "game/manager/player_manager.h"
 #include "game/actor/player/player.h"
 #include "game/collision/collision_manager.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 void C_PLAYER_MANAGER::Init()
 {

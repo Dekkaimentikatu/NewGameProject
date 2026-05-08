@@ -1,7 +1,7 @@
 #include "game/camera/player_camera.h"
-#include "lib/input_config.h"
-#include "lib/2Ddirection/easing/easing.h"
-#include "lib/fade.h"
+#include "input_config.h"
+#include "2Ddirection/easing/easing.h"
+#include "fade/fade.h"
 #include "game/data/global_data.h"
 
 

@@ -66,21 +66,6 @@
     <ClInclude Include="src\game\public\game\UI\UI_hpber.h" />
     <ClInclude Include="src\game\public\game\UI\UI_shop.h" />
     <ClInclude Include="src\game\public\game\UI\UI_stmber.h" />
-    <ClInclude Include="src\game\public\lib\2Dcollosion.h" />
-    <ClInclude Include="src\game\public\lib\2Ddirection\easing\easing.h" />
-    <ClInclude Include="src\game\public\lib\2Dhndlmanager.h" />
-    <ClInclude Include="src\game\public\lib\3Dhndlmanager.h" />
-    <ClInclude Include="src\game\public\lib\bgm_manager.h" />
-    <ClInclude Include="src\game\public\lib\collision.h" />
-    <ClInclude Include="src\game\public\lib\fade.h" />
-    <ClInclude Include="src\game\public\lib\fps.h" />
-    <ClInclude Include="src\game\public\lib\input.h" />
-    <ClInclude Include="src\game\public\lib\input_config.h" />
-    <ClInclude Include="src\game\public\lib\mouseinput.h" />
-    <ClInclude Include="src\game\public\lib\mymath.h" />
-    <ClInclude Include="src\game\public\lib\rand.h" />
-    <ClInclude Include="src\game\public\lib\se_manager.h" />
-    <ClInclude Include="src\game\public\lib\xinput.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
     <ClInclude Include="src\imgui\imgui_impl_dx11.h" />
@@ -89,6 +74,22 @@
     <ClInclude Include="src\imgui\imstb_rectpack.h" />
     <ClInclude Include="src\imgui\imstb_textedit.h" />
     <ClInclude Include="src\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\lib\public\2Ddirection\easing\easing.h" />
+    <ClInclude Include="src\lib\public\array\3Darray.h" />
+    <ClInclude Include="src\lib\public\collision\2Dcollosion.h" />
+    <ClInclude Include="src\lib\public\collision\3Dcollision.h" />
+    <ClInclude Include="src\lib\public\fade\fade.h" />
+    <ClInclude Include="src\lib\public\fps\fps.h" />
+    <ClInclude Include="src\lib\public\hndlmanager\2Dhndlmanager.h" />
+    <ClInclude Include="src\lib\public\hndlmanager\3Dhndlmanager.h" />
+    <ClInclude Include="src\lib\public\input\input.h" />
+    <ClInclude Include="src\lib\public\input\mouseinput.h" />
+    <ClInclude Include="src\lib\public\input\Xinput.h" />
+    <ClInclude Include="src\lib\public\input_config.h" />
+    <ClInclude Include="src\lib\public\math\mymath.h" />
+    <ClInclude Include="src\lib\public\math\rand.h" />
+    <ClInclude Include="src\lib\public\soundmanager\bgm_manager.h" />
+    <ClInclude Include="src\lib\public\soundmanager\se_manager.h" />
     <ClInclude Include="src\system\public\imguiCtrl\imguiCtrl.h" />
     <ClInclude Include="src\system\public\mapediter\editer_camera_point.h" />
     <ClInclude Include="src\system\public\mapediter\mapediter.h" />
@@ -146,27 +147,27 @@
     <ClCompile Include="src\game\private\game\UI\title_back.cpp" />
     <ClCompile Include="src\game\private\game\UI\UI_hpber.cpp" />
     <ClCompile Include="src\game\private\game\UI\UI_stmber.cpp" />
-    <ClCompile Include="src\game\private\lib\2Dcollision.cpp" />
-    <ClCompile Include="src\game\private\lib\2Ddirection\easing\easing.cpp" />
-    <ClCompile Include="src\game\private\lib\2Dhndlmanager.cpp" />
-    <ClCompile Include="src\game\private\lib\3Dhndlmanager.cpp" />
-    <ClCompile Include="src\game\private\lib\bgm_manager.cpp" />
-    <ClCompile Include="src\game\private\lib\collision.cpp" />
-    <ClCompile Include="src\game\private\lib\fade.cpp" />
-    <ClCompile Include="src\game\private\lib\fps.cpp" />
-    <ClCompile Include="src\game\private\lib\input.cpp" />
-    <ClCompile Include="src\game\private\lib\input_config.cpp" />
-    <ClCompile Include="src\game\private\lib\mouseinput.cpp" />
-    <ClCompile Include="src\game\private\lib\mymath.cpp" />
-    <ClCompile Include="src\game\private\lib\rand.cpp" />
-    <ClCompile Include="src\game\private\lib\se_manager .cpp" />
-    <ClCompile Include="src\game\private\lib\Xinput.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="src\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\lib\private\2Ddirection\easing\easing.cpp" />
+    <ClCompile Include="src\lib\private\collision\2Dcollision.cpp" />
+    <ClCompile Include="src\lib\private\collision\3Dcollision.cpp" />
+    <ClCompile Include="src\lib\private\fade\fade.cpp" />
+    <ClCompile Include="src\lib\private\fps\fps.cpp" />
+    <ClCompile Include="src\lib\private\hndlmanager\2Dhndlmanager.cpp" />
+    <ClCompile Include="src\lib\private\hndlmanager\3Dhndlmanager.cpp" />
+    <ClCompile Include="src\lib\private\input\input.cpp" />
+    <ClCompile Include="src\lib\private\input\mouseinput.cpp" />
+    <ClCompile Include="src\lib\private\input\Xinput.cpp" />
+    <ClCompile Include="src\lib\private\input_config.cpp" />
+    <ClCompile Include="src\lib\private\math\mymath.cpp" />
+    <ClCompile Include="src\lib\private\math\rand.cpp" />
+    <ClCompile Include="src\lib\private\soundmanager\bgm_manager.cpp" />
+    <ClCompile Include="src\lib\private\soundmanager\se_manager .cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\system\private\imguiCtrl\imguiCtrl.cpp" />
     <ClCompile Include="src\system\private\mapediter\editer_camera_point.cpp" />
@@ -235,13 +236,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/lib/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/lib/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>

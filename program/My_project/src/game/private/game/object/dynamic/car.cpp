@@ -1,5 +1,5 @@
 #include "game/object/dynamic/car.h"
-#include "lib/2Ddirection/easing/easing.h"
+#include "2Ddirection/easing/easing.h"
 #include "block_common.h"
 
 C_CAR::C_CAR()

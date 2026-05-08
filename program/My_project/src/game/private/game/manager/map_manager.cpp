@@ -2,7 +2,7 @@
 #include "game/collision/collision_manager.h"
 #include "game/object/static/sky.h"
 
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 void C_MAP_MANAGER::Init()
 {

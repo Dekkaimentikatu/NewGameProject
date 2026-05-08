@@ -2,8 +2,6 @@
 
 #include <DxLib.h>
 #include <math.h>
-#include "lib/xinput.h"
-#include "lib/input.h"
 
 class C_CAMERA_BASE_VECTOR
 {

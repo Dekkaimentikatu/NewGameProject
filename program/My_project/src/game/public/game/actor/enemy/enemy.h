@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "lib/rand.h"
+#include "math/rand.h"
 
 #include "game/base/character.h"
 

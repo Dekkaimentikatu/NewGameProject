@@ -3,7 +3,7 @@
 #include "game/base/manager_base.h"
 
 #include "game/actor/enemy/enemy.h"
-#include "lib/rand.h"
+#include "math/rand.h"
 
 class C_ENEMY_MANAGER : public C_ACOTR_MANAGER_BASE
 {

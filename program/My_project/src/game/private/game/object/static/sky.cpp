@@ -1,5 +1,5 @@
 #include "game/object/static/sky.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 void C_SKY::Init()
 {

@@ -3,7 +3,7 @@
 #include <list>
 #include <math.h>
 
-#include "lib/collision.h"
+#include "collision/3Dcollision.h"
 
 #include "game/base/manager_base.h"
 

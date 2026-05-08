@@ -1,5 +1,5 @@
 #include "game/object/static/check_point.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 C_CHECK_POINT::C_CHECK_POINT()
 {
