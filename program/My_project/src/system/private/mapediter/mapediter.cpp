@@ -1,10 +1,11 @@
 #include "mapediter/mapediter.h"
+
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
 
-#include "lib/3Dhndlmanager.h"
+#include "hndlManager/3Dhndlmanager.h"
+#include "input/input.h"
 
-#include "lib/input.h"
 #include "game/object/static/sky.h"
 
 // ツールバーのボタンの状態
@@ -20,7 +21,7 @@
 
 void C_MAP_EDITER::Init()
 {
-	c_objectArray.clear();
+	c_objectList.clear();
 	m_pos = VGet(0.0f, 0.0f, 0.0f);
 	m_scl = VGet(0.1f, 0.1f, 0.1f);
 	m_rot = VGet(0.0f, 0.0f, 0.0f);
@@ -47,13 +48,12 @@ void C_MAP_EDITER::LoadSync()
 	MV1SetScale(m_hndl, VGet(0.1f, 0.1f, 0.1f));
 	memcpy(m_filePath, const_cast<char*>(FILE_PATH), sizeof(char[256]));
 	memcpy(m_prevfilePath, const_cast<char*>(FILE_PATH), sizeof(char[256]));
-	m_stageLoader.LoadMapData(c_objectArray, m_filePath);
+	m_stageLoader.LoadMapData(m_filePath);
+	m_stageLoader.LoadObject(c_objectList);
 
-	C_OBJECT_BASE* tmp = new C_SKY;
-	tmp->Init();
-	tmp->Load();
-
-	c_objectArray.push_back(tmp);
+	c_sky = make_shared<C_SKY>();
+	c_sky->Init();
+	c_sky->Load();
 }
 
 void C_MAP_EDITER::Step()
@@ -100,8 +100,8 @@ void C_MAP_EDITER::Step()
 			DeleteObjectAll();
 
 			memcpy(m_prevfilePath, m_filePath, sizeof(m_filePath));
-
-			m_stageLoader.LoadMapData(c_objectArray, m_filePath);
+			m_stageLoader.LoadMapData(m_filePath);
+			m_stageLoader.LoadObject(c_objectList);
 		}
 	}
 	ImGui::Separator();
@@ -118,11 +118,11 @@ void C_MAP_EDITER::Step()
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Ando")) {
-		m_stageLoader.AndoAddObject(c_objectArray);
+		m_stageLoader.AndoAddObject(c_objectList);
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Redo")) {
-		m_stageLoader.RedoAddObject(c_objectArray);
+		m_stageLoader.RedoAddObject(c_objectList);
 	}
 	ImGui::End();
 
@@ -144,12 +144,12 @@ void C_MAP_EDITER::AddObject()
 	tmp.scaleX = m_scl.x;
 	tmp.scaleY = m_scl.y;
 	tmp.scaleZ = m_scl.z;
-	m_stageLoader.AddObject(tmp, c_objectArray);
+	c_objectList.push_back(m_stageLoader.AddObject(tmp));
 }
 
 void C_MAP_EDITER::DeleteObject()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		if ((*itr)->GetPos().x == m_pos.x &&
 			(*itr)->GetPos().y == m_pos.y &&
@@ -157,8 +157,8 @@ void C_MAP_EDITER::DeleteObject()
 		{
 			//オブジェクトを削除
 			(*itr)->Exit();
-			delete (*itr);
-			c_objectArray.erase(itr);
+			(*itr).reset();
+			itr = c_objectList.erase(itr);
 			m_stageLoader.DeleteObject(m_pos);
 			return;
 		}
@@ -168,7 +168,9 @@ void C_MAP_EDITER::DeleteObject()
 
 void C_MAP_EDITER::Update()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	c_sky->Update();
+
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Update();
 	}
@@ -178,7 +180,9 @@ void C_MAP_EDITER::Update()
 
 void C_MAP_EDITER::Draw()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	c_sky->Draw();
+
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Draw();
 	}
@@ -193,19 +197,20 @@ void C_MAP_EDITER::Draw()
 
 void C_MAP_EDITER::DeleteObjectAll()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+
+
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 
-	c_objectArray.clear();
+	c_objectList.clear();
 }
 
 void C_MAP_EDITER::Exit()
 {
 	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
-
+	c_sky->Exit();
 	DeleteObjectAll();
 	instance->Delete3DModel(SKY_MODEL_PATH);
 	instance->Delete3DModel("data/model/field/pointer.mv1");

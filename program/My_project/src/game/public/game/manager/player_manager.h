@@ -52,7 +52,7 @@ public:
 
 	void ReflectCollision(VECTOR addVec);
 
-	C_ACTOR_BASE* GetPlayerInstance(int _index = 0) 
+	shared_ptr<C_ACTOR_BASE> GetPlayerInstance(int _index = 0) 
 	{
 		auto itr = c_actorArray.begin();
 		return (*itr);

@@ -147,8 +147,8 @@ void C_PALYER_CAMERA_VEC::CamMovePlay()
 {
 	if (C_XINPUT::GetConnectPad(DX_INPUT_PAD1))
 	{
-		m_rot.x += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_UD);
-		m_rot.y += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_LR);
+		m_rot.x += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsMoveInput(C_INPUT_CONFIG::COM_ROT_UD);
+		m_rot.y += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsMoveInput(C_INPUT_CONFIG::COM_ROT_LR);
 	}
 	else
 	{

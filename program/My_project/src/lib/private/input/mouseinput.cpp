@@ -3,7 +3,7 @@
 MOUSE_INPUT_DATA C_MOUSE_INPUT::c_mouseInputData;
 
 //キー入力初期化
-void C_MOUSE_INPUT::InitMouseInput()
+void C_MOUSE_INPUT::Init()
 {
 	c_mouseInputData.m_nowPos = VGet(0, 0, 0);	//マウスの座標を初期化
 	c_mouseInputData.m_prevPos = VGet(0, 0, 0);//前回のマウスの座標を初期化
@@ -17,7 +17,7 @@ void C_MOUSE_INPUT::InitMouseInput()
 }
 
 //キー入力情報更新
-void C_MOUSE_INPUT::UpdateMouseInput()
+void C_MOUSE_INPUT::Update()
 {
 	c_mouseInputData.m_inputInfo
 		= GetMouseInputLog2

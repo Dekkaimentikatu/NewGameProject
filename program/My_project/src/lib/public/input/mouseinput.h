@@ -27,9 +27,9 @@ private:
 	
 public:
 	//キー入力初期化
-	static void InitMouseInput();
+	static void Init();
 	//キー入力情報更新
-	static void UpdateMouseInput();
+	static void Update();
 	//キー入力判定(通常判定)
 	static bool IsMouseInputRep(unsigned int key);
 	//キー入力判定(トリガー判定)

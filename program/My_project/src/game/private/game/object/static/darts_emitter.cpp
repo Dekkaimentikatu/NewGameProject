@@ -26,7 +26,6 @@ void C_DARTS_EMITTER::Load()
 {
 	RequestToObject();
 	auto itr = m_objectList.begin();
-	C_COLLISION_MANAGER::AddObject(*itr);
 }
 
 void C_DARTS_EMITTER::Step()

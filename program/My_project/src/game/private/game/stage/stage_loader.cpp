@@ -42,7 +42,7 @@ void C_STAGE_LOADER::LoadMapResource()
 	hndlManager2D->Load2DImage(BOARD_IMAGE_PATH[5]);
 }
 
-void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _filePath)
+void C_STAGE_LOADER::LoadMapData(char* _filePath)
 {
 	m_hndl = FileRead_open(_filePath);
 
@@ -72,11 +72,9 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 			//読み込み失敗で終了
 			break;
 		}
-		else
-		{
-			//オブジェクトの生成
-			AddObject(tmp, _objectArray);
-		}
+
+		//ステージデータリストに情報を追加
+		m_stageDataList.push_back(tmp);
 	}
 
 	//ファイルを閉じる
@@ -85,18 +83,22 @@ void C_STAGE_LOADER::LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _file
 	m_hndl = 0;
 }
 
-void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _objectArray)
+void C_STAGE_LOADER::LoadObject(list<shared_ptr<C_OBJECT_BASE>>& _objectList)
 {
-	//各オブジェクトのポインタ変数
-	C_OBJECT_BASE* tmp = nullptr;
-	C_OBJECT_BASE::T_OBJECT_DATA data = { 0 };
+	for (auto itr = m_stageDataList.begin(); itr != m_stageDataList.end(); ++itr)
+	{
+		//オブジェクトの追加
+		_objectList.push_back(AddObject((*itr)));
+	}
+}
 
-	//
-	int objectID = _stageData.objectID;
-	VECTOR pos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
-	VECTOR scale = VGet(_stageData.scaleX, _stageData.scaleY, _stageData.scaleZ);
-	VECTOR rot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
-	int moveLen = _stageData.moveLen;
+shared_ptr<C_OBJECT_BASE> C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData)
+{
+	//ベースクラスのポインタ変数
+	shared_ptr<C_OBJECT_BASE> tmp = nullptr;
+
+	//オブジェクトに与えるデータ
+	C_OBJECT_BASE::T_OBJECT_DATA data = { 0 };
 	data.initPos = VGet(_stageData.posX, _stageData.posY, _stageData.posZ);
 	data.modelScale = VGet(_stageData.scaleX, _stageData.scaleY, _stageData.scaleZ);
 	data.modelRot = VGet(_stageData.rotX, _stageData.rotY, _stageData.rotZ);
@@ -106,40 +108,40 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _o
 	switch (_stageData.objectID)
 	{
 	case OBJECT_ID_BOX:
-		tmp = new C_BLOCK;
+		tmp = make_shared<C_BLOCK>();
 		break;
 	case OBJECT_ID_BOX_MOVE:
-		tmp = new C_BLOCK_MOVE;
+		tmp = make_shared <C_BLOCK_MOVE>();
 		break;
 	case OBJECT_ID_ROT_FLOOR:
-		tmp = new C_CIRCULAR_MOTION;
+		tmp = make_shared <C_CIRCULAR_MOTION>();
 		break;
 	case OBJECT_ID_DAMAGE_FLOOR:
-		tmp = new C_DAMAGE_FLOOR;
+		tmp = make_shared <C_DAMAGE_FLOOR>();
 		break;
 	case OBJECT_ID_ROT_DAMAGE:
-		tmp = new C_ROT_FLOOR;
+		tmp = make_shared <C_ROT_FLOOR>();
 		break;
 	case OBJECT_ID_HOLOBLOCK:
-		tmp = new C_HOLO_BLOCK;
+		tmp = make_shared <C_HOLO_BLOCK>();
 		break;
 	case OBJECT_ID_GOAL:
-		tmp = new C_GOAL;
+		tmp = make_shared <C_GOAL>();
 		break;
 	case OBJECT_ID_START:
-		tmp = new C_START;
+		tmp = make_shared <C_START>();
 		break;
 	case OBJECT_ID_CHECKPOINT:
-		tmp = new C_CHECK_POINT;
+		tmp = make_shared <C_CHECK_POINT>();
 		break;
 	case OBJECT_ID_ENEMY_SPAWN:
-		tmp = new C_ENEMY_SPAWN_POINT;
+		tmp = make_shared <C_ENEMY_SPAWN_POINT>();
 		break;
 	case OBJECT_ID_EMITTER:
-		tmp = new C_DARTS_EMITTER;
+		tmp = make_shared <C_DARTS_EMITTER>();
 		break;
 	case OBJECT_ID_BOARD:
-		tmp = new C_BOARD;
+		tmp = make_shared <C_BOARD>();
 		break;
 	}
 
@@ -147,30 +149,26 @@ void C_STAGE_LOADER::AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _o
 	tmp->Request(data);
 	tmp->Load();
 
-	//オブジェクトリストに追加
-	_objectArray.push_back(tmp);
-	//ステージデータリストに情報を追加
-	m_stageDataList.push_back(_stageData);
+	return tmp;
 }
 
-void C_STAGE_LOADER::AndoAddObject(list<C_OBJECT_BASE*>& _objectArray)
+void C_STAGE_LOADER::AndoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectList)
 {
-	if (_objectArray.size() == 0)return;
+	if (_objectList.size() == 0)return;
 	if (m_stageDataList.size() == 0)return;
 	auto itr1 = --m_stageDataList.end();
-	auto itr2 = --_objectArray.end();
+	auto itr2 = --_objectList.end();
 	(*itr2)->Exit();
-	delete (*itr2);
+	itr2 = _objectList.erase(itr2);
 	m_RedoList.push_back(*itr1);
-	m_stageDataList.erase(itr1);
-	_objectArray.erase(itr2);
+	itr1 = m_stageDataList.erase(itr1);
 }
 
-void C_STAGE_LOADER::RedoAddObject(list<C_OBJECT_BASE*>& _objectArray)
+void C_STAGE_LOADER::RedoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectList)
 {
 	if (m_RedoList.size() == 0)return;
 	auto itr = m_RedoList.begin();
-	AddObject((*itr), _objectArray);
+	_objectList.push_back(AddObject((*itr)));
 	m_RedoList.erase(itr);
 }
 

@@ -26,12 +26,8 @@ void C_PLAYER_MANAGER::LoadSync()
 {
 	c_globalData = C_GLOBAL_DATA::GetInstace();
 
-	//プレイヤーの初期化
-	C_PLAYER* player = nullptr;
-	player = new C_PLAYER();
-
 	//listにInstanceを追加
-	c_actorArray.push_back(player);
+	c_actorArray.push_back(make_shared<C_PLAYER>());
 
 	//プレイヤーの初期化
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
@@ -93,7 +89,6 @@ void C_PLAYER_MANAGER::Exit()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();

@@ -18,26 +18,32 @@ private:
 	static bool isHitWall;
 
 	//オブジェクトの判定用プール
-	static list<C_OBJECT_BASE*> m_objectPool;
+	static list<weak_ptr<C_OBJECT_BASE>> m_objectPool;
 
 	//プレイヤーとエネミーの当たり判定
-	static void CollisionPlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* enemy);
+	static void CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> enemy);
 
 	//プレイヤーとブロックの当たり判定
-	static void CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block);
+	static void CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _block);
 
 	//プレイヤーとアイテムの当たり判定
-	static void CollisionPlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag);
+	static void CollisionPlayerToFlag(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _flag);
 
 	//エネミーとエネミーの当たり判定
-	static void CollisionEnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2);
+	static void CollisionEnemyToEnemy(weak_ptr<C_OBJECT_BASE> _enemy1, weak_ptr<C_OBJECT_BASE> _enemy2);
 
 	//エネミーとブロックの当たり判定
-	static void CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block);
+	static void CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, weak_ptr<C_OBJECT_BASE> _block);
 
-	static list<C_ACTOR_BASE*> m_actorPool;
+	//アクターの判定用プール
+	static list<weak_ptr<C_ACTOR_BASE>> m_actorPool;
 
-	static void AttackPlayerToEnemy(C_ACTOR_BASE* _player, C_ACTOR_BASE* _enemy);
+	//プレイヤーとエネミーの攻撃判定
+	static void AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy);
+
+	static void EraseObject(list<weak_ptr<C_OBJECT_BASE>>::iterator _objectPool);
+
+	static void EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator _actorPool);
 
 public:
 
@@ -45,9 +51,10 @@ public:
 	static void CollisionCalc();
 
 	//オブジェクト追加
-	static void AddObject(C_OBJECT_BASE* _object) { m_objectPool.push_back(_object); }
+	static void AddObject(weak_ptr<C_OBJECT_BASE> _object) { m_objectPool.push_back(_object); }
 
-	static void AddActor(C_ACTOR_BASE* _actor) { m_actorPool.push_back(_actor); }
+	//アクター追加
+	static void AddActor(weak_ptr<C_ACTOR_BASE> _actor) { m_actorPool.push_back(_actor); }
 
 	//終了処理
 	static void Exit();

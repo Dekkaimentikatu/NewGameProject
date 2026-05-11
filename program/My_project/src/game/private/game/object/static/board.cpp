@@ -17,9 +17,8 @@ void C_BOARD::Init()
 
 void C_BOARD::Request(T_OBJECT_DATA _objectData)
 {
-	m_pos = m_objectData.initPos = _objectData.initPos;
-	m_objectData.modelScale = _objectData.modelScale;
-	m_objectData.modelRot = _objectData.modelRot;
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
 	m_objectType = OBJECT_TYPE_BLCOK;
 	m_isActive = true;
 	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();

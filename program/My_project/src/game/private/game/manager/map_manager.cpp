@@ -6,7 +6,7 @@
 
 void C_MAP_MANAGER::Init()
 {
-	c_objectArray.clear();
+	c_objectList.clear();
 
 	c_globalData = C_GLOBAL_DATA::GetInstace();
 }
@@ -22,14 +22,15 @@ void C_MAP_MANAGER::LoadAnSync()
 void C_MAP_MANAGER::LoadSync()
 {
 	int tmp = c_globalData->GetStageData()->stage_index;
-	m_stageLoader.LoadMapData(c_objectArray, const_cast<char*>(MAP_FILE_PATH[tmp]));
+	m_stageLoader.LoadMapData(const_cast<char*>(MAP_FILE_PATH[tmp]));
+	m_stageLoader.LoadObject(c_objectList);
 
-	C_SKY* sky = new C_SKY();
+	shared_ptr<C_OBJECT_BASE> sky = make_shared<C_SKY>();
 	sky->Init();
 	sky->Load();
-	c_objectArray.push_back(sky);
+	c_objectList.push_back(sky);
 
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		C_COLLISION_MANAGER::AddObject(*itr);
 	}
@@ -37,7 +38,7 @@ void C_MAP_MANAGER::LoadSync()
 
 void C_MAP_MANAGER::Step()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Step();
 	}
@@ -45,7 +46,7 @@ void C_MAP_MANAGER::Step()
 
 void C_MAP_MANAGER::Update()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Update();
 	}
@@ -53,7 +54,7 @@ void C_MAP_MANAGER::Update()
 
 void C_MAP_MANAGER::Draw()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Draw();
 	}
@@ -61,15 +62,14 @@ void C_MAP_MANAGER::Draw()
 
 void C_MAP_MANAGER::Exit()
 {
-	for (auto itr = c_objectArray.begin(); itr != c_objectArray.end(); ++itr)
+	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
 	incetanse->Delete3DModel(SKY_MODEL_PATH);
 
-	c_objectArray.clear();
+	c_objectList.clear();
 	m_stageLoader.Exit();
 }

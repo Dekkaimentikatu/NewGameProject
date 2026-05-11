@@ -20,7 +20,7 @@ void C_ENEMY_MANAGER::LoadAnSync()
 
 void C_ENEMY_MANAGER::LoadSync()
 {
-	C_ENEMY* enemy = nullptr;
+	shared_ptr<C_ENEMY> enemy = nullptr;
 	C_OBJECT_BASE::T_OBJECT_DATA tmp = {0};
 
 	int eff1 = CEffekseerCtrl::LoadData("data/effect/ToonHit.efk");
@@ -29,7 +29,7 @@ void C_ENEMY_MANAGER::LoadSync()
 	for (auto itr = c_globalData->GetEnemySpawnPointList()->begin();
 		itr != c_globalData->GetEnemySpawnPointList()->end(); ++itr)
 	{
-		enemy = new C_ENEMY;
+		enemy = make_shared<C_ENEMY>();
 		enemy->Init();
 		tmp.initPos = (*itr).pos;
 		tmp.modelScale = (*itr).scale;
@@ -81,7 +81,6 @@ void C_ENEMY_MANAGER::Exit()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 	c_globalData->GetEnemySpawnPointList()->clear();
 	c_actorArray.clear();

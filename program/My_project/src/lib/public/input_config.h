@@ -37,19 +37,20 @@ public:
 		I_CONFIG_STATE_NUM
 	};
 
-	enum INPUT_STICK_STATE
+	enum INPUT_MOVE_STATE
 	{
 		MOVE_LR,
 		MOVE_FR,
 
 		COM_ROT_LR,
 		COM_ROT_UD,
+
+		M_CONFIG_STATE_NUM,
 	};
 
 	enum CONFIG_MODE
 	{
 		COM_LR_REVERSE,
-		COM_MOVE_CALC,
 
 		MODE_NUM,
 	};
@@ -62,14 +63,18 @@ public:
 
 	typedef struct
 	{
-		int pad;
-	}T_STICK_COMFIG;
+		int key[2][2];
+	}T_MOVE_COMFIG;
 
 private:
 
 	static T_KEY_COMFIG m_defaultKeyConfig[I_CONFIG_STATE_NUM];
 
 	static T_KEY_COMFIG m_customKeyConfig[I_CONFIG_STATE_NUM];
+
+	static T_MOVE_COMFIG m_defaultMoveConfig[M_CONFIG_STATE_NUM];
+
+	static T_MOVE_COMFIG m_customMoveConfig[M_CONFIG_STATE_NUM];
 
 	static int configMode[MODE_NUM];
 
@@ -83,6 +88,6 @@ public:
 
 	static bool IsButtanInputTrg(INPUT_BUTTAN_SATATE _state);
 
-	static float IsStickInput(INPUT_STICK_STATE _state);
+	static float IsMoveInput(INPUT_MOVE_STATE _state);
 };
 

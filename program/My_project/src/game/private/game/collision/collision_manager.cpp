@@ -5,32 +5,32 @@ bool C_COLLISION_MANAGER::isHitFloor = false;
 
 bool C_COLLISION_MANAGER::isHitWall = false;
 
-list<C_OBJECT_BASE*> C_COLLISION_MANAGER::m_objectPool;
+list<weak_ptr<C_OBJECT_BASE>> C_COLLISION_MANAGER::m_objectPool;
 
-list<C_ACTOR_BASE*> C_COLLISION_MANAGER::m_actorPool;
+list<weak_ptr<C_ACTOR_BASE>> C_COLLISION_MANAGER::m_actorPool;
 
-void C_COLLISION_MANAGER::CollisionPlayerToEnemy(C_OBJECT_BASE* _player, C_OBJECT_BASE* _enemy)
+void C_COLLISION_MANAGER::CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _enemy)
 {
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
 	//生存フラグが折れているなら次の要素へ
-	if (!_player->GetIsActive())return;
-	if (!_enemy->GetIsActive())return;
+	if (!_player.lock()->GetIsActive())return;
+	if (!_enemy.lock()->GetIsActive())return;
 
 	//当たり判定
-	if (C_COLLISION::CheckHitSphereToSphere(_player->GetPos(), _enemy->GetPos(),
-		_player->GetRedius(), _enemy->GetRedius()))
+	if (C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetPos(), _enemy.lock()->GetPos(),
+		_player.lock()->GetRedius(), _enemy.lock()->GetRedius()))
 	{
 
 		//アクターの座標の差を取得
-		VECTOR vec = VSub(_enemy->GetPos(), _player->GetPos());
+		VECTOR vec = VSub(_enemy.lock()->GetPos(), _player.lock()->GetPos());
 		float len = VSize(vec);
 
 		//座標の差を正規化
 		vec = VNorm(vec);
 
 		//めり込んだ距離を計算
-		len = (_enemy->GetRedius() + _player->GetRedius()) - len;
+		len = (_enemy.lock()->GetRedius() + _player.lock()->GetRedius()) - len;
 
 		//移動ベクトルにめり込んだ距離を乗算
 		vec = VScale(vec, len);
@@ -39,18 +39,18 @@ void C_COLLISION_MANAGER::CollisionPlayerToEnemy(C_OBJECT_BASE* _player, C_OBJEC
 		if (globalData->GetPlayerData()->isStop)
 		{
 			vec = VScale(vec, -1.0f);
-			_player->AddPos(vec);
+			_player.lock()->AddPos(vec);
 		}
-		else _enemy->AddPos(vec);
+		else _enemy.lock()->AddPos(vec);
 
 	}
 }
 
-void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJECT_BASE* _block)
+void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _block)
 {
 	//生存フラグが折れているなら次の要素へ
-	if (!_player->GetIsActive())return;
-	if (!_block->GetIsActive())return;
+	if (!_player.lock()->GetIsActive())return;
+	if (!_block.lock()->GetIsActive())return;
 
 	VECTOR HitPos = { 0 };	//ポリゴンとの最近点を格納する変数
 	VECTOR result = { 0 };	//リザルトを格納する変数
@@ -61,10 +61,10 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJEC
 	MV1_COLL_RESULT_POLY_DIM col;
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
-	center = _player->GetCenter();
-	radius = static_cast<float>(_player->GetRedius());
+	center = _player.lock()->GetCenter();
+	radius = static_cast<float>(_player.lock()->GetRedius());
 
-	col = MV1CollCheck_Sphere(_block->GetModelHndle(), -1, center, radius);
+	col = MV1CollCheck_Sphere(_block.lock()->GetModelHndle(), -1, center, radius);
 
 	if (col.HitNum <= 0)return;
 
@@ -96,18 +96,18 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJEC
 		//壁との当たり判定
 		if (col.Dim[i].Normal.y < 0.7f && col.Dim[i].Normal.y > -0.7f)
 		{
-			_player->HitCalcWall();
+			_player.lock()->HitCalcWall();
 		}
 		//天井との当たり判定
 		else if (col.Dim[i].Normal.y == -1.0f)
 		{
-			_player->HitCalcCeiling();
+			_player.lock()->HitCalcCeiling();
 		}
 		//床との当たり判定
 		else if (col.Dim[i].Normal.y != -1.0f)
 		{
-			_player->HitCalc();
-			_block->HitCalc();
+			_player.lock()->HitCalc();
+			_block.lock()->HitCalc();
 		}
 
 
@@ -115,20 +115,20 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJEC
 	}
 
 	//リザルトに結果を加算する
-	if (_block->GetMoveVec().x > result.x &&
-		_block->GetMoveVec().y > result.y &&
-		_block->GetMoveVec().z > result.z)
+	if (_block.lock()->GetMoveVec().x > result.x &&
+		_block.lock()->GetMoveVec().y > result.y &&
+		_block.lock()->GetMoveVec().z > result.z)
 	{
-		moveVec = _block->GetMoveVec();
+		moveVec = _block.lock()->GetMoveVec();
 	}
 	else
 	{
-		moveVec = VAdd(moveVec, _block->GetMoveVec());
+		moveVec = VAdd(moveVec, _block.lock()->GetMoveVec());
 	}
 
 	result = VAdd(result, moveVec);
 
-	_player->AddPos(result);
+	_player.lock()->AddPos(result);
 
 
 	//if (_block->GetIsAttack())
@@ -139,30 +139,30 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(C_OBJECT_BASE* _player, C_OBJEC
 	MV1CollResultPolyDimTerminate(col);
 }
 
-void C_COLLISION_MANAGER::CollisionPlayerToFlag(C_OBJECT_BASE* _player, C_OBJECT_BASE* _flag)
+void C_COLLISION_MANAGER::CollisionPlayerToFlag(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _flag)
 {
 	//生存フラグが折れているなら次の要素へ
-	if (!_player->GetIsActive())return;
+	if (!_player.lock()->GetIsActive())return;
 
-	if (C_COLLISION::CheckHitSphereToSphere(_player->GetPos(), _flag->GetPos(),
-		_player->GetRedius(), _flag->GetRedius()))
+	if (C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetPos(), _flag.lock()->GetPos(),
+		_player.lock()->GetRedius(), _flag.lock()->GetRedius()))
 	{
-		_flag->HitCalc();
+		_flag.lock()->HitCalc();
 	}
 }
 
-void C_COLLISION_MANAGER::CollisionEnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT_BASE* _enemy2)
+void C_COLLISION_MANAGER::CollisionEnemyToEnemy(weak_ptr<C_OBJECT_BASE> _enemy1, weak_ptr<C_OBJECT_BASE> _enemy2)
 {
 	//生存フラグが折れているなら次の要素へ
-	if (!_enemy1->GetIsActive())return;
-	if (!_enemy2->GetIsActive())return;
+	if (!_enemy1.lock()->GetIsActive())return;
+	if (!_enemy2.lock()->GetIsActive())return;
 
 	//当たり判定
-	if (C_COLLISION::CheckHitSphereToSphere(_enemy1->GetPos(), _enemy2->GetPos(),
-		_enemy1->GetRedius(), _enemy2->GetRedius()))
+	if (C_COLLISION::CheckHitSphereToSphere(_enemy1.lock()->GetPos(), _enemy2.lock()->GetPos(),
+		_enemy1.lock()->GetRedius(), _enemy2.lock()->GetRedius()))
 	{
 		//アクターの座標の差を取得
-		VECTOR vec = VSub(_enemy2->GetPos(), _enemy1->GetPos());
+		VECTOR vec = VSub(_enemy2.lock()->GetPos(), _enemy1.lock()->GetPos());
 		vec.y = 0.0f;
 		float len = VSize(vec);
 
@@ -170,17 +170,17 @@ void C_COLLISION_MANAGER::CollisionEnemyToEnemy(C_OBJECT_BASE* _enemy1, C_OBJECT
 		vec = VNorm(vec);
 
 		//めり込んだ距離を計算
-		len = (_enemy2->GetRedius() + _enemy1->GetRedius()) - len;
+		len = (_enemy2.lock()->GetRedius() + _enemy1.lock()->GetRedius()) - len;
 
 		//移動ベクトルにめり込んだ距離を乗算
 		vec = VScale(vec, len);
 
 		//押し戻しベクトルを座標に加算
-		_enemy2->AddPos(vec);
+		_enemy2.lock()->AddPos(vec);
 	}
 }
 
-void C_COLLISION_MANAGER::CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_BASE* _block)
+void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, weak_ptr<C_OBJECT_BASE> _block)
 {
 	VECTOR HitPos = { 0 };	//ポリゴンとの最近点を格納する変数
 	VECTOR result = { 0 };	//リザルトを格納する変数
@@ -193,23 +193,23 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_
 
 
 	//生存フラグが折れているなら次の要素へ
-	if (!_enemy->GetIsActive())return;
-	if (!_block->GetIsActive())return;
+	if (!_enemy.lock()->GetIsActive())return;
+	if (!_block.lock()->GetIsActive())return;
 
-	center = _enemy->GetCenter();
-	radius = static_cast<float>(_enemy->GetRedius());
+	center = _enemy.lock()->GetCenter();
+	radius = static_cast<float>(_enemy.lock()->GetRedius());
 
-	if (_block->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_STATIC)
+	if (_block.lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_STATIC)
 	{
-		if (C_COLLISION::CheckHitSphereToSphere(_enemy->GetPos(), _block->GetPos(),
-			_enemy->GetRedius(), _block->GetRedius()))
+		if (C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetPos(), _block.lock()->GetPos(),
+			_enemy.lock()->GetRedius(), _block.lock()->GetRedius()))
 		{
-			_block->HitCalc();
+			_block.lock()->HitCalc();
 		}
 		return;
 	}
 
-	col = MV1CollCheck_Sphere(_block->GetModelHndle(), -1, center, radius);
+	col = MV1CollCheck_Sphere(_block.lock()->GetModelHndle(), -1, center, radius);
 
 	if (col.HitNum <= 0)return;
 
@@ -238,44 +238,62 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(C_OBJECT_BASE* _enemy, C_OBJECT_
 	}
 
 	//リザルトに結果を加算する
-	if (_block->GetMoveVec().x > result.x &&
-		_block->GetMoveVec().y > result.y &&
-		_block->GetMoveVec().z > result.z)
+	if (_block.lock()->GetMoveVec().x > result.x &&
+		_block.lock()->GetMoveVec().y > result.y &&
+		_block.lock()->GetMoveVec().z > result.z)
 	{
-		moveVec = _block->GetMoveVec();
+		moveVec = _block.lock()->GetMoveVec();
 	}
 	else
 	{
-		moveVec = VAdd(moveVec, _block->GetMoveVec());
+		moveVec = VAdd(moveVec, _block.lock()->GetMoveVec());
 	}
 
 	result = VAdd(result, moveVec);
 
-	_enemy->AddPos(result);
+	_enemy.lock()->AddPos(result);
 
 	MV1CollResultPolyDimTerminate(col);
 }
 
-void C_COLLISION_MANAGER::AttackPlayerToEnemy(C_ACTOR_BASE* _player, C_ACTOR_BASE* _enemy)
+void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy)
 {
 	//マネージャー1の攻撃判定
-	if (_player->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_player->GetAttackPos(), _enemy->GetPos(),
-			_player->GetAttackRedius(), _enemy->GetRedius()))
+	if (_player.lock()->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
+			_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
 	{
 		//ノックバックの速度の設定
-		_enemy->SetKonckBackSpeed(_player->GetPos());
+		_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
 
 		//当たり判定処理
-		_enemy->DamageCalc(_player->GetAtt());
+		_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
 	}
 
 	//マネージャー2の攻撃判定
-	if (_enemy->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_enemy->GetAttackPos(), _player->GetCenter(),
-			_enemy->GetAttackRedius(), _player->GetRedius()))
+	if (_enemy.lock()->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
+			_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
 	{
-		_player->DamageCalc(_enemy->GetAtt());
+		_player.lock()->DamageCalc(_enemy.lock()->GetAtt());
+	}
+}
+
+void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator _objectPool)
+{
+	auto fanc = [](list <weak_ptr<C_OBJECT_BASE>>::iterator _objectPool, bool) -> void {_objectPool = m_objectPool.erase(_objectPool);};
+
+	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
+	{
+		_objectPool = m_objectPool.erase(_objectPool);
+	}
+}
+
+void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator _actorPool)
+{
+	if (_actorPool->expired() || !(*_actorPool).lock()->GetIsActive())
+	{
+		_actorPool = m_actorPool.erase(_actorPool);
 	}
 }
 
@@ -283,7 +301,7 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(C_ACTOR_BASE* _player, C_ACTOR_BAS
 void C_COLLISION_MANAGER::CollisionCalc()
 {
 	//関数ポインタを作成
-	void (*Calc[])(C_OBJECT_BASE*, C_OBJECT_BASE*) = { C_COLLISION_MANAGER::CollisionPlayerToEnemy, C_COLLISION_MANAGER::CollisionPlayerToBlock,
+	void (*Calc[])(weak_ptr<C_OBJECT_BASE>, weak_ptr<C_OBJECT_BASE>) = { C_COLLISION_MANAGER::CollisionPlayerToEnemy, C_COLLISION_MANAGER::CollisionPlayerToBlock,
 		C_COLLISION_MANAGER::CollisionPlayerToFlag, C_COLLISION_MANAGER::CollisionEnemyToEnemy, C_COLLISION_MANAGER::CollisionEnemyToBlock };
 
 	int funkIndex = 0;
@@ -291,35 +309,39 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	//マネージャー1の配列の要素数だけforループを回す
 	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end(); ++itr1)
 	{
+		EraseObject(itr1);
+
 		//マネージャー2の配列の要素数だけforループを回す
 		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
+			EraseObject(itr2);
+
 			//同じ要素同士なら次の要素へ
-			if ((*itr1) == (*itr2))continue;
+			if ((*itr1).lock() == (*itr2).lock())continue;
 
 			//どのタイプのオブジェクトが参照されているか
-			if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
 				funkIndex = 0;
 			}
-			else if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
+			else if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
 			{
 				funkIndex = 1;
 			}
-			else if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_FLAG)
+			else if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_FLAG)
 			{
 				funkIndex = 2;
 			}
-			else if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+			else if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
 				funkIndex = 3;
 			}
-			else if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
+			else if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
 			{
 				funkIndex = 4;
 			}
@@ -335,11 +357,15 @@ void C_COLLISION_MANAGER::CollisionCalc()
 
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{
+		EraseActor(itr1);
+
 		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
 		{
-			if ((*itr1) == (*itr2))continue;
-			if ((*itr1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-				(*itr2)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+			EraseActor(itr2);
+
+			if ((*itr1).lock() == (*itr2).lock())continue;
+			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
 				AttackPlayerToEnemy((*itr1), (*itr2));
 			}
