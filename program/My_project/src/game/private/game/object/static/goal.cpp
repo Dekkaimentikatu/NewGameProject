@@ -17,6 +17,7 @@ void C_GOAL::Init()
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ハンドル
+	m_isActive = true;
 }
 
 void C_GOAL::Request(T_OBJECT_DATA _objectData)

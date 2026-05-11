@@ -281,11 +281,13 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator _objectPool)
 {
-	auto fanc = [](list <weak_ptr<C_OBJECT_BASE>>::iterator _objectPool, bool) -> void {_objectPool = m_objectPool.erase(_objectPool);};
-
 	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
 	{
 		_objectPool = m_objectPool.erase(_objectPool);
+	}
+	else
+	{
+		++_objectPool;
 	}
 }
 
@@ -294,6 +296,10 @@ void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator _ac
 	if (_actorPool->expired() || !(*_actorPool).lock()->GetIsActive())
 	{
 		_actorPool = m_actorPool.erase(_actorPool);
+	}
+	else
+	{
+		++_actorPool;
 	}
 }
 
@@ -309,13 +315,9 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	//マネージャー1の配列の要素数だけforループを回す
 	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end(); ++itr1)
 	{
-		EraseObject(itr1);
-
 		//マネージャー2の配列の要素数だけforループを回す
 		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
-			EraseObject(itr2);
-
 			//同じ要素同士なら次の要素へ
 			if ((*itr1).lock() == (*itr2).lock())continue;
 
@@ -352,24 +354,29 @@ void C_COLLISION_MANAGER::CollisionCalc()
 
 			//コールバック関数
 			Calc[funkIndex]((*itr1), (*itr2));
+
+			/*EraseObject(itr2);*/
 		}
+
+		/*EraseObject(itr1);*/
 	}
 
-	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
 	{
-		EraseActor(itr1);
-
-		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
+		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
 		{
-			EraseActor(itr2);
-
 			if ((*itr1).lock() == (*itr2).lock())continue;
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
 				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
 				AttackPlayerToEnemy((*itr1), (*itr2));
 			}
+
+			/*EraseActor(itr2);*/
 		}
+
+		/*EraseActor(itr1);*/
+
 	}
 }
 

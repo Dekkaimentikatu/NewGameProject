@@ -19,6 +19,7 @@ void C_CAR::Init()
 	m_moveVec = VGet(10.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ƒnƒ“ƒhƒ‹
 	m_speedUp = MAX_TIME;
+	m_isActive = true;
 }
 
 void C_CAR::Request(T_OBJECT_DATA _objectData)
