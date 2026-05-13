@@ -19,6 +19,8 @@
 
 void C_STAGE_LOADER::LoadMapResource()
 {
+	m_golobalData = C_GLOBAL_DATA::GetInstace();
+
 	C_3D_HNDL_MANAGER* hndlManager3D = C_3D_HNDL_MANAGER::GetInstance();
 	//モデルの読み込み
 	hndlManager3D->Load3DModel(BLOCK_MODEL_PATH);
@@ -50,8 +52,6 @@ void C_STAGE_LOADER::LoadMapData(char* _filePath)
 	if (m_hndl == 0)return;
 
 	T_STAGE_DATA tmp = { 0 };
-
-	m_golobalData = C_GLOBAL_DATA::GetInstace();
 
 	//ファイルの終端まで繰り返す
 	while (FileRead_eof(m_hndl) == 0)

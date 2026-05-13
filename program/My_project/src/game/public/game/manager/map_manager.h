@@ -1,8 +1,11 @@
 #pragma once
 #include "game/base/manager_base.h"
 #include "game/stage/stage_loader.h"
+#include "array/3Darray.h"
 
-
+constexpr int X_MAX = 9;
+constexpr int Y_MAX = 9;
+constexpr int Z_MAX = 1;
 
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {
@@ -17,9 +20,14 @@ public:
 
 private:
 
+	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>> m_objectArray;
+
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 
 public:
+
+	C_MAP_MANAGER() : m_objectArray(X_MAX, Y_MAX, Z_MAX)
+	{}
 
 	//初期化
 	void Init();
