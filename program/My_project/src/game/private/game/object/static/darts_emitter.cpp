@@ -4,12 +4,12 @@
 
 void C_DARTS_EMITTER::RequestToObject()
 {
-	C_DARTS* tmp = new C_DARTS;
+	shared_ptr<C_OBJECT_BASE> tmp = make_shared<C_DARTS>();
 
 	tmp->Init();
 	tmp->Request(m_objectData);
 	tmp->Load();
-
+	C_COLLISION_MANAGER::AddObject(tmp);
 	m_objectList.push_back(tmp);
 }
 
@@ -63,7 +63,6 @@ void C_DARTS_EMITTER::Exit()
 	for (auto itr = m_objectList.begin(); itr != m_objectList.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 
 	m_objectList.clear();

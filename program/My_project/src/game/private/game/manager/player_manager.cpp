@@ -33,7 +33,6 @@ void C_PLAYER_MANAGER::LoadSync()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Init();
-		(*itr)->DuplicateModel(m_modelHndl);
 		(*itr)->Load();
 		C_COLLISION_MANAGER::AddObject(*itr);
 		C_COLLISION_MANAGER::AddActor(*itr);

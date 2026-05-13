@@ -33,7 +33,7 @@ void C_START::Load()
 	DuplicateModel(m_modelHndl);
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//ƒXƒP[ƒ‹
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
-	m_flagData->StartPos = m_pos;
+	m_flagData->StartPos = m_objectData.initPos;
 	UpdateModel();
 	SetUpCollInfo();
 }
@@ -65,5 +65,5 @@ void C_START::Exit()
 
 void C_START::HitCalc()
 {
-	m_flagData->StartPos = m_pos;
+	m_flagData->StartPos = m_objectData.initPos;
 }

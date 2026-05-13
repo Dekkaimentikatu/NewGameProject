@@ -190,12 +190,12 @@ void C_SCENE_PLAY::Step()
 #ifdef DEBUG_MODE
 
 	//遷移テスト用の処理
-	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
-	{
-		c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
+	//if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
+	//{
+	//	c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
 
-		m_sceneState = ENDWAIT;		//ステータスを更新
-	}
+	//	m_sceneState = ENDWAIT;		//ステータスを更新
+	//}
 
 #endif // DEBUG_MODE
 }

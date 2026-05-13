@@ -1,64 +1,5 @@
 #include "../public/collision/3Dcollision.h"
 
-//点と四角の当たり判定
-bool C_COLLISION::CheckHitDotToSquare(VECTOR dotPos, VECTOR squarePos,
-	int width, int height)
-{
-	//四角形の上下左右それぞれの座標を計算する
-	float up = squarePos.y - height * 0.5f;
-	float down = squarePos.y + height * 0.5f;
-	float left = squarePos.x - width * 0.5f;
-	float right = squarePos.x + width * 0.5f;
-
-	//4つの端をそれぞれチェックして、すべての条件を満たしたらヒット！
-	if (dotPos.x >= left && dotPos.x <= right
-		&& dotPos.y >= up && dotPos.y <= down)
-	{
-		return true;
-	}
-	else return false;
-}
-
-//矩形同士の当たり判定
-bool C_COLLISION::CheckHitSquareToSquare(VECTOR S_squarePos, VECTOR E_squarePos,
-	int S_width, int S_height, int E_width, int E_height)
-{
-	//弾の当たり判定
-	float S_up = S_squarePos.y - S_height * 0.5f;
-	float S_down = S_squarePos.y + S_height * 0.5f;
-	float S_left = S_squarePos.x - S_width * 0.5f;
-	float S_right = S_squarePos.x + S_width * 0.5f;
-	//敵の当たり判定
-	float E_up = E_squarePos.y - E_height * 0.5f;
-	float E_down = E_squarePos.y + E_height * 0.5f;
-	float E_left = E_squarePos.x - E_width * 0.5f;
-	float E_right = E_squarePos.x + E_width * 0.5f;
-	//判定
-	if (S_left <= E_right && S_right >= E_left 
-		&& S_up <= E_down && S_down >= E_up )
-	{
-		return true;
-	}
-	else return false;
-}
-
-//円同士の当たり判定
-bool C_COLLISION::CheckHitCircleToCircle(VECTOR S_circlePos, VECTOR E_cleclePos, int S_redius, int E_redius)
-{
-	//半径Aの2乗+半径Bの2乗
-	float addredius = static_cast<float>((S_redius * S_redius) + (E_redius * E_redius));
-	//距離Xの2乗
-	float distance_X = (E_cleclePos.x - S_circlePos.x) * (E_cleclePos.x - S_circlePos.x);
-	//距離Yの2乗
-	float distance_Y = (E_cleclePos.y - S_circlePos.y) * (E_cleclePos.y - S_circlePos.y);
-	//判定
-	if ((distance_X + distance_Y) < addredius)
-	{
-		return true;
-	}
-	else return false;
-}
-
 //箱同士の当たり判定
 bool C_COLLISION::CheckHitBoxToBox(VECTOR pos1, VECTOR size1, VECTOR pos2, VECTOR size2)
 {
@@ -83,6 +24,11 @@ bool C_COLLISION::CheckHitBoxToBox(VECTOR pos1, VECTOR size1, VECTOR pos2, VECTO
 		return true;
 	}
 	else return false;
+}
+
+bool C_COLLISION::CheckHitBoxToCapsule(VECTOR _boxPos, VECTOR _boxSize, VECTOR _capPos1, VECTOR _capPos2, float _capRedius)
+{
+	return true;
 }
 
 //球同士の当たり判定

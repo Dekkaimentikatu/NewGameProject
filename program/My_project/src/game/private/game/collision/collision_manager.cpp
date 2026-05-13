@@ -110,7 +110,6 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 			_block.lock()->HitCalc();
 		}
 
-
 		break;
 	}
 
@@ -361,9 +360,9 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		/*EraseObject(itr1);*/
 	}
 
-	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{
-		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
+		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
 		{
 			if ((*itr1).lock() == (*itr2).lock())continue;
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&

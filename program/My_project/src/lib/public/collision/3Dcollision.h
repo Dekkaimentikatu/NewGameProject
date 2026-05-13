@@ -12,11 +12,9 @@
 class C_COLLISION
 {
 public:
-	static bool CheckHitDotToSquare(VECTOR dotPos, VECTOR squarePos, int width, int height);
-	static bool CheckHitSquareToSquare(VECTOR S_squarePos, VECTOR E_squarePos, int S_width, int S_height, int E_width, int E_height);
-	static bool CheckHitCircleToCircle(VECTOR S_circlePos, VECTOR E_cleclePos, int S_redius, int E_redius);
 
 	static bool CheckHitBoxToBox(VECTOR pos1, VECTOR size1, VECTOR pos2, VECTOR size2);
+	static bool CheckHitBoxToCapsule(VECTOR _boxPos, VECTOR _boxSize, VECTOR _capPos1, VECTOR _capPos2, float _capRedius);
 	static bool CheckHitSphereToSphere(VECTOR S_circlePos, VECTOR E_cleclePos, int S_redius, int E_redius);
 
 };
