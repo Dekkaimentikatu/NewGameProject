@@ -1,4 +1,5 @@
 #include "game/collision/collision_manager.h"
+#include "collision/3Dcollision.h"
 #include "game/data/global_data.h"
 
 bool C_COLLISION_MANAGER::isHitFloor = false;
@@ -54,88 +55,211 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 
 	VECTOR HitPos = { 0 };	//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğŠi”[‚·‚é•Ï”
 	VECTOR result = { 0 };	//ƒŠƒUƒ‹ƒg‚ğŠi”[‚·‚é•Ï”
-	VECTOR center = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
+	VECTOR center1 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
+	VECTOR Pcenter = { 0 };
+	VECTOR center2 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
+	VECTOR Size1 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
+	VECTOR Size2 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
 	VECTOR moveVec = { 0 };	//ƒuƒƒbƒN‚ÌˆÚ“®
-	float radius = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
+	float radius1 = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
+	float radius2 = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
 	float len = 0; //‚ß‚è‚ñ‚¾‹——£‚ğŠi”[‚·‚é•Ï”
+	//d—Íˆ—‚ğs‚¤‚©
+	bool IsGravity = true;
+	//“®‚­°‚Æ“–‚½‚Á‚½‚©
+	bool IsMovingPlatform = false;
 	MV1_COLL_RESULT_POLY_DIM col;
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
-	center = _player.lock()->GetCenter();
-	radius = static_cast<float>(_player.lock()->GetRedius());
+	center1 = _player.lock()->GetCenter();
+	radius1 = static_cast<float>(_player.lock()->GetRedius());
+	Size1 = VScale(_player.lock()->GetScale(), 80);
+	Pcenter = _player.lock()->GetPPos();
+	center2 = _block.lock()->GetCenter();
+	Size2 = VScale(_block.lock()->GetScale(), 400);
+	radius2 = static_cast<float>(_block.lock()->GetRedius());
 
-	col = MV1CollCheck_Sphere(_block.lock()->GetModelHndle(), -1, center, radius);
 
-	if (col.HitNum <= 0)return;
+	bool isHit = C_COLLISION::CheckHitBoxToBox(center1, Size1, center2, Size2);
 
+	float ObjectUP = center1.y + Size1.y * 0.5f;
+	//‰º•ûŒü
+	float ObjectDown = center1.y - Size1.y * 0.5f;
+	//¶•ûŒü
+	float ObjectLeft = center1.x - Size1.x * 0.5f;
+	//‰E•ûŒü
+	float ObjectRight = center1.x + Size1.x * 0.5f;
+	//‘O•ûŒü
+	float ObjectFlont = center1.z - Size1.z * 0.5f;
+	//‰œ•ûŒü
+	float ObjectBack = center1.z + Size1.z * 0.5f;
+	//‘OƒtƒŒ[ƒ€
+	//ã•ûŒü
+	float PrevObjectUp = Pcenter.y + Size1.y * 0.5f;
+	//‰º•ûŒü
+	float PrevObjectDown = Pcenter.y;
+	//‘«ê
+	//ã•ûŒü
+	float PlatformUp = center2.y + Size2.y * 0.5f;
+	//‰º•ûŒü
+	float PlatformDown = center2.y - Size2.y * 0.5f;
+	//¶•ûŒü
+	float PlatformLeft = center2.x - Size2.x * 0.5f;
+	//‰E•ûŒü
+	float PlatformRight = center2.x + Size2.x * 0.5f;
+	//‘O•ûŒü
+	float PlatformFlont = center2.z - Size2.z * 0.5f;
+	//‰œ•ûŒü
+	float PlatformBack = center2.z + Size2.z * 0.5f;
 
-	for (int i = 0; i < col.HitNum; i++)
-	{
+	//‰Ÿ‚µ–ß‚µ•ûŒüİ’è
+	VECTOR PushVec = { 0 };
+	//’…’n
+	if (PrevObjectDown >= PlatformUp) {
+		//‰Ÿ‚µ–ß‚µ—ÊŒvZ
+		//ã•ûŒü
+		float PushUp = PlatformUp - ObjectDown;
+		//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+		PushVec = VGet(0.0f, PushUp, 0.0f);
+		//d—Íˆ—‚ğs‚í‚È‚¢
+		IsGravity = false;
+		//d—Í‚ğƒŠƒZƒbƒg
+		_player.lock()->HitCalc();
+	}
+	//“Vˆäƒqƒbƒg
+	else if (PrevObjectUp <= PlatformDown) {
+		//‰Ÿ‚µ–ß‚µ—ÊŒvZ
+		//‰º•ûŒü
+		float PushDown = PlatformDown - ObjectUP;
+		//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+		PushVec = VGet(0.0f, PushDown, 0.0f);
+		_player.lock()->HitCalcCeiling();
+	}
+	else {
+		//‰Ÿ‚µ–ß‚µ—ÊŒvZ
+		//¶•ûŒü
+		float PushLeft = PlatformRight - ObjectLeft;
+		//‰E•ûŒü
+		float PushRight = PlatformLeft - ObjectRight;
+		//‘O•ûŒü
+		float PushFront = PlatformBack - ObjectFlont;
+		//‰œ•ûŒü
+		float PushBack = PlatformFlont - ObjectBack;
 
-		//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğæ“¾
-		HitPos = col.Dim[i].HitPosition;
+		//Å‚à‰Ÿ‚µ–ß‚µ—Ê‚Ì¬‚³‚¢•ûŒü‚ğ’T‚·
+		//Šp•ûŒü‚Ì’l‚ğâ‘Î’l‚É•ÏŠ·
+		//¶•ûŒü
+		float PushLeftAbs = fabsf(PushLeft);
+		//‰E•ûŒü
+		float PushRightAbs = fabsf(PushRight);
+		//‘O•ûŒü
+		float PushFrontAbs = fabsf(PushFront);
+		//‰œ•ûŒü
+		float PushBackAbs = fabsf(PushBack);
 
-		//‚ß‚è‚ñ‚¾‹——£‚ğ‹‚ß‚é
-		len = VSize(VSub(HitPos, center));
-
-		//”¼Œa‚©‚ç‚ß‚è‚ñ‚¾‹——£‚ğŒ¸Z‚·‚é
-		len = radius - len;
-
-		//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
-		if (VScale(col.Dim[i].Normal, len).x > result.x &&
-			VScale(col.Dim[i].Normal, len).y > result.y &&
-			VScale(col.Dim[i].Normal, len).z > result.z)
-		{
-			result = VScale(col.Dim[i].Normal, len);
+		//ˆê’Uã•ûŒü‚ªÅ‚à¬‚³‚¢‚Æ‰¼’è‚·‚é
+		float MinPush = PushLeftAbs;
+		//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+		PushVec = VGet(PushLeft, 0.0f, 0.0f);
+		//‰E•ûŒü‚Æ”äŠr
+		//¬‚³‚¯‚ê‚Î
+		if (PushRightAbs < MinPush) {
+			//Å¬‚ğXV
+			MinPush = PushRightAbs;
+			//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+			PushVec = VGet(PushRight, 0.0f, 0.0f);
 		}
-		else
-		{
-			result = VAdd(result, VScale(col.Dim[i].Normal, len));
+		//‘O•ûŒü‚Æ”äŠr
+		//¬‚³‚¯‚ê‚Î
+		if (PushFrontAbs < MinPush) {
+			//Å¬‚ğXV
+			MinPush = PushFrontAbs;
+			//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+			PushVec = VGet(0.0f, 0.0f, PushFront);
+		}
+		//‰œ•ûŒü‚Æ”äŠr
+		//¬‚³‚¯‚ê‚Î
+		if (PushBackAbs < MinPush) {
+			//Å¬‚ğXV
+			MinPush = PushBackAbs;
+			//‰Ÿ‚µ–ß‚µ•ûŒüÄİ’è
+			PushVec = VGet(0.0f, 0.0f, PushBack);
 		}
 
-		//•Ç‚Æ‚Ì“–‚½‚è”»’è
-		if (col.Dim[i].Normal.y < 0.7f && col.Dim[i].Normal.y > -0.7f)
-		{
-			_player.lock()->HitCalcWall();
-		}
-		//“Vˆä‚Æ‚Ì“–‚½‚è”»’è
-		else if (col.Dim[i].Normal.y == -1.0f)
-		{
-			_player.lock()->HitCalcCeiling();
-		}
-		//°‚Æ‚Ì“–‚½‚è”»’è
-		else if (col.Dim[i].Normal.y != -1.0f)
-		{
-			_player.lock()->HitCalc();
-			_block.lock()->HitCalc();
-		}
-
-		break;
+		_player.lock()->HitCalcWall();
 	}
 
 	//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
-	if (_block.lock()->GetMoveVec().x > result.x &&
-		_block.lock()->GetMoveVec().y > result.y &&
-		_block.lock()->GetMoveVec().z > result.z)
+	if (_block.lock()->GetMoveVec().x > PushVec.x &&
+		_block.lock()->GetMoveVec().y > PushVec.y &&
+		_block.lock()->GetMoveVec().z > PushVec.z)
 	{
-		moveVec = _block.lock()->GetMoveVec();
+		PushVec = _block.lock()->GetMoveVec();
 	}
 	else
 	{
-		moveVec = VAdd(moveVec, _block.lock()->GetMoveVec());
+		moveVec = VAdd(PushVec, _block.lock()->GetMoveVec());
 	}
 
-	result = VAdd(result, moveVec);
+	_player.lock()->AddPos(PushVec);
 
-	_player.lock()->AddPos(result);
-
-
-	//if (_block->GetIsAttack())
+	//for (int i = 0; i < col.HitNum; i++)
 	//{
-	//	_player->DamageCalc(_block->GetAtt());
+
+	//	//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğæ“¾
+	//	HitPos = col.Dim[i].HitPosition;
+
+	//	//‚ß‚è‚ñ‚¾‹——£‚ğ‹‚ß‚é
+	//	len = VSize(VSub(HitPos, center1));
+
+	//	//”¼Œa‚©‚ç‚ß‚è‚ñ‚¾‹——£‚ğŒ¸Z‚·‚é
+	//	len = radius1 - len;
+
+	//	//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
+	//	if (VScale(col.Dim[i].Normal, len).x > result.x &&
+	//		VScale(col.Dim[i].Normal, len).y > result.y &&
+	//		VScale(col.Dim[i].Normal, len).z > result.z)
+	//	{
+	//		result = VScale(col.Dim[i].Normal, len);
+	//	}
+	//	else
+	//	{
+	//		result = VAdd(result, VScale(col.Dim[i].Normal, len));
+	//	}
+
+	//	//•Ç‚Æ‚Ì“–‚½‚è”»’è
+	//	if (col.Dim[i].Normal.y < 0.7f && col.Dim[i].Normal.y > -0.7f)
+	//	{
+	//		_player.lock()->HitCalcWall();
+	//	}
+	//	//“Vˆä‚Æ‚Ì“–‚½‚è”»’è
+	//	else if (col.Dim[i].Normal.y == -1.0f)
+	//	{
+	//		_player.lock()->HitCalcCeiling();
+	//	}
+	//	//°‚Æ‚Ì“–‚½‚è”»’è
+	//	else if (col.Dim[i].Normal.y != -1.0f)
+	//	{
+	//		_player.lock()->HitCalc();
+	//		_block.lock()->HitCalc();
+	//	}
+
+	//	break;
 	//}
 
-	MV1CollResultPolyDimTerminate(col);
+
+
+	//result = VAdd(result, moveVec);
+
+	//_player.lock()->AddPos(result);
+
+
+	////if (_block->GetIsAttack())
+	////{
+	////	_player->DamageCalc(_block->GetAtt());
+	////}
+
+	//MV1CollResultPolyDimTerminate(col);
 }
 
 void C_COLLISION_MANAGER::CollisionPlayerToFlag(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _flag)

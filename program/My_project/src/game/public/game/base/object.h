@@ -45,6 +45,9 @@ protected:
 	//座標
 	VECTOR m_pos;
 
+	//座標
+	VECTOR m_P_pos;
+
 	//移動ベクトル
 	VECTOR m_moveVec;
 
@@ -139,6 +142,8 @@ public:
 
 	//座標を取得
 	inline VECTOR GetPos() const { return m_pos; }
+
+	inline VECTOR GetPPos() const { return m_P_pos; }
 
 	//初期座標を取得
 	inline VECTOR GetInitPos() const { return m_objectData.initPos; }

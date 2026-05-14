@@ -114,6 +114,8 @@ void C_PLAYER::Step()
 	//—‰ºˆ—
 	FallCalc();
 
+	m_P_pos = GetCenter();
+
 	//Œ»İ‚ÌÀ•W‚ÉˆÚ“®—Ê‚ğ‰ÁZ
 	m_pos = VAdd(m_pos, m_moveVec);
 
