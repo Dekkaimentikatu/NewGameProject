@@ -215,6 +215,9 @@
     <Filter Include="src\lib\public\array">
       <UniqueIdentifier>{91daa4d6-c051-4fc7-918a-1d8fdd60892e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\public\game\voxel">
+      <UniqueIdentifier>{2a107bb8-971e-4211-bd25-b131c2704103}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
@@ -468,6 +471,12 @@
     </ClInclude>
     <ClInclude Include="src\lib\public\array\3Darray.h">
       <Filter>src\lib\public\array</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\public\game\voxel\world.h">
+      <Filter>src\game\public\game\voxel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\public\game\voxel\chunk.h">
+      <Filter>src\game\public\game\voxel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

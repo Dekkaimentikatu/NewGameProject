@@ -22,6 +22,8 @@ private:
 
 	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>> m_objectArray;
 
+	vector<C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>>> m_world;
+
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 
 public:
