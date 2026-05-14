@@ -319,6 +319,7 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		{
 			//同じ要素同士なら次の要素へ
 			if ((*itr1).lock() == (*itr2).lock())continue;
+			if ((*itr1).lock()->GetObjectType() == (*itr2).lock()->GetObjectType()) continue;
 
 			//どのタイプのオブジェクトが参照されているか
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&

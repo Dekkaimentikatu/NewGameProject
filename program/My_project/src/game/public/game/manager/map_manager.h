@@ -5,7 +5,7 @@
 
 constexpr int X_MAX = 9;
 constexpr int Y_MAX = 9;
-constexpr int Z_MAX = 1;
+constexpr int Z_MAX = 9;
 
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {
@@ -26,8 +26,7 @@ private:
 
 public:
 
-	C_MAP_MANAGER() : m_objectArray(X_MAX, Y_MAX, Z_MAX)
-	{}
+	C_MAP_MANAGER() : m_objectArray(X_MAX, Y_MAX, Z_MAX){}
 
 	//èâä˙âª
 	void Init();

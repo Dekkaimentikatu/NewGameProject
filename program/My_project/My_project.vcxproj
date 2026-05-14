@@ -239,13 +239,13 @@
     <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/lib/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+    <IncludePath>$(ProjectDir)src/lib/public;$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/lib/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
+    <IncludePath>$(ProjectDir)src/lib/public;$(ProjectDir)src/;$(ProjectDir)src/game/public/;$(ProjectDir)src/system/public/;$(ProjectDir)src/public/;$(ProjectDir)src/public/game/</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

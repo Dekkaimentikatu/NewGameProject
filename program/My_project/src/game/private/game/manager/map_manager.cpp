@@ -38,7 +38,7 @@ void C_MAP_MANAGER::LoadSync()
 			for (int z = 0; z < Z_MAX; z++)
 			{
 				tmp.initPos.x = static_cast<float>(x) * 40.0f;
-				tmp.initPos.y = static_cast<float>(y) * 40.0f;
+				tmp.initPos.y = static_cast<float>(-y) * 40.0f;
 				tmp.initPos.z = static_cast<float>(z) * 40.0f;
 				shared_ptr<C_OBJECT_BASE> object = make_shared<C_BLOCK>();
 				object->Init();
@@ -59,11 +59,21 @@ void C_MAP_MANAGER::LoadSync()
 	{
 		C_COLLISION_MANAGER::AddObject(*itr);
 	}
+
+	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	{
+		C_COLLISION_MANAGER::AddObject(*itr);
+	}
 }
 
 void C_MAP_MANAGER::Step()
 {
 	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
+	{
+		(*itr)->Step();
+	}
+
+	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
 	{
 		(*itr)->Step();
 	}
@@ -75,6 +85,11 @@ void C_MAP_MANAGER::Update()
 	{
 		(*itr)->Update();
 	}
+
+	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	{
+		(*itr)->Update();
+	}
 }
 
 void C_MAP_MANAGER::Draw()
@@ -83,11 +98,21 @@ void C_MAP_MANAGER::Draw()
 	{
 		(*itr)->Draw();
 	}
+
+	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	{
+		(*itr)->Draw();
+	}
 }
 
 void C_MAP_MANAGER::Exit()
 {
 	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
+	{
+		(*itr)->Exit();
+	}
+
+	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
 	{
 		(*itr)->Exit();
 	}
