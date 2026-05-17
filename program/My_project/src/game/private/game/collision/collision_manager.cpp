@@ -1,6 +1,7 @@
 #include "game/collision/collision_manager.h"
 #include "collision/3Dcollision.h"
 #include "game/data/global_data.h"
+#include "debugdraw/debug_draw.h"
 
 bool C_COLLISION_MANAGER::isHitFloor = false;
 
@@ -73,14 +74,15 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 
 	center1 = _player.lock()->GetCenter();
 	radius1 = static_cast<float>(_player.lock()->GetRedius());
-	Size1 = VScale(_player.lock()->GetScale(), 80);
+	Size1 = VScale(_player.lock()->GetScale(), 100);
 	Pcenter = _player.lock()->GetPPos();
 	center2 = _block.lock()->GetCenter();
-	Size2 = VScale(_block.lock()->GetScale(), 400);
+	Size2 = VScale(_block.lock()->GetScale(), 400.0f);
 	radius2 = static_cast<float>(_block.lock()->GetRedius());
 
+	C_DEBUG_DRAW::DrawBox3DWire(VSub(center2, VScale(Size2, 0.5f)), VAdd(center2, VScale(Size2, 0.5f)), GetColor(0, 255, 0));
 
-	bool isHit = C_COLLISION::CheckHitBoxToBox(center1, Size1, center2, Size2);
+	if (!C_COLLISION::CheckHitBoxToBox(center1, Size1, center2, Size2))return;
 
 	float ObjectUP = center1.y + Size1.y * 0.5f;
 	//下方向
@@ -125,6 +127,7 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 		IsGravity = false;
 		//重力をリセット
 		_player.lock()->HitCalc();
+		_block.lock()->HitCalc();
 	}
 	//天井ヒット
 	else if (PrevObjectUp <= PlatformDown) {
@@ -189,17 +192,19 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 		_player.lock()->HitCalcWall();
 	}
 
-	//リザルトに結果を加算する
-	if (_block.lock()->GetMoveVec().x > PushVec.x &&
-		_block.lock()->GetMoveVec().y > PushVec.y &&
-		_block.lock()->GetMoveVec().z > PushVec.z)
+	//リザルトにブロックの移動量を加算する
+	if (_block.lock()->GetMoveVec().x > moveVec.x &&
+		_block.lock()->GetMoveVec().y > moveVec.y &&
+		_block.lock()->GetMoveVec().z > moveVec.z)
 	{
-		PushVec = _block.lock()->GetMoveVec();
+		moveVec = _block.lock()->GetMoveVec();
 	}
 	else
 	{
-		moveVec = VAdd(PushVec, _block.lock()->GetMoveVec());
+		moveVec = VAdd(moveVec, _block.lock()->GetMoveVec());
 	}
+
+	PushVec = VAdd(PushVec, moveVec);
 
 	_player.lock()->AddPos(PushVec);
 

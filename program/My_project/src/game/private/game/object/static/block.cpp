@@ -1,5 +1,6 @@
 #include "game/object/static/block.h"
 #include "hndlmanager/3Dhndlmanager.h"
+#include "debugdraw/debug_draw.h"
 
 C_BLOCK::C_BLOCK()
 {
@@ -50,6 +51,9 @@ void C_BLOCK::Update()
 void C_BLOCK::Draw()
 {
 	DrawModel();
+	VECTOR minPos = VSub(m_pos, VScale(m_objectData.modelScale, 200.0f));
+	VECTOR maxPos = VAdd(m_pos, VScale(m_objectData.modelScale, 200.0f));
+	C_DEBUG_DRAW::DrawBox3DWire(minPos, maxPos, GetColor(255, 0, 0));
 }
 
 void C_BLOCK::Exit()

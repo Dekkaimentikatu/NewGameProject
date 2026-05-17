@@ -215,6 +215,9 @@
     <Filter Include="src\lib\public\array">
       <UniqueIdentifier>{91daa4d6-c051-4fc7-918a-1d8fdd60892e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lib\public\debugdraw">
+      <UniqueIdentifier>{d933734b-7830-4541-ae3d-7f7c6e0d4f7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
@@ -468,6 +471,9 @@
     </ClInclude>
     <ClInclude Include="src\lib\public\array\3Darray.h">
       <Filter>src\lib\public\array</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\debugdraw\debug_draw.h">
+      <Filter>src\lib\public\debugdraw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

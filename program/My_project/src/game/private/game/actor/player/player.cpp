@@ -3,6 +3,7 @@
 #include "fade/fade.h"
 #include "soundmanager/se_manager.h"
 #include "hndlmanager/3Dhndlmanager.h"
+#include "debugdraw/debug_draw.h"
 
 void C_PLAYER::Init()
 {
@@ -427,6 +428,9 @@ void C_PLAYER::Draw()
 #ifdef DEBUG_MODE
 
 	DrawSphere3D(GetCenter(), static_cast<float>(m_redius), 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+	VECTOR center1 = GetCenter();
+	VECTOR Size1 = VGet(static_cast<float>(m_redius), static_cast<float>(m_redius), static_cast<float>(m_redius));
+	C_DEBUG_DRAW::DrawBox3DWire(VSub(center1, Size1), VAdd(center1, Size1), GetColor(0, 0, 255));
 
 	if (!m_isAttack)return;
 

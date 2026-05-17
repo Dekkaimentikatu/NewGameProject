@@ -78,6 +78,7 @@
     <ClInclude Include="src\lib\public\array\3Darray.h" />
     <ClInclude Include="src\lib\public\collision\2Dcollosion.h" />
     <ClInclude Include="src\lib\public\collision\3Dcollision.h" />
+    <ClInclude Include="src\lib\public\debugdraw\debug_draw.h" />
     <ClInclude Include="src\lib\public\fade\fade.h" />
     <ClInclude Include="src\lib\public\fps\fps.h" />
     <ClInclude Include="src\lib\public\hndlmanager\2Dhndlmanager.h" />
