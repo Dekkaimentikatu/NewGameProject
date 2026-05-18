@@ -8,6 +8,10 @@ public:
 
 	static float GetLen(float X1, float X2, float Y1, float Y2);
 
+	static int FloorDiv(int a, int b);
+
+	static int Mod(int a, int b);
+
 	//座標にベクトルを足す
 	static VECTOR VecAdd(VECTOR pos, VECTOR add);
 

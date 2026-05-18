@@ -137,6 +137,11 @@ public:
 		return m_isActive;
 	}
 
+	inline void SetIsActive(bool _isActive)
+	{
+		m_isActive = _isActive;
+	}
+
 	//À•W‚ğæ“¾
 	inline VECTOR GetPos() const { return m_pos; }
 

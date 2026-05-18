@@ -7,6 +7,30 @@ float MYMATH::GetLen(float X1, float X2, float Y1, float Y2)
 	return len;
 }
 
+int MYMATH::FloorDiv(int a, int b)
+{
+	int result = a / b;
+
+	if ((a ^ b) < 0 && a % b)
+	{
+		--result;
+	}
+
+	return result;
+}
+
+int MYMATH::Mod(int a, int b)
+{
+	int m = a % b;
+
+	if (m < 0)
+	{
+		m += b;
+	}
+
+	return m;
+}
+
 //座標にベクトルを足す
 VECTOR MYMATH::VecAdd(VECTOR pos, VECTOR add)
 {

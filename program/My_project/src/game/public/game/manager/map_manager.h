@@ -1,11 +1,11 @@
 #pragma once
 #include "game/base/manager_base.h"
 #include "game/stage/stage_loader.h"
-#include "array/3Darray.h"
+#include "game/voxel/voxel_chunk.h"
 
-constexpr int X_MAX = 9;
-constexpr int Y_MAX = 9;
-constexpr int Z_MAX = 9;
+constexpr int X_MAX = 32;
+constexpr int Y_MAX = 32;
+constexpr int Z_MAX = 32;
 
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {
@@ -22,7 +22,7 @@ private:
 
 	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>> m_objectArray;
 
-	vector<C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>>> m_world;
+	C_VOXEL_CHUNK c_chunk;
 
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 

@@ -66,8 +66,8 @@
     <ClInclude Include="src\game\public\game\UI\UI_hpber.h" />
     <ClInclude Include="src\game\public\game\UI\UI_shop.h" />
     <ClInclude Include="src\game\public\game\UI\UI_stmber.h" />
-    <ClInclude Include="src\game\public\game\voxel\chunk.h" />
-    <ClInclude Include="src\game\public\game\voxel\world.h" />
+    <ClInclude Include="src\game\public\game\voxel\voxel_chunk.h" />
+    <ClInclude Include="src\game\public\game\voxel\voxel_world.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
     <ClInclude Include="src\imgui\imgui_impl_dx11.h" />
@@ -149,6 +149,7 @@
     <ClCompile Include="src\game\private\game\UI\title_back.cpp" />
     <ClCompile Include="src\game\private\game\UI\UI_hpber.cpp" />
     <ClCompile Include="src\game\private\game\UI\UI_stmber.cpp" />
+    <ClCompile Include="src\game\private\game\voxel\voxel_chunk.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_dx11.cpp" />

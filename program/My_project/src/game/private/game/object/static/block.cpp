@@ -49,7 +49,7 @@ void C_BLOCK::Update()
 
 void C_BLOCK::Draw()
 {
-	DrawModel();
+	if(m_isActive)DrawModel();
 }
 
 void C_BLOCK::Exit()

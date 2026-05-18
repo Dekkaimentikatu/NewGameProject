@@ -10,8 +10,6 @@ void C_MAP_MANAGER::Init()
 	c_objectList.clear();
 
 	c_globalData = C_GLOBAL_DATA::GetInstace();
-
-	m_objectArray.resize(X_MAX, Y_MAX, Z_MAX);
 }
 
 void C_MAP_MANAGER::LoadAnSync()
@@ -31,11 +29,11 @@ void C_MAP_MANAGER::LoadSync()
 	C_OBJECT_BASE::T_OBJECT_DATA tmp = {0};
 	tmp.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
-	for (int x = 0; x < X_MAX; x++)
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
-		for (int y = 0; y < Y_MAX; y++)
+		for (int y = 0; y < CHUNK_SIZE_Y; y++)
 		{
-			for (int z = 0; z < Z_MAX; z++)
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
 				tmp.initPos.x = static_cast<float>(x) * 40.0f;
 				tmp.initPos.y = static_cast<float>(-y) * 40.0f;
@@ -44,7 +42,7 @@ void C_MAP_MANAGER::LoadSync()
 				object->Init();
 				object->Request(tmp);
 				object->Load();
-				m_objectArray(x,y,z) = object;
+				c_chunk.SetVoxel(x, y, z, object);
 				C_COLLISION_MANAGER::AddObject(object);
 			}
 		}
@@ -60,9 +58,32 @@ void C_MAP_MANAGER::LoadSync()
 		C_COLLISION_MANAGER::AddObject(*itr);
 	}
 
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	{
 		C_COLLISION_MANAGER::AddObject(*itr);
+	}
+
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	{
+		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		{
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			{
+				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
+				{
+					if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
+					{
+						c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
+					}
+					else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
+				}
+			}
+		}
 	}
 }
 
@@ -73,9 +94,29 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
-		(*itr)->Step();
+		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		{
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			{
+				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
+				{
+					if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+						c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
+					{
+						c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
+					}
+					else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
+				}
+
+				c_chunk.GetVoxel(x, y, z)->Step();
+			}
+		}
 	}
 }
 
@@ -86,7 +127,7 @@ void C_MAP_MANAGER::Update()
 		(*itr)->Update();
 	}
 
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	{
 		(*itr)->Update();
 	}
@@ -99,7 +140,7 @@ void C_MAP_MANAGER::Draw()
 		(*itr)->Draw();
 	}
 
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	{
 		(*itr)->Draw();
 	}
@@ -112,7 +153,7 @@ void C_MAP_MANAGER::Exit()
 		(*itr)->Exit();
 	}
 
-	for (auto itr = m_objectArray.begin(); itr != m_objectArray.end(); ++itr)
+	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	{
 		(*itr)->Exit();
 	}

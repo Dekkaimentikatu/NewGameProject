@@ -218,6 +218,9 @@
     <Filter Include="src\game\public\game\voxel">
       <UniqueIdentifier>{2a107bb8-971e-4211-bd25-b131c2704103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\game\private\game\voxel">
+      <UniqueIdentifier>{33c42b0c-f547-4ebf-91d5-6277116421ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
@@ -472,10 +475,10 @@
     <ClInclude Include="src\lib\public\array\3Darray.h">
       <Filter>src\lib\public\array</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\game\voxel\world.h">
+    <ClInclude Include="src\game\public\game\voxel\voxel_world.h">
       <Filter>src\game\public\game\voxel</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\game\voxel\chunk.h">
+    <ClInclude Include="src\game\public\game\voxel\voxel_chunk.h">
       <Filter>src\game\public\game\voxel</Filter>
     </ClInclude>
   </ItemGroup>
@@ -710,6 +713,9 @@
     </ClCompile>
     <ClCompile Include="src\lib\private\input_config.cpp">
       <Filter>src\lib\private</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\private\game\voxel\voxel_chunk.cpp">
+      <Filter>src\game\private\game\voxel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
