@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <thread>
 #include <math.h>
 
 #include "collision/3Dcollision.h"
@@ -11,6 +12,8 @@ class C_COLLISION_MANAGER
 {
 private:
 
+	static C_COLLISION_MANAGER* m_instance;
+
 	//床との衝突フラグ
 	static bool isHitFloor;
 
@@ -19,6 +22,8 @@ private:
 
 	//オブジェクトの判定用プール
 	static list<weak_ptr<C_OBJECT_BASE>> m_objectPool;
+
+	static vector<thread> m_collisionThread;
 
 	//プレイヤーとエネミーの当たり判定
 	static void CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> enemy);

@@ -221,6 +221,12 @@
     <Filter Include="src\game\private\game\voxel">
       <UniqueIdentifier>{33c42b0c-f547-4ebf-91d5-6277116421ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lib\public\thread_pool">
+      <UniqueIdentifier>{4a2b8bf6-a940-49a9-9cea-ca394206ed1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\thread_pool">
+      <UniqueIdentifier>{656a1894-edab-4e8e-a98c-d2992503c6f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
@@ -481,6 +487,9 @@
     <ClInclude Include="src\game\public\game\voxel\voxel_chunk.h">
       <Filter>src\game\public\game\voxel</Filter>
     </ClInclude>
+    <ClInclude Include="src\lib\public\thread_pool\thread_pool.h">
+      <Filter>src\lib\public\thread_pool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">
@@ -716,6 +725,9 @@
     </ClCompile>
     <ClCompile Include="src\game\private\game\voxel\voxel_chunk.cpp">
       <Filter>src\game\private\game\voxel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\thread_pool\thread_pool.cpp">
+      <Filter>src\lib\private\thread_pool</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

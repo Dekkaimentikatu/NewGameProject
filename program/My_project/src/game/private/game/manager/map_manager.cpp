@@ -43,7 +43,6 @@ void C_MAP_MANAGER::LoadSync()
 				object->Request(tmp);
 				object->Load();
 				c_chunk.SetVoxel(x, y, z, object);
-				C_COLLISION_MANAGER::AddObject(object);
 			}
 		}
 	}
@@ -52,16 +51,6 @@ void C_MAP_MANAGER::LoadSync()
 	sky->Init();
 	sky->Load();
 	c_objectList.push_back(sky);
-
-	for (auto itr = c_objectList.begin(); itr != c_objectList.end(); ++itr)
-	{
-		C_COLLISION_MANAGER::AddObject(*itr);
-	}
-
-	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
-	{
-		C_COLLISION_MANAGER::AddObject(*itr);
-	}
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
@@ -84,6 +73,11 @@ void C_MAP_MANAGER::LoadSync()
 				}
 			}
 		}
+	}
+
+	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
+	{
+		if((*itr)->GetIsActive())C_COLLISION_MANAGER::AddObject(*itr);
 	}
 }
 

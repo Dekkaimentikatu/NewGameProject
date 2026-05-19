@@ -92,6 +92,7 @@
     <ClInclude Include="src\lib\public\math\rand.h" />
     <ClInclude Include="src\lib\public\soundmanager\bgm_manager.h" />
     <ClInclude Include="src\lib\public\soundmanager\se_manager.h" />
+    <ClInclude Include="src\lib\public\thread_pool\thread_pool.h" />
     <ClInclude Include="src\system\public\imguiCtrl\imguiCtrl.h" />
     <ClInclude Include="src\system\public\mapediter\editer_camera_point.h" />
     <ClInclude Include="src\system\public\mapediter\mapediter.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="src\lib\private\math\rand.cpp" />
     <ClCompile Include="src\lib\private\soundmanager\bgm_manager.cpp" />
     <ClCompile Include="src\lib\private\soundmanager\se_manager .cpp" />
+    <ClCompile Include="src\lib\private\thread_pool\thread_pool.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\system\private\imguiCtrl\imguiCtrl.cpp" />
     <ClCompile Include="src\system\private\mapediter\editer_camera_point.cpp" />

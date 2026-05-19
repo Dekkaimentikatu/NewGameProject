@@ -309,18 +309,14 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	void (*Calc[])(weak_ptr<C_OBJECT_BASE>, weak_ptr<C_OBJECT_BASE>) = { C_COLLISION_MANAGER::CollisionPlayerToEnemy, C_COLLISION_MANAGER::CollisionPlayerToBlock,
 		C_COLLISION_MANAGER::CollisionPlayerToFlag, C_COLLISION_MANAGER::CollisionEnemyToEnemy, C_COLLISION_MANAGER::CollisionEnemyToBlock };
 
-	int funkIndex = 0;
+	int funkIndex = -1;
 
 	//マネージャー1の配列の要素数だけforループを回す
-	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end(); ++itr1)
+	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end();)
 	{
 		//マネージャー2の配列の要素数だけforループを回す
-		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
+		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end();)
 		{
-			//同じ要素同士なら次の要素へ
-			if ((*itr1).lock() == (*itr2).lock())continue;
-			if ((*itr1).lock()->GetObjectType() == (*itr2).lock()->GetObjectType()) continue;
-
 			//どのタイプのオブジェクトが参照されているか
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
 				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
@@ -347,35 +343,30 @@ void C_COLLISION_MANAGER::CollisionCalc()
 			{
 				funkIndex = 4;
 			}
-			else
-			{
-				continue;
-			}
 
 			//コールバック関数
-			Calc[funkIndex]((*itr1), (*itr2));
+			if(funkIndex != -1)Calc[funkIndex]((*itr1), (*itr2));
 
-			/*EraseObject(itr2);*/
+			EraseObject(itr2);
 		}
 
-		/*EraseObject(itr1);*/
+		EraseObject(itr1);
 	}
 
-	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
 	{
-		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
+		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
 		{
-			if ((*itr1).lock() == (*itr2).lock())continue;
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
 				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
 				AttackPlayerToEnemy((*itr1), (*itr2));
 			}
 
-			/*EraseActor(itr2);*/
+			EraseActor(itr2);
 		}
 
-		/*EraseActor(itr1);*/
+		EraseActor(itr1);
 
 	}
 }

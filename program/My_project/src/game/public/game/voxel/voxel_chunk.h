@@ -3,11 +3,11 @@
 #include "array/3Darray.h"
 #include "game/base/object.h"
 
-constexpr int CHUNK_SIZE_X = 32;
+constexpr int CHUNK_SIZE_X = 16;
 
 constexpr int CHUNK_SIZE_Y = 16;
 
-constexpr int CHUNK_SIZE_Z = 32;
+constexpr int CHUNK_SIZE_Z = 16;
 
 class C_VOXEL_CHUNK
 {

@@ -335,10 +335,11 @@ void C_PLAYER::MoveCalc()
 		MATRIX	mat1, mat2, mat3;
 		mat1 = MGetTranslate(m_moveVec);
 		mat2 = MGetRotY(m_cameraRot.y);
-		mat3 = MGetRotY(m_cameraRot.x);
+		//mat3 = MGetRotX(m_cameraRot.x);
 		mat1 = MMult(mat1, mat2);
-		mat1 = MMult(mat1, mat3);
+		//mat1 = MMult(mat1, mat3);
 		m_moveVec.x = mat1.m[3][0];
+		//m_moveVec.y = mat1.m[3][1];
 		m_moveVec.z = mat1.m[3][2];
 		// ˆÚ“®‘¬“x‚©‚çYŽ²‰ñ“]Šp“x‚ðŽæ“¾
 		m_objectData.modelRot.y = atan2f(-m_moveVec.x, -m_moveVec.z);
