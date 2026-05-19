@@ -45,7 +45,6 @@ void C_PLAYER_MANAGER::Step()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Step();
-
 	}
 }
 
