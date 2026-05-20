@@ -1,4 +1,4 @@
-#include "fps/fps.h"
+#include "../public/fps/fps.h"
 
 C_FPS_DATA C_FPS::c_fps;
 

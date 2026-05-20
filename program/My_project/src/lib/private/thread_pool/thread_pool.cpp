@@ -1,7 +1,8 @@
-#include "thread_pool/thread_pool.h"
+#include "thread_pool.h"
 
 C_THREAD_POOL::C_THREAD_POOL(size_t threadCount)
 {
+	//スレッドを確保
 	for (size_t i = 0; i < threadCount; ++i)
 	{
 		//末尾に追加
@@ -12,8 +13,8 @@ C_THREAD_POOL::C_THREAD_POOL(size_t threadCount)
 C_THREAD_POOL::~C_THREAD_POOL()
 {
 
-	//m_jobsMutexへのアクセスを制限
-	lock_guard<mutex> lock(m_jobsMutex);
+	//m_taskMutexへのアクセスを制限
+	lock_guard<mutex> lock(m_taskMutex);
 
 	//スレッド停止
 	m_stop = true;
@@ -32,11 +33,13 @@ void C_THREAD_POOL::Enqueue(function<void()> job)
 {
 	//Enqueue処理
 	{
-		//m_jobsMutexへのアクセスを制限
-		lock_guard<mutex> lock(m_jobsMutex);
+		//m_taskMutexへのアクセスを制限
+		lock_guard<mutex> lock(m_taskMutex);
 
 		//引数で渡された関数を追加
-		m_jobs.push(move(job));
+		m_task.push(move(job));
+
+		++m_activetask;
 	}
 
 	//スレッドを起動
@@ -47,33 +50,45 @@ void C_THREAD_POOL::WorkerLoop()
 {
 	while (true)
 	{
-		function<void()> job;
+		function<void()> task;
 
 		//スレッド待機処理
 		{
 			//m_jobsMutexへのアクセスを制限
-			unique_lock<mutex> lock(m_jobsMutex);
+			unique_lock<mutex> lock(m_taskMutex);
 
 			//スレッドが起床するまで待機
 			m_cv.wait(lock, [this]
 				{
-					return m_stop || !m_jobs.empty();
+					return m_stop || !m_task.empty();
 				});
 
 			//タスクがないなら何もしない
-			if (m_stop && m_jobs.empty())
+			if (m_stop && m_task.empty())
 			{
 				return;
 			}
 
 			//先頭要素を取得
-			job = move(m_jobs.front());
+			task = move(m_task.front());
 
 			//先頭要素を削除
-			m_jobs.pop();
+			m_task.pop();
 		}
 
 		//タスク実行
-		job();
+		task();
+
+		--m_activetask;
+	}
+}
+
+void C_THREAD_POOL::Wait()
+{
+	//タスク数が０より多い間
+	while (m_activetask > 0)
+	{
+		//現在実行中のスレッドとは別のスレッドに処理を行わせる
+		this_thread::yield();
 	}
 }

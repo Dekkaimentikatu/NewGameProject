@@ -1,4 +1,4 @@
-#include "hndlmanager/3Dhndlmanager.h"
+#include "../public/hndlmanager/3Dhndlmanager.h"
 
 C_3D_HNDL_MANAGER* C_3D_HNDL_MANAGER::m_instance = nullptr;
 

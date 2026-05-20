@@ -1,4 +1,4 @@
-#include "hndlmanager/2Dhndlmanager.h"
+#include "../public/hndlmanager/2Dhndlmanager.h"
 
 C_2D_HNDL_MANAGER* C_2D_HNDL_MANAGER::m_instance;
 

@@ -24,20 +24,27 @@ public:
     //キューに追加
     void Enqueue(function<void()> job);
 
+    //待機
+    void Wait();
+
 private:
 
+    //実行処理ループ
     void WorkerLoop();
 
 private:
 
-    //タスク管理用配列
+    //スレッド管理用配列
     vector<thread> m_workers;
 
     //タスク管理用キュー
-    queue<function<void()>> m_jobs;
+    queue<function<void()>> m_task;
+
+    //起動しているタスク数
+    atomic<int> m_activetask = 0;
 
     //ミューテックス
-    mutex m_jobsMutex;
+    mutex m_taskMutex;
 
     //スレッド停止
     condition_variable m_cv;
