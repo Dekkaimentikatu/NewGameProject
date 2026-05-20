@@ -14,11 +14,15 @@ class C_THREAD_POOL
 {
 public:
 
+    //コンストラクタ
+    //スレッド数を指定
     C_THREAD_POOL(size_t threadCount);
 
+    //デストラクタ
     ~C_THREAD_POOL();
 
-    void Enqueue(std::function<void()> job);
+    //キューに追加
+    void Enqueue(function<void()> job);
 
 private:
 
@@ -26,13 +30,18 @@ private:
 
 private:
 
-    std::vector<std::thread> workers;
+    //タスク管理用配列
+    vector<thread> m_workers;
 
-    std::queue<std::function<void()>> jobs;
+    //タスク管理用キュー
+    queue<function<void()>> m_jobs;
 
-    std::mutex jobsMutex;
+    //ミューテックス
+    mutex m_jobsMutex;
 
-    std::condition_variable cv;
+    //スレッド停止
+    condition_variable m_cv;
 
-    bool stop = false;
+    //停止フラグ
+    bool m_stop = false;
 };

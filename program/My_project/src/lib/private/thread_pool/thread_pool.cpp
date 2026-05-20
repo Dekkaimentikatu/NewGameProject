@@ -2,66 +2,78 @@
 
 C_THREAD_POOL::C_THREAD_POOL(size_t threadCount)
 {
-    for (size_t i = 0; i < threadCount; ++i)
-    {
-        workers.emplace_back(
-            &C_THREAD_POOL::WorkerLoop,
-            this);
-    }
+	for (size_t i = 0; i < threadCount; ++i)
+	{
+		//末尾に追加
+		m_workers.emplace_back(&C_THREAD_POOL::WorkerLoop, this);
+	}
 }
 
 C_THREAD_POOL::~C_THREAD_POOL()
 {
-    {
-        lock_guard<mutex> lock(jobsMutex);
 
-        stop = true;
-    }
+	//m_jobsMutexへのアクセスを制限
+	lock_guard<mutex> lock(m_jobsMutex);
 
-    cv.notify_all();
+	//スレッド停止
+	m_stop = true;
 
-    for (auto& worker : workers)
-    {
-        worker.join();
-    }
+	//全ての待機中スレッドを起動
+	m_cv.notify_all();
+
+	//全ての処理が終了するまで待機
+	for (auto& worker : m_workers)
+	{
+		worker.join();
+	}
 }
 
-void C_THREAD_POOL::Enqueue(
-    function<void()> job)
+void C_THREAD_POOL::Enqueue(function<void()> job)
 {
-    {
-        lock_guard<mutex> lock(jobsMutex);
+	//Enqueue処理
+	{
+		//m_jobsMutexへのアクセスを制限
+		lock_guard<mutex> lock(m_jobsMutex);
 
-        jobs.push(move(job));
-    }
+		//引数で渡された関数を追加
+		m_jobs.push(move(job));
+	}
 
-    cv.notify_one();
+	//スレッドを起動
+	m_cv.notify_one();
 }
 
 void C_THREAD_POOL::WorkerLoop()
 {
-    while (true)
-    {
-        std::function<void()> job;
+	while (true)
+	{
+		function<void()> job;
 
-        {
-            unique_lock<mutex> lock(jobsMutex);
+		//スレッド待機処理
+		{
+			//m_jobsMutexへのアクセスを制限
+			unique_lock<mutex> lock(m_jobsMutex);
 
-            cv.wait(lock, [this]
-                {
-                    return stop || !jobs.empty();
-                });
+			//スレッドが起床するまで待機
+			m_cv.wait(lock, [this]
+				{
+					return m_stop || !m_jobs.empty();
+				});
 
-            if (stop && jobs.empty())
-            {
-                return;
-            }
+			//タスクがないなら何もしない
+			if (m_stop && m_jobs.empty())
+			{
+				return;
+			}
 
-            job = std::move(jobs.front());
+			//先頭要素を取得
+			job = move(m_jobs.front());
 
-            jobs.pop();
-        }
+			//先頭要素を削除
+			m_jobs.pop();
+		}
 
-        job();
-    }
+		//タスク実行
+		job();
+	}
 }
