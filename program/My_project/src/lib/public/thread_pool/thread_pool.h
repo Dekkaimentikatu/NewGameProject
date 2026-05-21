@@ -12,28 +12,6 @@ using namespace std;
 
 class C_THREAD_POOL
 {
-public:
-
-    //コンストラクタ
-    //スレッド数を指定
-    C_THREAD_POOL(size_t threadCount);
-
-    //デストラクタ
-    ~C_THREAD_POOL();
-
-    //キューに追加
-    void Enqueue(function<void()> job);
-
-    //待機
-    void Wait();
-
-private:
-
-    //実行処理ループ
-    void WorkerLoop();
-
-private:
-
     //スレッド管理用配列
     vector<thread> m_workers;
 
@@ -51,4 +29,22 @@ private:
 
     //停止フラグ
     bool m_stop = false;
+
+    //実行処理ループ
+    void WorkerLoop();
+
+public:
+
+    //コンストラクタ
+    //スレッド数を指定
+    C_THREAD_POOL(size_t threadCount);
+
+    //デストラクタ
+    ~C_THREAD_POOL();
+
+    //キューに追加
+    void Enqueue(function<void()> job);
+
+    //待機
+    void Wait();
 };

@@ -80,6 +80,7 @@
     <ClInclude Include="src\lib\public\array\3Darray.h" />
     <ClInclude Include="src\lib\public\collision\2Dcollosion.h" />
     <ClInclude Include="src\lib\public\collision\3Dcollision.h" />
+    <ClInclude Include="src\lib\public\draw_polygon\draw_polygon.h" />
     <ClInclude Include="src\lib\public\fade\fade.h" />
     <ClInclude Include="src\lib\public\fps\fps.h" />
     <ClInclude Include="src\lib\public\hndlmanager\2Dhndlmanager.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\lib\private\2Ddirection\easing\easing.cpp" />
     <ClCompile Include="src\lib\private\collision\2Dcollision.cpp" />
     <ClCompile Include="src\lib\private\collision\3Dcollision.cpp" />
+    <ClCompile Include="src\lib\private\draw_polygon\draw_polygon.cpp" />
     <ClCompile Include="src\lib\private\fade\fade.cpp" />
     <ClCompile Include="src\lib\private\fps\fps.cpp" />
     <ClCompile Include="src\lib\private\hndlmanager\2Dhndlmanager.cpp" />

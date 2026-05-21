@@ -1,4 +1,4 @@
-#include "thread_pool.h"
+#include "../public/thread_pool/thread_pool.h"
 
 C_THREAD_POOL::C_THREAD_POOL(size_t threadCount)
 {
@@ -39,6 +39,7 @@ void C_THREAD_POOL::Enqueue(function<void()> job)
 		//引数で渡された関数を追加
 		m_task.push(move(job));
 
+		//タスク数を増やす
 		++m_activetask;
 	}
 
@@ -50,6 +51,7 @@ void C_THREAD_POOL::WorkerLoop()
 {
 	while (true)
 	{
+		//実行する関数を取得する変数
 		function<void()> task;
 
 		//スレッド待機処理
@@ -79,13 +81,14 @@ void C_THREAD_POOL::WorkerLoop()
 		//タスク実行
 		task();
 
+		//タスクが実行されたので、タスク数減らす
 		--m_activetask;
 	}
 }
 
 void C_THREAD_POOL::Wait()
 {
-	//タスク数が０より多い間
+	//タスク数が0より多い間
 	while (m_activetask > 0)
 	{
 		//現在実行中のスレッドとは別のスレッドに処理を行わせる

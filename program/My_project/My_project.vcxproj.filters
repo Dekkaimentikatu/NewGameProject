@@ -122,9 +122,6 @@
     <Filter Include="src\game\public\game\actor\player">
       <UniqueIdentifier>{908f1220-4a64-4635-9daf-ff3352dcc28c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\public\game\stage">
-      <UniqueIdentifier>{d9539c37-6a84-40f3-b891-43d342582103}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\public\effekseer">
       <UniqueIdentifier>{be2232ca-af0e-4ee1-9971-f378a9c9509c}</UniqueIdentifier>
     </Filter>
@@ -227,6 +224,15 @@
     <Filter Include="src\lib\private\thread_pool">
       <UniqueIdentifier>{656a1894-edab-4e8e-a98c-d2992503c6f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lib\private\draw_polygon">
+      <UniqueIdentifier>{be1702ca-9f09-4ecb-a36f-e5641af3b592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\draw_polygon">
+      <UniqueIdentifier>{84c35bf1-1b61-488e-8b12-73a106cef5ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\game\public\game\UI\stage">
+      <UniqueIdentifier>{d9539c37-6a84-40f3-b891-43d342582103}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
@@ -323,7 +329,7 @@
       <Filter>src\game\public\game\object\static</Filter>
     </ClInclude>
     <ClInclude Include="src\game\public\game\stage\stage_loader.h">
-      <Filter>src\game\public\game\stage</Filter>
+      <Filter>src\game\public\game\UI\stage</Filter>
     </ClInclude>
     <ClInclude Include="src\system\public\mapediter\editer_camera_point.h">
       <Filter>src\system\public\mapediter</Filter>
@@ -489,6 +495,9 @@
     </ClInclude>
     <ClInclude Include="src\lib\public\thread_pool\thread_pool.h">
       <Filter>src\lib\public\thread_pool</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\draw_polygon\draw_polygon.h">
+      <Filter>src\lib\public\draw_polygon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -728,6 +737,9 @@
     </ClCompile>
     <ClCompile Include="src\lib\private\thread_pool\thread_pool.cpp">
       <Filter>src\lib\private\thread_pool</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\draw_polygon\draw_polygon.cpp">
+      <Filter>src\lib\private\draw_polygon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

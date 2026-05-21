@@ -9,6 +9,43 @@ using namespace std;
 template <typename T>
 class C_3D_ARRAY 
 {
+private:
+
+    //配列の各次元の長さ
+    size_t m_x;
+    size_t m_y;
+    size_t m_z;
+
+    //配列
+    vector<T> m_data;
+
+    //3次元から1次元に変換
+    size_t index(size_t x,
+        size_t y,
+        size_t z) const
+    {
+        //3次元の座標を1次元の座標に変換
+        return x * m_y * m_z
+            + y * m_z
+            + z;
+    }
+
+    //範囲チェック
+    void check_range(size_t x,
+        size_t y,
+        size_t z) const
+    {
+        //範囲外かどうかチェック
+        if (x >= m_x ||
+            y >= m_y ||
+            z >= m_z)
+        {
+            //例外処理メッセージ
+            throw out_of_range(
+                "C_3D_ARRAY index out of range");
+        }
+    }
+
 public:
 
     //イテレーター型を定義
@@ -106,41 +143,4 @@ public:
 
     const_iterator cbegin() const { return m_data.cbegin(); }
     const_iterator cend() const { return m_data.cend(); }
-
-private:
-
-    //配列の各次元の長さ
-    size_t m_x;
-    size_t m_y;
-    size_t m_z;
-
-    //配列
-    vector<T> m_data;
-
-    //3次元から1次元に変換
-    size_t index(size_t x,
-        size_t y,
-        size_t z) const
-    {
-        //3次元の座標を1次元の座標に変換
-        return x * m_y * m_z
-            + y * m_z
-            + z;
-    }
-
-    //範囲チェック
-    void check_range(size_t x,
-        size_t y,
-        size_t z) const
-    {
-        //範囲外かどうかチェック
-        if (x >= m_x ||
-            y >= m_y ||
-            z >= m_z)
-        {
-            //例外処理メッセージ
-            throw out_of_range(
-                "C_3D_ARRAY index out of range");
-        }
-    }
 };
