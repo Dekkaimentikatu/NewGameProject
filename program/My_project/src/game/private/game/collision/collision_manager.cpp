@@ -353,11 +353,7 @@ void C_COLLISION_MANAGER::CollisionCalc()
 
 			//コールバック関数
 			Calc[funkIndex]((*itr1), (*itr2));
-
-			/*EraseObject(itr2);*/
 		}
-
-		/*EraseObject(itr1);*/
 	}
 
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
@@ -370,12 +366,7 @@ void C_COLLISION_MANAGER::CollisionCalc()
 			{
 				AttackPlayerToEnemy((*itr1), (*itr2));
 			}
-
-			/*EraseActor(itr2);*/
 		}
-
-		/*EraseActor(itr1);*/
-
 	}
 }
 
