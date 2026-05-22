@@ -9,7 +9,7 @@ public:
 	* 
 	* 
 	*/
-	static void DrawPolygontriangle(VECTOR _center, VECTOR _vartex1, VECTOR _vartex2, VECTOR _vartex3, int _grapHndl, int _transFlag);
+	static void DrawPolygonTriangle(VECTOR _center, VECTOR _vartex1, VECTOR _vartex2, VECTOR _vartex3, int _grapHndl, int _transFlag);
 
 	/*ŽlŠpŒ`‚ð•`‰æ
 	*

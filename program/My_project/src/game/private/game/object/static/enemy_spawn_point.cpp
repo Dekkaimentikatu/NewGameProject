@@ -55,6 +55,7 @@ void C_ENEMY_SPAWN_POINT::Update()
 
 void C_ENEMY_SPAWN_POINT::Draw()
 {
+
 #ifdef DEBUG_MODE
 	DrawSphere3D(GetCenter(), static_cast<float>(m_redius), m_redius, GetColor(0, 255, 255), GetColor(0, 255, 255), FALSE);
 #endif
