@@ -140,7 +140,9 @@ void C_MAP_MANAGER::Draw()
 		(*itr)->Draw();
 	}
 
-	C_DRAW_POLYGON::DrawPolygonTriangle(VGet(0.0f, 20.0f, 0.0f), VGet(-20.0f, 0.0f, 20.0f), VGet(20, 0.0f, 20), VGet(20.0f, 0.0f, -20.0f),
+	C_DRAW_POLYGON::DrawPolygonSquare(VGet(0.0f, 20.0f, 0.0f),
+		VGet(20.0f, 0.0f, 20.0f), VGet(-20, 0.0f, 20),
+		VGet(20.0f, 0.0f, -20.0f), VGet(-20.0f, 0.0f, -20.0f),
 		DX_NONE_GRAPH, FALSE);
 }
 

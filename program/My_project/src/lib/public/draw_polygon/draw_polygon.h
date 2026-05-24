@@ -15,5 +15,5 @@ public:
 	*
 	*
 	*/
-	static void DrawPolygonSquare(VECTOR _pos, int _sizeX, int _sizeY, int _grapHndl, int _transFlag);
+	static void DrawPolygonSquare(VECTOR _pos, VECTOR _vartex1, VECTOR _vartex2, VECTOR _vartex3, VECTOR _vartex4, int _grapHndl, int _transFlag);
 };
