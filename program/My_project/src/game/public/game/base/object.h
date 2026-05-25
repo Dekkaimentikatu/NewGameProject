@@ -48,9 +48,6 @@ protected:
 	//移動ベクトル
 	VECTOR m_moveVec;
 
-	//押し戻し速度
-	VECTOR m_knockBackSpeed;
-
 	//オブジェクトの分類
 	OBJECT_TYPE m_objectType;
 
@@ -94,14 +91,11 @@ protected:
 public:
 
 	//コンストラクタ
-	C_OBJECT_BASE(C_GLOBAL_DATA* _globalData = nullptr, int _hp = 0, int _hpMax = 0,
-		int _att = 0, bool _isActive = false, bool _isJump = false, bool _isHit = false,
+	C_OBJECT_BASE(C_GLOBAL_DATA* _globalData = nullptr, bool _isActive = false,
 		bool _isAttack = false, VECTOR _pos = { 0 }, VECTOR _moveVec = VGet(0.0f, 0.0f, 0.0f), 
-		VECTOR _knockBackSpeed = VGet(0.0f, 0.0f, 0.0f), OBJECT_TYPE _objectType = OBJECT_TYPE_DYNAMIC, 
-		int _redius = 0, int _attackRedius = 0, int _modelHndl = -1, int _effHndl = -1, 
-		int _hitWait = 0, float _attackWait = 0.0f) :
-		c_globalData(_globalData), m_isActive(_isActive), m_pos(_pos), m_moveVec(_moveVec),
-		m_knockBackSpeed(_knockBackSpeed), m_objectType(_objectType), m_redius(_redius), m_modelHndl(_modelHndl), 
+		OBJECT_TYPE _objectType = OBJECT_TYPE_DYNAMIC, int _redius = 0, int _modelHndl = -1, int _effHndl = -1) :
+		c_globalData(_globalData), m_objectData(), m_isActive(_isActive), m_pos(_pos),
+		m_moveVec(_moveVec), m_objectType(_objectType), m_redius(_redius), m_modelHndl(_modelHndl), 
 		m_effHndl(_effHndl){ }
 
 	//デストラクタ
@@ -186,10 +180,4 @@ public:
 
 	//オブジェクトのタイプを取得
 	inline OBJECT_TYPE GetObjectType() const { return m_objectType; }
-
-	//ノックバック速度を設定
-	virtual void SetKonckBackSpeed(VECTOR _knockBackSpeed)
-	{
-		m_knockBackSpeed = _knockBackSpeed;
-	}
 };

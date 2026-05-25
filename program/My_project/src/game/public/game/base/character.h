@@ -45,4 +45,9 @@ protected:
 	virtual void KnockBackCalc() {}
 
 public:
+
+	C_CHARACTER(int _animIndex = 0, float _animPlayTime = 0, float _animAllPlayTime = 0,
+	float _animPlaySpeed = 0, int _nowAnimState = 0, int _prveAnimState = 0):
+	m_animIndex(_animIndex), m_animPlayTime(_animPlayTime), m_animAllPlayTime(_animAllPlayTime),
+	m_animPlaySpeed(_animPlaySpeed), m_nowAnimState(_nowAnimState), m_prveAnimState(_prveAnimState){}
 };

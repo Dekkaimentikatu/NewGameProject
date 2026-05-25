@@ -27,8 +27,8 @@ void C_MAP_MANAGER::LoadSync()
 	//m_stageLoader.LoadMapData(const_cast<char*>(MAP_FILE_PATH[tmp]));
 	//m_stageLoader.LoadObject(c_objectList);
 
-	C_OBJECT_BASE::T_OBJECT_DATA tmp = {0};
-	tmp.modelScale = VGet(0.1f, 0.1f, 0.1f);
+	C_VOXEL::T_VOXEL_DATA tmp = {0};
+	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
@@ -36,10 +36,11 @@ void C_MAP_MANAGER::LoadSync()
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				tmp.initPos.x = static_cast<float>(x) * 40.0f;
-				tmp.initPos.y = static_cast<float>(-y) * 40.0f;
-				tmp.initPos.z = static_cast<float>(z) * 40.0f;
-				shared_ptr<C_OBJECT_BASE> object = make_shared<C_BLOCK>();
+				tmp.size = 40.0f;
+				tmp.pos.x = static_cast<float>(x) * 40.0f;
+				tmp.pos.y = static_cast<float>(-y) * 40.0f;
+				tmp.pos.z = static_cast<float>(z) * 40.0f;
+				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
 				object->Init();
 				object->Request(tmp);
 				object->Load();
@@ -61,25 +62,21 @@ void C_MAP_MANAGER::LoadSync()
 			{
 				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
 				{
-					if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
-					{
-						c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
-					}
-					else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
+					if (c_chunk.GetVoxel(x + 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x - 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x, y + 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x, y - 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x, y, z + 1)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x, y, z - 1)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
 				}
 			}
 		}
 	}
 
-	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
-	{
-		if((*itr)->GetIsActive())C_COLLISION_MANAGER::AddObject(*itr);
-	}
+	//for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
+	//{
+	//	if((*itr)->GetIsActive())C_COLLISION_MANAGER::AddObject(*itr);
+	//}
 }
 
 void C_MAP_MANAGER::Step()
@@ -89,30 +86,30 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	for (int x = 0; x < CHUNK_SIZE_X; x++)
-	{
-		for (int y = 0; y < CHUNK_SIZE_Y; y++)
-		{
-			for (int z = 0; z < CHUNK_SIZE_Z; z++)
-			{
-				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
-				{
-					if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-						c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
-					{
-						c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
-					}
-					else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
-				}
+	//for (int x = 0; x < CHUNK_SIZE_X; x++)
+	//{
+	//	for (int y = 0; y < CHUNK_SIZE_Y; y++)
+	//	{
+	//		for (int z = 0; z < CHUNK_SIZE_Z; z++)
+	//		{
+	//			if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
+	//			{
+	//				if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+	//					c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+	//					c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+	//					c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+	//					c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
+	//					c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
+	//				{
+	//					c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
+	//				}
+	//				else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
+	//			}
 
-				c_chunk.GetVoxel(x, y, z)->Step();
-			}
-		}
-	}
+	//			c_chunk.GetVoxel(x, y, z)->Step();
+	//		}
+	//	}
+	//}
 }
 
 void C_MAP_MANAGER::Update()
@@ -140,10 +137,7 @@ void C_MAP_MANAGER::Draw()
 		(*itr)->Draw();
 	}
 
-	C_DRAW_POLYGON::DrawPolygonSquare(VGet(0.0f, 20.0f, 0.0f),
-		VGet(20.0f, 0.0f, 20.0f), VGet(-20, 0.0f, 20),
-		VGet(20.0f, 0.0f, -20.0f), VGet(-20.0f, 0.0f, -20.0f),
-		DX_NONE_GRAPH, FALSE);
+
 }
 
 void C_MAP_MANAGER::Exit()

@@ -34,6 +34,9 @@ protected:
 	//カメラの回転
 	VECTOR m_cameraRot;
 
+	//押し戻し速度
+	VECTOR m_knockBackSpeed;
+
 	//リスポーンフラグ
 	bool m_isRespawn;
 
@@ -51,8 +54,13 @@ protected:
 public:
 
 	//コンストラクタ
-	C_ACTOR_BASE(VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, bool _isRespawn = false) :
-		m_targetPos(_targetPos), m_cameraRot(_modelRot), m_isRespawn(_isRespawn) { }
+	C_ACTOR_BASE(int _hp = 0, int _hpMax = 0, int _att = 0, bool _isJump = false,
+		bool _isHit = false, bool _isAttack = false,
+		VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, VECTOR _knockBackSpeed = { 0 },
+		bool _isRespawn = false, int _hitWait = 0, float _attackWait = 0.0f, int _attackRedius = 0) :
+		m_hp(_hp), m_hpMax(_hpMax), m_att(_att), m_isJump(_isJump), m_isHit(_isHit), m_isAttack(_isAttack),
+		m_targetPos(_targetPos), m_knockBackSpeed(_knockBackSpeed), m_cameraRot(_modelRot), m_isRespawn(_isRespawn),
+		m_hitWait(_hitWait), m_attackWait(_attackWait), m_attackRedius(_attackRedius){}
 
 	//デストラクタ
 	virtual ~C_ACTOR_BASE() {}
@@ -150,6 +158,12 @@ public:
 		tmp = VGet(-mat1.m[3][0], mat1.m[3][1], -mat1.m[3][2]);
 
 		return VAdd(m_pos, tmp);
+	}
+
+	//ノックバック速度を設定
+	virtual void SetKonckBackSpeed(VECTOR _knockBackSpeed)
+	{
+		m_knockBackSpeed = _knockBackSpeed;
 	}
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include "array/3Darray.h"
-#include "game/base/object.h"
+#include "game/voxel/voxel.h"
 
 constexpr int CHUNK_SIZE_X = 16;
 
@@ -13,7 +13,7 @@ class C_VOXEL_CHUNK
 {
 private:
 
-	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>> m_chunk;
+	C_3D_ARRAY<shared_ptr<C_VOXEL>> m_chunk;
 
 public:
 
@@ -21,11 +21,11 @@ public:
 
 	~C_VOXEL_CHUNK(){}
 
-	shared_ptr<C_OBJECT_BASE> GetVoxel(int _x, int _y, int _z);
+	shared_ptr<C_VOXEL> GetVoxel(int _x, int _y, int _z);
 
-	void SetVoxel(int _x, int _y, int _z, shared_ptr<C_OBJECT_BASE> _voxel);
+	void SetVoxel(int _x, int _y, int _z, shared_ptr<C_VOXEL> _voxel);
 
-	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>>::iterator GetChunkBegin() { return m_chunk.begin(); }
+	C_3D_ARRAY<shared_ptr<C_VOXEL>>::iterator GetChunkBegin() { return m_chunk.begin(); }
 
-	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>>::iterator GetChunkEnd() { return m_chunk.end(); }
+	C_3D_ARRAY<shared_ptr<C_VOXEL>>::iterator GetChunkEnd() { return m_chunk.end(); }
 };

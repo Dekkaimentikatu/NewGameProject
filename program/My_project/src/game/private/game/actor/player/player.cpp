@@ -87,12 +87,12 @@ void C_PLAYER::Step()
 	{
 	case C_PLAYER::PLAYER_STATE_WAIT:
 		MoveCalc();
-		AttackCalc();
+		//AttackCalc();
 		JumpCalc();
 		break;
 	case C_PLAYER::PLAYER_STATE_MOVE:
 		MoveCalc();
-		AttackCalc();
+		//AttackCalc();
 		JumpCalc();
 
 		break;

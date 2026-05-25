@@ -499,6 +499,9 @@
     <ClInclude Include="src\lib\public\draw_polygon\draw_polygon.h">
       <Filter>src\lib\public\draw_polygon</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\public\game\voxel\voxel.h">
+      <Filter>src\game\public\game\voxel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">
@@ -740,6 +743,9 @@
     </ClCompile>
     <ClCompile Include="src\lib\private\draw_polygon\draw_polygon.cpp">
       <Filter>src\lib\private\draw_polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\private\game\voxel\voxel.cpp">
+      <Filter>src\game\private\game\voxel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
