@@ -25,6 +25,8 @@ public:
 
 	void SetVoxel(int _x, int _y, int _z, shared_ptr<C_VOXEL> _voxel);
 
+	void CheckDrawFlag(int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, C_VOXEL::DRAW_POLY_FLAG _flag);
+
 	C_3D_ARRAY<shared_ptr<C_VOXEL>>::iterator GetChunkBegin() { return m_chunk.begin(); }
 
 	C_3D_ARRAY<shared_ptr<C_VOXEL>>::iterator GetChunkEnd() { return m_chunk.end(); }

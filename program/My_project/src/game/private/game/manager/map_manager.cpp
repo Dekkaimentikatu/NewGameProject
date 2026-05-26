@@ -62,7 +62,14 @@ void C_MAP_MANAGER::LoadSync()
 			{
 				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
 				{
-					if (c_chunk.GetVoxel(x + 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
+					if (c_chunk.GetVoxel(x + 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType())
+					{
+						c_chunk.GetVoxel(x, y, z)->OnFlag(C_VOXEL::RIGHT);
+					}
+					else
+					{
+						c_chunk.GetVoxel(x, y, z)->OffFlag(C_VOXEL::RIGHT);
+					}
 					if (c_chunk.GetVoxel(x - 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
 					if (c_chunk.GetVoxel(x, y + 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
 					if (c_chunk.GetVoxel(x, y - 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());

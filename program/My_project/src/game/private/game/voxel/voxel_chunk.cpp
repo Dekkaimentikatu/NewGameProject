@@ -17,3 +17,15 @@ void C_VOXEL_CHUNK::SetVoxel(int _x, int _y, int _z, shared_ptr<C_VOXEL> _voxel)
 
 	m_chunk(_x, _y, _z) = _voxel;
 }
+
+void C_VOXEL_CHUNK::CheckDrawFlag(int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, C_VOXEL::DRAW_POLY_FLAG _flag)
+{
+	if (this->GetVoxel(_x1, _y1, _z1)->GetVoxelType() == this->GetVoxel(_x2, _y2, _z2)->GetVoxelType())
+	{
+		this->GetVoxel(_x1, _y1, _z1)->OnFlag(_flag);
+	}
+	else
+	{
+		this->GetVoxel(_x1, _y1, _z1)->OffFlag(_flag);
+	}
+}
