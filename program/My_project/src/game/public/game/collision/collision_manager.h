@@ -46,9 +46,9 @@ private:
 	//プレイヤーとエネミーの攻撃判定
 	static void AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy);
 
-	static void EraseObject(list<weak_ptr<C_OBJECT_BASE>>::iterator _objectPool);
+	static void EraseObject(list<weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool);
 
-	static void EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator _actorPool);
+	static void EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator &_actorPool);
 
 public:
 

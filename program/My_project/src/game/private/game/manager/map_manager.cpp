@@ -27,7 +27,7 @@ void C_MAP_MANAGER::LoadSync()
 	//m_stageLoader.LoadMapData(const_cast<char*>(MAP_FILE_PATH[tmp]));
 	//m_stageLoader.LoadObject(c_objectList);
 
-	C_VOXEL::T_VOXEL_DATA tmp = {0};
+	C_VOXEL::T_VOXEL_DATA tmp = { 0 };
 	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
@@ -36,7 +36,7 @@ void C_MAP_MANAGER::LoadSync()
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				tmp.size = 40.0f;
+				tmp.size = 20.0f;
 				tmp.pos.x = static_cast<float>(x) * 40.0f;
 				tmp.pos.y = static_cast<float>(-y) * 40.0f;
 				tmp.pos.z = static_cast<float>(z) * 40.0f;
@@ -60,22 +60,12 @@ void C_MAP_MANAGER::LoadSync()
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
-				{
-					if (c_chunk.GetVoxel(x + 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType())
-					{
-						c_chunk.GetVoxel(x, y, z)->OnFlag(C_VOXEL::RIGHT);
-					}
-					else
-					{
-						c_chunk.GetVoxel(x, y, z)->OffFlag(C_VOXEL::RIGHT);
-					}
-					if (c_chunk.GetVoxel(x - 1, y, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
-					if (c_chunk.GetVoxel(x, y + 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
-					if (c_chunk.GetVoxel(x, y - 1, z)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
-					if (c_chunk.GetVoxel(x, y, z + 1)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
-					if (c_chunk.GetVoxel(x, y, z - 1)->GetVoxelType() == c_chunk.GetVoxel(x, y, z)->GetVoxelType());
-				}
+				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
+				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
+				if (y < CHUNK_SIZE_Y - 1)c_chunk.CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
+				if (y != 0)c_chunk.CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
+				if (z < CHUNK_SIZE_Z - 1)c_chunk.CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
+				if (z != 0)c_chunk.CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
 			}
 		}
 	}
@@ -93,30 +83,21 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	//for (int x = 0; x < CHUNK_SIZE_X; x++)
-	//{
-	//	for (int y = 0; y < CHUNK_SIZE_Y; y++)
-	//	{
-	//		for (int z = 0; z < CHUNK_SIZE_Z; z++)
-	//		{
-	//			if (x != 0 && y != 0 && z != 0 && x < CHUNK_SIZE_X - 1 && y < CHUNK_SIZE_Y - 1 && z < CHUNK_SIZE_Z - 1)
-	//			{
-	//				if (c_chunk.GetVoxel(x + 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-	//					c_chunk.GetVoxel(x - 1, y, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-	//					c_chunk.GetVoxel(x, y + 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-	//					c_chunk.GetVoxel(x, y - 1, z)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-	//					c_chunk.GetVoxel(x, y, z + 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK &&
-	//					c_chunk.GetVoxel(x, y, z - 1)->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_BLCOK)
-	//				{
-	//					c_chunk.GetVoxel(x, y, z)->SetIsActive(false);
-	//				}
-	//				else c_chunk.GetVoxel(x, y, z)->SetIsActive(true);
-	//			}
-
-	//			c_chunk.GetVoxel(x, y, z)->Step();
-	//		}
-	//	}
-	//}
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	{
+		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		{
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			{
+				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
+				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
+				if (y < CHUNK_SIZE_Y - 1)c_chunk.CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
+				if (y != 0)c_chunk.CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
+				if (z < CHUNK_SIZE_Z - 1)c_chunk.CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
+				if (z != 0)c_chunk.CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
+			}
+		}
+	}
 }
 
 void C_MAP_MANAGER::Update()
@@ -141,7 +122,7 @@ void C_MAP_MANAGER::Draw()
 
 	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	{
-		(*itr)->Draw();
+		if((*itr)->GetIsActive())(*itr)->Draw();
 	}
 
 

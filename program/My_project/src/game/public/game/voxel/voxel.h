@@ -16,11 +16,14 @@ public:
 	enum DRAW_POLY_FLAG
 	{
 		UP		=	0x0001,
-		DONW	=	0x0002,
+		DOWN	=	0x0002,
 		LEFT	=	0x0004,
 		RIGHT	=	0x0008,
 		FRONT	=	0x0010,
 		REAR	=	0x0020,
+
+		DIR_MASK	=	0x00FF,
+		ALL_MASK	=	0xFFFF,
 	};
 
 	//ボクセルのデータ
@@ -32,6 +35,8 @@ public:
 		VECTOR scale;
 		//一辺の長さ(単位)
 		float size;
+		//生存フラグ
+		bool isActive;
 		//画像ハンドル
 		int grapHndl;
 		//ボクセルのタイプ
@@ -77,7 +82,9 @@ public:
 	void OnFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag &= _drawFlag; }
 
 	//フラグを折る
-	void OffFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag != _drawFlag; }
+	void OffFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag &= ~_drawFlag; }
+
+	int GetFlag() const  { return m_drawFlag; }
 
 	//座標を取得
 	VECTOR GetPos() const { return m_voxelData.pos; }
@@ -87,6 +94,10 @@ public:
 
 	//一辺の長さを取得
 	int GetSize() const { return m_voxelData.size; }
+
+	bool GetIsActive() const { return m_voxelData.isActive; }
+
+	void SetIsActive(bool _isActive) { m_voxelData.isActive = _isActive; }
 
 	//ボクセルのタイプを取得
 	VOXEL_TYPE GetVoxelType() const { return m_voxelData.voxelType; }

@@ -22,10 +22,13 @@ void C_VOXEL_CHUNK::CheckDrawFlag(int _x1, int _y1, int _z1, int _x2, int _y2, i
 {
 	if (this->GetVoxel(_x1, _y1, _z1)->GetVoxelType() == this->GetVoxel(_x2, _y2, _z2)->GetVoxelType())
 	{
-		this->GetVoxel(_x1, _y1, _z1)->OnFlag(_flag);
+		this->GetVoxel(_x1, _y1, _z1)->OffFlag(_flag);
 	}
 	else
 	{
-		this->GetVoxel(_x1, _y1, _z1)->OffFlag(_flag);
+		this->GetVoxel(_x1, _y1, _z1)->OnFlag(_flag);
 	}
+
+	if (this->GetVoxel(_x1, _y1, _z1)->GetFlag() ^ C_VOXEL::DIR_MASK)this->GetVoxel(_x1, _y1, _z1)->SetIsActive(true);
+	else this->GetVoxel(_x1, _y1, _z1)->SetIsActive(false);
 }

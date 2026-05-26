@@ -1,3 +1,2 @@
-﻿  player.cpp
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\actor\player\player.cpp(335,22): warning C4101: 'mat3': ローカル変数は 1 度も使われていません。
+﻿  collision_manager.cpp
   My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

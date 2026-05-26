@@ -278,7 +278,7 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 	}
 }
 
-void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator _objectPool)
+void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool)
 {
 	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
 	{
@@ -290,7 +290,7 @@ void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator _
 	}
 }
 
-void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator _actorPool)
+void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator &_actorPool)
 {
 	if (_actorPool->expired() || !(*_actorPool).lock()->GetIsActive())
 	{
