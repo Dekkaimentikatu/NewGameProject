@@ -1,5 +1,5 @@
 #include "game/UI/title_back.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_TITLE_BACK::Init(VECTOR _pos)

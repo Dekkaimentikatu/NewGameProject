@@ -1,5 +1,5 @@
 #include "game/UI/result.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_RESULT::Init(VECTOR _pos)

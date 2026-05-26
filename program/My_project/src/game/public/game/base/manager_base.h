@@ -1,8 +1,6 @@
 #pragma once
  
-#include <DxLib.h>
-#include <vector>
-#include <list>
+#include "common.h"
 #include "game/base/object.h"
 #include "game/base/actor.h"
 
@@ -15,7 +13,7 @@ class C_OBJECT_MANAGER_BASE
 protected:
 
 	//オブジェクトのリスト
-	list<C_OBJECT_BASE*> c_objectArray;
+	list<shared_ptr<C_OBJECT_BASE>> c_objectList;
 
 	//グローバルデータクラスのインスタンス取得用変数
 	C_GLOBAL_DATA* c_globalData;
@@ -51,15 +49,15 @@ public:
 	virtual void Exit() = 0;
 
 	//リスト取得
-	inline list<C_OBJECT_BASE*>& GetArray()
+	inline list<shared_ptr<C_OBJECT_BASE>>& GetArray()
 	{
-		return c_objectArray;
+		return c_objectList;
 	}
 
 	//リストの長さを取得
 	inline int GetArrayLen()
 	{
-		return static_cast<int>(c_objectArray.size());
+		return static_cast<int>(c_objectList.size());
 	}
 
 };
@@ -69,7 +67,7 @@ class C_ACOTR_MANAGER_BASE
 protected:
 
 	//アクターのリスト
-	list<C_ACTOR_BASE*> c_actorArray;
+	list< shared_ptr<C_ACTOR_BASE>> c_actorArray;
 
 	//グローバルデータクラスのインスタンス取得用変数
 	C_GLOBAL_DATA* c_globalData;
@@ -105,7 +103,7 @@ public:
 	virtual void HitCalc() {};
 
 	//リスト取得
-	inline list<C_ACTOR_BASE*>& GetArray()
+	inline list< shared_ptr<C_ACTOR_BASE>>& GetArray()
 	{
 		return c_actorArray;
 	}

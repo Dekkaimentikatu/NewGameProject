@@ -1,6 +1,6 @@
 #include "game/base/object.h"
-#include "lib/3Dhndlmanager.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 void C_OBJECT_BASE::Init()
 {

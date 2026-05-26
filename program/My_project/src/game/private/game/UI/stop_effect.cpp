@@ -1,5 +1,5 @@
 #include "game/UI/stop_effect.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 constexpr int SPEFF_GRAPH_SIZEX = 512;
 constexpr int SPEFF_GRAPH_SIZEY = 16;

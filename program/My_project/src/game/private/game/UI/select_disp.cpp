@@ -1,10 +1,10 @@
 #include "game/UI/select_disp.h"
-#include "lib/XInput.h"
-#include "lib/Input.h"
+#include "input/XInput.h"
+#include "input/Input.h"
 
-#include "lib/input_config.h"
+#include "input_config.h"
 
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_SELECT_DISP::Init(VECTOR _pos)

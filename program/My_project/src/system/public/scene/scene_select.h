@@ -2,7 +2,6 @@
 
 #include "scene.h"
 
-#include "lib/xinput.h"
 #include "UI/UI_manager.h"
 
 class C_SCENE_SELECT : public C_SCENE_BASE

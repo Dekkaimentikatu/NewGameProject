@@ -9,7 +9,7 @@
 #include "game/UI/respawn_back.h"
 #include "game/UI/select_disp.h"
 
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 
 //‰Šú‰»

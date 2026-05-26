@@ -5,9 +5,8 @@
 
 #include "game/data/global_data.h"
 #include "scene/scene_data.h"
-#include "lib/xinput.h"
-#include "lib/input.h"
-#include "lib/rand.h"
+#include "input_config.h"
+#include "math/rand.h"
 
 #include "game/base/UI_object.h"
 

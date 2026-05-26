@@ -1,7 +1,7 @@
 #include "game/camera/player_camera.h"
-#include "lib/input_config.h"
-#include "lib/2Ddirection/easing/easing.h"
-#include "lib/fade.h"
+#include "input_config.h"
+#include "2Ddirection/easing/easing.h"
+#include "fade/fade.h"
 #include "game/data/global_data.h"
 
 
@@ -147,8 +147,8 @@ void C_PALYER_CAMERA_VEC::CamMovePlay()
 {
 	if (C_XINPUT::GetConnectPad(DX_INPUT_PAD1))
 	{
-		m_rot.x += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_UD);
-		m_rot.y += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsStickInput(C_INPUT_CONFIG::COM_ROT_LR);
+		m_rot.x += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsMoveInput(C_INPUT_CONFIG::COM_ROT_UD);
+		m_rot.y += COM_PLAY_ROT_SPEED * C_INPUT_CONFIG::IsMoveInput(C_INPUT_CONFIG::COM_ROT_LR);
 	}
 	else
 	{

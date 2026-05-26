@@ -2,9 +2,8 @@
 
 #include <DxLib.h>				//DxLib
 #include "scene_data.h"
-#include "lib/fade.h"		//フェードイン/フェードアウト管理クラス
-#include "lib/input.h"	//入力管理クラス
-#include "lib/xinput.h"
+#include "fade/fade.h"		//フェードイン/フェードアウト管理クラス
+#include "input_config.h"
 #include "UI/UI_manager.h"
 #include "game/data/global_data.h"
 

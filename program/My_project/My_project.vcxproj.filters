@@ -77,15 +77,6 @@
     <Filter Include="src\game\private\game\stage">
       <UniqueIdentifier>{3c99998f-2a0f-4671-8eee-eafec6a0e186}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\private\lib">
-      <UniqueIdentifier>{5f6114ce-261d-4750-9244-bde57911990a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\private\lib\2Ddirection">
-      <UniqueIdentifier>{c8f4c53c-c5b5-4a32-b29f-fd93a96bc3d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\private\lib\2Ddirection\easing">
-      <UniqueIdentifier>{42995ec9-d267-41ef-ae03-f0676c956cdb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\private\effekseer">
       <UniqueIdentifier>{0b2f2452-dd01-4954-91e2-c69562cc4c4a}</UniqueIdentifier>
     </Filter>
@@ -137,15 +128,6 @@
     <Filter Include="src\game\public\effekseer">
       <UniqueIdentifier>{be2232ca-af0e-4ee1-9971-f378a9c9509c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\game\public\lib">
-      <UniqueIdentifier>{b63368eb-6333-462b-9d0b-9cb40cbbc173}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\public\lib\2Ddirection">
-      <UniqueIdentifier>{6fcd7afe-6a29-4f18-8bf4-6c48a1d7f975}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\game\public\lib\2Ddirection\easing">
-      <UniqueIdentifier>{8035259c-7a8d-4e52-952f-ae44266f38d2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\game\public\game\UI\button">
       <UniqueIdentifier>{ecf57873-baa3-4e3d-92fd-b8a181641bac}</UniqueIdentifier>
     </Filter>
@@ -167,44 +149,74 @@
     <Filter Include="src\imgui">
       <UniqueIdentifier>{61a3c25a-a262-4de6-ad89-30bb6b5ce834}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lib">
+      <UniqueIdentifier>{1f6237a9-34d8-4426-89e6-c250827b6689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public">
+      <UniqueIdentifier>{b4fe9660-2cbe-48d9-a41b-da82fcdd46c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private">
+      <UniqueIdentifier>{a90ef814-d7a5-4af7-a5da-8bd3a3f8aa1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\2Ddirection">
+      <UniqueIdentifier>{d38cae88-953c-49be-b56f-85b20058e6ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\2Ddirection">
+      <UniqueIdentifier>{0a3e4165-8cbc-4d7a-9ca3-9891e7c1edb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\2Ddirection\easing">
+      <UniqueIdentifier>{be140b8f-8401-44ef-be64-f8a657c5ce45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\2Ddirection\easing">
+      <UniqueIdentifier>{48465df7-44cb-40ba-9714-3d4450f3d2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\collision">
+      <UniqueIdentifier>{a8be1c52-31b9-45ed-b1c6-10a7338b6a94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\fade">
+      <UniqueIdentifier>{71cb431f-e3b1-4acb-b1a2-ee121170aed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\fps">
+      <UniqueIdentifier>{6ea4e77b-1fd0-47aa-b74f-37d9ebeff1da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\hndlmanger">
+      <UniqueIdentifier>{cb3c887e-f7b1-4552-abe4-ec807b81b80a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\input">
+      <UniqueIdentifier>{ed78cc0b-b10a-4a34-a99c-d0a05b796ff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\math">
+      <UniqueIdentifier>{f281d417-560d-4de3-9815-cddbc10b31df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\private\soundmanager">
+      <UniqueIdentifier>{f2c2827d-203a-4774-ba2e-22ed3dd6b1ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\collision">
+      <UniqueIdentifier>{4f151859-0f75-43fb-9c70-630953a4cce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\fade">
+      <UniqueIdentifier>{7328b40d-7d47-4415-9341-89642ac3ab79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\fps">
+      <UniqueIdentifier>{22ccd52f-1beb-41ff-8828-26b36a667f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\hndlmanager">
+      <UniqueIdentifier>{5afed2dd-9c3b-44b8-bd7a-9614ca933087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\input">
+      <UniqueIdentifier>{4fc287a0-e00b-4bed-b2d3-5891e0356bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\math">
+      <UniqueIdentifier>{6a7924f7-4d3f-4548-8b43-bd5b5b6f056e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\soundmanager">
+      <UniqueIdentifier>{1947bec3-9dfc-4c83-b282-bbab5b9a2d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lib\public\array">
+      <UniqueIdentifier>{91daa4d6-c051-4fc7-918a-1d8fdd60892e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\game\public\lib\2Dcollosion.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\bgm_manager.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\collision.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\fade.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\fps.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\input.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\input_config.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\mouseinput.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\mymath.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\rand.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\se_manager.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\2Ddirection\easing\easing.h">
-      <Filter>src\game\public\lib\2Ddirection\easing</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\public\effekseer\effekseer.h">
       <Filter>src\game\public\effekseer</Filter>
     </ClInclude>
@@ -285,9 +297,6 @@
     </ClInclude>
     <ClInclude Include="src\system\public\scene\scene_title.h">
       <Filter>src\system\public\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\xinput.h">
-      <Filter>src\game\public\lib</Filter>
     </ClInclude>
     <ClInclude Include="src\system\public\mapediter\mapediter.h">
       <Filter>src\system\public\mapediter</Filter>
@@ -409,14 +418,56 @@
     <ClInclude Include="src\imgui\imstb_truetype.h">
       <Filter>src\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\public\lib\3Dhndlmanager.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\public\lib\2Dhndlmanager.h">
-      <Filter>src\game\public\lib</Filter>
-    </ClInclude>
     <ClInclude Include="src\game\public\game\base\character.h">
       <Filter>src\game\public\game\base</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\2Ddirection\easing\easing.h">
+      <Filter>src\lib\public\2Ddirection\easing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\collision\2Dcollosion.h">
+      <Filter>src\lib\public\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\collision\3Dcollision.h">
+      <Filter>src\lib\public\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\input_config.h">
+      <Filter>src\lib\public</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\soundmanager\bgm_manager.h">
+      <Filter>src\lib\public\soundmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\soundmanager\se_manager.h">
+      <Filter>src\lib\public\soundmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\math\mymath.h">
+      <Filter>src\lib\public\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\math\rand.h">
+      <Filter>src\lib\public\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\input\input.h">
+      <Filter>src\lib\public\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\input\mouseinput.h">
+      <Filter>src\lib\public\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\input\Xinput.h">
+      <Filter>src\lib\public\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\hndlmanager\2Dhndlmanager.h">
+      <Filter>src\lib\public\hndlmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\hndlmanager\3Dhndlmanager.h">
+      <Filter>src\lib\public\hndlmanager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\fps\fps.h">
+      <Filter>src\lib\public\fps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\fade\fade.h">
+      <Filter>src\lib\public\fade</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lib\public\array\3Darray.h">
+      <Filter>src\lib\public\array</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -464,42 +515,6 @@
     </ClCompile>
     <ClCompile Include="src\game\private\game\UI\UI_stmber.cpp">
       <Filter>src\game\private\game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\2Dcollision.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\bgm_manager.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\collision.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\fade.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\fps.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\input.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\input_config.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\mouseinput.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\rand.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\se_manager .cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\Xinput.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\2Ddirection\easing\easing.cpp">
-      <Filter>src\game\private\lib\2Ddirection\easing</Filter>
     </ClCompile>
     <ClCompile Include="src\system\private\scene\scene.cpp">
       <Filter>src\system\private\scene</Filter>
@@ -639,17 +654,53 @@
     <ClCompile Include="src\imgui\imgui_widgets.cpp">
       <Filter>src\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\private\lib\3Dhndlmanager.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game\private\lib\2Dhndlmanager.cpp">
-      <Filter>src\game\private\lib</Filter>
-    </ClCompile>
     <ClCompile Include="src\game\private\game\base\character.cpp">
       <Filter>src\game\private\game\base</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\private\lib\mymath.cpp">
-      <Filter>src\game\private\lib</Filter>
+    <ClCompile Include="src\lib\private\2Ddirection\easing\easing.cpp">
+      <Filter>src\lib\private\2Ddirection\easing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\collision\2Dcollision.cpp">
+      <Filter>src\lib\private\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\collision\3Dcollision.cpp">
+      <Filter>src\lib\private\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\fade\fade.cpp">
+      <Filter>src\lib\private\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\fps\fps.cpp">
+      <Filter>src\lib\private\fps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\hndlmanager\2Dhndlmanager.cpp">
+      <Filter>src\lib\private\hndlmanger</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\hndlmanager\3Dhndlmanager.cpp">
+      <Filter>src\lib\private\hndlmanger</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\input\input.cpp">
+      <Filter>src\lib\private\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\input\mouseinput.cpp">
+      <Filter>src\lib\private\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\input\Xinput.cpp">
+      <Filter>src\lib\private\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\math\mymath.cpp">
+      <Filter>src\lib\private\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\math\rand.cpp">
+      <Filter>src\lib\private\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\soundmanager\bgm_manager.cpp">
+      <Filter>src\lib\private\soundmanager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\soundmanager\se_manager .cpp">
+      <Filter>src\lib\private\soundmanager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\private\input_config.cpp">
+      <Filter>src\lib\private</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

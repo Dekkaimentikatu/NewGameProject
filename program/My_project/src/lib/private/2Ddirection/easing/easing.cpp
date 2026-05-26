@@ -1,0 +1,1 @@
+#include "../public/2Ddirection/easing/easing.h"

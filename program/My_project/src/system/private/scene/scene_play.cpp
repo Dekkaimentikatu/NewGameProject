@@ -1,7 +1,7 @@
 #include "scene/scene_play.h"
 #include "game/data/global_data.h"
-#include "lib/bgm_manager.h"
-#include "lib/input_config.h"
+#include "soundmanager/bgm_manager.h"
+#include "input_config.h"
 
 C_SCENE_PLAY::~C_SCENE_PLAY()
 {
@@ -190,12 +190,12 @@ void C_SCENE_PLAY::Step()
 #ifdef DEBUG_MODE
 
 	//遷移テスト用の処理
-	if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
-	{
-		c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
+	//if (C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
+	//{
+	//	c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
 
-		m_sceneState = ENDWAIT;		//ステータスを更新
-	}
+	//	m_sceneState = ENDWAIT;		//ステータスを更新
+	//}
 
 #endif // DEBUG_MODE
 }

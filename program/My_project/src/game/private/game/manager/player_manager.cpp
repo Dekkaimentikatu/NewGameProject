@@ -1,7 +1,7 @@
 #include "game/manager/player_manager.h"
 #include "game/actor/player/player.h"
 #include "game/collision/collision_manager.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 void C_PLAYER_MANAGER::Init()
 {
@@ -26,18 +26,13 @@ void C_PLAYER_MANAGER::LoadSync()
 {
 	c_globalData = C_GLOBAL_DATA::GetInstace();
 
-	//プレイヤーの初期化
-	C_PLAYER* player = nullptr;
-	player = new C_PLAYER();
-
 	//listにInstanceを追加
-	c_actorArray.push_back(player);
+	c_actorArray.push_back(make_shared<C_PLAYER>());
 
 	//プレイヤーの初期化
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Init();
-		(*itr)->DuplicateModel(m_modelHndl);
 		(*itr)->Load();
 		C_COLLISION_MANAGER::AddObject(*itr);
 		C_COLLISION_MANAGER::AddActor(*itr);
@@ -93,7 +88,6 @@ void C_PLAYER_MANAGER::Exit()
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Exit();
-		delete (*itr);
 	}
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();

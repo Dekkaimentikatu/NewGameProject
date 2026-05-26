@@ -1,6 +1,6 @@
 #include "scene/scene_title.h"
-#include "lib/bgm_manager.h"
-#include "lib/input_config.h"
+#include "soundmanager/bgm_manager.h"
+#include "input_config.h"
 
 C_SCENE_TITLE::~C_SCENE_TITLE()
 {

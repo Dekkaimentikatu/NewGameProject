@@ -2,7 +2,7 @@
 #include "game/base/object.h"
 #include "game/data/global_data.h"
 
-static const char* _DARTS_MODEL_PATH = "data/model/field/paper_plane.mv1";
+static const char* _DARTS_MODEL_PATH = "data/model/field/Floor_2.mv1";
 
 class C_DARTS : public C_OBJECT_BASE
 {

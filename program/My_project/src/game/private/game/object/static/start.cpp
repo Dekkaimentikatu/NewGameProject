@@ -1,5 +1,5 @@
 #include "game/object/static/start.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 C_START::~C_START()
 {
@@ -12,6 +12,7 @@ void C_START::Init()
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ハンドル
+	m_isActive = true;
 }
 
 void C_START::Request(T_OBJECT_DATA _objectData)
@@ -32,7 +33,7 @@ void C_START::Load()
 	DuplicateModel(m_modelHndl);
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);	//スケール
 	m_moveVec = VGet(0.0f, 0.0f, 0.0f);
-	m_flagData->StartPos = m_pos;
+	m_flagData->StartPos = m_objectData.initPos;
 	UpdateModel();
 	SetUpCollInfo();
 }
@@ -64,5 +65,5 @@ void C_START::Exit()
 
 void C_START::HitCalc()
 {
-	m_flagData->StartPos = m_pos;
+	m_flagData->StartPos = m_objectData.initPos;
 }

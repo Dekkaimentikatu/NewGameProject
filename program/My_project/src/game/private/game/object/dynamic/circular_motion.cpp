@@ -1,6 +1,6 @@
 #include <math.h>
 #include "game/object/dynamic/circular_motion.h"
-#include "lib/2Ddirection/easing/easing.h"
+#include "2Ddirection/easing/easing.h"
 #include "block_common.h"
 
 

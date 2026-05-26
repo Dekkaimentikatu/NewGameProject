@@ -1,5 +1,6 @@
 #include "mapediter/editer_camera_point.h"
-
+#include "input/Xinput.h"
+#include "input/input.h"
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
 

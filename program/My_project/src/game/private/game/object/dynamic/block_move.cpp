@@ -1,6 +1,6 @@
 #include "game/object/dynamic/block_move.h"
-#include "lib/2Ddirection/easing/easing.h"
-#include "lib/3Dhndlmanager.h"
+#include "2Ddirection/easing/easing.h"
+#include "hndlmanager/3Dhndlmanager.h"
 #include "block_common.h"
 
 C_BLOCK_MOVE::~C_BLOCK_MOVE()

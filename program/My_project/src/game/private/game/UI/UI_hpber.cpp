@@ -1,5 +1,5 @@
 #include "game/UI/UI_hpber.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 //‰Šú‰»
 void C_UI_HPBER::Init(VECTOR _pos)

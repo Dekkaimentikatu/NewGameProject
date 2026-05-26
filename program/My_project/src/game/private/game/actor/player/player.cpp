@@ -1,8 +1,8 @@
 #include "game/actor/player/player.h"
-#include "lib/input_config.h"
-#include "lib/fade.h"
-#include "lib/se_manager.h"
-#include "lib/3Dhndlmanager.h"
+#include "input_config.h"
+#include "fade/fade.h"
+#include "soundmanager/se_manager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 void C_PLAYER::Init()
 {

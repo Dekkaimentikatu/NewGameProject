@@ -1,8 +1,6 @@
 #pragma once
 
-#include <list>
-#include <vector>
-#include <DxLib.h>
+#include "common.h"
 #include "game/data/global_data.h"
 
 using namespace std;
@@ -73,13 +71,15 @@ public:
 
 	void LoadMapResource();
 
-	void LoadMapData(list<C_OBJECT_BASE*>& _objectArray, char* _filePath);
+	void LoadMapData(char* _filePath);
 
-	void AddObject(T_STAGE_DATA _stageData, list<C_OBJECT_BASE*>& _objectArray);
+	void LoadObject(list<shared_ptr<C_OBJECT_BASE>>& _objectList);
 
-	void AndoAddObject(list<C_OBJECT_BASE*>& _objectArray);
+	shared_ptr<C_OBJECT_BASE> AddObject(T_STAGE_DATA _stageData);
 
-	void RedoAddObject(list<C_OBJECT_BASE*>& _objectArray);
+	void AndoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectArray);
+
+	void RedoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectArray);
 
 	void DeleteObject(VECTOR _pos);
 

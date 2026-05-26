@@ -1,7 +1,7 @@
 #include "game/object/dynamic/damage_floor.h"
-#include "lib/2Ddirection/easing/easing.h"
+#include "2Ddirection/easing/easing.h"
 #include "block_common.h"
-#include "lib/3Dhndlmanager.h"
+#include "hndlmanager/3Dhndlmanager.h"
 
 
 C_DAMAGE_FLOOR::~C_DAMAGE_FLOOR()
@@ -16,6 +16,7 @@ void C_DAMAGE_FLOOR::Init()
 	m_moveVec = VGet(10.0f, 0.0f, 0.0f);
 	m_modelHndl = -1;	//ƒnƒ“ƒhƒ‹
 	m_speedUp = MAX_TIME;
+	m_isActive = true;
 }
 
 void C_DAMAGE_FLOOR::Request(T_OBJECT_DATA _objectData)

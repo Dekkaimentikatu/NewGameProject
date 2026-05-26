@@ -40,7 +40,9 @@ private:
 
 	int m_editerMode;
 
-	list<C_OBJECT_BASE*> c_objectArray;
+	list<shared_ptr<C_OBJECT_BASE>> c_objectList;
+
+	shared_ptr<C_OBJECT_BASE> c_sky;
 
 	VECTOR m_pos;
 

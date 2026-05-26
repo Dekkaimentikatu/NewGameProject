@@ -1,5 +1,5 @@
 #include "game/UI/UI_stmber.h"
-#include "lib/2Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 void C_UI_STMBER::Init(VECTOR _pos)
 {
