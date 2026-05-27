@@ -95,6 +95,7 @@
     <ClInclude Include="src\lib\public\soundmanager\bgm_manager.h" />
     <ClInclude Include="src\lib\public\soundmanager\se_manager.h" />
     <ClInclude Include="src\lib\public\thread_pool\thread_pool.h" />
+    <ClInclude Include="src\lib\public\thread_pool\_thread_pool.h" />
     <ClInclude Include="src\system\public\imguiCtrl\imguiCtrl.h" />
     <ClInclude Include="src\system\public\mapediter\editer_camera_point.h" />
     <ClInclude Include="src\system\public\mapediter\mapediter.h" />

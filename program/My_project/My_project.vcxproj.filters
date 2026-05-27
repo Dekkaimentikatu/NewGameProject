@@ -502,6 +502,9 @@
     <ClInclude Include="src\game\public\game\voxel\voxel.h">
       <Filter>src\game\public\game\voxel</Filter>
     </ClInclude>
+    <ClInclude Include="src\lib\public\thread_pool\_thread_pool.h">
+      <Filter>src\lib\public\thread_pool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">

@@ -7,6 +7,8 @@ constexpr int X_MAX = 32;
 constexpr int Y_MAX = 32;
 constexpr int Z_MAX = 32;
 
+constexpr int BLOCK_SIZE = 20;
+
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {
 public:

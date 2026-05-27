@@ -36,10 +36,10 @@ void C_MAP_MANAGER::LoadSync()
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				tmp.size = 20.0f;
-				tmp.pos.x = static_cast<float>(x) * 40.0f;
-				tmp.pos.y = static_cast<float>(-y) * 40.0f;
-				tmp.pos.z = static_cast<float>(z) * 40.0f;
+				tmp.size = BLOCK_SIZE / 2;
+				tmp.pos.x = static_cast<float>(x) * BLOCK_SIZE;
+				tmp.pos.y = static_cast<float>(-y) * BLOCK_SIZE;
+				tmp.pos.z = static_cast<float>(z) * BLOCK_SIZE;
 				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
 				object->Init();
 				object->Request(tmp);
