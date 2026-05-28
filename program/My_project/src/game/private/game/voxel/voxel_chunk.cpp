@@ -17,6 +17,14 @@ void C_VOXEL_CHUNK::SetVoxel(int _x, int _y, int _z, shared_ptr<C_VOXEL> _voxel)
 
 	m_chunk(_x, _y, _z) = _voxel;
 }
+void C_VOXEL_CHUNK::SetVoxelType(int _x, int _y, int _z, C_VOXEL::VOXEL_TYPE _voxelType)
+{
+	if (_x > CHUNK_SIZE_X ||
+		_y > CHUNK_SIZE_Y ||
+		_z > CHUNK_SIZE_Z)return;
+
+	m_chunk(_x, _y, _z)->SetVoxelType(_voxelType);
+}
 
 void C_VOXEL_CHUNK::CheckDrawFlag(int _x1, int _y1, int _z1, int _x2, int _y2, int _z2, C_VOXEL::DRAW_POLY_FLAG _flag)
 {

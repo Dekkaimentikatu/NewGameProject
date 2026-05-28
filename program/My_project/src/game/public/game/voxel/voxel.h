@@ -84,6 +84,7 @@ public:
 	//フラグを折る
 	void OffFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag &= ~_drawFlag; }
 
+	//フラグを取得
 	int GetFlag() const  { return m_drawFlag; }
 
 	//座標を取得
@@ -95,11 +96,16 @@ public:
 	//一辺の長さを取得
 	int GetSize() const { return m_voxelData.size; }
 
+	//生存フラグを取得
 	bool GetIsActive() const { return m_voxelData.isActive; }
 
+	//生存フラグを変更
 	void SetIsActive(bool _isActive) { m_voxelData.isActive = _isActive; }
 
 	//ボクセルのタイプを取得
 	VOXEL_TYPE GetVoxelType() const { return m_voxelData.voxelType; }
+
+	//ボクセルのタイプを変更
+	void SetVoxelType(VOXEL_TYPE _voxelType) { m_voxelData.voxelType = _voxelType; }
 };
 

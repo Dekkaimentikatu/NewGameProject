@@ -750,5 +750,8 @@
     <ClCompile Include="src\game\private\game\voxel\voxel.cpp">
       <Filter>src\game\private\game\voxel</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\private\game\voxel\voxel_world.cpp">
+      <Filter>src\game\private\game\voxel</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

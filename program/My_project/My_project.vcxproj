@@ -155,6 +155,7 @@
     <ClCompile Include="src\game\private\game\UI\UI_stmber.cpp" />
     <ClCompile Include="src\game\private\game\voxel\voxel.cpp" />
     <ClCompile Include="src\game\private\game\voxel\voxel_chunk.cpp" />
+    <ClCompile Include="src\game\private\game\voxel\voxel_world.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_draw.cpp" />
     <ClCompile Include="src\imgui\imgui_impl_dx11.cpp" />
