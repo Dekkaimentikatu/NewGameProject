@@ -30,11 +30,11 @@ void C_MAP_MANAGER::LoadSync()
 	C_VOXEL::T_VOXEL_DATA tmp = { 0 };
 	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
-	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	for (int x = 0; x < X_MAX; x++)
 	{
-		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		for (int y = 0; y < Y_MAX; y++)
 		{
-			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			for (int z = 0; z < Z_MAX; z++)
 			{
 				tmp.size = BLOCK_SIZE / 2;
 				tmp.pos.x = static_cast<float>(x) * BLOCK_SIZE;
@@ -54,11 +54,11 @@ void C_MAP_MANAGER::LoadSync()
 	sky->Load();
 	c_objectList.push_back(sky);
 
-	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	for (int x = 0; x < X_MAX; x++)
 	{
-		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		for (int y = 0; y < Y_MAX; y++)
 		{
-			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			for (int z = 0; z < Z_MAX; z++)
 			{
 				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
 				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
@@ -83,11 +83,11 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	for (int x = 0; x < X_MAX; x++)
 	{
-		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		for (int y = 0; y < Y_MAX; y++)
 		{
-			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			for (int z = 0; z < Z_MAX; z++)
 			{
 				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
 				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);

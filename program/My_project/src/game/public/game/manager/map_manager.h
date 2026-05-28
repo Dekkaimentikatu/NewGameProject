@@ -3,9 +3,9 @@
 #include "game/stage/stage_loader.h"
 #include "game/voxel/voxel_chunk.h"
 
-constexpr int X_MAX = 32;
-constexpr int Y_MAX = 32;
-constexpr int Z_MAX = 32;
+constexpr int X_MAX = 16;
+constexpr int Y_MAX = 16;
+constexpr int Z_MAX = 16;
 
 constexpr int BLOCK_SIZE = 20;
 
@@ -22,15 +22,13 @@ public:
 
 private:
 
-	C_3D_ARRAY<shared_ptr<C_OBJECT_BASE>> m_objectArray;
-
 	C_VOXEL_CHUNK c_chunk;
 
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 
 public:
 
-	C_MAP_MANAGER() : m_objectArray(X_MAX, Y_MAX, Z_MAX){}
+	C_MAP_MANAGER() : c_chunk(X_MAX, Y_MAX, Z_MAX){}
 
 	//初期化
 	void Init();

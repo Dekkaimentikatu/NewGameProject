@@ -1,5 +1,5 @@
 ﻿  voxel_world.cpp
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(96,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル 'src/game/private/game/voxel/voxel_world.cpp' をコンパイルしています)
   
   My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

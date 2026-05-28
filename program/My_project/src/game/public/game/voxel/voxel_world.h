@@ -8,6 +8,8 @@ using namespace std;
 
 class C_VOXEL_CHUNK;
 
+constexpr int BLOCK_SIZE = 20;
+
 class C_VOXEL_WOELD
 {
 private:
@@ -40,7 +42,8 @@ public:
 	void Init();
 	//
 	void CreateChunk(int _chunkNumX, int _chunkNumY, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
-	//void CreateChunk(string _filePath);
+	//
+	void CreateChunk(string _filePath);
 	//
 	void Step();
 	//

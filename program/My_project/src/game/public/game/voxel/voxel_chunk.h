@@ -17,7 +17,7 @@ private:
 
 public:
 
-	C_VOXEL_CHUNK(): m_chunk(CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z){}
+	C_VOXEL_CHUNK(int _chunkNumX, int _chunkNumY, int _chunkSizeX): m_chunk(_chunkNumX, _chunkNumY, _chunkSizeX){}
 
 	~C_VOXEL_CHUNK(){}
 
