@@ -4,14 +4,51 @@
 //
 void C_VOXEL_WOELD::Init()
 {
+	m_chunkNumX = 0;
+	m_chunkNumZ = 0;
+
+	m_chunkSizeX = 0;
+	m_chunkSizeY = 0;
+	m_chunkSizeZ = 0;
+}
+
+//ワールドの生成
+void C_VOXEL_WOELD::CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
+{
+	m_chunkNumX = _chunkNumX;
+	m_chunkNumZ = _chunkNumZ;
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+			C_VOXEL_WOELD::CreateChunk(DEF_WORLD_POS[x][z], _chunkSizeX, _chunkSizeY, _chunkSizeZ, C_VOXEL::BLOCK);
+		}
+	}
+
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+			CheckDrawFlag(DEF_WORLD_POS[x][z], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+		}
+	}
+}
+
+//
+void C_VOXEL_WOELD::CreateWorld(string _filePath)
+{
 
 }
 
 //
-void C_VOXEL_WOELD::CreateChunk(int _chunkNumX, int _chunkNumY, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
+void C_VOXEL_WOELD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType)
 {
 	C_VOXEL_CHUNK chunk(_chunkSizeX, _chunkSizeY, _chunkSizeZ);
 	C_VOXEL::T_VOXEL_DATA voxelData = { 0 };
+	T_CHUNK_POS chunkPos = { 0 };
+	T_CHUNK_DATA chunkData = { 0 };
+
+	chunkPos = chunkPos;
 
 	for (int x = 0; x < _chunkSizeX; x++)
 	{
@@ -20,9 +57,10 @@ void C_VOXEL_WOELD::CreateChunk(int _chunkNumX, int _chunkNumY, int _chunkSizeX,
 			for (int z = 0; z < _chunkSizeZ; z++)
 			{
 				voxelData.size = BLOCK_SIZE / 2;
-				voxelData.pos.x = static_cast<float>(x) * BLOCK_SIZE;
-				voxelData.pos.y = static_cast<float>(-y) * BLOCK_SIZE;
-				voxelData.pos.z = static_cast<float>(z) * BLOCK_SIZE;
+				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) * static_cast<float>(_chunkPos.x);
+				voxelData.pos.y = static_cast<float>(-y) * static_cast<float>(BLOCK_SIZE);
+				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) * static_cast<float>(_chunkPos.z);
+				voxelData.voxelType = _voxelType;
 				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
 				object->Init();
 				object->Request(voxelData);
@@ -31,19 +69,43 @@ void C_VOXEL_WOELD::CreateChunk(int _chunkNumX, int _chunkNumY, int _chunkSizeX,
 			}
 		}
 	}
-	T_CHUNK_DATA chunkData = { 0 };
+
+	chunkData.chunk = &chunk;
+	chunkData.chunkPos = chunkPos;
+
+	m_voxelWorld.insert(make_pair(chunkPos, &chunk));
 }
 
-//
-void C_VOXEL_WOELD::CreateChunk(string _filePath)
+//ボクセルのポリゴン描画フラグの更新
+void C_VOXEL_WOELD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
 {
-
+	for (int x = 0; x < _chunkSizeX; x++)
+	{
+		for (int y = 0; y < _chunkSizeY; y++)
+		{
+			for (int z = 0; z < _chunkSizeZ; z++)
+			{
+				if (x < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
+				if (x != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
+				if (y < CHUNK_SIZE_Y - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
+				if (y != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
+				if (z < CHUNK_SIZE_Z - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
+				if (z != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
+			}
+		}
+	}
 }
 
 //
 void C_VOXEL_WOELD::Step()
 {
-
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+			CheckDrawFlag(DEF_WORLD_POS[x][z], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+		}
+	}
 }
 
 //
@@ -52,14 +114,40 @@ void C_VOXEL_WOELD::Update()
 
 }
 
+//ポリゴンの描画フラグの更新
+void C_VOXEL_WOELD::DrawVoxel(T_CHUNK_POS _chunkPos)
+{
+	for (int x = 0; x < m_chunkSizeX; x++)
+	{
+		for (int y = 0; y < m_chunkSizeY; y++)
+		{
+			for (int z = 0; z < m_chunkSizeZ; z++)
+			{
+				m_voxelWorld.at(_chunkPos)->GetVoxel(x, y, z)->Draw();
+			}
+		}
+	}
+}
+
 //
 void C_VOXEL_WOELD::Draw()
 {
-
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+			DrawVoxel(DEF_WORLD_POS[x][z]);
+		}
+	}
 }
 
 //
 void C_VOXEL_WOELD::Exit()
 {
-
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+		}
+	}
 }
