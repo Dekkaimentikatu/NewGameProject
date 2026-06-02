@@ -4,6 +4,7 @@
 #include <memory>
 #include <compare>
 #include "game/voxel/voxel.h"
+#include "game/voxel/voxel_chunk.h"
 
 using namespace std;
 
@@ -48,7 +49,7 @@ private:
 		T_CHUNK_POS chunkPos;
 	}T_CHUNK_DATA;
 
-	map<T_CHUNK_POS, C_VOXEL_CHUNK*> m_voxelWorld;
+	map<T_CHUNK_POS, unique_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
 
 	int m_chunkNumX;
 	int m_chunkNumZ;

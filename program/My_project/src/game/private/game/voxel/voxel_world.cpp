@@ -1,5 +1,5 @@
 #include "game/voxel/voxel_world.h"
-#include "game/voxel/voxel_chunk.h"
+
 
 //
 void C_VOXEL_WORLD::Init()
@@ -48,12 +48,12 @@ void C_VOXEL_WORLD::CreateWorld(string _filePath)
 //
 void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType)
 {
-	C_VOXEL_CHUNK chunk(_chunkSizeX, _chunkSizeY, _chunkSizeZ);
 	C_VOXEL::T_VOXEL_DATA voxelData = { 0 };
 	T_CHUNK_POS chunkPos = { 0 };
-	T_CHUNK_DATA chunkData = { 0 };
 
 	chunkPos = _chunkPos;
+
+	m_voxelWorld.insert(make_pair(chunkPos, make_unique<C_VOXEL_CHUNK>(_chunkSizeX, _chunkSizeY, _chunkSizeZ)));
 
 	for (int x = 0; x < _chunkSizeX; x++)
 	{
@@ -70,15 +70,10 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chu
 				object->Init();
 				object->Request(voxelData);
 				object->Load();
-				chunk.SetVoxel(x, y, z, object);
+				m_voxelWorld.at(chunkPos)->SetVoxel(x, y, z, object);
 			}
 		}
 	}
-
-	chunkData.chunk = &chunk;
-	chunkData.chunkPos = chunkPos;
-
-	m_voxelWorld.insert(make_pair(chunkPos, &chunk));
 }
 
 //ボクセルのポリゴン描画フラグの更新
