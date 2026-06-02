@@ -1,13 +1,11 @@
 #pragma once
 #include "game/base/manager_base.h"
 #include "game/stage/stage_loader.h"
-#include "game/voxel/voxel_chunk.h"
+#include "game/voxel/voxel_world.h"
 
 constexpr int X_MAX = 16;
 constexpr int Y_MAX = 16;
 constexpr int Z_MAX = 16;
-
-constexpr int BLOCK_SIZE = 20;
 
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {
@@ -22,13 +20,13 @@ public:
 
 private:
 
-	C_VOXEL_CHUNK c_chunk;
+	C_VOXEL_WORLD c_world;
 
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 
 public:
 
-	C_MAP_MANAGER() : c_chunk(X_MAX, Y_MAX, Z_MAX){}
+	C_MAP_MANAGER(){}
 
 	//初期化
 	void Init();

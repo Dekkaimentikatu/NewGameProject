@@ -2,6 +2,7 @@
 
 #include <map>
 #include <memory>
+#include <compare>
 #include "game/voxel/voxel.h"
 
 using namespace std;
@@ -15,11 +16,19 @@ struct T_CHUNK_POS
 	int x;
 	int z;
 
-	bool operator==(const T_CHUNK_POS& other) const
-	{
-		return x == other.x
-			&& z == other.z;
-	}
+	    bool operator==(const T_CHUNK_POS& other) const
+    {
+        return x == other.x &&
+               z == other.z;
+    }
+
+    bool operator<(const T_CHUNK_POS& other) const
+    {
+        if (x != other.x)
+            return x < other.x;
+
+        return z < other.z;
+    }
 };
 
 static const T_CHUNK_POS DEF_WORLD_POS[2][2] = {{{ -1, -1,} ,{ -1, 1}},
@@ -27,7 +36,7 @@ static const T_CHUNK_POS DEF_WORLD_POS[2][2] = {{{ -1, -1,} ,{ -1, 1}},
 
 
 
-class C_VOXEL_WOELD
+class C_VOXEL_WORLD
 {
 private:
 

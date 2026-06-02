@@ -2,7 +2,7 @@
 #include "game/voxel/voxel_chunk.h"
 
 //
-void C_VOXEL_WOELD::Init()
+void C_VOXEL_WORLD::Init()
 {
 	m_chunkNumX = 0;
 	m_chunkNumZ = 0;
@@ -13,15 +13,20 @@ void C_VOXEL_WOELD::Init()
 }
 
 //ワールドの生成
-void C_VOXEL_WOELD::CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
+void C_VOXEL_WORLD::CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
 {
 	m_chunkNumX = _chunkNumX;
 	m_chunkNumZ = _chunkNumZ;
+
+	m_chunkSizeX = _chunkSizeX;
+	m_chunkSizeY = _chunkSizeY;
+	m_chunkSizeZ = _chunkSizeZ;
+
 	for (int x = 0; x < m_chunkNumX; x++)
 	{
 		for (int z = 0; z < m_chunkNumZ; z++)
 		{
-			C_VOXEL_WOELD::CreateChunk(DEF_WORLD_POS[x][z], _chunkSizeX, _chunkSizeY, _chunkSizeZ, C_VOXEL::BLOCK);
+			C_VOXEL_WORLD::CreateChunk(DEF_WORLD_POS[x][z], _chunkSizeX, _chunkSizeY, _chunkSizeZ, C_VOXEL::BLOCK);
 		}
 	}
 
@@ -35,20 +40,20 @@ void C_VOXEL_WOELD::CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX,
 }
 
 //
-void C_VOXEL_WOELD::CreateWorld(string _filePath)
+void C_VOXEL_WORLD::CreateWorld(string _filePath)
 {
 
 }
 
 //
-void C_VOXEL_WOELD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType)
+void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType)
 {
 	C_VOXEL_CHUNK chunk(_chunkSizeX, _chunkSizeY, _chunkSizeZ);
 	C_VOXEL::T_VOXEL_DATA voxelData = { 0 };
 	T_CHUNK_POS chunkPos = { 0 };
 	T_CHUNK_DATA chunkData = { 0 };
 
-	chunkPos = chunkPos;
+	chunkPos = _chunkPos;
 
 	for (int x = 0; x < _chunkSizeX; x++)
 	{
@@ -77,7 +82,7 @@ void C_VOXEL_WOELD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chu
 }
 
 //ボクセルのポリゴン描画フラグの更新
-void C_VOXEL_WOELD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
+void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ)
 {
 	for (int x = 0; x < _chunkSizeX; x++)
 	{
@@ -97,7 +102,7 @@ void C_VOXEL_WOELD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _c
 }
 
 //
-void C_VOXEL_WOELD::Step()
+void C_VOXEL_WORLD::Step()
 {
 	for (int x = 0; x < m_chunkNumX; x++)
 	{
@@ -109,13 +114,13 @@ void C_VOXEL_WOELD::Step()
 }
 
 //
-void C_VOXEL_WOELD::Update()
+void C_VOXEL_WORLD::Update()
 {
 
 }
 
 //ポリゴンの描画フラグの更新
-void C_VOXEL_WOELD::DrawVoxel(T_CHUNK_POS _chunkPos)
+void C_VOXEL_WORLD::DrawVoxel(T_CHUNK_POS _chunkPos)
 {
 	for (int x = 0; x < m_chunkSizeX; x++)
 	{
@@ -130,7 +135,7 @@ void C_VOXEL_WOELD::DrawVoxel(T_CHUNK_POS _chunkPos)
 }
 
 //
-void C_VOXEL_WOELD::Draw()
+void C_VOXEL_WORLD::Draw()
 {
 	for (int x = 0; x < m_chunkNumX; x++)
 	{
@@ -142,7 +147,7 @@ void C_VOXEL_WOELD::Draw()
 }
 
 //
-void C_VOXEL_WOELD::Exit()
+void C_VOXEL_WORLD::Exit()
 {
 	for (int x = 0; x < m_chunkNumX; x++)
 	{

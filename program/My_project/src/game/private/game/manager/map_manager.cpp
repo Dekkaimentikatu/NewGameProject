@@ -30,45 +30,12 @@ void C_MAP_MANAGER::LoadSync()
 	C_VOXEL::T_VOXEL_DATA tmp = { 0 };
 	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
-	for (int x = 0; x < X_MAX; x++)
-	{
-		for (int y = 0; y < Y_MAX; y++)
-		{
-			for (int z = 0; z < Z_MAX; z++)
-			{
-				tmp.size = BLOCK_SIZE / 2;
-				tmp.pos.x = static_cast<float>(x) * BLOCK_SIZE;
-				tmp.pos.y = static_cast<float>(-y) * BLOCK_SIZE;
-				tmp.pos.z = static_cast<float>(z) * BLOCK_SIZE;
-				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
-				object->Init();
-				object->Request(tmp);
-				object->Load();
-				c_chunk.SetVoxel(x, y, z, object);
-			}
-		}
-	}
+	c_world.CreateWorld(2, 2, X_MAX, Y_MAX, Z_MAX);
 
 	shared_ptr<C_OBJECT_BASE> sky = make_shared<C_SKY>();
 	sky->Init();
 	sky->Load();
 	c_objectList.push_back(sky);
-
-	for (int x = 0; x < X_MAX; x++)
-	{
-		for (int y = 0; y < Y_MAX; y++)
-		{
-			for (int z = 0; z < Z_MAX; z++)
-			{
-				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
-				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
-				if (y < CHUNK_SIZE_Y - 1)c_chunk.CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
-				if (y != 0)c_chunk.CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
-				if (z < CHUNK_SIZE_Z - 1)c_chunk.CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
-				if (z != 0)c_chunk.CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
-			}
-		}
-	}
 
 	//for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	//{
@@ -83,21 +50,7 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	for (int x = 0; x < X_MAX; x++)
-	{
-		for (int y = 0; y < Y_MAX; y++)
-		{
-			for (int z = 0; z < Z_MAX; z++)
-			{
-				if (x < CHUNK_SIZE_X - 1)c_chunk.CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
-				if (x != 0)c_chunk.CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
-				if (y < CHUNK_SIZE_Y - 1)c_chunk.CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
-				if (y != 0)c_chunk.CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
-				if (z < CHUNK_SIZE_Z - 1)c_chunk.CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
-				if (z != 0)c_chunk.CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
-			}
-		}
-	}
+	c_world.Step();
 }
 
 void C_MAP_MANAGER::Update()
@@ -107,10 +60,7 @@ void C_MAP_MANAGER::Update()
 		(*itr)->Update();
 	}
 
-	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
-	{
-		(*itr)->Update();
-	}
+	c_world.Update();
 }
 
 void C_MAP_MANAGER::Draw()
@@ -120,12 +70,7 @@ void C_MAP_MANAGER::Draw()
 		(*itr)->Draw();
 	}
 
-	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
-	{
-		if((*itr)->GetIsActive())(*itr)->Draw();
-	}
-
-
+	c_world.Draw();
 }
 
 void C_MAP_MANAGER::Exit()
@@ -135,10 +80,7 @@ void C_MAP_MANAGER::Exit()
 		(*itr)->Exit();
 	}
 
-	for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
-	{
-		(*itr)->Exit();
-	}
+	c_world.Exit();
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
 	incetanse->Delete3DModel(SKY_MODEL_PATH);
