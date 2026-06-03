@@ -18,6 +18,9 @@ void C_VOXEL_WORLD::CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX,
 	m_chunkNumX = _chunkNumX;
 	m_chunkNumZ = _chunkNumZ;
 
+	m_chunkCountX = 0;
+	m_chunkCountZ = 0;
+
 	m_chunkSizeX = _chunkSizeX;
 	m_chunkSizeY = _chunkSizeY;
 	m_chunkSizeZ = _chunkSizeZ;
@@ -85,12 +88,12 @@ void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _c
 		{
 			for (int z = 0; z < _chunkSizeZ; z++)
 			{
-				if (x < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
-				if (x != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
-				if (y < CHUNK_SIZE_Y - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
-				if (y != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
-				if (z < CHUNK_SIZE_Z - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
-				if (z != 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
+				if (x < _chunkSizeX - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::RIGHT);
+				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::LEFT);
+				if (y < _chunkSizeY - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
+				if (y > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
+				if (z < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::FRONT);
+				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::REAR);
 			}
 		}
 	}
@@ -99,11 +102,20 @@ void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _c
 //
 void C_VOXEL_WORLD::Step()
 {
-	for (int x = 0; x < m_chunkNumX; x++)
+
+
+	CheckDrawFlag(DEF_WORLD_POS[m_chunkCountX][m_chunkCountZ], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+
+	m_chunkCountX++;
+
+	if (m_chunkCountX >= m_chunkNumX)
 	{
-		for (int z = 0; z < m_chunkNumZ; z++)
+		m_chunkCountX = m_chunkNumX - 1;
+		m_chunkCountZ++;
+		if (m_chunkCountZ >= m_chunkCountZ)
 		{
-			CheckDrawFlag(DEF_WORLD_POS[x][z], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+			m_chunkCountX = 0;
+			m_chunkCountZ = 0;
 		}
 	}
 }

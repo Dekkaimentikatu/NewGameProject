@@ -54,6 +54,9 @@ private:
 	int m_chunkNumX;
 	int m_chunkNumZ;
 
+	int m_chunkCountX;
+	int m_chunkCountZ;
+
 	int m_chunkSizeX;
 	int m_chunkSizeY;
 	int m_chunkSizeZ;
