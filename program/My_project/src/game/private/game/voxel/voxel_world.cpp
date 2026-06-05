@@ -88,12 +88,12 @@ void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _c
 		{
 			for (int z = 0; z < _chunkSizeZ; z++)
 			{
-				if (x < _chunkSizeX - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1 * _chunkPos.x, y, z, C_VOXEL::RIGHT);
-				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1 * _chunkPos.x, y, z, C_VOXEL::LEFT);
+				if (x < _chunkSizeX - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::RIGHT);
+				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::LEFT);
 				if (y < _chunkSizeY - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
 				if (y > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
-				if (z < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1 * _chunkPos.z, C_VOXEL::FRONT);
-				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1 * _chunkPos.z, C_VOXEL::REAR);
+				if (z < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::FRONT);
+				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::REAR);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ void C_VOXEL_WORLD::Step()
 {
 
 
-	CheckDrawFlag(DEF_WORLD_POS[m_chunkCountX][m_chunkCountZ], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+	CheckDrawFlag(DEF_WORLD_POS[0][1], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
 
 	m_chunkCountX++;
 
@@ -144,13 +144,14 @@ void C_VOXEL_WORLD::DrawVoxel(T_CHUNK_POS _chunkPos)
 //
 void C_VOXEL_WORLD::Draw()
 {
-	for (int x = 0; x < m_chunkNumX; x++)
-	{
-		for (int z = 0; z < m_chunkNumZ; z++)
-		{
-			DrawVoxel(DEF_WORLD_POS[x][z]);
-		}
-	}
+	//for (int x = 0; x < m_chunkNumX; x++)
+	//{
+	//	for (int z = 0; z < m_chunkNumZ; z++)
+	//	{
+	//		DrawVoxel(DEF_WORLD_POS[x][z]);
+	//	}
+	//}
+	DrawVoxel(DEF_WORLD_POS[0][1]);
 }
 
 //
