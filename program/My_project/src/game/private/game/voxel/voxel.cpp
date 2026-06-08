@@ -29,9 +29,13 @@ void C_VOXEL::Update()
 //•`‰æ
 void C_VOXEL::Draw()
 {
+	VECTOR pos = m_voxelData.pos;
+
+	if (m_voxelData.voxelType == AIR)return;
+
 	if (m_drawFlag & UP)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(0.0f, m_voxelData.size, 0.0f)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(0.0f, m_voxelData.size, 0.0f)),
 			VGet(m_voxelData.size, 0.0f, m_voxelData.size), VGet(-m_voxelData.size, 0.0f, m_voxelData.size),
 			VGet(m_voxelData.size, 0.0f, -m_voxelData.size), VGet(-m_voxelData.size, 0.0f, -m_voxelData.size),
 			DX_NONE_GRAPH, FALSE);
@@ -39,7 +43,7 @@ void C_VOXEL::Draw()
 
 	if (m_drawFlag & DOWN)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(0.0f, -m_voxelData.size, 0.0f)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(0.0f, -m_voxelData.size, 0.0f)),
 			VGet(m_voxelData.size, 0.0f, m_voxelData.size), VGet(-m_voxelData.size, 0.0f, m_voxelData.size),
 			VGet(m_voxelData.size, 0.0f, -m_voxelData.size), VGet(-m_voxelData.size, 0.0f, -m_voxelData.size),
 			DX_NONE_GRAPH, FALSE);
@@ -47,7 +51,7 @@ void C_VOXEL::Draw()
 
 	if (m_drawFlag & LEFT)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(m_voxelData.size, 0.0f, 0.0f)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(m_voxelData.size, 0.0f, 0.0f)),
 			VGet(0.0f, m_voxelData.size, m_voxelData.size), VGet(0.0f, -m_voxelData.size, m_voxelData.size),
 			VGet(0.0f, m_voxelData.size, -m_voxelData.size), VGet(0.0f, -m_voxelData.size, -m_voxelData.size),
 			DX_NONE_GRAPH, FALSE);
@@ -55,7 +59,7 @@ void C_VOXEL::Draw()
 
 	if (m_drawFlag & RIGHT)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(-m_voxelData.size, 0.0f, 0.0f)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(-m_voxelData.size, 0.0f, 0.0f)),
 			VGet(0.0f, m_voxelData.size, m_voxelData.size), VGet(0.0f, -m_voxelData.size, m_voxelData.size),
 			VGet(0.0f, m_voxelData.size, -m_voxelData.size), VGet(0.0f, -m_voxelData.size, -m_voxelData.size),
 			DX_NONE_GRAPH, FALSE);
@@ -63,7 +67,7 @@ void C_VOXEL::Draw()
 
 	if (m_drawFlag & REAR)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(0.0f, 0.0f, m_voxelData.size)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(0.0f, 0.0f, m_voxelData.size)),
 			VGet(m_voxelData.size, m_voxelData.size, 0.0f), VGet(-m_voxelData.size, m_voxelData.size, 0.0f),
 			VGet(m_voxelData.size, -m_voxelData.size, 0.0f), VGet(-m_voxelData.size, -m_voxelData.size, 0.0f),
 			DX_NONE_GRAPH, FALSE);
@@ -71,7 +75,7 @@ void C_VOXEL::Draw()
 
 	if (m_drawFlag & FRONT)
 	{
-		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(m_voxelData.pos, VGet(0.0f, 0.0f, -m_voxelData.size)),
+		C_DRAW_POLYGON::DrawPolygonSquare(VAdd(pos, VGet(0.0f, 0.0f, -m_voxelData.size)),
 			VGet(m_voxelData.size, m_voxelData.size, 0.0f), VGet(-m_voxelData.size, m_voxelData.size, 0.0f),
 			VGet(m_voxelData.size, -m_voxelData.size, 0.0f), VGet(-m_voxelData.size, -m_voxelData.size, 0.0f),
 			DX_NONE_GRAPH, FALSE);

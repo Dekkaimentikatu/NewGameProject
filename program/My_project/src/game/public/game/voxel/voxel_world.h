@@ -35,8 +35,6 @@ struct T_CHUNK_POS
 static const T_CHUNK_POS DEF_WORLD_POS[2][2] = {{{ -1, -1,} ,{ -1, 1}},
 											{{ 1, -1}, { 1 , 1}}};
 
-
-
 class C_VOXEL_WORLD
 {
 private:
@@ -61,6 +59,15 @@ private:
 	int m_chunkSizeY;
 	int m_chunkSizeZ;
 
+	//チャンクの生成
+	void CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType);
+	//ボクセルのポリゴン描画フラグの更新
+	void CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
+	//ポリゴンの描画フラグの更新
+	void DrawVoxel(T_CHUNK_POS _chunkPos);
+	//ポリゴンの描画オフセットの計算
+	VECTOR CalcDrawOffset(T_CHUNK_POS _chunkPos, VECTOR _offset);
+
 public:
 
 	//初期化
@@ -69,16 +76,10 @@ public:
 	void CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
 	//ワールドの生成(データ読み込み)
 	void CreateWorld(string _filePath);
-	//チャンクの生成
-	void CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType);
-	//ボクセルのポリゴン描画フラグの更新
-	void CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
 	//更新処理
 	void Step();
 	//更新確定処理
 	void Update();
-	//ポリゴンの描画フラグの更新
-	void DrawVoxel(T_CHUNK_POS _chunkPos);
 	//描画処理
 	void Draw();
 	//終了処理

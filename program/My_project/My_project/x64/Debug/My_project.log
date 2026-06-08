@@ -1,6 +1,5 @@
-﻿  voxel_world.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\include\compare(12): warning STL4038: The contents of <compare> are available only with C++20 or later.
+﻿  voxel.cpp
 C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
-  (ソース ファイル 'src/game/private/game/voxel/voxel_world.cpp' をコンパイルしています)
+  (ソース ファイル 'src/game/private/game/voxel/voxel.cpp' をコンパイルしています)
   
   My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

@@ -51,7 +51,7 @@ void C_PLAYER::Load()
 	C_3D_HNDL_MANAGER* incetans = C_3D_HNDL_MANAGER::GetInstance();
 
 	//座標、回転、スケールの設定
-	m_pos = VGet(0.0f, 40.0f, 0.0f);	//位置
+	m_pos = VGet(0.0f, 10.0f, 0.0f);	//位置
 
 	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);
 

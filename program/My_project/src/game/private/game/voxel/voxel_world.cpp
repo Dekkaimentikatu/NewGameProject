@@ -64,11 +64,13 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chu
 		{
 			for (int z = 0; z < _chunkSizeZ; z++)
 			{
+				VECTOR offset = CalcDrawOffset(_chunkPos, VGet(x, y, z));
 				voxelData.size = BLOCK_SIZE / 2;
-				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) * static_cast<float>(_chunkPos.x);
-				voxelData.pos.y = static_cast<float>(-y) * static_cast<float>(BLOCK_SIZE);
-				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) * static_cast<float>(_chunkPos.z);
-				voxelData.voxelType = _voxelType;
+				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE / 2) + offset.x;
+				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE);
+				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE / 2) + offset.z;
+				if(y == 0)voxelData.voxelType = _voxelType;
+				else voxelData.voxelType = C_VOXEL::AIR;
 				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
 				object->Init();
 				object->Request(voxelData);
@@ -88,12 +90,12 @@ void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _c
 		{
 			for (int z = 0; z < _chunkSizeZ; z++)
 			{
-				if (x < _chunkSizeX - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::RIGHT);
-				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::LEFT);
+				if (x < _chunkSizeX - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
+				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
 				if (y < _chunkSizeY - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
 				if (y > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
-				if (z < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::FRONT);
-				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::REAR);
+				if (z < _chunkSizeZ - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
+				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
 			}
 		}
 	}
@@ -104,26 +106,46 @@ void C_VOXEL_WORLD::Step()
 {
 
 
-	CheckDrawFlag(DEF_WORLD_POS[0][1], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
+	//CheckDrawFlag(DEF_WORLD_POS[0][1], m_chunkSizeX, m_chunkSizeY, m_chunkSizeZ);
 
-	m_chunkCountX++;
+	//m_chunkCountX++;
 
-	if (m_chunkCountX >= m_chunkNumX)
-	{
-		m_chunkCountX = m_chunkNumX - 1;
-		m_chunkCountZ++;
-		if (m_chunkCountZ >= m_chunkCountZ)
-		{
-			m_chunkCountX = 0;
-			m_chunkCountZ = 0;
-		}
-	}
+	//if (m_chunkCountX >= m_chunkNumX)
+	//{
+	//	m_chunkCountX = m_chunkNumX - 1;
+	//	m_chunkCountZ++;
+	//	if (m_chunkCountZ >= m_chunkCountZ)
+	//	{
+	//		m_chunkCountX = 0;
+	//		m_chunkCountZ = 0;
+	//	}
+	//}
 }
 
 //
 void C_VOXEL_WORLD::Update()
 {
 
+}
+
+//ポリゴンの描画オフセットの計算
+VECTOR C_VOXEL_WORLD::CalcDrawOffset(T_CHUNK_POS _chunkPos, VECTOR _offset)
+{
+	VECTOR drawOffset = { 0 };
+
+	if (_chunkPos.x < 0)
+	{
+		drawOffset.x = static_cast<float>(m_chunkSizeX) * static_cast<float>(BLOCK_SIZE) * _chunkPos.x;
+	}
+	else if (_chunkPos.x > 1) drawOffset.x = static_cast<float>(m_chunkSizeX) * static_cast<float>(BLOCK_SIZE) * _chunkPos.x;
+
+	if (_chunkPos.z < 0)
+	{
+		drawOffset.z = static_cast<float>(m_chunkSizeZ) * static_cast<float>(BLOCK_SIZE) * _chunkPos.z;
+	}
+	else if (_chunkPos.z > 1) drawOffset.z = static_cast<float>(m_chunkSizeZ) * static_cast<float>(BLOCK_SIZE) * _chunkPos.z;
+
+	return drawOffset;
 }
 
 //ポリゴンの描画フラグの更新
@@ -139,19 +161,21 @@ void C_VOXEL_WORLD::DrawVoxel(T_CHUNK_POS _chunkPos)
 			}
 		}
 	}
+
+	//CalcDrawOffset(_chunkPos, VGet(x, y, z))
 }
 
 //
 void C_VOXEL_WORLD::Draw()
 {
-	//for (int x = 0; x < m_chunkNumX; x++)
-	//{
-	//	for (int z = 0; z < m_chunkNumZ; z++)
-	//	{
-	//		DrawVoxel(DEF_WORLD_POS[x][z]);
-	//	}
-	//}
-	DrawVoxel(DEF_WORLD_POS[0][1]);
+	for (int x = 0; x < m_chunkNumX; x++)
+	{
+		for (int z = 0; z < m_chunkNumZ; z++)
+		{
+			DrawVoxel(DEF_WORLD_POS[x][z]);
+		}
+	}
+	//DrawVoxel(DEF_WORLD_POS[0][0]);
 }
 
 //
