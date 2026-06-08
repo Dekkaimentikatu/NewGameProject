@@ -5,7 +5,7 @@
 void C_VOXEL::Init()
 {
 	m_voxelData = { 0 };
-	m_drawFlag = DIR_MASK;
+	m_drawFlag |= DIR_MASK;
 }
 
 //ì«çû

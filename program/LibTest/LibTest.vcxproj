@@ -124,10 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LibTest.cpp" />
-    <ClCompile Include="lib\_thread_pool.cpp" />
+    <ClCompile Include="lib\thread_pool.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\_thread_pool.h" />
+    <ClInclude Include="lib\thread_pool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

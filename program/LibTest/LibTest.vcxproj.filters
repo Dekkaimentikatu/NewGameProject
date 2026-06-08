@@ -21,12 +21,12 @@
     <ClCompile Include="LibTest.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="lib\_thread_pool.cpp">
+    <ClCompile Include="lib\thread_pool.cpp">
       <Filter>ソース ファイル\lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\_thread_pool.h">
+    <ClInclude Include="lib\thread_pool.h">
       <Filter>ソース ファイル\lib</Filter>
     </ClInclude>
   </ItemGroup>

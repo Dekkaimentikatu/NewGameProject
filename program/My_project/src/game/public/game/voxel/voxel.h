@@ -79,7 +79,7 @@ public:
 	void Request(T_VOXEL_DATA _voxelData) { m_voxelData = _voxelData; }
 
 	//フラグを立てる
-	void OnFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag &= _drawFlag; }
+	void OnFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag |= _drawFlag; }
 
 	//フラグを折る
 	void OffFlag(DRAW_POLY_FLAG _drawFlag) { m_drawFlag &= ~_drawFlag; }
