@@ -16,7 +16,7 @@ private:
 
 	//ターゲットポインター
 	template<typename T>
-	struct TaggedPtr
+	struct T_TAGGED_PTR
 	{
 		//テンプレート型ポインタ変数
 		T* ptr;
@@ -24,13 +24,13 @@ private:
 		uint64_t tag;
 
 		//コンストラクタ
-		TaggedPtr(T* p = nullptr, uint64_t t = 0)
+		T_TAGGED_PTR(T* p = nullptr, uint64_t t = 0)
 			: ptr(p), tag(t)
 		{
 		}
 
 		//==の定義
-		bool operator==(const TaggedPtr& other) const
+		bool operator==(const T_TAGGED_PTR& other) const
 		{
 			return ptr == other.ptr &&
 				tag == other.tag;
@@ -39,7 +39,7 @@ private:
 
 	template<typename T>
 	//ロックフリーキュークラス
-	class LockFreeQueue
+	class C_LOCK_FREE_QUEUE
 	{
 	private:
 
@@ -49,26 +49,26 @@ private:
 			//テンプレート型変数
 			T data;
 			//キューの次の要素
-			std::atomic<TaggedPtr<Node>> next;
+			std::atomic<T_TAGGED_PTR<Node>> next;
 
 			//コンストラクタ
 			Node()
-				: next(TaggedPtr<Node>(nullptr, 0))
+				: next(T_TAGGED_PTR<Node>(nullptr, 0))
 			{
 			}
 
 			//コンストラクタ(値を代入)
 			Node(T value)
 				: data(std::move(value)),
-				next(TaggedPtr<Node>(nullptr, 0))
+				next(T_TAGGED_PTR<Node>(nullptr, 0))
 			{
 			}
 		};
 
 		//キューの先頭
-		std::atomic<TaggedPtr<Node>> m_head;
+		std::atomic<T_TAGGED_PTR<Node>> m_head;
 		//キューの末尾
-		std::atomic<TaggedPtr<Node>> m_tail;
+		std::atomic<T_TAGGED_PTR<Node>> m_tail;
 
 		//安全削除用ミューテックス
 		std::mutex m_deleteMutex;
@@ -90,28 +90,28 @@ private:
 	public:
 
 		//コンストラクタ
-		LockFreeQueue()
+		C_LOCK_FREE_QUEUE()
 		{
 			//ダミーのノードを生成
 			Node* dummy = new Node();
 			//ターゲットに登録
-			TaggedPtr<Node> ptr(dummy, 0);
+			T_TAGGED_PTR<Node> ptr(dummy, 0);
 			//先頭と末尾に登録
 			m_head.store(ptr);
 			m_tail.store(ptr);
 		}
 
 		//デストラクタ
-		~LockFreeQueue()
+		~C_LOCK_FREE_QUEUE()
 		{
 			// queue側解放
-			TaggedPtr<Node> current =
+			T_TAGGED_PTR<Node> current =
 				m_head.load(std::memory_order_acquire);
 
 			//解放処理
 			while (current.ptr)
 			{
-				TaggedPtr<Node> next =
+				T_TAGGED_PTR<Node> next =
 					current.ptr->next.load(
 						std::memory_order_acquire);
 
@@ -136,11 +136,11 @@ private:
 			while (true)
 			{
 				//末尾を取得
-				TaggedPtr<Node> tail =
+				T_TAGGED_PTR<Node> tail =
 					m_tail.load(std::memory_order_acquire);
 
 				//最後尾を参照
-				TaggedPtr<Node> next =
+				T_TAGGED_PTR<Node> next =
 					tail.ptr->next.load(
 						std::memory_order_acquire);
 
@@ -152,7 +152,7 @@ private:
 					if (next.ptr == nullptr)
 					{
 						//最後尾のノードを生成
-						TaggedPtr<Node> newNext(
+						T_TAGGED_PTR<Node> newNext(
 							newNode,
 							next.tag + 1);
 
@@ -164,7 +164,7 @@ private:
 							std::memory_order_relaxed))
 						{
 							//新しい末尾
-							TaggedPtr<Node> newTail(
+							T_TAGGED_PTR<Node> newTail(
 								newNode,
 								tail.tag + 1);
 							//末尾と新しい末尾を比較
@@ -180,7 +180,7 @@ private:
 					else
 					{
 						//tail更新
-						TaggedPtr<Node> newTail(
+						T_TAGGED_PTR<Node> newTail(
 							next.ptr,
 							tail.tag + 1);
 
@@ -200,13 +200,13 @@ private:
 		{
 			while (true)
 			{
-				TaggedPtr<Node> head =
+				T_TAGGED_PTR<Node> head =
 					m_head.load(std::memory_order_acquire);
 
-				TaggedPtr<Node> tail =
+				T_TAGGED_PTR<Node> tail =
 					m_tail.load(std::memory_order_acquire);
 
-				TaggedPtr<Node> next =
+				T_TAGGED_PTR<Node> next =
 					head.ptr->next.load(
 						std::memory_order_acquire);
 
@@ -219,7 +219,7 @@ private:
 				// tail遅れ
 				if (head.ptr == tail.ptr)
 				{
-					TaggedPtr<Node> newTail(
+					T_TAGGED_PTR<Node> newTail(
 						next.ptr,
 						tail.tag + 1);
 
@@ -236,7 +236,7 @@ private:
 
 				T value = next.ptr->data;
 
-				TaggedPtr<Node> newHead(
+				T_TAGGED_PTR<Node> newHead(
 					next.ptr,
 					head.tag + 1);
 
@@ -260,133 +260,38 @@ private:
 
 private:
 
-	// ========================================================
-	// Thread
-	// ========================================================
-
+	//ワーカースレッド
 	std::vector<std::thread> m_workers;
+	//タスクキュー
+	C_LOCK_FREE_QUEUE<std::function<void()>> m_tasks;
 
-	LockFreeQueue<std::function<void()>> m_tasks;
-
-	// ========================================================
-	// Atomic
-	// ========================================================
-
+	//停止フラグ
 	std::atomic<bool> m_stop = false;
-
+	//実行中タスク数
 	std::atomic<int> m_activeTask = 0;
 
-	// ========================================================
-	// Sleep
-	// ========================================================
-
+	//待機用ミューテックス
 	std::mutex m_waitMutex;
-
+	//待機用条件変数
 	std::condition_variable m_cv;
 
 private:
 
-	// ========================================================
-	// Worker
-	// ========================================================
-	void WorkerLoop()
-	{
-		while (true)
-		{
-			std::function<void()> task;
-
-			if (m_tasks.Pop(task))
-			{
-				task();
-
-				m_activeTask.fetch_sub(
-					1,
-					std::memory_order_release);
-			}
-			else
-			{
-				std::unique_lock<std::mutex> lock(
-					m_waitMutex);
-
-				m_cv.wait(lock, [this]
-					{
-						return
-							m_stop.load(
-								std::memory_order_acquire)
-							||
-							m_activeTask.load(
-								std::memory_order_acquire) > 0;
-					});
-
-				if (m_stop.load(
-					std::memory_order_acquire))
-				{
-					return;
-				}
-			}
-		}
-	}
+	//ワーカーループ
+	void WorkerLoop();
 
 public:
 
-	// ========================================================
-	// Constructor
-	// ========================================================
-	C_THREAD_POOL(size_t threadCount)
-	{
-		for (size_t i = 0; i < threadCount; ++i)
-		{
-			m_workers.emplace_back(
-				&C_THREAD_POOL::WorkerLoop,
-				this);
-		}
-	}
+	//コンストラクタ
+	C_THREAD_POOL(size_t threadCount);
 
-	// ========================================================
-	// Destructor
-	// ========================================================
-	~C_THREAD_POOL()
-	{
-		Wait();
+	//デストラクタ
+	~C_THREAD_POOL();
 
-		m_stop.store(true);
+	//エンキュー
+	void Enqueue(std::function<void()> job);
 
-		m_cv.notify_all();
-
-		for (auto& worker : m_workers)
-		{
-			if (worker.joinable())
-			{
-				worker.join();
-			}
-		}
-	}
-
-	// ========================================================
-	// Enqueue
-	// ========================================================
-	void Enqueue(std::function<void()> job)
-	{
-		m_activeTask.fetch_add(
-			1,
-			std::memory_order_release);
-
-		m_tasks.Push(std::move(job));
-
-		m_cv.notify_one();
-	}
-
-	// ========================================================
-	// Wait
-	// ========================================================
-	void Wait()
-	{
-		while (
-			m_activeTask.load(
-				std::memory_order_acquire) > 0)
-		{
-			std::this_thread::yield();
-		}
-	}
+	//待機
+	void Wait();
 };
 

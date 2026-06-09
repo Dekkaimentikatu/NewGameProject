@@ -176,7 +176,6 @@ void C_VOXEL_WORLD::Draw()
 			DrawVoxel(DEF_WORLD_POS[x][z]);
 		}
 	}
-	//DrawVoxel(DEF_WORLD_POS[0][0]);
 }
 
 //

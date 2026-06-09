@@ -32,17 +32,17 @@ private:
     // ABA対策
     // ========================================================
     template<typename T>
-    struct TaggedPtr
+    struct T_TAGGED_PTR
     {
         T* ptr;
         uint64_t tag;
 
-        TaggedPtr(T* p = nullptr, uint64_t t = 0)
+        T_TAGGED_PTR(T* p = nullptr, uint64_t t = 0)
             : ptr(p), tag(t)
         {
         }
 
-        bool operator==(const TaggedPtr& other) const
+        bool operator==(const T_TAGGED_PTR& other) const
         {
             return ptr == other.ptr &&
                 tag == other.tag;
@@ -54,7 +54,7 @@ private:
     // Michael & Scott Queue
     // ========================================================
     template<typename T>
-    class LockFreeQueue
+    class C_LOCK_FREE_QUEUE
     {
     private:
 
@@ -62,49 +62,49 @@ private:
         {
             T data;
 
-            std::atomic<TaggedPtr<Node>> next;
+            std::atomic<T_TAGGED_PTR<Node>> next;
 
             Node()
-                : next(TaggedPtr<Node>(nullptr, 0))
+                : next(T_TAGGED_PTR<Node>(nullptr, 0))
             {
             }
 
             Node(T value)
                 : data(std::move(value)),
-                next(TaggedPtr<Node>(nullptr, 0))
+                next(T_TAGGED_PTR<Node>(nullptr, 0))
             {
             }
         };
 
         alignas(64)
-            std::atomic<TaggedPtr<Node>> m_head;
+            std::atomic<T_TAGGED_PTR<Node>> m_head;
 
         alignas(64)
-            std::atomic<TaggedPtr<Node>> m_tail;
+            std::atomic<T_TAGGED_PTR<Node>> m_tail;
 
     public:
 
-        LockFreeQueue()
+        C_LOCK_FREE_QUEUE()
         {
             Node* dummy = new Node();
 
-            TaggedPtr<Node> ptr(dummy, 0);
+            T_TAGGED_PTR<Node> ptr(dummy, 0);
 
             m_head.store(ptr, std::memory_order_release);
             m_tail.store(ptr, std::memory_order_release);
         }
 
-        ~LockFreeQueue()
+        ~C_LOCK_FREE_QUEUE()
         {
             // 学習用安全設計
             // lock-free delete問題回避
 
-            TaggedPtr<Node> current =
+            T_TAGGED_PTR<Node> current =
                 m_head.load(std::memory_order_acquire);
 
             while (current.ptr)
             {
-                TaggedPtr<Node> next =
+                T_TAGGED_PTR<Node> next =
                     current.ptr->next.load(std::memory_order_acquire);
 
                 delete current.ptr;
@@ -122,10 +122,10 @@ private:
 
             while (true)
             {
-                TaggedPtr<Node> tail =
+                T_TAGGED_PTR<Node> tail =
                     m_tail.load(std::memory_order_acquire);
 
-                TaggedPtr<Node> next =
+                T_TAGGED_PTR<Node> next =
                     tail.ptr->next.load(std::memory_order_acquire);
 
                 // tail整合性確認
@@ -134,7 +134,7 @@ private:
                     // 最後尾
                     if (next.ptr == nullptr)
                     {
-                        TaggedPtr<Node> newNext(
+                        T_TAGGED_PTR<Node> newNext(
                             newNode,
                             next.tag + 1);
 
@@ -145,7 +145,7 @@ private:
                             std::memory_order_release,
                             std::memory_order_relaxed))
                         {
-                            TaggedPtr<Node> newTail(
+                            T_TAGGED_PTR<Node> newTail(
                                 newNode,
                                 tail.tag + 1);
 
@@ -161,7 +161,7 @@ private:
                     else
                     {
                         // tail進行
-                        TaggedPtr<Node> newTail(
+                        T_TAGGED_PTR<Node> newTail(
                             next.ptr,
                             tail.tag + 1);
 
@@ -182,13 +182,13 @@ private:
         {
             while (true)
             {
-                TaggedPtr<Node> head =
+                T_TAGGED_PTR<Node> head =
                     m_head.load(std::memory_order_acquire);
 
-                TaggedPtr<Node> tail =
+                T_TAGGED_PTR<Node> tail =
                     m_tail.load(std::memory_order_acquire);
 
-                TaggedPtr<Node> next =
+                T_TAGGED_PTR<Node> next =
                     head.ptr->next.load(std::memory_order_acquire);
 
                 // head整合性確認
@@ -203,7 +203,7 @@ private:
                     // tail遅れ
                     if (head.ptr == tail.ptr)
                     {
-                        TaggedPtr<Node> newTail(
+                        T_TAGGED_PTR<Node> newTail(
                             next.ptr,
                             tail.tag + 1);
 
@@ -218,7 +218,7 @@ private:
 
                     result = std::move(next.ptr->data);
 
-                    TaggedPtr<Node> newHead(
+                    T_TAGGED_PTR<Node> newHead(
                         next.ptr,
                         head.tag + 1);
 
@@ -246,7 +246,7 @@ private:
 
     std::vector<std::thread> m_workers;
 
-    LockFreeQueue<std::function<void()>> m_tasks;
+    C_LOCK_FREE_QUEUE<std::function<void()>> m_tasks;
 
     alignas(64)
         std::atomic<bool> m_stop = false;
