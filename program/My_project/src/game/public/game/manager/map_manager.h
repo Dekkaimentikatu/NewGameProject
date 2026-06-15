@@ -3,9 +3,9 @@
 #include "game/stage/stage_loader.h"
 #include "game/voxel/voxel_world.h"
 
-constexpr int X_MAX = 16;
-constexpr int Y_MAX = 16;
-constexpr int Z_MAX = 16;
+constexpr int X_MAX = 32;
+constexpr int Y_MAX = 32;
+constexpr int Z_MAX = 32;
 
 class C_MAP_MANAGER : public C_OBJECT_MANAGER_BASE
 {

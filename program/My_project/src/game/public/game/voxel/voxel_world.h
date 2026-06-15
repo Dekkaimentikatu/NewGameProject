@@ -12,6 +12,11 @@ class C_VOXEL_CHUNK;
 
 constexpr int BLOCK_SIZE = 20;
 
+constexpr int CHUNK_NUM_X = 2;
+
+constexpr int CHUNK_NUM_Y = 2;
+
+
 struct T_CHUNK_POS
 {
 	int x;
@@ -32,8 +37,8 @@ struct T_CHUNK_POS
     }
 };
 
-static const T_CHUNK_POS DEF_WORLD_POS[2][2] = {{{ -1, -1,} ,{ -1, 1}},
-											{{ 1, -1}, { 1 , 1}}};
+static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = {{{ -1, -1,} ,{ -1, 1}},
+																	{{ 1, -1}, { 1 , 1}}};
 
 class C_VOXEL_WORLD
 {
@@ -49,20 +54,10 @@ private:
 
 	map<T_CHUNK_POS, unique_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
 
-	int m_chunkNumX;
-	int m_chunkNumZ;
-
-	int m_chunkCountX;
-	int m_chunkCountZ;
-
-	int m_chunkSizeX;
-	int m_chunkSizeY;
-	int m_chunkSizeZ;
-
 	//チャンクの生成
-	void CreateChunk(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ, C_VOXEL::VOXEL_TYPE _voxelType);
+	void CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxelType);
 	//ボクセルのポリゴン描画フラグの更新
-	void CheckDrawFlag(T_CHUNK_POS _chunkPos, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
+	void CheckDrawFlag(T_CHUNK_POS _chunkPos);
 	//ポリゴンの描画フラグの更新
 	void DrawVoxel(T_CHUNK_POS _chunkPos);
 	//ポリゴンの描画オフセットの計算
@@ -73,7 +68,7 @@ public:
 	//初期化
 	void Init();
 	//ワールドの生成
-	void CreateWorld(int _chunkNumX, int _chunkNumZ, int _chunkSizeX, int _chunkSizeY, int _chunkSizeZ);
+	void CreateWorld();
 	//ワールドの生成(データ読み込み)
 	void CreateWorld(string _filePath);
 	//更新処理

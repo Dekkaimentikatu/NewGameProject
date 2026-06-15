@@ -93,7 +93,8 @@ void C_SCENE_PLAY::Step()
 
 		if (!C_FADE::IsEndFadeIn())return;	//フェードインが終わっていなければ抜ける
 
-		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_START ||
+		//カメライベントの状態がプレイ待機、もしくは決定ボタンが押されたらフェードアウトする
+		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_PLAYWAIT ||
 			C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 		{
 			C_FADE::RequestFadeOut();
@@ -120,7 +121,7 @@ void C_SCENE_PLAY::Step()
 		c_enemyManager.Step();
 
 		//マップ更新
-		//c_threadPool.Enqueue([this]() { c_mapManager.Step(); });
+		c_threadPool.Enqueue([this]() { c_mapManager.Step(); });
 
 		if (tmp->GetPlayerData()->isRespawn)
 		{
@@ -168,7 +169,7 @@ void C_SCENE_PLAY::Step()
 	CEffekseerCtrl::SetAutoProjectionMtx();
 
 	// ラムダで渡すことで std::function<void()> に合うようにする
-	//c_threadPool.Enqueue([]() { C_COLLISION_MANAGER::CollisionCalc(); });
+	c_threadPool.Enqueue([]() { C_COLLISION_MANAGER::CollisionCalc(); });
 
 	//当たり判定を行った後に更新確定処理を行う
 	CEffekseerCtrl::UpdateAutoCamera();

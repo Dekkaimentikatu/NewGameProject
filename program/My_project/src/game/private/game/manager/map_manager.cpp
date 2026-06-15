@@ -30,7 +30,7 @@ void C_MAP_MANAGER::LoadSync()
 	C_VOXEL::T_VOXEL_DATA tmp = { 0 };
 	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
-	c_world.CreateWorld(2, 2, X_MAX, Y_MAX, Z_MAX);
+	c_world.CreateWorld();
 
 	shared_ptr<C_OBJECT_BASE> sky = make_shared<C_SKY>();
 	sky->Init();
