@@ -10,6 +10,9 @@
 #include "game/collision/collision_manager.h"
 #include "UI/UI_manager.h"
 #include "effekseer/effekseer.h"
+#include "thread_pool/thread_pool.h"
+
+constexpr int WORKR_THREAD_NUM = 4;
 
 class C_SCENE_PLAY: public C_SCENE_BASE
 {
@@ -35,6 +38,8 @@ private:
 
 	PLAY_STATE m_playState;
 
+	C_THREAD_POOL c_threadPool;
+
 private:
 
 	void Init();		//初期化処理
@@ -58,6 +63,8 @@ private:
 	void EndWait();		//終了前待機処理
 
 public:
+
+	C_SCENE_PLAY() : c_threadPool(WORKR_THREAD_NUM), m_playState(START) {}	//コンストラクタ
 
 	~C_SCENE_PLAY() override;	//デストラクタ
 

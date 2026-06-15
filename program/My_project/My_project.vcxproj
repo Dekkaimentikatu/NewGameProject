@@ -194,6 +194,9 @@
     <ClCompile Include="src\system\private\scene\scene_title.cpp" />
     <ClCompile Include="src\system\private\UI\UI_manager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="tmp_note.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

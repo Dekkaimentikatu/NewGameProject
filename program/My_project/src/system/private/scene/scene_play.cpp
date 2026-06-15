@@ -93,7 +93,7 @@ void C_SCENE_PLAY::Step()
 
 		if (!C_FADE::IsEndFadeIn())return;	//フェードインが終わっていなければ抜ける
 
-		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_PLAYWAIT ||
+		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_START ||
 			C_INPUT_CONFIG::IsButtanInputTrg(C_INPUT_CONFIG::DECISION))
 		{
 			C_FADE::RequestFadeOut();
@@ -120,7 +120,7 @@ void C_SCENE_PLAY::Step()
 		c_enemyManager.Step();
 
 		//マップ更新
-		c_mapManager.Step();
+		//c_threadPool.Enqueue([this]() { c_mapManager.Step(); });
 
 		if (tmp->GetPlayerData()->isRespawn)
 		{
@@ -167,7 +167,8 @@ void C_SCENE_PLAY::Step()
 
 	CEffekseerCtrl::SetAutoProjectionMtx();
 
-	C_COLLISION_MANAGER::CollisionCalc();
+	// ラムダで渡すことで std::function<void()> に合うようにする
+	//c_threadPool.Enqueue([]() { C_COLLISION_MANAGER::CollisionCalc(); });
 
 	//当たり判定を行った後に更新確定処理を行う
 	CEffekseerCtrl::UpdateAutoCamera();
@@ -176,6 +177,7 @@ void C_SCENE_PLAY::Step()
 
 	c_enemyManager.Update();
 
+	// メンバ関数呼び出しをラムダに包んで渡す
 	c_mapManager.Update();
 
 	c_cameraManager.Step(c_playerManager.GetPlayerInstance()->GetTargetPos(),
@@ -205,6 +207,7 @@ void C_SCENE_PLAY::EndWait()
 	C_BGM_MANAGER* bgmMgr = C_BGM_MANAGER::GetInstance();
 	bgmMgr->Stop(C_BGM_MANAGER::BGMID_GAME);	//BGM停止
 
+	c_threadPool.Wait();
 	m_sceneState = END;			//ステータスを更新
 }
 

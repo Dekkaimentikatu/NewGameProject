@@ -1,2 +1,9 @@
-﻿  thread_pool.cpp
-  My_project.vcxproj -> C:\Users\reono\Desktop\新しいフォルダー\NewGameProject\program\My_project\x64\Debug\My_project.exe
+﻿  scene_play.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.42.34433\include\compare(12): warning STL4038: The contents of <compare> are available only with C++20 or later.
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'src/system/private/scene/scene_play.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'src/system/private/scene/scene_play.cpp' をコンパイルしています)
+  
+  My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

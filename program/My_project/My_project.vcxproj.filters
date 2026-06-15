@@ -754,4 +754,7 @@
       <Filter>src\game\private\game\voxel</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="tmp_note.txt" />
+  </ItemGroup>
 </Project>
