@@ -78,5 +78,8 @@ public:
 	//I—¹ˆ—
 	void Exit();
 
+	//
+	std::weak_ptr<C_VOXEL> GetChunk(T_CHUNK_POS _chunkPos, int _x, int _y, int _z) { return m_voxelWorld.at(_chunkPos)->GetVoxel(_x, _y, _z); }
+
 };
 

@@ -28,8 +28,6 @@ private:
 	//オブジェクトの判定用プール
 	std::list<std::weak_ptr<C_OBJECT_BASE>> m_objectPool;
 
-	std::weak_ptr<C_VOXEL_WORLD> c_voxelWorldCopy;
-
 	//プレイヤーとエネミーの当たり判定
 	static void CollisionPlayerToEnemy(std::weak_ptr<C_OBJECT_BASE> _player, std::weak_ptr<C_OBJECT_BASE> enemy);
 
@@ -51,16 +49,27 @@ private:
 	//プレイヤーとエネミーの攻撃判定
 	void AttackPlayerToEnemy(std::weak_ptr<C_ACTOR_BASE> _player, std::weak_ptr<C_ACTOR_BASE> _enemy);
 
+	//ワールドのコピー
+	std::weak_ptr<C_VOXEL_WORLD> c_voxelWorldCopy;
+
+	//アクターとボクセル
+	void CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor);
+
+	//オブジェクトの削除
 	void EraseObject(std::list<std::weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool);
 
+	//アクターの削除
 	void EraseActor(std::list <std::weak_ptr<C_ACTOR_BASE>>::iterator &_actorPool);
 
 public:
 
+	//インスタンスを取得
 	static C_COLLISION_MANAGER* GetInstance();
 
+	//インスタンスを削除
 	static void DeleteInstance();
 
+	//実行処理
 	void CollisionCalc();
 
 	//オブジェクト追加

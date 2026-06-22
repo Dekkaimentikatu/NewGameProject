@@ -1,5 +1,11 @@
-﻿  collision_manager.cpp
-  enemy_manager.cpp
+﻿  select_disp.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'src/game/private/game/UI/select_disp.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'src/game/private/game/UI/select_disp.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\UI\select_disp.cpp(65,37): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   map_manager.cpp
 C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル 'src/game/private/game/manager/map_manager.cpp' をコンパイルしています)
@@ -7,10 +13,30 @@ C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\ga
 C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   (ソース ファイル 'src/game/private/game/manager/map_manager.cpp' をコンパイルしています)
   
-  player_manager.cpp
-  car_emitter.cpp
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\object\static\car_emitter.cpp(78,25): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-  darts_emitter.cpp
+  voxel_world.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'src/game/private/game/voxel/voxel_world.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'src/game/private/game/voxel/voxel_world.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\voxel\voxel_world.cpp(54,58): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\voxel\voxel_world.cpp(54,55): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\voxel\voxel_world.cpp(54,52): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  UI_manager.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'src/system/private/UI/UI_manager.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'src/system/private/UI/UI_manager.cpp' をコンパイルしています)
+  
+  scene_factory.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'src/system/private/scene/scene_factory.cpp' をコンパイルしています)
+  
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  (ソース ファイル 'src/system/private/scene/scene_factory.cpp' をコンパイルしています)
+  
   scene_play.cpp
 C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
   (ソース ファイル 'src/system/private/scene/scene_play.cpp' をコンパイルしています)

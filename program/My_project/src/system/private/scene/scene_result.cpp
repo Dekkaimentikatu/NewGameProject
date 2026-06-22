@@ -64,6 +64,15 @@ void C_SCENE_RESULT::StartWait()
 
 void C_SCENE_RESULT::Step()
 {
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+	{
+		c_sceneData->SetSceneType(C_SCENE_DATA::END);	//次に遷移したいシーンのタイプを代入
+
+		m_sceneState = ENDWAIT;		//ステータスを更新
+
+		C_FADE::RequestFadeOut();	//フェードアウトのリクエスト
+	}
+
 	m_loadState = LOAD_OUT;
 
 

@@ -86,6 +86,15 @@ void C_SCENE_PLAY::StartWait()
 
 void C_SCENE_PLAY::Step()
 {
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+	{
+		c_sceneData->SetSceneType(C_SCENE_DATA::END);	//次に遷移したいシーンのタイプを代入
+
+		m_sceneState = ENDWAIT;		//ステータスを更新
+
+		C_FADE::RequestFadeOut();	//フェードアウトのリクエスト
+	}
+
 	m_loadState = LOAD_OUT;
 
 	C_GLOBAL_DATA* tmp = C_GLOBAL_DATA::GetInstace();

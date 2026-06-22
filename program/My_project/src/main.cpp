@@ -83,7 +83,6 @@ int  WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance,
 	{
 		WaitTimer(1);
 		// 「escキー」が押されたら終了
-		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) break; 
 		if (c_sceneManager.IsSceneTypeEND())break;
 
 		// 画面を一度何もない状態へ

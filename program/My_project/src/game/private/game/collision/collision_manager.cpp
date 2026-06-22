@@ -292,6 +292,11 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 	}
 }
 
+void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor)
+{
+	if (_actor.lock()->GetIsActive())return;
+}
+
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool)
 {
 	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
@@ -365,6 +370,14 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		}
 
 		EraseObject(itr1);
+	}
+
+	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end();)
+	{
+		//ƒ{ƒNƒZƒ‹‚Æ‚Ì“–‚½‚è”»’è
+		CollisionActorToVoxel((*itr));
+
+		EraseActor(itr);
 	}
 
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)

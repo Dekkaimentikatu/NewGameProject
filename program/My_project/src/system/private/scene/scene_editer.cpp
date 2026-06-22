@@ -71,6 +71,13 @@ void C_SCENE_EDITER::StartWait()
 
 void C_SCENE_EDITER::Step()
 {
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+	{
+		c_sceneData->SetSceneType(C_SCENE_DATA::END);	//次に遷移したいシーンのタイプを代入
+
+		m_sceneState = ENDWAIT;		//ステータスを更新
+	}
+
 	m_loadState = LOAD_OUT;
 
 	ImGui_ImplDX11_NewFrame();
