@@ -6,14 +6,12 @@
 
 #include "game/data/global_data.h"
 
-using namespace std;
-
 class C_OBJECT_MANAGER_BASE
 {
 protected:
 
 	//オブジェクトのリスト
-	list<shared_ptr<C_OBJECT_BASE>> c_objectList;
+	std::list<std::shared_ptr<C_OBJECT_BASE>> c_objectList;
 
 	//グローバルデータクラスのインスタンス取得用変数
 	C_GLOBAL_DATA* c_globalData;
@@ -49,7 +47,7 @@ public:
 	virtual void Exit() = 0;
 
 	//リスト取得
-	inline list<shared_ptr<C_OBJECT_BASE>>& GetArray()
+	inline std::list<std::shared_ptr<C_OBJECT_BASE>>& GetArray()
 	{
 		return c_objectList;
 	}
@@ -67,7 +65,7 @@ class C_ACOTR_MANAGER_BASE
 protected:
 
 	//アクターのリスト
-	list< shared_ptr<C_ACTOR_BASE>> c_actorArray;
+	std::list<std::shared_ptr<C_ACTOR_BASE>> c_actorArray;
 
 	//グローバルデータクラスのインスタンス取得用変数
 	C_GLOBAL_DATA* c_globalData;
@@ -103,7 +101,7 @@ public:
 	virtual void HitCalc() {};
 
 	//リスト取得
-	inline list< shared_ptr<C_ACTOR_BASE>>& GetArray()
+	inline std::list<std::shared_ptr<C_ACTOR_BASE>>& GetArray()
 	{
 		return c_actorArray;
 	}

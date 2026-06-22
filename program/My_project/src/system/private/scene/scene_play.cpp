@@ -2,6 +2,7 @@
 #include "game/data/global_data.h"
 #include "soundmanager/bgm_manager.h"
 #include "input_config.h"
+#include "game/collision/collision_manager.h"
 
 C_SCENE_PLAY::~C_SCENE_PLAY()
 {
@@ -12,6 +13,8 @@ C_SCENE_PLAY::~C_SCENE_PLAY()
 void C_SCENE_PLAY::Init()
 {
 	c_sceneData = C_SCENE_DATA::GetInstance();	//C_SCENE_DATAクラスのインスタンスを取得
+
+
 
 	c_playerManager.Init();
 
@@ -168,8 +171,9 @@ void C_SCENE_PLAY::Step()
 
 	CEffekseerCtrl::SetAutoProjectionMtx();
 
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
 	// ラムダで渡すことで std::function<void()> に合うようにする
-	c_threadPool.Enqueue([]() { C_COLLISION_MANAGER::CollisionCalc(); });
+	c_threadPool.Enqueue([instance]() { instance->CollisionCalc(); });
 
 	//当たり判定を行った後に更新確定処理を行う
 	CEffekseerCtrl::UpdateAutoCamera();
@@ -224,7 +228,8 @@ void C_SCENE_PLAY::Exit()
 
 	c_cameraManager.Exit();
 
-	C_COLLISION_MANAGER::Exit();
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+	instance->Exit();
 
 	//ここで各インスタンスの終了処理を行う
 }

@@ -20,7 +20,7 @@ public:
 
 private:
 
-	C_VOXEL_WORLD c_world;
+	std::shared_ptr<C_VOXEL_WORLD> c_world;
 
 	C_STAGE_LOADER m_stageLoader;	//ステージローダー
 

@@ -6,8 +6,6 @@
 #include "game/voxel/voxel.h"
 #include "game/voxel/voxel_chunk.h"
 
-using namespace std;
-
 class C_VOXEL_CHUNK;
 
 constexpr int BLOCK_SIZE = 20;
@@ -52,7 +50,7 @@ private:
 		T_CHUNK_POS chunkPos;
 	}T_CHUNK_DATA;
 
-	map<T_CHUNK_POS, unique_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
+	std::map<T_CHUNK_POS, std::unique_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
 
 	//チャンクの生成
 	void CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxelType);
@@ -70,7 +68,7 @@ public:
 	//ワールドの生成
 	void CreateWorld();
 	//ワールドの生成(データ読み込み)
-	void CreateWorld(string _filePath);
+	void CreateWorld(std::string _filePath);
 	//更新処理
 	void Step();
 	//更新確定処理

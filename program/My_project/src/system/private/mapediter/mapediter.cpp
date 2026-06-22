@@ -51,7 +51,7 @@ void C_MAP_EDITER::LoadSync()
 	m_stageLoader.LoadMapData(m_filePath);
 	m_stageLoader.LoadObject(c_objectList);
 
-	c_sky = make_shared<C_SKY>();
+	c_sky = std::make_shared<C_SKY>();
 	c_sky->Init();
 	c_sky->Load();
 }

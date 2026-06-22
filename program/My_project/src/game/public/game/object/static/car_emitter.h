@@ -2,15 +2,13 @@
 #include "game/base/object.h"
 #include <list>
 
-using namespace std;
-
 constexpr int OBJECT_MAX = 1;
 
 class C_CAR_EMITTER : public C_OBJECT_BASE
 {
 private:
 
-	list<C_OBJECT_BASE*> m_objectList;
+	std::list<C_OBJECT_BASE*> m_objectList;
 
 	int m_moveDir;
 

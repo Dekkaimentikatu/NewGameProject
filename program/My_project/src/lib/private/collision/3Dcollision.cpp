@@ -1,4 +1,5 @@
 #include "../public/collision/3Dcollision.h"
+#include <algorithm>
 
 //箱同士の当たり判定
 bool C_COLLISION::CheckHitBoxToBox(VECTOR pos1, VECTOR size1, VECTOR pos2, VECTOR size2)
@@ -48,4 +49,48 @@ bool C_COLLISION::CheckHitSphereToSphere(VECTOR S_circlePos, VECTOR E_cleclePos,
 		return true;
 	}
 	else return false;
+}
+
+//AABBと球の当たり判定
+bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius, VECTOR _AABBMax, VECTOR _AABBMin)
+{
+	//AABB上の球心に最も近い点を求める
+	float closestX = std::clamp(_sphereCenter.x, _AABBMin.x, _AABBMax.x);
+	float closestY = std::clamp(_sphereCenter.y, _AABBMin.y, _AABBMax.y);
+	float closestZ = std::clamp(_sphereCenter.z, _AABBMin.z, _AABBMax.z);
+
+	//最近接点と球心の距離の二乗を計算
+	float dx = closestX - _sphereCenter.x;
+	float dy = closestY - _sphereCenter.y;
+	float dz = closestZ - _sphereCenter.z;
+	float distSq = dx * dx + dy * dy + dz * dz;
+
+	//距離が半径以下なら衝突
+	return distSq <= (_sphereRedius * _sphereRedius);
+}
+
+//AABBと球の当たり判定
+bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius, VECTOR _AABBPos, float _AABBSize)
+{
+	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };
+	VECTOR AABBMin = { _AABBPos.x - _AABBSize * 0.5f, _AABBPos.y - _AABBSize * 0.5f, _AABBPos.z - _AABBSize * 0.5f };
+
+	//AABB上の球心に最も近い点を求める
+	float closestX = std::clamp(_sphereCenter.x, AABBMin.x, AABBMax.x);
+	float closestY = std::clamp(_sphereCenter.y, AABBMin.y, AABBMax.y);
+	float closestZ = std::clamp(_sphereCenter.z, AABBMin.z, AABBMax.z);
+
+	//最近接点と球心の距離の二乗を計算
+	float dx = closestX - _sphereCenter.x;
+	float dy = closestY - _sphereCenter.y;
+	float dz = closestZ - _sphereCenter.z;
+	float distSq = dx * dx + dy * dy + dz * dz;
+
+	//距離が半径以下なら衝突
+	return distSq <= (_sphereRedius * _sphereRedius);
+}
+
+bool C_COLLISION::CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius, T_OBB _OBB)
+{
+	return true;
 }

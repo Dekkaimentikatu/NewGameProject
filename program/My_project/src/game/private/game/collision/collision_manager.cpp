@@ -1,13 +1,27 @@
 #include "game/collision/collision_manager.h"
 #include "game/data/global_data.h"
 
-bool C_COLLISION_MANAGER::isHitFloor = false;
+using namespace std;
 
-bool C_COLLISION_MANAGER::isHitWall = false;
+C_COLLISION_MANAGER* C_COLLISION_MANAGER::m_instance = nullptr;
 
-list<weak_ptr<C_OBJECT_BASE>> C_COLLISION_MANAGER::m_objectPool;
+C_COLLISION_MANAGER* C_COLLISION_MANAGER::GetInstance()
+{
+	if (m_instance == nullptr)
+	{
+		m_instance = new C_COLLISION_MANAGER();
+	}
+	return m_instance;
+}
 
-list<weak_ptr<C_ACTOR_BASE>> C_COLLISION_MANAGER::m_actorPool;
+void C_COLLISION_MANAGER::DeleteInstance()
+{
+	if (m_instance != nullptr)
+	{
+		delete m_instance;
+		m_instance = nullptr;
+	}
+}
 
 void C_COLLISION_MANAGER::CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _enemy)
 {

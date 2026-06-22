@@ -17,6 +17,8 @@
 #include "hndlmanager/3Dhndlmanager.h"
 #include "hndlmanager/2Dhndlmanager.h"
 
+using namespace std;
+
 void C_STAGE_LOADER::LoadMapResource()
 {
 	m_golobalData = C_GLOBAL_DATA::GetInstace();

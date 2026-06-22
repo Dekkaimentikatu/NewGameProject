@@ -3,8 +3,6 @@
 #include "common.h"
 #include "game/data/global_data.h"
 
-using namespace std;
-
 class C_OBJECT_BASE;
 
 typedef struct
@@ -52,14 +50,14 @@ private:
 	int m_hndl;
 
 	//モデル用ハンドル
-	vector<int> m_modelHndl;
+	std::vector<int> m_modelHndl;
 
-	vector<int> m_graphicHndl;
+	std::vector<int> m_graphicHndl;
 
 	//情報を保存するためのリスト
-	list<T_STAGE_DATA> m_stageDataList;
+	std::list<T_STAGE_DATA> m_stageDataList;
 
-	list<T_STAGE_DATA> m_RedoList;
+	std::list<T_STAGE_DATA> m_RedoList;
 
 	C_GLOBAL_DATA* m_golobalData;
 
@@ -73,13 +71,13 @@ public:
 
 	void LoadMapData(char* _filePath);
 
-	void LoadObject(list<shared_ptr<C_OBJECT_BASE>>& _objectList);
+	void LoadObject(std::list<std::shared_ptr<C_OBJECT_BASE>>& _objectList);
 
-	shared_ptr<C_OBJECT_BASE> AddObject(T_STAGE_DATA _stageData);
+	std::shared_ptr<C_OBJECT_BASE> AddObject(T_STAGE_DATA _stageData);
 
-	void AndoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectArray);
+	void AndoAddObject(std::list<std::shared_ptr<C_OBJECT_BASE>>& _objectArray);
 
-	void RedoAddObject(list<shared_ptr<C_OBJECT_BASE>>& _objectArray);
+	void RedoAddObject(std::list<std::shared_ptr<C_OBJECT_BASE>>& _objectArray);
 
 	void DeleteObject(VECTOR _pos);
 
@@ -89,5 +87,5 @@ public:
 
 	void Exit();
 
-	list<T_STAGE_DATA>& GetList() { return m_stageDataList; };
+	std::list<T_STAGE_DATA>& GetList() { return m_stageDataList; };
 };

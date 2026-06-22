@@ -7,10 +7,6 @@
 
 #include "game/data/global_data.h"
 
-using namespace std;
-
-
-
 class C_OBJECT_BASE
 {
 public:

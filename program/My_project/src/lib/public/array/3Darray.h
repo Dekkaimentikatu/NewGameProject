@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include <cstddef>
 
-using namespace std;
-
 //3次元配列管理用のラッププログラム
 template <typename T>
 class C_3D_ARRAY 
@@ -17,7 +15,7 @@ private:
     size_t m_z;
 
     //配列
-    vector<T> m_data;
+    std::vector<T> m_data;
 
     //3次元から1次元に変換
     size_t index(size_t x,
@@ -41,7 +39,7 @@ private:
             z >= m_z)
         {
             //例外処理メッセージ
-            throw out_of_range(
+            throw std::out_of_range(
                 "C_3D_ARRAY index out of range");
         }
     }

@@ -3,6 +3,8 @@
 #include "game/collision/collision_manager.h"
 #include "hndlmanager/3Dhndlmanager.h"
 
+using namespace std;
+
 void C_PLAYER_MANAGER::Init()
 {
 	//list‚Ì‰Šú‰»
@@ -29,13 +31,15 @@ void C_PLAYER_MANAGER::LoadSync()
 	//list‚ÉInstance‚ğ’Ç‰Á
 	c_actorArray.push_back(make_shared<C_PLAYER>());
 
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+
 	//ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
 		(*itr)->Init();
 		(*itr)->Load();
-		C_COLLISION_MANAGER::AddObject(*itr);
-		C_COLLISION_MANAGER::AddActor(*itr);
+		instance->AddObject(*itr);
+		instance->AddActor(*itr);
 		c_globalData->GetPlayerData()->pos = (*itr)->GetPos();
 	}
 }

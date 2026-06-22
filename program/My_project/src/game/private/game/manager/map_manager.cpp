@@ -6,6 +6,8 @@
 #include "hndlmanager/3Dhndlmanager.h"
 #include "draw_polygon/draw_polygon.h"
 
+using namespace std;
+
 void C_MAP_MANAGER::Init()
 {
 	c_objectList.clear();
@@ -30,7 +32,9 @@ void C_MAP_MANAGER::LoadSync()
 	C_VOXEL::T_VOXEL_DATA tmp = { 0 };
 	tmp.scale = VGet(0.1f, 0.1f, 0.1f);
 
-	c_world.CreateWorld();
+	c_world = make_shared<C_VOXEL_WORLD>();
+
+	c_world->CreateWorld();
 
 	shared_ptr<C_OBJECT_BASE> sky = make_shared<C_SKY>();
 	sky->Init();
@@ -50,7 +54,7 @@ void C_MAP_MANAGER::Step()
 		(*itr)->Step();
 	}
 
-	c_world.Step();
+	c_world->Step();
 }
 
 void C_MAP_MANAGER::Update()
@@ -60,7 +64,7 @@ void C_MAP_MANAGER::Update()
 		(*itr)->Update();
 	}
 
-	c_world.Update();
+	c_world->Update();
 }
 
 void C_MAP_MANAGER::Draw()
@@ -70,7 +74,7 @@ void C_MAP_MANAGER::Draw()
 		(*itr)->Draw();
 	}
 
-	c_world.Draw();
+	c_world->Draw();
 }
 
 void C_MAP_MANAGER::Exit()
@@ -80,7 +84,7 @@ void C_MAP_MANAGER::Exit()
 		(*itr)->Exit();
 	}
 
-	c_world.Exit();
+	c_world->Exit();
 
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
 	incetanse->Delete3DModel(SKY_MODEL_PATH);

@@ -12,14 +12,14 @@ private:
 	typedef struct
 	{
 		//画像のファイルパス
-		string imageFilePath;
+		std::string imageFilePath;
 		//画像の総枚数
 		int grapAllNum;
 		//グラフィックハンドル
 		int* hndl;
 	}T_2D_HNDL_DATA;
 
-	list<T_2D_HNDL_DATA> m_data;
+	std::list<T_2D_HNDL_DATA> m_data;
 
 	static C_2D_HNDL_MANAGER* m_instance;
 

@@ -2,8 +2,6 @@
 #include <DxLib.h>
 #include <vector>
 
-using namespace std;
-
 class C_BGM_MANAGER
 {
 public:
@@ -24,7 +22,7 @@ private:
 
 	~C_BGM_MANAGER() = default;
 
-	vector<int> m_hndl;	//サウンドハンドル
+	std::vector<int> m_hndl;	//サウンドハンドル
 
 	static C_BGM_MANAGER* m_instance;
 

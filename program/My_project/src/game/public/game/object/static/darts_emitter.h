@@ -4,15 +4,13 @@
 
 static const char* DARTS_MODEL_PATH = "data/model/field/paper_plane.mv1";
 
-using namespace std;
-
 constexpr int OBJECT_MAX = 1;
 
 class C_DARTS_EMITTER : public C_OBJECT_BASE
 {
 private:
 
-	list<shared_ptr<C_OBJECT_BASE>> m_objectList;
+	std::list<std::shared_ptr<C_OBJECT_BASE>> m_objectList;
 
 	int m_moveDir;
 

@@ -13,8 +13,6 @@
 #include <list>
 #include <map>
 
-using namespace std;
-
 //unsigned intŒ^‚ğUIntŒ^‚Æ‚µ‚Ä’è‹`
 typedef unsigned int UInt;
 

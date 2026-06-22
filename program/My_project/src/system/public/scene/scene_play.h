@@ -7,7 +7,6 @@
 #include "game/manager/enemy_manager.h"
 #include "game/manager/map_manager.h"
 #include "game/camera/camera_manager.h"
-#include "game/collision/collision_manager.h"
 #include "UI/UI_manager.h"
 #include "effekseer/effekseer.h"
 #include "thread_pool/thread_pool.h"

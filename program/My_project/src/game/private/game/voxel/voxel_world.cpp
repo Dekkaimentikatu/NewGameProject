@@ -1,6 +1,7 @@
 #include "game/voxel/voxel_world.h"
 #include "game/voxel/voxel.h"
 
+using namespace std;
 
 //
 void C_VOXEL_WORLD::Init()

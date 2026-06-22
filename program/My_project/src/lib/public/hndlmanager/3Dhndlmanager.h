@@ -11,20 +11,20 @@ private:
 	//hndl:ì«Ç›çûÇ‹ÇÍÇΩÉÇÉfÉãÇÃÉnÉìÉhÉã
 	typedef struct
 	{
-		string modelFilePath;
+		std::string modelFilePath;
 		int hnld;
 	}T_3D_HNDL_DATA;
 
-	list<T_3D_HNDL_DATA> m_data;
+	std::list<T_3D_HNDL_DATA> m_data;
 
 	static C_3D_HNDL_MANAGER* m_instance;
 
-	C_3D_HNDL_MANAGER(){}
+	C_3D_HNDL_MANAGER() {}
 
-	~C_3D_HNDL_MANAGER() = default;
+	~C_3D_HNDL_MANAGER() {}
 
 	C_3D_HNDL_MANAGER(const C_3D_HNDL_MANAGER& other);
-	C_3D_HNDL_MANAGER& operator = (const C_3D_HNDL_MANAGER& other);
+	C_3D_HNDL_MANAGER& operator = (const C_3D_HNDL_MANAGER& other) = default;
 
 public:
 

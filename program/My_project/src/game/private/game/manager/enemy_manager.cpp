@@ -3,6 +3,8 @@
 #include "effekseer/effekseer.h"
 #include "hndlmanager/3Dhndlmanager.h"
 
+using namespace std;
+
 void C_ENEMY_MANAGER::Init()
 {
 	c_actorArray.clear();
@@ -42,10 +44,12 @@ void C_ENEMY_MANAGER::LoadSync()
 		c_actorArray.push_back(enemy);
 	}
 
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
-		C_COLLISION_MANAGER::AddObject(*itr);
-		C_COLLISION_MANAGER::AddActor(*itr);
+		instance->AddObject(*itr);
+		instance->AddActor(*itr);
 	}
 }
 

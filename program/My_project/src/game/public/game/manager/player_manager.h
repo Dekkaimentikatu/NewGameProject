@@ -12,7 +12,7 @@ private:
 
 	C_CAMERA_MANAGER_ c_cameraManager;	//カメラマネージャー
 
-	vector<C_ACTOR_BASE*> m_targetPosList;	//ターゲットの位置リスト
+	std::vector<C_ACTOR_BASE*> m_targetPosList;	//ターゲットの位置リスト
 
 	float m_debugRot;
 
@@ -52,7 +52,7 @@ public:
 
 	void ReflectCollision(VECTOR addVec);
 
-	shared_ptr<C_ACTOR_BASE> GetPlayerInstance(int _index = 0) 
+	std::shared_ptr<C_ACTOR_BASE> GetPlayerInstance(int _index = 0)
 	{
 		auto itr = c_actorArray.begin();
 		return (*itr);

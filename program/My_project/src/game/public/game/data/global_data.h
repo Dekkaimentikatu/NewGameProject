@@ -3,8 +3,6 @@
 #include <DxLib.h>
 #include <list>
 
-using namespace std;
-
 constexpr int MAX_HP = 100;
 constexpr int MAX_STM = 250;
 constexpr int ATT = 20;
@@ -89,7 +87,7 @@ private:
 
 	T_FLAG_DATA t_flagData;
 
-	list<T_ENEMY_SPOWN> m_enemySpawnPointList;
+	std::list<T_ENEMY_SPOWN> m_enemySpawnPointList;
 
 	static C_GLOBAL_DATA* m_instance;
 
@@ -111,7 +109,7 @@ public:
 
 	T_FLAG_DATA* GetFlagData() { return &t_flagData; };
 
-	list<T_ENEMY_SPOWN>* GetEnemySpawnPointList() { return &m_enemySpawnPointList; }
+	std::list<T_ENEMY_SPOWN>* GetEnemySpawnPointList() { return &m_enemySpawnPointList; }
 
 	void SetPlayerData(T_PLAYER_DATA* _playerData) { t_playerData = *_playerData; }
 

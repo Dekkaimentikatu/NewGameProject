@@ -5,8 +5,6 @@
 #include "scene.h"
 #include "scene_data.h"
 
-using namespace std;
-
 class C_SCENE_MANAGER
 {
 private:

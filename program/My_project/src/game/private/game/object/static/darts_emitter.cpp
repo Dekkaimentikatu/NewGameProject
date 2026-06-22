@@ -2,14 +2,18 @@
 #include "game/collision/collision_manager.h"
 #include "game/object/dynamic/darts.h"
 
+using namespace std;
+
 void C_DARTS_EMITTER::RequestToObject()
 {
 	shared_ptr<C_OBJECT_BASE> tmp = make_shared<C_DARTS>();
 
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+
 	tmp->Init();
 	tmp->Request(m_objectData);
 	tmp->Load();
-	C_COLLISION_MANAGER::AddObject(tmp);
+	instance->AddObject(tmp);
 	m_objectList.push_back(tmp);
 }
 

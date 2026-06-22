@@ -1,5 +1,7 @@
 #include "game/voxel/voxel_chunk.h"
 
+using namespace std;
+
 shared_ptr<C_VOXEL> C_VOXEL_CHUNK::GetVoxel(int _x, int _y, int _z)
 {
 	if (_x > CHUNK_SIZE_X ||
