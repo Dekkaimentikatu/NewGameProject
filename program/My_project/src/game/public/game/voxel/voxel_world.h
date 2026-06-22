@@ -15,7 +15,7 @@ constexpr int CHUNK_NUM_X = 2;
 constexpr int CHUNK_NUM_Y = 2;
 
 
-struct T_CHUNK_POS
+typedef struct 
 {
 	int x;
 	int z;
@@ -33,7 +33,7 @@ struct T_CHUNK_POS
 
         return z < other.z;
     }
-};
+}T_CHUNK_POS;
 
 static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = {{{ -1, -1,} ,{ -1, 1}},
 																	{{ 1, -1}, { 1 , 1}}};

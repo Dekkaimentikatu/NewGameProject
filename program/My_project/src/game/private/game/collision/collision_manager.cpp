@@ -1,5 +1,6 @@
 #include "game/collision/collision_manager.h"
 #include "game/data/global_data.h"
+#include "game/voxel/voxel_world.h"
 
 using namespace std;
 
@@ -295,6 +296,8 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor)
 {
 	if (_actor.lock()->GetIsActive())return;
+
+	T_CHUNK_POS chunkPos;
 }
 
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool)
