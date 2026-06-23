@@ -20,7 +20,7 @@ typedef struct
 	int x;
 	int z;
 
-	    bool operator==(const T_CHUNK_POS& other) const
+     bool operator==(const T_CHUNK_POS& other) const
     {
         return x == other.x &&
                z == other.z;
@@ -78,8 +78,9 @@ public:
 	//終了処理
 	void Exit();
 
-	//
-	std::weak_ptr<C_VOXEL> GetChunk(T_CHUNK_POS _chunkPos, int _x, int _y, int _z) { return m_voxelWorld.at(_chunkPos)->GetVoxel(_x, _y, _z); }
-
+	// チャンクをポインタで取得（存在しない場合は nullptr を返す）
+	C_VOXEL_CHUNK* GetChunk(const T_CHUNK_POS& _chunkPos)
+	{
+		return m_voxelWorld.at(_chunkPos).get();
+	}
 };
-

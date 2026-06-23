@@ -297,7 +297,59 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 {
 	if (_actor.lock()->GetIsActive())return;
 
-	T_CHUNK_POS chunkPos;
+	T_CHUNK_POS chunkPos = { 0 };
+	VECTOR p_pos = {0} , v_pos = {0};
+	float p_size = 0.0f, v_size = 0.0f;
+
+	p_pos = _actor.lock()->GetCenter();
+
+	if (p_pos.x > 0) chunkPos.x = 1;
+	else if (p_pos.x < 0) chunkPos.x = -1;
+	if (p_pos.z > 0) chunkPos.z = 1;
+	else if (p_pos.z < 0) chunkPos.z = -1;
+
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	{
+		for (int y = 0; y < CHUNK_SIZE_Y; y++)
+		{
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			{
+				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos)->GetVoxel(x, y, z)->GetPos();
+
+				VECTOR closest = { 0 };
+
+				if(!C_COLLISION::CheckHitAABBToSphere(p_pos, p_size, v_pos, v_size, closest))continue;
+
+				VECTOR diff = VSub(p_pos, closest);
+
+				float dist = sqrtf(
+					diff.x * diff.x +
+					diff.y * diff.y +
+					diff.z * diff.z);
+
+				if (dist < p_size)
+				{
+					float penetration = p_size - dist;
+
+					VECTOR normal =
+					{
+						diff.x / dist,
+						diff.y / dist,
+						diff.z / dist
+					};
+
+					VECTOR push =
+					{
+						normal.x * penetration,
+						normal.y * penetration,
+						normal.z * penetration
+					};
+
+					_actor.lock()->AddPos(VAdd(p_pos, push));
+				}
+			}
+		}
+	}
 }
 
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool)

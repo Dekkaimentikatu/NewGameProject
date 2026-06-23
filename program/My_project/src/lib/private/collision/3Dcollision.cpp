@@ -70,7 +70,7 @@ bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius
 }
 
 //AABBÇ∆ãÖÇÃìñÇΩÇËîªíË
-bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius, VECTOR _AABBPos, float _AABBSize)
+bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius, VECTOR _AABBPos, float _AABBSize, VECTOR& _closest)
 {
 	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };
 	VECTOR AABBMin = { _AABBPos.x - _AABBSize * 0.5f, _AABBPos.y - _AABBSize * 0.5f, _AABBPos.z - _AABBSize * 0.5f };
@@ -79,6 +79,8 @@ bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius
 	float closestX = std::clamp(_sphereCenter.x, AABBMin.x, AABBMax.x);
 	float closestY = std::clamp(_sphereCenter.y, AABBMin.y, AABBMax.y);
 	float closestZ = std::clamp(_sphereCenter.z, AABBMin.z, AABBMax.z);
+
+	_closest = VGet(closestX, closestY, closestZ);
 
 	//ç≈ãﬂê⁄ì_Ç∆ãÖêSÇÃãóó£ÇÃìÒèÊÇåvéZ
 	float dx = closestX - _sphereCenter.x;
