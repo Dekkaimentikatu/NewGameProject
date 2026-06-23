@@ -331,6 +331,8 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 					diff.y * diff.y +
 					diff.z * diff.z);
 
+				if(dist == 0.0f)continue;
+
 				if (dist < p_size)
 				{
 					float penetration = p_size - dist;
