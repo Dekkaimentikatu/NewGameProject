@@ -43,7 +43,7 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 
 	chunkPos = _chunkPos;
 
-	m_voxelWorld.insert(make_pair(chunkPos, make_unique<C_VOXEL_CHUNK>(CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z)));
+	m_voxelWorld.insert(make_pair(chunkPos, make_shared<C_VOXEL_CHUNK>(CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z)));
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{

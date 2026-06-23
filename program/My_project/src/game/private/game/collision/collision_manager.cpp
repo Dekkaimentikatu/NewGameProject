@@ -295,18 +295,21 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 
 void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor)
 {
-	if (_actor.lock()->GetIsActive())return;
+	if (!_actor.lock()->GetIsActive())return;
 
 	T_CHUNK_POS chunkPos = { 0 };
 	VECTOR p_pos = {0} , v_pos = {0};
 	float p_size = 0.0f, v_size = 0.0f;
 
 	p_pos = _actor.lock()->GetCenter();
+	p_size = _actor.lock()->GetRedius();
 
 	if (p_pos.x > 0) chunkPos.x = 1;
 	else if (p_pos.x < 0) chunkPos.x = -1;
 	if (p_pos.z > 0) chunkPos.z = 1;
 	else if (p_pos.z < 0) chunkPos.z = -1;
+
+	if (chunkPos.x == 0 || chunkPos.z == 0)return;
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
@@ -314,7 +317,8 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos)->GetVoxel(x, y, z)->GetPos();
+				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
+				v_size = BLOCK_SIZE / 2;
 
 				VECTOR closest = { 0 };
 
@@ -331,6 +335,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				{
 					float penetration = p_size - dist;
 
+					//Ç±Ç±èCê≥
 					VECTOR normal =
 					{
 						diff.x / dist,
@@ -345,7 +350,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 						normal.z * penetration
 					};
 
-					_actor.lock()->AddPos(VAdd(p_pos, push));
+					_actor.lock()->AddPos(push);
 				}
 			}
 		}

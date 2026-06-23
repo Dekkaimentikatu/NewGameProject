@@ -41,6 +41,9 @@ void C_MAP_MANAGER::LoadSync()
 	sky->Load();
 	c_objectList.push_back(sky);
 
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+	instance->CopyVoxelWorld(c_world);
+
 	//for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	//{
 	//	if((*itr)->GetIsActive())C_COLLISION_MANAGER::AddObject(*itr);

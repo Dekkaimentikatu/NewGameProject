@@ -15,7 +15,7 @@ constexpr int CHUNK_NUM_X = 2;
 constexpr int CHUNK_NUM_Y = 2;
 
 
-typedef struct 
+typedef struct T_CHUNK_POS
 {
 	int x;
 	int z;
@@ -33,7 +33,7 @@ typedef struct
 
         return z < other.z;
     }
-}T_CHUNK_POS;
+};
 
 static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = {{{ -1, -1,} ,{ -1, 1}},
 																	{{ 1, -1}, { 1 , 1}}};
@@ -50,7 +50,7 @@ private:
 		T_CHUNK_POS chunkPos;
 	}T_CHUNK_DATA;
 
-	std::map<T_CHUNK_POS, std::unique_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
+	std::map<T_CHUNK_POS, std::shared_ptr<C_VOXEL_CHUNK>> m_voxelWorld;
 
 	//チャンクの生成
 	void CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxelType);
@@ -79,8 +79,8 @@ public:
 	void Exit();
 
 	// チャンクをポインタで取得（存在しない場合は nullptr を返す）
-	C_VOXEL_CHUNK* GetChunk(const T_CHUNK_POS& _chunkPos)
+	std::weak_ptr<C_VOXEL_CHUNK> GetChunk(const T_CHUNK_POS& _chunkPos)
 	{
-		return m_voxelWorld.at(_chunkPos).get();
+		return m_voxelWorld.at(_chunkPos);
 	}
 };
