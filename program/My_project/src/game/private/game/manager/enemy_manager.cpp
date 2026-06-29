@@ -3,6 +3,8 @@
 #include "effekseer/effekseer.h"
 #include "hndlmanager/3Dhndlmanager.h"
 
+constexpr int ENEMY_NUM = 10;
+
 using namespace std;
 
 void C_ENEMY_MANAGER::Init()
@@ -36,6 +38,21 @@ void C_ENEMY_MANAGER::LoadSync()
 		tmp.initPos = (*itr).pos;
 		tmp.modelScale = (*itr).scale;
 		tmp.modelRot = (*itr).rot;
+		tmp.moveLen = 0;
+		enemy->Request(tmp);
+		enemy->SetEffectHndl(eff1, 0);
+		enemy->SetEffectHndl(eff2, 1);
+		enemy->Load();
+		c_actorArray.push_back(enemy);
+	}
+
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		enemy = make_shared<C_ENEMY>();
+		enemy->Init();
+		tmp.initPos = VGet(20.0f, 20.0f, 20.0f);
+		tmp.modelScale = VGet(0.1f, 0.1f, 0.1f);
+		tmp.modelRot = { 0 };
 		tmp.moveLen = 0;
 		enemy->Request(tmp);
 		enemy->SetEffectHndl(eff1, 0);

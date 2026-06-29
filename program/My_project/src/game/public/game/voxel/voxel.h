@@ -10,6 +10,7 @@ public:
 	{
 		BLOCK,
 		AIR,
+		E_EMITTER,
 	};
 
 	//ƒ|ƒŠƒSƒ“•`‰æƒtƒ‰ƒO

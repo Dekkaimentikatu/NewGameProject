@@ -1,12 +1,2 @@
-﻿  collision_manager.cpp
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel.h(97,42): warning C4244: 'return': 'const float' から 'int' への変換です。データが失われる可能性があります。
-  (ソース ファイル 'src/game/private/game/collision/collision_manager.cpp' をコンパイルしています)
-  
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_chunk.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  (ソース ファイル 'src/game/private/game/collision/collision_manager.cpp' をコンパイルしています)
-  
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\public\game\voxel\voxel_world.h(18,16): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'T_CHUNK_POS' の左辺を無視します。
-  (ソース ファイル 'src/game/private/game/collision/collision_manager.cpp' をコンパイルしています)
-  
-C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\collision\collision_manager.cpp(305,35): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+﻿  enemy.cpp
   My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

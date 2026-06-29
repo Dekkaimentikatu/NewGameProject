@@ -273,42 +273,48 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, 
 void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy)
 {
 	//マネージャー1の攻撃判定
-	if (_player.lock()->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
-			_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
-	{
-		//ノックバックの速度の設定
-		_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
+	//if (_player.lock()->GetIsAttack() &&
+	//	C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
+	//		_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
+	//{
+	//	//ノックバックの速度の設定
+	//	_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
 
-		//当たり判定処理
-		_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
-	}
+	//	//当たり判定処理
+	//	_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
+	//}
 
-	//マネージャー2の攻撃判定
-	if (_enemy.lock()->GetIsAttack() &&
-		C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
-			_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
-	{
-		_player.lock()->DamageCalc(_enemy.lock()->GetAtt());
-	}
+	////マネージャー2の攻撃判定
+	//if (_enemy.lock()->GetIsAttack() &&
+	//	C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
+	//		_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
+	//{
+	//	_player.lock()->DamageCalc(_enemy.lock()->GetAtt());
+	//}
 }
 
 void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor)
 {
 	if (!_actor.lock()->GetIsActive())return;
 
+	//チャンクの座標
 	T_CHUNK_POS chunkPos = { 0 };
+
 	VECTOR p_pos = {0} , v_pos = {0};
 	float p_size = 0.0f, v_size = 0.0f;
 
+	//playerの中心座標を取得
 	p_pos = _actor.lock()->GetCenter();
+	//playerの半径を取得
 	p_size = _actor.lock()->GetRedius();
 
+	//チャンクのどこにいるか
 	if (p_pos.x > 0) chunkPos.x = 1;
 	else if (p_pos.x < 0) chunkPos.x = -1;
 	if (p_pos.z > 0) chunkPos.z = 1;
 	else if (p_pos.z < 0) chunkPos.z = -1;
 
+	//中心にいるなら当たり判定をしない
 	if (chunkPos.x == 0 || chunkPos.z == 0)return;
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
@@ -317,43 +323,126 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
+				//ボクセルの中心座標
 				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
-				v_size = BLOCK_SIZE / 2;
+				//ボクセルのサイズ
+				v_size = BLOCK_SIZE * 0.5f;
 
+				//最近点
 				VECTOR closest = { 0 };
 
+				//当たり判定
 				if(!C_COLLISION::CheckHitAABBToSphere(p_pos, p_size, v_pos, v_size, closest))continue;
 
+				//最近点と座標の差を計算
 				VECTOR diff = VSub(p_pos, closest);
 
-				float dist = sqrtf(
+				//差の２乗
+				float distSq =
 					diff.x * diff.x +
 					diff.y * diff.y +
-					diff.z * diff.z);
+					diff.z * diff.z;
 
-				if(dist == 0.0f)continue;
+				//差の２乗がプレイヤーの半径の２乗より大きい場合は次のボクセルとの判定をする
+				if (distSq > p_size * p_size) continue;
 
-				if (dist < p_size)
+				//法線
+				VECTOR normal = { 0 };
+
+				//押し戻しベクトル
+				VECTOR push = { 0 };
+
+				if (distSq > 0.0f)
 				{
+					//平方根に直す
+					float dist = sqrtf(distSq);
+
+					//法線を計算
+					normal = VGet(diff.x / dist,
+										diff.y / dist,
+										diff.z / dist);
+
+					//めり込んだ距離を計算
 					float penetration = p_size - dist;
 
-					//ここ修正
-					VECTOR normal =
-					{
-						diff.x / dist,
-						diff.y / dist,
-						diff.z / dist
-					};
+					//押し戻しベクトルを生成
+					push = VScale(normal, penetration);
 
-					VECTOR push =
-					{
-						normal.x * penetration,
-						normal.y * penetration,
-						normal.z * penetration
-					};
-
-					_actor.lock()->AddPos(push);
 				}
+				else
+				{
+					//ボクセルの上座標
+					VECTOR AABBMax = VGet(v_pos.x + v_size * 0.5f,
+									v_pos.y + v_size * 0.5f,
+									v_pos.z + v_size * 0.5f );
+
+					//ボクセルの下座標
+					VECTOR AABBMin = VGet(v_pos.x - v_size * 0.5f,
+									v_pos.y - v_size * 0.5f,
+									v_pos.z - v_size * 0.5f );
+
+					//左方向のめり込んだ距離
+					float left = p_pos.x - AABBMin.x;
+					//右方向のめり込んだ距離
+					float right = AABBMax.x - p_pos.x;
+
+					//下方向のめり込んだ距離
+					float down = p_pos.y - AABBMin.y;
+					//上方向のめり込んだ距離
+					float up = AABBMax.y - p_pos.y;
+
+					//前方向のめり込んだ距離
+					float back = p_pos.z - AABBMin.z;
+					//後方向のめり込んだ距離
+					float front = AABBMax.z - p_pos.z;
+
+					//ボックス内にどれだけめり込んでいるか
+					//一旦左方向に押し戻すと仮定する
+					float minDist = left;
+					normal = VGet(-1.0f, 0.0f, 0.0f);
+
+					//前の値より大きければ右方向に変更
+					if (right < minDist)
+					{
+						minDist = right;
+						normal = VGet(1.0f, 0.0f, 0.0f);
+					}
+
+					//前の値より大きければ下方向に変更
+					if (down < minDist)
+					{
+						minDist = down;
+						normal = VGet(0.0f, -1.0f, 0.0f);
+					}
+
+					//前の値より大きければ上方向に変更
+					if (up < minDist)
+					{
+						minDist = up;
+						normal = VGet(0.0f, 1.0f, 0.0f);
+					}
+
+					//前の値より大きければ後方向に変更
+					if (back < minDist)
+					{
+						minDist = back;
+						normal = VGet(0.0f, 0.0f, 1.0f);
+					}
+
+					//前の値より大きければ前方向に変更
+					if (front < minDist)
+					{
+						minDist = front;
+						normal = VGet(0.0f, 0.0f, -1.0f);
+					}
+
+					//押し戻しベクトルを生成
+					push = VScale(normal, p_size + minDist);
+				}
+
+				//押し戻し処理
+				_actor.lock()->AddPos(push);
+				_actor.lock()->HitCalc();
 			}
 		}
 	}

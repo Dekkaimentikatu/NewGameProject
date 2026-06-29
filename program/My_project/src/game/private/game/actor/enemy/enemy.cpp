@@ -40,8 +40,6 @@ void C_ENEMY::Init()
 
 	//各行動のカウントの初期化
 	memset(m_waitCount, 0, sizeof(m_waitCount));
-
-
 }
 
 void C_ENEMY::Load()
@@ -52,7 +50,10 @@ void C_ENEMY::Load()
 	//拡大縮小率の設定
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
-	C_OBJECT_BASE::DuplicateModel(m_modelHndl);
+	m_hp = 1000;
+
+	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
+	C_OBJECT_BASE::DuplicateModel(instance->Get3DModelHndl(ENEMY_MODEL_PATH));
 
 	//モデルの更新
 	UpdateModel();
@@ -307,7 +308,9 @@ void C_ENEMY::AttackCalc()
 //被弾処理
 void C_ENEMY::HitCalc()
 {
-	KnockBackCalc();
+	m_moveVec.y = 0.0f;
+	m_fallSpeed = 0.0f;
+	//KnockBackCalc();
 }
 
 void C_ENEMY::KnockBackCalc()
@@ -397,8 +400,7 @@ void C_ENEMY::AddPos(VECTOR _addPos)
 void C_ENEMY::Request(T_OBJECT_DATA _objectData)
 {
 	m_objectData = _objectData;
-	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
-	m_modelHndl = instance->Get3DModelHndl(ENEMY_MODEL_PATH);
+	m_isActive = true;
 }
 
 int C_ENEMY::GetAtt() const

@@ -80,6 +80,7 @@ bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius
 	float closestY = std::clamp(_sphereCenter.y, AABBMin.y, AABBMax.y);
 	float closestZ = std::clamp(_sphereCenter.z, AABBMin.z, AABBMax.z);
 
+	//最近点を格納
 	_closest = VGet(closestX, closestY, closestZ);
 
 	//最近接点と球心の距離の二乗を計算
