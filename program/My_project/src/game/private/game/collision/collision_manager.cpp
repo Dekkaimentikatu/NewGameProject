@@ -326,7 +326,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				//ボクセルの中心座標
 				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
 				//ボクセルのサイズ
-				v_size = BLOCK_SIZE * 0.5f;
+				v_size = BLOCK_SIZE;
 
 				//最近点
 				VECTOR closest = { 0 };
@@ -338,10 +338,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				VECTOR diff = VSub(p_pos, closest);
 
 				//差の２乗
-				float distSq =
-					diff.x * diff.x +
-					diff.y * diff.y +
-					diff.z * diff.z;
+				float distSq = VSquareSize(diff);
 
 				//差の２乗がプレイヤーの半径の２乗より大きい場合は次のボクセルとの判定をする
 				if (distSq > p_size * p_size) continue;
@@ -355,7 +352,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				if (distSq > 0.0f)
 				{
 					//平方根に直す
-					float dist = sqrtf(distSq);
+					float dist = std::sqrt(distSq);
 
 					//法線を計算
 					normal = VGet(diff.x / dist,
