@@ -53,9 +53,9 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 			{
 				VECTOR offset = CalcDrawOffset(_chunkPos, VGet(x, y, z));
 				voxelData.size = BLOCK_SIZE * 0.5f;
-				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + offset.x;
-				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE);
-				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + offset.z;
+				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.x;
+				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
+				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.z;
 				if(y == 0)voxelData.voxelType = _voxelType;
 				else voxelData.voxelType = C_VOXEL::AIR;
 				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();

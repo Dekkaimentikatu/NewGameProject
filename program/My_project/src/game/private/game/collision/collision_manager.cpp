@@ -300,7 +300,7 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 	//チャンクの座標
 	T_CHUNK_POS chunkPos = { 0 };
 
-	VECTOR p_pos = {0} , v_pos = {0};
+	VECTOR p_pos = { 0 }, v_pos = { 0 };
 	float p_size = 0.0f, v_size = 0.0f;
 
 	//playerの中心座標を取得
@@ -332,16 +332,13 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				VECTOR closest = { 0 };
 
 				//当たり判定
-				if(!C_COLLISION::CheckHitAABBToSphere(p_pos, p_size, v_pos, v_size, closest))continue;
+				if (!C_COLLISION::CheckHitAABBToSphere(p_pos, p_size, v_pos, v_size, closest))continue;
 
 				//最近点と座標の差を計算
 				VECTOR diff = VSub(p_pos, closest);
 
 				//差の２乗
 				float distSq = VSquareSize(diff);
-
-				//差の２乗がプレイヤーの半径の２乗より大きい場合は次のボクセルとの判定をする
-				if (distSq > p_size * p_size) continue;
 
 				//法線
 				VECTOR normal = { 0 };
@@ -354,98 +351,100 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 					//平方根に直す
 					float dist = std::sqrt(distSq);
 
+					if (dist > p_size)break;
+
 					//法線を計算
 					normal = VGet(diff.x / dist,
-										diff.y / dist,
-										diff.z / dist);
+						diff.y / dist,
+						diff.z / dist);
 
 					//めり込んだ距離を計算
 					float penetration = p_size - dist;
 
 					//押し戻しベクトルを生成
 					push = VScale(normal, penetration);
-
+					_actor.lock()->HitCalc();
+					//押し戻し処理
+					_actor.lock()->AddPos(push);
+					return;
 				}
-				else
+
+				//ボクセルの上座標
+				VECTOR AABBMax = VGet(v_pos.x + v_size * 0.5f,
+					v_pos.y + v_size * 0.5f,
+					v_pos.z + v_size * 0.5f);
+
+				//ボクセルの下座標
+				VECTOR AABBMin = VGet(v_pos.x - v_size * 0.5f,
+					v_pos.y - v_size * 0.5f,
+					v_pos.z - v_size * 0.5f);
+
+				//左方向のめり込んだ距離
+				float left = p_pos.x - AABBMin.x;
+				//右方向のめり込んだ距離
+				float right = AABBMax.x - p_pos.x;
+
+				//下方向のめり込んだ距離
+				float down = p_pos.y - AABBMin.y;
+				//上方向のめり込んだ距離
+				float up = AABBMax.y - p_pos.y;
+
+				//前方向のめり込んだ距離
+				float back = p_pos.z - AABBMin.z;
+				//後方向のめり込んだ距離
+				float front = AABBMax.z - p_pos.z;
+
+				//ボックス内にどれだけめり込んでいるか
+				//一旦左方向に押し戻すと仮定する
+				float minDist = left;
+				normal = VGet(-1.0f, 0.0f, 0.0f);
+
+				//前の値より大きければ右方向に変更
+				if (right < minDist)
 				{
-					//ボクセルの上座標
-					VECTOR AABBMax = VGet(v_pos.x + v_size * 0.5f,
-									v_pos.y + v_size * 0.5f,
-									v_pos.z + v_size * 0.5f );
-
-					//ボクセルの下座標
-					VECTOR AABBMin = VGet(v_pos.x - v_size * 0.5f,
-									v_pos.y - v_size * 0.5f,
-									v_pos.z - v_size * 0.5f );
-
-					//左方向のめり込んだ距離
-					float left = p_pos.x - AABBMin.x;
-					//右方向のめり込んだ距離
-					float right = AABBMax.x - p_pos.x;
-
-					//下方向のめり込んだ距離
-					float down = p_pos.y - AABBMin.y;
-					//上方向のめり込んだ距離
-					float up = AABBMax.y - p_pos.y;
-
-					//前方向のめり込んだ距離
-					float back = p_pos.z - AABBMin.z;
-					//後方向のめり込んだ距離
-					float front = AABBMax.z - p_pos.z;
-
-					//ボックス内にどれだけめり込んでいるか
-					//一旦左方向に押し戻すと仮定する
-					float minDist = left;
-					normal = VGet(-1.0f, 0.0f, 0.0f);
-
-					//前の値より大きければ右方向に変更
-					if (right < minDist)
-					{
-						minDist = right;
-						normal = VGet(1.0f, 0.0f, 0.0f);
-					}
-
-					//前の値より大きければ下方向に変更
-					if (down < minDist)
-					{
-						minDist = down;
-						normal = VGet(0.0f, -1.0f, 0.0f);
-					}
-
-					//前の値より大きければ上方向に変更
-					if (up < minDist)
-					{
-						minDist = up;
-						normal = VGet(0.0f, 1.0f, 0.0f);
-					}
-
-					//前の値より大きければ後方向に変更
-					if (back < minDist)
-					{
-						minDist = back;
-						normal = VGet(0.0f, 0.0f, 1.0f);
-					}
-
-					//前の値より大きければ前方向に変更
-					if (front < minDist)
-					{
-						minDist = front;
-						normal = VGet(0.0f, 0.0f, -1.0f);
-					}
-
-					//押し戻しベクトルを生成
-					push = VScale(normal, p_size + minDist);
+					minDist = right;
+					normal = VGet(1.0f, 0.0f, 0.0f);
 				}
 
-				//押し戻し処理
-				_actor.lock()->AddPos(push);
+				//前の値より大きければ下方向に変更
+				if (down < minDist)
+				{
+					minDist = down;
+					normal = VGet(0.0f, -1.0f, 0.0f);
+				}
+
+				//前の値より大きければ上方向に変更
+				if (up < minDist)
+				{
+					minDist = up;
+					normal = VGet(0.0f, 1.0f, 0.0f);
+				}
+
+				//前の値より大きければ後方向に変更
+				if (back < minDist)
+				{
+					minDist = back;
+					normal = VGet(0.0f, 0.0f, 1.0f);
+				}
+
+				//前の値より大きければ前方向に変更
+				if (front < minDist)
+				{
+					minDist = front;
+					normal = VGet(0.0f, 0.0f, -1.0f);
+				}
+
+				//押し戻しベクトルを生成
+				push = VScale(normal, p_size + minDist);
 				_actor.lock()->HitCalc();
+				_actor.lock()->AddPos(push);
+				return;
 			}
 		}
 	}
 }
 
-void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool)
+void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator& _objectPool)
 {
 	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
 	{
@@ -457,7 +456,7 @@ void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator &
 	}
 }
 
-void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator &_actorPool)
+void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator& _actorPool)
 {
 	if (_actorPool->expired() || !(*_actorPool).lock()->GetIsActive())
 	{
@@ -512,7 +511,7 @@ void C_COLLISION_MANAGER::CollisionCalc()
 			}
 
 			//コールバック関数
-			if(funkIndex != -1)Calc[funkIndex]((*itr1), (*itr2));
+			if (funkIndex != -1)Calc[funkIndex]((*itr1), (*itr2));
 
 			EraseObject(itr2);
 		}
@@ -520,30 +519,30 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		EraseObject(itr1);
 	}
 
-	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end();)
+	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end(); ++itr)
 	{
 		//ボクセルとの当たり判定
 		CollisionActorToVoxel((*itr));
 
-		EraseActor(itr);
+		//EraseActor(itr);
 	}
 
-	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
-	{
-		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
-		{
-			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
-			{
-				AttackPlayerToEnemy((*itr1), (*itr2));
-			}
+	//for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
+	//{
+	//	for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
+	//	{
+	//		if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+	//			(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+	//		{
+	//			AttackPlayerToEnemy((*itr1), (*itr2));
+	//		}
 
-			EraseActor(itr2);
-		}
+	//		EraseActor(itr2);
+	//	}
 
-		EraseActor(itr1);
+	//	EraseActor(itr1);
 
-	}
+	//}
 }
 
 void C_COLLISION_MANAGER::Exit()

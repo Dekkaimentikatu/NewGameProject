@@ -263,7 +263,7 @@ void C_PLAYER::ReSpawnCalc()
 		m_hp = m_hpMax;
 
 		//ƒ‚ƒfƒ‹‚ÌÀ•W‚ğİ’è
-		m_pos = VGet(32.0f, 20.0f, 32.0f);
+		m_pos = VGet(32.0f, 30.0f, 32.0f);
 
 		//ƒ‚ƒfƒ‹‚ÌY²‰ñ“]‚ğİ’è
 		m_objectData.modelRot.y = 3.14f;

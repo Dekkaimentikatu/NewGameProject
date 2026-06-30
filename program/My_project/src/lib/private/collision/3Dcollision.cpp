@@ -87,7 +87,7 @@ bool C_COLLISION::CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius
 	float dx = closestX - _sphereCenter.x;
 	float dy = closestY - _sphereCenter.y;
 	float dz = closestZ - _sphereCenter.z;
-	float distSq = dx * dx + dy * dy + dz * dz;
+	float distSq = VSquareSize(VGet(dx, dy, dz));
 
 	//‹——£‚ª”¼ŒaˆÈ‰º‚È‚çÕ“Ë
 	return distSq <= (_sphereRedius * _sphereRedius);
