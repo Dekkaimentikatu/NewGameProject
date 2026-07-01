@@ -9,6 +9,4 @@ C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\ga
   (ソース ファイル 'src/game/private/game/collision/collision_manager.cpp' をコンパイルしています)
   
 C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\collision\collision_manager.cpp(309,35): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  3Dcollision.cpp
-  コードを生成中...
   My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Debug\My_project.exe

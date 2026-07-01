@@ -323,6 +323,10 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 		{
 			for (int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
+
+				if (c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetVoxelType() ==
+					C_VOXEL::AIR)continue;
+
 				//ボクセルの中心座標
 				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
 				//ボクセルのサイズ
