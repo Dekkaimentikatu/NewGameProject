@@ -106,6 +106,12 @@ private:
 	//被弾処理
 	void HitCalc();
 
+	//壁との当たり判定
+	void HitCalcWall();
+
+	//天井との当たり判定
+	void HitCalcCeiling();
+
 	//リスポーン処理
 	void RespawnCalc();
 

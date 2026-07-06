@@ -81,10 +81,10 @@ void C_ENEMY::Step()
 	{
 	case C_ENEMY::ENEMY_STATE_MOVE:
 		MoveCalc();
-		AttackCalc();
+		//AttackCalc();
 		break;
 	case C_ENEMY::ENEMY_STATE_ATTACK:
-		AttackCalc();
+		//AttackCalc();
 		break;
 	case C_ENEMY::ENEMY_STATE_HIT:
 		HitCalc();
@@ -101,7 +101,7 @@ void C_ENEMY::Step()
 	m_pos = VAdd(m_pos, m_moveVec);
 
 	//リスポーン処理
-	RespawnCalc();
+	/*RespawnCalc();*/
 
 	//アニメーションの更新
 	if (m_prevState != m_nowState)
@@ -310,7 +310,19 @@ void C_ENEMY::HitCalc()
 {
 	m_moveVec.y = 0.0f;
 	m_fallSpeed = 0.0f;
-	//KnockBackCalc();
+}
+
+//壁との当たり判定
+void C_ENEMY::HitCalcWall()
+{
+
+}
+
+//天井との当たり判定
+void C_ENEMY::HitCalcCeiling()
+{
+	if (m_moveVec.y > 0.0f)m_moveVec.y = 0.0f;
+	m_fallSpeed = -ENEMY_GRAVITY;
 }
 
 void C_ENEMY::KnockBackCalc()
@@ -388,12 +400,12 @@ void C_ENEMY::AddPos(VECTOR _addPos)
 
 	//座標を加算する
 	m_pos = VAdd(m_pos, _addPos);
-	//移動ベクトルをリセットする
-	m_moveVec.y = 0.0f;
-	//落下速度をリセットする
-	m_fallSpeed = 0.0f;
-	//ジャンプ攻撃フラグを折る
-	m_isJump = false;
+	////移動ベクトルをリセットする
+	//m_moveVec.y = 0.0f;
+	////落下速度をリセットする
+	//m_fallSpeed = 0.0f;
+	////ジャンプ攻撃フラグを折る
+	//m_isJump = false;
 }
 
 //リクエスト処理

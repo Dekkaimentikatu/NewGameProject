@@ -482,11 +482,13 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	int funkIndex = -1;
 
 	//マネージャー1の配列の要素数だけforループを回す
-	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end();)
+	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end(); ++itr1)
 	{
 		//マネージャー2の配列の要素数だけforループを回す
-		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end();)
+		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
+			if ((*itr1).lock() == (*itr2).lock())continue;
+
 			//どのタイプのオブジェクトが参照されているか
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
 				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
@@ -516,37 +518,39 @@ void C_COLLISION_MANAGER::CollisionCalc()
 
 			//コールバック関数
 			if (funkIndex != -1)Calc[funkIndex]((*itr1), (*itr2));
-
-			EraseObject(itr2);
 		}
-
-		EraseObject(itr1);
 	}
 
 	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end(); ++itr)
 	{
 		//ボクセルとの当たり判定
 		CollisionActorToVoxel((*itr));
-
-		//EraseActor(itr);
 	}
 
-	//for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end();)
-	//{
-	//	for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end();)
-	//	{
-	//		if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
-	//			(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
-	//		{
-	//			AttackPlayerToEnemy((*itr1), (*itr2));
-	//		}
+	//攻撃判定
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
+	{
+		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)
+		{
+			if ((*itr1).lock() == (*itr2).lock())continue;
 
-	//		EraseActor(itr2);
-	//	}
+			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
+				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
+			{
+				AttackPlayerToEnemy((*itr1), (*itr2));
+			}
+		}
+	}
 
-	//	EraseActor(itr1);
+	for (auto itr = m_objectPool.begin(); itr != m_objectPool.end(); ++itr)
+	{
+		EraseObject(itr);
+	}
 
-	//}
+	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end(); ++itr)
+	{
+		EraseActor(itr);
+	}
 }
 
 void C_COLLISION_MANAGER::Exit()
