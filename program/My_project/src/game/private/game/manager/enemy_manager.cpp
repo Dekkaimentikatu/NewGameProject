@@ -50,7 +50,7 @@ void C_ENEMY_MANAGER::LoadSync()
 	{
 		enemy = make_shared<C_ENEMY>();
 		enemy->Init();
-		tmp.initPos = VGet(32.0f, 30.0f, 32.0f);
+		tmp.initPos = VGet(32.0f, 200.0f, 32.0f);
 		tmp.modelScale = VGet(0.1f, 0.1f, 0.1f);
 		tmp.modelRot = { 0 };
 		tmp.moveLen = 0;

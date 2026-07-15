@@ -6,6 +6,9 @@
 #include "game/voxel/voxel.h"
 #include "game/voxel/voxel_chunk.h"
 
+constexpr const char* VOXEL_WORLD_FILE_PATH = "data/map/voxel_world.dat";
+constexpr const char* VOXEL_GRAP_PATH = "data/graphic/Voxel_Grap_1.png";
+
 class C_VOXEL_CHUNK;
 
 constexpr int BLOCK_SIZE = 20;

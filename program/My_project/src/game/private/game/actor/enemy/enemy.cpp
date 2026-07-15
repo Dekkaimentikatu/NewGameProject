@@ -19,7 +19,7 @@ void C_ENEMY::Init()
 
 	//当たり判定用の半径の初期化
 	m_redius = 16;
-	
+
 	//攻撃判定用の半径の初期化
 	m_attackRedius = 16;
 
@@ -221,13 +221,6 @@ void C_ENEMY::Exit()
 //移動処理
 void C_ENEMY::MoveCalc()
 {
-	////時間停止状態なら移動処理を行わない
-	if (t_playerData->isStop)
-	{
-		m_moveVec = { 0 };
-		return;
-	}
-
 	VECTOR tmp = { 0 };
 
 	//スポーン地点とプレイヤーの位置の差分を計算する
@@ -239,32 +232,12 @@ void C_ENEMY::MoveCalc()
 	//スポーン地点とプレイヤーの位置の距離を計算する
 	float len = VSize(tmp);
 
-	//スポーン地点とプレイヤーの距離が一定以上ならスポーン地点に向かう
-	if (len > 72.0f)
-	{
-		tmp = VSub(m_objectData.initPos, m_pos);
-		len = VSize(tmp);
-		tmp = VNorm(tmp);
-		m_moveVec = VScale(tmp, ENEMY_MOVE_SPEED * m_easingSpeed);
-
-		if (len < 5)
-		{
-			m_pos.x = m_objectData.initPos.x;
-			m_pos.z = m_objectData.initPos.z;
-			m_objectData.modelRot.y = 0.0f;
-			m_moveVec = { 0 };
-		}
-	}
-	//スポーン地点とプレイヤーの距離が一定以下ならプレイヤーに向かう
-	else
-	{
-		//移動処理
-		tmp = VSub(m_targetPos, m_pos);
-		m_objectData.modelRot.y = atan2f(-tmp.x, -tmp.z);
-		tmp = VNorm(tmp);
-		m_moveVec = VScale(tmp, ENEMY_MOVE_SPEED * m_easingSpeed);
-		m_nowState = ENEMY_STATE_MOVE;
-	}
+	//移動処理
+	tmp = VSub(m_targetPos, m_pos);
+	m_objectData.modelRot.y = atan2f(-tmp.x, -tmp.z);
+	tmp = VNorm(tmp);
+	m_moveVec = VScale(tmp, ENEMY_MOVE_SPEED * m_easingSpeed);
+	m_nowState = ENEMY_STATE_MOVE;
 }
 
 //攻撃処理

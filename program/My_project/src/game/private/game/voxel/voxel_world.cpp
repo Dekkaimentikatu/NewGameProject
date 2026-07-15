@@ -1,5 +1,6 @@
 #include "game/voxel/voxel_world.h"
 #include "game/voxel/voxel.h"
+#include "hndlmanager/2Dhndlmanager.h"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 {
 	C_VOXEL::T_VOXEL_DATA voxelData = { 0 };
 	T_CHUNK_POS chunkPos = { 0 };
+	C_2D_HNDL_MANAGER* instance2D = C_2D_HNDL_MANAGER::GetInstance();
 
 	chunkPos = _chunkPos;
 
@@ -56,8 +58,9 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.x;
 				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
 				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.z;
-				if(y == 0)voxelData.voxelType = _voxelType;
+				if(y < 3)voxelData.voxelType = _voxelType;
 				else voxelData.voxelType = C_VOXEL::AIR;
+				voxelData.grapHndl = instance2D->Get2DImageHndl(VOXEL_GRAP_PATH);
 				shared_ptr<C_VOXEL> object = make_shared<C_VOXEL>();
 				object->Init();
 				object->Request(voxelData);
@@ -79,8 +82,8 @@ void C_VOXEL_WORLD::CheckDrawFlag(T_CHUNK_POS _chunkPos)
 			{
 				if (x < CHUNK_SIZE_X - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x + 1, y, z, C_VOXEL::LEFT);
 				if (x > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x - 1, y, z, C_VOXEL::RIGHT);
-				if (y < CHUNK_SIZE_Y - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::DOWN);
-				if (y > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::UP);
+				if (y < CHUNK_SIZE_Y - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y + 1, z, C_VOXEL::UP);
+				if (y > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y - 1, z, C_VOXEL::DOWN);
 				if (z < CHUNK_SIZE_Z - 1)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z + 1, C_VOXEL::REAR);
 				if (z > 0)m_voxelWorld.at(_chunkPos)->CheckDrawFlag(x, y, z, x, y, z - 1, C_VOXEL::FRONT);
 			}

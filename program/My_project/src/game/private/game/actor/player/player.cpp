@@ -51,7 +51,7 @@ void C_PLAYER::Load()
 	C_3D_HNDL_MANAGER* incetans = C_3D_HNDL_MANAGER::GetInstance();
 
 	//座標、回転、スケールの設定
-	m_pos = VGet(32.0f, 20.0f, 32.0f);	//位置
+	m_pos = VGet(32.0f, 100.0f, 32.0f);	//位置
 
 	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);
 
@@ -263,7 +263,7 @@ void C_PLAYER::ReSpawnCalc()
 		m_hp = m_hpMax;
 
 		//モデルの座標を設定
-		m_pos = VGet(32.0f, 30.0f, 32.0f);
+		m_pos = VGet(32.0f, 100.0f, 32.0f);
 
 		//モデルのY軸回転を設定
 		m_objectData.modelRot.y = 3.14f;

@@ -4,6 +4,7 @@
 #include "game/object/static/block.h"
 
 #include "hndlmanager/3Dhndlmanager.h"
+#include "hndlmanager/2Dhndlmanager.h"
 #include "draw_polygon/draw_polygon.h"
 
 using namespace std;
@@ -20,6 +21,8 @@ void C_MAP_MANAGER::LoadAnSync()
 	m_stageLoader.LoadMapResource();
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
 	incetanse->Load3DModel(SKY_MODEL_PATH);
+	C_2D_HNDL_MANAGER* instance2D = C_2D_HNDL_MANAGER::GetInstance();
+	instance2D->Load2DImage(VOXEL_GRAP_PATH);
 
 }
 
