@@ -293,6 +293,29 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 	//}
 }
 
+//ÉAÉNÉ^Å[Ç∆É{ÉNÉZÉã
+void C_COLLISION_MANAGER::AttackActorToObject(std::weak_ptr<C_ACTOR_BASE> _actor, std::weak_ptr<C_OBJECT_BASE> _object)
+{
+	VECTOR HitPos = { 0 };	//É|ÉäÉSÉìÇ∆ÇÃç≈ãﬂì_Çäiî[Ç∑ÇÈïœêî
+	VECTOR center1 = { 0 };	//ìñÇΩÇËîªíËÇÃíÜêSÇäiî[Ç∑ÇÈïœêî
+	float radius1 = 0; //ìñÇΩÇËîªíËÇÃîºåaÇäiî[Ç∑ÇÈïœêî
+	VECTOR center2 = { 0 };	//ìñÇΩÇËîªíËÇÃíÜêSÇäiî[Ç∑ÇÈïœêî
+	float radius2 = 0; //ìñÇΩÇËîªíËÇÃîºåaÇäiî[Ç∑ÇÈïœêî
+	float len = 0; //ÇﬂÇËçûÇÒÇæãóó£Çäiî[Ç∑ÇÈïœêî
+
+	//ê∂ë∂ÉtÉâÉOÇ™ê‹ÇÍÇƒÇ¢ÇÈÇ»ÇÁéüÇÃóvëfÇ÷
+	if (!_actor.lock()->GetIsActive())return;
+	if (!_actor.lock()->GetIsAttack())return;
+	if (!_object.lock()->GetIsActive())return;
+
+	center1 = _actor.lock()->GetAttackPos();
+	radius1 = static_cast<float>(_actor.lock()->GetAttackRedius());
+
+	if(C_COLLISION::CheckHitAABBToSphere(center1, radius1, center2, radius2, HitPos))return;
+
+	_object.lock()->SubHp(_actor.lock()->GetAtt());
+}
+
 void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor)
 {
 	if (!_actor.lock()->GetIsActive())return;
@@ -525,6 +548,15 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	{
 		//É{ÉNÉZÉãÇ∆ÇÃìñÇΩÇËîªíË
 		CollisionActorToVoxel((*itr));
+	}
+
+	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
+	{
+		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
+		{
+			//É{ÉNÉZÉãÇ∆ÇÃìñÇΩÇËîªíË
+			AttackActorToObject((*itr1), (*itr2));
+		}
 	}
 
 	//çUåÇîªíË

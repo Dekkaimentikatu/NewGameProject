@@ -121,6 +121,23 @@ public:
 	//I—¹
 	virtual void Exit() = 0;
 
+	//HPæ“¾
+	inline int GetHp() const
+	{
+		return m_hp;
+	}
+
+	//HPİ’è
+	inline void SetHp(int _hp)
+	{
+		m_hp = _hp;
+	}
+
+	inline void SubHp(int _sub)
+	{
+		m_hp -= _sub;
+	}
+
 	//À•W‰ÁZ
 	virtual void AddPos(VECTOR _addPos) { m_pos = VAdd(m_pos, _addPos); }
 

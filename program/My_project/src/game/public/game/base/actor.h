@@ -103,17 +103,7 @@ public:
 		return m_attackRedius;
 	}
 
-	//HPæ“¾
-	inline int GetHp() const
-	{
-		return m_hp;
-	}
 
-	//HPİ’è
-	inline void SetHp(int _hp)
-	{
-		m_hp = _hp;
-	}
 
 	inline void SetTargetPos(VECTOR _targetPos)
 	{

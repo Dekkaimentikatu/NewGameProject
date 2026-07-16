@@ -181,8 +181,7 @@ void C_SCENE_PLAY::Step()
 	CEffekseerCtrl::SetAutoProjectionMtx();
 
 	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
-	// ラムダで渡すことで std::function<void()> に合うようにする
-	c_threadPool.Enqueue([instance]() { instance->CollisionCalc(); });
+	instance->CollisionCalc();
 
 	//当たり判定を行った後に更新確定処理を行う
 	CEffekseerCtrl::UpdateAutoCamera();

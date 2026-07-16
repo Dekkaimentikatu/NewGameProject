@@ -53,6 +53,9 @@ private:
 	std::weak_ptr<C_VOXEL_WORLD> c_voxelWorldCopy;
 
 	//アクターとボクセル
+	void AttackActorToObject(std::weak_ptr<C_ACTOR_BASE> _actor, std::weak_ptr<C_OBJECT_BASE> _object);
+
+	//アクターとボクセル
 	void CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor);
 
 	//オブジェクトの削除
