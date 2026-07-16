@@ -53,7 +53,7 @@ void C_CHECK_POINT::Step()
 void C_CHECK_POINT::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_CHECK_POINT::Draw()

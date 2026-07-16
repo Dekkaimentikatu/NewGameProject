@@ -83,7 +83,7 @@ VECTOR C_CIRCULAR_MOTION::MoveCalc()
 void C_CIRCULAR_MOTION::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_CIRCULAR_MOTION::Draw()

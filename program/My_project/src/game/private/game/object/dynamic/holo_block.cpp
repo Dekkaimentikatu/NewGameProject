@@ -77,7 +77,7 @@ void C_HOLO_BLOCK::Step()
 void C_HOLO_BLOCK::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_HOLO_BLOCK::Draw()

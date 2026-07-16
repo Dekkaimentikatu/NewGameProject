@@ -10,11 +10,7 @@ class C_ACTOR_BASE : public C_OBJECT_BASE
 {
 protected:
 
-	//HP
-	int m_hp;
 
-	//HP最大値
-	int m_hpMax;
 
 	//攻撃力
 	int m_att;
@@ -54,11 +50,11 @@ protected:
 public:
 
 	//コンストラクタ
-	C_ACTOR_BASE(int _hp = 0, int _hpMax = 0, int _att = 0, bool _isJump = false,
+	C_ACTOR_BASE(int _att = 0, bool _isJump = false,
 		bool _isHit = false, bool _isAttack = false,
 		VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, VECTOR _knockBackSpeed = { 0 },
 		bool _isRespawn = false, int _hitWait = 0, float _attackWait = 0.0f, int _attackRedius = 0) :
-		m_hp(_hp), m_hpMax(_hpMax), m_att(_att), m_isJump(_isJump), m_isHit(_isHit), m_isAttack(_isAttack),
+		m_att(_att), m_isJump(_isJump), m_isHit(_isHit), m_isAttack(_isAttack),
 		m_targetPos(_targetPos), m_knockBackSpeed(_knockBackSpeed), m_cameraRot(_modelRot), m_isRespawn(_isRespawn),
 		m_hitWait(_hitWait), m_attackWait(_attackWait), m_attackRedius(_attackRedius){}
 

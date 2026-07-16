@@ -65,7 +65,7 @@ void C_ROT_FLOOR::Step()
 void C_ROT_FLOOR::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_ROT_FLOOR::Draw()

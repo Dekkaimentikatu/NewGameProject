@@ -32,6 +32,12 @@ public:
 
 protected:
 
+	//HP
+	int m_hp;
+
+	//HP最大値
+	int m_hpMax;
+
 	//グローバルデータクラスのインスタンス取得用変数
 	C_GLOBAL_DATA* c_globalData;
 
@@ -79,7 +85,7 @@ protected:
 	inline void SetUpCollInfo() const { MV1SetupCollInfo(m_modelHndl); }
 
 	//モデルのコリジョン情報の更新
-	inline void UpdataCollInfo() const { MV1RefreshCollInfo(m_modelHndl); }
+	inline void UpdateCollInfo() const { MV1RefreshCollInfo(m_modelHndl); }
 
 	//モデルのコリジョン情報の破棄
 	inline void DeleteCollInfo() const { MV1TerminateCollInfo(m_modelHndl); }
@@ -87,10 +93,10 @@ protected:
 public:
 
 	//コンストラクタ
-	C_OBJECT_BASE(C_GLOBAL_DATA* _globalData = nullptr, bool _isActive = false,
+	C_OBJECT_BASE(int _hp = 0, int _hpMax = 0, C_GLOBAL_DATA* _globalData = nullptr, bool _isActive = false,
 		bool _isAttack = false, VECTOR _pos = { 0 }, VECTOR _moveVec = VGet(0.0f, 0.0f, 0.0f), 
 		OBJECT_TYPE _objectType = OBJECT_TYPE_DYNAMIC, int _redius = 0, int _modelHndl = -1, int _effHndl = -1) :
-		c_globalData(_globalData), m_objectData(), m_isActive(_isActive), m_pos(_pos),
+		m_hp(_hp), m_hpMax(_hpMax), c_globalData(_globalData), m_objectData(), m_isActive(_isActive), m_pos(_pos),
 		m_moveVec(_moveVec), m_objectType(_objectType), m_redius(_redius), m_modelHndl(_modelHndl), 
 		m_effHndl(_effHndl){ }
 

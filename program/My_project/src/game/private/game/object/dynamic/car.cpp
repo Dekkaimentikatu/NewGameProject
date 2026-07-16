@@ -103,7 +103,7 @@ VECTOR C_CAR::MoveCalc()
 void C_CAR::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_CAR::Draw()

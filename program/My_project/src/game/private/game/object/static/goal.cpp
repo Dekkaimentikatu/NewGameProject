@@ -59,7 +59,7 @@ void C_GOAL::Update()
 {
 	//ƒ‚ƒfƒ‹î•ñ‚ÌXV
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_GOAL::Draw()

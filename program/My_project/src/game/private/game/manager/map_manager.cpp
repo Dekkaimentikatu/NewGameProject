@@ -1,6 +1,7 @@
 #include "game/manager/map_manager.h"
 #include "game/collision/collision_manager.h"
 #include "game/object/static/sky.h"
+#include "game/object/static/nexus.h"
 #include "game/object/static/block.h"
 
 #include "hndlmanager/3Dhndlmanager.h"
@@ -21,6 +22,7 @@ void C_MAP_MANAGER::LoadAnSync()
 	m_stageLoader.LoadMapResource();
 	C_3D_HNDL_MANAGER* incetanse = C_3D_HNDL_MANAGER::GetInstance();
 	incetanse->Load3DModel(SKY_MODEL_PATH);
+	incetanse->Load3DModel(NEXUS_MODEL_PATH);
 	C_2D_HNDL_MANAGER* instance2D = C_2D_HNDL_MANAGER::GetInstance();
 	instance2D->Load2DImage(VOXEL_GRAP_PATH);
 
@@ -44,8 +46,14 @@ void C_MAP_MANAGER::LoadSync()
 	sky->Load();
 	c_objectList.push_back(sky);
 
+	shared_ptr<C_OBJECT_BASE> nexus = make_shared<C_NEXUS>();
+	nexus->Init();
+	nexus->Load();
+	c_objectList.push_back(nexus);
+
 	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
 	instance->CopyVoxelWorld(c_world);
+	instance->AddObject(nexus);
 
 	//for (auto itr = c_chunk.GetChunkBegin(); itr != c_chunk.GetChunkEnd(); ++itr)
 	//{

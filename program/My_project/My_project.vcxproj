@@ -52,6 +52,7 @@
     <ClInclude Include="src\game\public\game\object\static\darts_emitter.h" />
     <ClInclude Include="src\game\public\game\object\static\enemy_spawn_point.h" />
     <ClInclude Include="src\game\public\game\object\static\goal.h" />
+    <ClInclude Include="src\game\public\game\object\static\nexus.h" />
     <ClInclude Include="src\game\public\game\object\static\sky.h" />
     <ClInclude Include="src\game\public\game\object\static\start.h" />
     <ClInclude Include="src\game\public\game\stage\stage_loader.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="src\game\private\game\object\static\darts_emitter.cpp" />
     <ClCompile Include="src\game\private\game\object\static\enemy_spawn_point.cpp" />
     <ClCompile Include="src\game\private\game\object\static\goal.cpp" />
+    <ClCompile Include="src\game\private\game\object\static\nexus.cpp" />
     <ClCompile Include="src\game\private\game\object\static\sky.cpp" />
     <ClCompile Include="src\game\private\game\object\static\start.cpp" />
     <ClCompile Include="src\game\private\game\stage\stage_loader.cpp" />

@@ -46,7 +46,7 @@ void C_START::Step()
 void C_START::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_START::Draw()

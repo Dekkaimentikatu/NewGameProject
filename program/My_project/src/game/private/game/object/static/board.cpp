@@ -45,7 +45,7 @@ void C_BOARD::Step()
 void C_BOARD::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_BOARD::Draw()

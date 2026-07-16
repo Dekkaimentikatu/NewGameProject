@@ -542,12 +542,12 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		}
 	}
 
-	for (auto itr = m_objectPool.begin(); itr != m_objectPool.end(); ++itr)
+	for (auto itr = m_objectPool.begin(); itr != m_objectPool.end();)
 	{
 		EraseObject(itr);
 	}
 
-	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end(); ++itr)
+	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end();)
 	{
 		EraseActor(itr);
 	}

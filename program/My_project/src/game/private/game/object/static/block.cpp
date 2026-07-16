@@ -45,7 +45,7 @@ void C_BLOCK::Step()
 void C_BLOCK::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_BLOCK::Draw()

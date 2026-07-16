@@ -71,7 +71,7 @@ void C_DAMAGE_FLOOR::Step()
 void C_DAMAGE_FLOOR::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_DAMAGE_FLOOR::Draw()

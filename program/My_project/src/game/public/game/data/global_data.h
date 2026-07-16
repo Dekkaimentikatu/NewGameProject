@@ -87,6 +87,8 @@ private:
 
 	T_FLAG_DATA t_flagData;
 
+	VECTOR m_targetPos;
+
 	std::list<T_ENEMY_SPOWN> m_enemySpawnPointList;
 
 	static C_GLOBAL_DATA* m_instance;
@@ -109,6 +111,8 @@ public:
 
 	T_FLAG_DATA* GetFlagData() { return &t_flagData; };
 
+	VECTOR GetTargetPos() { return m_targetPos; }
+
 	std::list<T_ENEMY_SPOWN>* GetEnemySpawnPointList() { return &m_enemySpawnPointList; }
 
 	void SetPlayerData(T_PLAYER_DATA* _playerData) { t_playerData = *_playerData; }
@@ -118,6 +122,8 @@ public:
 	void SetEnemyData(T_ENEMY_DATA _enemyData) { t_enemyData = _enemyData; }
 
 	void SetPlayData(T_PLAY_DATA _playData) { t_playData = _playData; }
+
+	void SetTargetPos(VECTOR _targetPos) { m_targetPos = _targetPos; }
 
 	void DrawDebug();
 

@@ -65,7 +65,7 @@ void C_ENEMY::Load()
 	m_objectType = OBJECT_TYPE_ENEMY;
 
 	//ターゲットの位置をプレイヤーの位置に設定する
-	m_targetPos = t_playerData->pos;
+	m_targetPos = c_globalData->GetTargetPos();
 
 	//攻撃待機時間を設定
 	m_waitCount[ENEMY_STATE_ATTACK] = ENEMY_ATTACK_WAIT_MAX;
@@ -74,17 +74,17 @@ void C_ENEMY::Load()
 void C_ENEMY::Step()
 {
 	//ターゲットの位置をプレイヤーの位置に更新する
-	m_targetPos = t_playerData->pos;
+	m_targetPos = c_globalData->GetTargetPos();
 
 	//状態ごとの処理
 	switch (m_nowState)
 	{
 	case C_ENEMY::ENEMY_STATE_MOVE:
 		MoveCalc();
-		//AttackCalc();
+		AttackCalc();
 		break;
 	case C_ENEMY::ENEMY_STATE_ATTACK:
-		//AttackCalc();
+		AttackCalc();
 		break;
 	case C_ENEMY::ENEMY_STATE_HIT:
 		HitCalc();

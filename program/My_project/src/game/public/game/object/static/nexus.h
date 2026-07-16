@@ -1,0 +1,20 @@
+#pragma once
+#include "game/base/object.h"
+
+static const char* NEXUS_MODEL_PATH = "data/model/field/Nexus.mv1";
+
+class C_NEXUS : public C_OBJECT_BASE
+{
+private:
+
+public:
+
+	void Init() override;	//初期化
+	void Load() override;	//読込
+	void Step() override;	//更新
+	void Update() override;
+	void Draw() override;	//描画
+	void Exit() override;	//終了
+	void Request(T_OBJECT_DATA _objectData);
+	void HitCalc();
+};

@@ -505,6 +505,9 @@
     <ClInclude Include="src\lib\public\thread_pool\_thread_pool.h">
       <Filter>src\lib\public\thread_pool</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\public\game\object\static\nexus.h">
+      <Filter>src\game\public\game\object\static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\game\private\effekseer\effekseer.cpp">
@@ -752,6 +755,9 @@
     </ClCompile>
     <ClCompile Include="src\game\private\game\voxel\voxel_world.cpp">
       <Filter>src\game\private\game\voxel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\private\game\object\static\nexus.cpp">
+      <Filter>src\game\private\game\object\static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

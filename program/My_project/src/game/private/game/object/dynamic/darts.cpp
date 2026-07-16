@@ -106,7 +106,7 @@ VECTOR C_DARTS::MoveCalc()
 void C_DARTS::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_DARTS::Draw()

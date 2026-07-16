@@ -149,7 +149,7 @@ VECTOR C_BLOCK_MOVE::MoveCalc()
 void C_BLOCK_MOVE::Update()
 {
 	UpdateModel();
-	UpdataCollInfo();
+	UpdateCollInfo();
 }
 
 void C_BLOCK_MOVE::Draw()
