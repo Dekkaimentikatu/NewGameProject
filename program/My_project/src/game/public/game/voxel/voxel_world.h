@@ -38,6 +38,23 @@ typedef struct T_CHUNK_POS
     }
 };
 
+typedef struct T_RAYCAST_HIT
+{
+	//ヒットしたかどうか
+	bool isHit;
+
+	//ヒットしたボクセルの座標
+	int voxelX;
+	int voxelY;
+	int voxelZ;
+
+	//ヒットしたボクセルのチャンク座標
+	VECTOR pos;
+
+	//ヒットしたボクセルの法線
+	VECTOR normal;
+};
+
 static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = {{{ -1, -1,} ,{ -1, 1}},
 																	{{ 1, -1}, { 1 , 1}}};
 
@@ -63,6 +80,8 @@ private:
 	void DrawVoxel(T_CHUNK_POS _chunkPos);
 	//ポリゴンの描画オフセットの計算
 	VECTOR CalcDrawOffset(T_CHUNK_POS _chunkPos, VECTOR _offset);
+	//ボクセルの存在判定
+	bool IsSolidVoxel(int x, int y, int z);
 
 public:
 
@@ -80,6 +99,9 @@ public:
 	void Draw();
 	//終了処理
 	void Exit();
+
+	//レイキャスト処理
+	T_RAYCAST_HIT RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance);
 
 	// チャンクをポインタで取得（存在しない場合は nullptr を返す）
 	std::weak_ptr<C_VOXEL_CHUNK> GetChunk(const T_CHUNK_POS& _chunkPos)

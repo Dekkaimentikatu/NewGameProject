@@ -1,38 +1,43 @@
 #include "../public/math/mymath.h"
+#include <compare>
 
-float MYMATH::GetLen(float X1, float X2, float Y1, float Y2)
+float C_MY_MATH::GetLen(float X1, float X2, float Y1, float Y2)
 {
 	float 	len;
 	len = sqrtf((X2 - X1) * (X2 - X1) + (Y2 - Y1) * (Y2 - Y1));
 	return len;
 }
 
-int MYMATH::FloorDiv(int a, int b)
+//整数の除算を切り捨てで行う
+int C_MY_MATH::FloorDiv(int a, int b)
 {
-	int result = a / b;
+	auto d = div(a, b);
 
-	if ((a ^ b) < 0 && a % b)
+	if (d.rem != 0 &&
+		((d.rem < 0) != (b < 0)))
 	{
-		--result;
+		--d.quot;
 	}
 
-	return result;
+	return d.quot;
 }
 
-int MYMATH::Mod(int a, int b)
+//整数の剰余を計算する
+int C_MY_MATH::Mod(int a, int b)
 {
-	int m = a % b;
+	auto d = div(a, b);
 
-	if (m < 0)
+	if (d.rem != 0 &&
+		((d.rem < 0) != (b < 0)))
 	{
-		m += b;
+		d.rem += b;
 	}
 
-	return m;
+	return d.rem;
 }
 
 //座標にベクトルを足す
-VECTOR MYMATH::VecAdd(VECTOR pos, VECTOR add)
+VECTOR C_MY_MATH::VecAdd(VECTOR pos, VECTOR add)
 {
 	pos.x += add.x;
 	pos.y += add.y;
@@ -42,7 +47,7 @@ VECTOR MYMATH::VecAdd(VECTOR pos, VECTOR add)
 }
 
 //ベクトルの生成
-VECTOR MYMATH::VecCreate(VECTOR endPos, VECTOR startPos)
+VECTOR C_MY_MATH::VecCreate(VECTOR endPos, VECTOR startPos)
 {
 	VECTOR res;
 
@@ -54,7 +59,7 @@ VECTOR MYMATH::VecCreate(VECTOR endPos, VECTOR startPos)
 }
 
 //ベクトルの長さを取得
-float MYMATH::GetVecLength(VECTOR Vec)
+float C_MY_MATH::GetVecLength(VECTOR Vec)
 {
 	float len;
 	len = sqrtf((Vec.x) * (Vec.x) + (Vec.y) * (Vec.y) + (Vec.z) * (Vec.z));
@@ -62,7 +67,7 @@ float MYMATH::GetVecLength(VECTOR Vec)
 }
 
 //ベクトルを正規化
-VECTOR MYMATH::VecNorm(VECTOR Vec, float len)
+VECTOR C_MY_MATH::VecNorm(VECTOR Vec, float len)
 {
 	VECTOR res;
 	res.x = Vec.x / len;
@@ -72,7 +77,7 @@ VECTOR MYMATH::VecNorm(VECTOR Vec, float len)
 }
 
 //ベクトルのスカラー倍
-VECTOR MYMATH::VecScale(VECTOR Vec, float scale)
+VECTOR C_MY_MATH::VecScale(VECTOR Vec, float scale)
 {
 	VECTOR res;
 	res.x = Vec.x * scale;
@@ -82,7 +87,7 @@ VECTOR MYMATH::VecScale(VECTOR Vec, float scale)
 }
 
 //ベクトルの内積の計算
-float MYMATH::VecDot(VECTOR vec1, VECTOR vec2)
+float C_MY_MATH::VecDot(VECTOR vec1, VECTOR vec2)
 {
 	float ret;
 
@@ -92,7 +97,7 @@ float MYMATH::VecDot(VECTOR vec1, VECTOR vec2)
 }
 
 //2Dの外積の計算
-float MYMATH::VecCrose2D(VECTOR vec1, VECTOR vec2)
+float C_MY_MATH::VecCrose2D(VECTOR vec1, VECTOR vec2)
 {
 	float ret;
 
@@ -102,7 +107,7 @@ float MYMATH::VecCrose2D(VECTOR vec1, VECTOR vec2)
 }
 
 //3Dの外積の計算
-VECTOR MYMATH::VecCrose(VECTOR vec1, VECTOR vec2)
+VECTOR C_MY_MATH::VecCrose(VECTOR vec1, VECTOR vec2)
 {
 	VECTOR ret;
 
@@ -116,7 +121,7 @@ VECTOR MYMATH::VecCrose(VECTOR vec1, VECTOR vec2)
 	return ret;
 }
 
-MATRIX MYMATH::GetIdentityMatrix()
+MATRIX C_MY_MATH::GetIdentityMatrix()
 {
 	MATRIX mat;
 
@@ -139,7 +144,7 @@ MATRIX MYMATH::GetIdentityMatrix()
 	return mat;
 }
 
-MATRIX MYMATH::GetTranslateMatrix(float x, float y, float z)
+MATRIX C_MY_MATH::GetTranslateMatrix(float x, float y, float z)
 {
 	MATRIX mat;
 
@@ -177,7 +182,7 @@ MATRIX MYMATH::GetTranslateMatrix(float x, float y, float z)
 	return mat;
 }
 
-MATRIX MYMATH::GetTranslateMatrix(VECTOR _vec)
+MATRIX C_MY_MATH::GetTranslateMatrix(VECTOR _vec)
 {
 	MATRIX mat;
 
@@ -215,7 +220,7 @@ MATRIX MYMATH::GetTranslateMatrix(VECTOR _vec)
 	return mat;
 }
 
-MATRIX MYMATH::GetScaleMatrix(float x, float y, float z)
+MATRIX C_MY_MATH::GetScaleMatrix(float x, float y, float z)
 {
 	MATRIX mat;
 
@@ -251,7 +256,7 @@ MATRIX MYMATH::GetScaleMatrix(float x, float y, float z)
 	return mat;
 }
 
-MATRIX MYMATH::GetScaleMatrix(VECTOR _vec)
+MATRIX C_MY_MATH::GetScaleMatrix(VECTOR _vec)
 {
 	MATRIX mat;
 
@@ -280,32 +285,32 @@ MATRIX MYMATH::GetScaleMatrix(VECTOR _vec)
 	return mat;
 }
 
-MATRIX MYMATH::GetPitchMatrix(float angle)
+MATRIX C_MY_MATH::GetPitchMatrix(float angle)
 {
 	return GetIdentityMatrix();
 }
 
-MATRIX MYMATH::GetYawMatrix(float angle)
+MATRIX C_MY_MATH::GetYawMatrix(float angle)
 {
 	return GetIdentityMatrix();
 }
 
-MATRIX MYMATH::GetRollMatrix(float angle)
+MATRIX C_MY_MATH::GetRollMatrix(float angle)
 {
 	return GetIdentityMatrix();
 }
 
-MATRIX MYMATH::MatMult(MATRIX _mat1, MATRIX _mat2)
+MATRIX C_MY_MATH::MatMult(MATRIX _mat1, MATRIX _mat2)
 {
 	return GetIdentityMatrix();
 }
 
-MATRIX MYMATH::MatTransform(MATRIX _mat, VECTOR _vec)
+MATRIX C_MY_MATH::MatTransform(MATRIX _mat, VECTOR _vec)
 {
 	return GetIdentityMatrix();
 }
 
-MATRIX MYMATH::MatTranspose(MATRIX _mat)
+MATRIX C_MY_MATH::MatTranspose(MATRIX _mat)
 {
 	return GetIdentityMatrix();
 }

@@ -51,7 +51,7 @@ void C_PLAYER::Load()
 	C_3D_HNDL_MANAGER* incetans = C_3D_HNDL_MANAGER::GetInstance();
 
 	//座標、回転、スケールの設定
-	m_pos = VGet(32.0f, 100.0f, 32.0f);	//位置
+	m_pos = VGet(32.0f, 300.0f, 32.0f);	//位置
 
 	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);
 
@@ -87,12 +87,12 @@ void C_PLAYER::Step()
 	{
 	case C_PLAYER::PLAYER_STATE_WAIT:
 		MoveCalc();
-		//AttackCalc();
+		AttackCalc();
 		JumpCalc();
 		break;
 	case C_PLAYER::PLAYER_STATE_MOVE:
 		MoveCalc();
-		//AttackCalc();
+		AttackCalc();
 		JumpCalc();
 
 		break;

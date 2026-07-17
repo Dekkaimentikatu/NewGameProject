@@ -18,7 +18,8 @@ void C_NEXUS::Load()
 	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
 	m_modelHndl = instace->Get3DModelHndl(NEXUS_MODEL_PATH);
 	m_isActive = true;
-	m_hp = 1;
+	m_hp = 100;
+	m_redius = 10;
 	//モデル情報の読込
 	m_pos = VGet(0.0f, 70.0f, 0.0f);	//位置
 	m_objectData.modelScale = VGet(1.0f, 1.0f, 1.0f);

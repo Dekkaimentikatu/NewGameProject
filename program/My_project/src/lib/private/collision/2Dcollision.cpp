@@ -33,20 +33,20 @@ bool COLLOSION_2D::CheckHitDotToSquare2D(VECTOR dotPos, VECTOR squarePos, int wi
 bool COLLOSION_2D::CheckHitDotToSquare2D(VECTOR dotPos, VECTOR vertexPos1, VECTOR vertexPos2, VECTOR vertexPos3,
 	VECTOR vertexPos4, int width, int height)
 {
-	VECTOR vec1 = MYMATH::VecCreate(vertexPos2, vertexPos1);
-	VECTOR vec2 = MYMATH::VecCreate(vertexPos3, vertexPos2);
-	VECTOR vec3 = MYMATH::VecCreate(vertexPos4, vertexPos3);
-	VECTOR vec4 = MYMATH::VecCreate(vertexPos1, vertexPos4);
+	VECTOR vec1 = C_MY_MATH::VecCreate(vertexPos2, vertexPos1);
+	VECTOR vec2 = C_MY_MATH::VecCreate(vertexPos3, vertexPos2);
+	VECTOR vec3 = C_MY_MATH::VecCreate(vertexPos4, vertexPos3);
+	VECTOR vec4 = C_MY_MATH::VecCreate(vertexPos1, vertexPos4);
 
-	VECTOR vecP1 = MYMATH::VecCreate(dotPos, vertexPos1);
-	VECTOR vecP2 = MYMATH::VecCreate(dotPos, vertexPos2);
-	VECTOR vecP3 = MYMATH::VecCreate(dotPos, vertexPos3);
-	VECTOR vecP4 = MYMATH::VecCreate(dotPos, vertexPos4);
+	VECTOR vecP1 = C_MY_MATH::VecCreate(dotPos, vertexPos1);
+	VECTOR vecP2 = C_MY_MATH::VecCreate(dotPos, vertexPos2);
+	VECTOR vecP3 = C_MY_MATH::VecCreate(dotPos, vertexPos3);
+	VECTOR vecP4 = C_MY_MATH::VecCreate(dotPos, vertexPos4);
 
-	float C1 = MYMATH::VecCrose2D(vec1, vecP1);
-	float C2 = MYMATH::VecCrose2D(vec2, vecP2);
-	float C3 = MYMATH::VecCrose2D(vec3, vecP3);
-	float C4 = MYMATH::VecCrose2D(vec4, vecP4);
+	float C1 = C_MY_MATH::VecCrose2D(vec1, vecP1);
+	float C2 = C_MY_MATH::VecCrose2D(vec2, vecP2);
+	float C3 = C_MY_MATH::VecCrose2D(vec3, vecP3);
+	float C4 = C_MY_MATH::VecCrose2D(vec4, vecP4);
 
 	return (C1 > 0 || C1 < 0) && (C2 > 0 || C2 < 0) && (C3 > 0 || C3 < 0) && (C4 > 0 || C4 < 0) ? true:false;
 }

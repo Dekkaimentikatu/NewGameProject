@@ -2,7 +2,8 @@
 #include <math.h>
 #include <DxLib.h>
 
-class MYMATH
+
+class C_MY_MATH
 {
 public:
 
@@ -35,7 +36,6 @@ public:
 
 	//3D‚ÌŠOÏ‚ÌŒvZ
 	static VECTOR VecCrose(VECTOR vec1, VECTOR vec2);
-
 
 	static MATRIX GetIdentityMatrix();
 

@@ -1,6 +1,7 @@
 #include "game/voxel/voxel_world.h"
 #include "game/voxel/voxel.h"
 #include "hndlmanager/2Dhndlmanager.h"
+#include "math/mymath.h"
 
 using namespace std;
 
@@ -165,4 +166,185 @@ void C_VOXEL_WORLD::Exit()
 		{
 		}
 	}
+}
+
+bool C_VOXEL_WORLD::IsSolidVoxel(int x, int y, int z)
+{
+	//チャンク座標を計算
+	int chunkX = C_MY_MATH::FloorDiv(x, CHUNK_SIZE_X);
+	int chunkZ = C_MY_MATH::FloorDiv(z, CHUNK_SIZE_Z);
+
+	//チャンク座標を作成
+	T_CHUNK_POS chunkPos = { chunkX, chunkZ };
+
+	if (chunkPos.x == 0 || chunkPos.z == 0)return false;
+	if (chunkPos.x > 1 || chunkPos.z > 1)return false;
+	if (chunkPos.x < -1 || chunkPos.z < -1)return false;
+
+	//チャンクを取得
+	weak_ptr<C_VOXEL_CHUNK> chunk = GetChunk(chunkPos);
+
+	//チャンクが存在しない場合は空のボクセルとみなす
+	if (chunk.expired())return false;
+
+	//ローカル座標を計算
+	int localX = C_MY_MATH::Mod(x, CHUNK_SIZE_X);
+	int localY = C_MY_MATH::Mod(y, CHUNK_SIZE_Y);
+	int localZ = C_MY_MATH::Mod(z, CHUNK_SIZE_Z);
+
+	//ローカル座標が範囲外の場合は空のボクセルとみなす
+	return chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR;
+}
+
+
+T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
+{
+	T_RAYCAST_HIT hit = {0};
+
+    int x = (int)floor(origin.x);
+    int y = (int)floor(origin.y);
+    int z = (int)floor(origin.z);
+
+    int stepX = (dir.x >= 0.0f) ? 1 : -1;
+    int stepY = (dir.y >= 0.0f) ? 1 : -1;
+    int stepZ = (dir.z >= 0.0f) ? 1 : -1;
+
+    float tDeltaX =
+        (dir.x != 0.0f) ? fabsf(1.0f / dir.x) : FLT_MAX;
+
+    float tDeltaY =
+        (dir.y != 0.0f) ? fabsf(1.0f / dir.y) : FLT_MAX;
+
+    float tDeltaZ =
+        (dir.z != 0.0f) ? fabsf(1.0f / dir.z) : FLT_MAX;
+
+    float nextX =
+        (stepX > 0) ? (float)(x + 1) : (float)x;
+
+    float nextY =
+        (stepY > 0) ? (float)(y + 1) : (float)y;
+
+    float nextZ =
+        (stepZ > 0) ? (float)(z + 1) : (float)z;
+
+    float tMaxX =
+        (dir.x != 0.0f)
+        ? (nextX - origin.x) / dir.x
+        : FLT_MAX;
+
+    float tMaxY =
+        (dir.y != 0.0f)
+        ? (nextY - origin.y) / dir.y
+        : FLT_MAX;
+
+    float tMaxZ =
+        (dir.z != 0.0f)
+        ? (nextZ - origin.z) / dir.z
+        : FLT_MAX;
+
+    VECTOR lastNormal = { 0,0,0 };
+
+    while (true)
+    {
+        if (IsSolidVoxel(x, y, z))
+        {
+            float hitT;
+
+            if (lastNormal.x != 0)
+                hitT = tMaxX - tDeltaX;
+            else if (lastNormal.y != 0)
+                hitT = tMaxY - tDeltaY;
+            else
+                hitT = tMaxZ - tDeltaZ;
+
+			//衝突フラグを立てる
+            hit.isHit = true;
+
+			//ヒットしたボクセルの座標を設定
+            hit.voxelX = x;
+            hit.voxelY = y;
+            hit.voxelZ = z;
+
+			//ヒットしたボクセルのチャンク座標を設定
+            hit.pos = VGet(origin.x + dir.x * hitT, origin.y + dir.y * hitT, origin.z + dir.z * hitT);
+
+            //ヒットしたボクセルの法線を設定
+            hit.normal = lastNormal;
+
+            return hit;
+        }
+
+        if (tMaxX < tMaxY)
+        {
+            if (tMaxX < tMaxZ)
+            {
+                x += stepX;
+
+                lastNormal =
+                {
+                    (float)-stepX,
+                    0.0f,
+                    0.0f
+                };
+
+                if (tMaxX > maxDistance)
+                    break;
+
+                tMaxX += tDeltaX;
+            }
+            else
+            {
+                z += stepZ;
+
+                lastNormal =
+                {
+                    0.0f,
+                    0.0f,
+                    (float)-stepZ
+                };
+
+                if (tMaxZ > maxDistance)
+                    break;
+
+                tMaxZ += tDeltaZ;
+            }
+        }
+        else
+        {
+            if (tMaxY < tMaxZ)
+            {
+                y += stepY;
+
+                lastNormal =
+                {
+                    0.0f,
+                    (float)-stepY,
+                    0.0f
+                };
+
+                if (tMaxY > maxDistance)
+                    break;
+
+                tMaxY += tDeltaY;
+            }
+            else
+            {
+                z += stepZ;
+
+                lastNormal =
+                {
+                    0.0f,
+                    0.0f,
+                    (float)-stepZ
+                };
+
+                if (tMaxZ > maxDistance)
+                    break;
+
+                tMaxZ += tDeltaZ;
+            }
+        }
+    }
+
+    return hit;
 }

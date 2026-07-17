@@ -97,3 +97,85 @@ bool C_COLLISION::CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius,
 {
 	return true;
 }
+
+bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, float _AABBSize, float& hitT, VECTOR& hitPos)
+{
+	//線分の方向ベクトルを計算
+	VECTOR dir = VSub(_lineStart, _lineStart);
+
+	//AABBの最大座標と最小座標を計算
+	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };
+	VECTOR AABBMin = { _AABBPos.x - _AABBSize * 0.5f, _AABBPos.y - _AABBSize * 0.5f, _AABBPos.z - _AABBSize * 0.5f };
+
+	float tMin = 0.0f;
+	float tMax = 1.0f;
+
+	//線分とAABBの交差判定
+	for (int axis = 0; axis < 3; axis++)
+	{
+		float s;
+		float d;
+		float minB;
+		float maxB;
+
+		//軸ごとの線分の始点と方向ベクトル、AABBの最小座標と最大座標を取得
+		switch (axis)
+		{
+		case 0:
+			s = _lineStart.x;
+			d = dir.x;
+			minB = AABBMin.x;
+			maxB = AABBMax.x;
+			break;
+
+		case 1:
+			s = _lineStart.y;
+			d = dir.y;
+			minB = AABBMin.y;
+			maxB = AABBMax.y;
+			break;
+
+		default:
+			s = _lineStart.z;
+			d = dir.z;
+			minB = AABBMin.z;
+			maxB = AABBMax.z;
+			break;
+		}
+
+		//線分がこの軸に平行かどうかを判定
+		if (std::abs(d) < 1e-6f)
+		{
+			//線分がこの軸に平行
+			if (s < minB || s > maxB)
+				return false;
+
+			continue;
+		}
+
+		//線分がこの軸に平行でない場合、交差する可能性がある
+		float invD = 1.0f / d;
+
+		//t1とt2を計算して、tMinとtMaxを更新
+		float t1 = (minB - s) * invD;
+		float t2 = (maxB - s) * invD;
+
+		//t1とt2の順序を入れ替える
+		if (t1 > t2)std::swap(t1, t2);
+
+		//tMinとtMaxを更新
+		tMin = (std::max)(tMin, t1);
+		tMax = (std::min)(tMax, t2);
+
+		//tMinがtMaxを超えた場合、交差しない
+		if (tMin > tMax)
+			return false;
+	}
+
+	//交差する場合、tMinを返す
+	hitT = tMin;
+	//交差点の座標を計算
+	hitPos = VAdd(_lineStart, VScale(dir, hitT));
+
+	return true;
+}

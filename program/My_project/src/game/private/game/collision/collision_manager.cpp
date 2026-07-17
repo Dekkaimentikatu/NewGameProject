@@ -273,24 +273,24 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, 
 void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy)
 {
 	//マネージャー1の攻撃判定
-	//if (_player.lock()->GetIsAttack() &&
-	//	C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
-	//		_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
-	//{
-	//	//ノックバックの速度の設定
-	//	_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
+	if (_player.lock()->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
+			_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
+	{
+		//ノックバックの速度の設定
+		_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
 
-	//	//当たり判定処理
-	//	_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
-	//}
+		//当たり判定処理
+		_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
+	}
 
-	////マネージャー2の攻撃判定
-	//if (_enemy.lock()->GetIsAttack() &&
-	//	C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
-	//		_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
-	//{
-	//	_player.lock()->DamageCalc(_enemy.lock()->GetAtt());
-	//}
+	//マネージャー2の攻撃判定
+	if (_enemy.lock()->GetIsAttack() &&
+		C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
+			_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
+	{
+		_player.lock()->DamageCalc(_enemy.lock()->GetAtt());
+	}
 }
 
 //アクターとボクセル
@@ -310,8 +310,10 @@ void C_COLLISION_MANAGER::AttackActorToObject(std::weak_ptr<C_ACTOR_BASE> _actor
 
 	center1 = _actor.lock()->GetAttackPos();
 	radius1 = static_cast<float>(_actor.lock()->GetAttackRedius());
+	center2 = _object.lock()->GetCenter();
+	radius2 = static_cast<float>(_object.lock()->GetRedius());
 
-	if(C_COLLISION::CheckHitAABBToSphere(center1, radius1, center2, radius2, HitPos))return;
+	if(!C_COLLISION::CheckHitSphereToSphere(center1, center2, radius1, radius2))return;
 
 	_object.lock()->SubHp(_actor.lock()->GetAtt());
 }
@@ -471,6 +473,39 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 	}
 }
 
+void C_COLLISION_MANAGER::CollisionLayToVoxel()
+{
+	int Mx = 0, My = 0;
+
+	GetMousePoint(&Mx, &My);
+
+	// マウスポインタがある画面上の座標に該当する３Ｄ空間上の Near 面の座標を取得
+	VECTOR StartPos = ConvScreenPosToWorldPos(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
+
+	// マウスポインタがある画面上の座標に該当する３Ｄ空間上の Far 面の座標を取得
+	VECTOR EndPos = ConvScreenPosToWorldPos(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 1.0f));
+
+	DrawLine3D(StartPos, EndPos, GetColor(255, 0, 0));
+
+	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), 100.0f);
+
+	if (!hit.isHit)return;
+
+	T_CHUNK_POS chunkPos = { hit.pos.x -1 , hit.pos.z -1};
+
+	if (chunkPos.x < 0 || chunkPos.z < 0)return;
+	if (chunkPos.x > 1 || chunkPos.z > 1)return;
+
+	int placeX = hit.voxelX + (int)hit.normal.x;
+	int placeY = hit.voxelY + (int)hit.normal.y;
+	int placeZ = hit.voxelZ + (int)hit.normal.z;
+
+	VECTOR pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).
+		lock()->GetVoxel(placeX, placeY, placeZ)->GetPos();
+
+	DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+}
+
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator& _objectPool)
 {
 	if (_objectPool->expired() || !(*_objectPool).lock()->GetIsActive())
@@ -550,10 +585,13 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		CollisionActorToVoxel((*itr));
 	}
 
+	/*CollisionLayToVoxel();*/
+
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{
 		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
+			if ((*itr1).lock() == (*itr2).lock())continue;
 			//ボクセルとの当たり判定
 			AttackActorToObject((*itr1), (*itr2));
 		}

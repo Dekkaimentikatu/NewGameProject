@@ -140,10 +140,10 @@ void C_SCENE_PLAY::Step()
 			m_playState = RESPAWN;
 		}
 
-		if (tmp->GetPlayerData()->isGoal)
+		if (tmp->GetPlayerData()->isGoal || c_enemyManager.GetIsEnd())
 		{
 			m_playState = GOAL;
-			c_cameraManager.GetPlayerCamera()->SetEventState(C_PALYER_CAMERA_VEC::CAM_EVENT_GOAL);
+			//c_cameraManager.GetPlayerCamera()->SetEventState(C_PALYER_CAMERA_VEC::CAM_EVENT_GOAL);
 		}
 
 		break;
@@ -161,14 +161,14 @@ void C_SCENE_PLAY::Step()
 		break;
 	case C_SCENE_PLAY::GOAL:
 
-		if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_NUM)
-		{
+		//if (c_cameraManager.GetPlayerCamEventState() == C_PALYER_CAMERA_VEC::CAM_EVENT_NUM)
+		//{
 			c_sceneData->SetSceneType(C_SCENE_DATA::SELECT);	//次に遷移したいシーンのタイプを代入
 
 			m_sceneState = ENDWAIT;		//ステータスを更新
 
 			C_FADE::RequestFadeOut();	//フェードアウトのリクエスト
-		}
+		//}
 
 		break;
 	case C_SCENE_PLAY::FADE:

@@ -103,8 +103,6 @@ public:
 		return m_attackRedius;
 	}
 
-
-
 	inline void SetTargetPos(VECTOR _targetPos)
 	{
 		m_targetPos = _targetPos;

@@ -57,6 +57,7 @@ private:
 
 	//アクターとボクセル
 	void CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _actor);
+	void CollisionLayToVoxel();
 
 	//オブジェクトの削除
 	void EraseObject(std::list<std::weak_ptr<C_OBJECT_BASE>>::iterator &_objectPool);

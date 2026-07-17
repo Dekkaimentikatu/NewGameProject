@@ -27,6 +27,7 @@ public:
 	static bool CheckHitAABBToSphere(VECTOR _sphereCenter, float _sphereRedius, VECTOR _AABBPos, float _AABBSize, VECTOR& _closest);
 	//OBB‚Æ‹…‚Ì“–‚½‚è”»’è
 	static bool CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius, T_OBB _OBB);
-
+	//AABB‚Æü•ª‚Ì“–‚½‚è”»’è
+	static bool CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, float _AABBSize, float& hitT, VECTOR& hitPos);
 };
 

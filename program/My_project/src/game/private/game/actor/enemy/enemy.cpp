@@ -27,7 +27,7 @@ void C_ENEMY::Init()
 	m_hp = 1;
 
 	//攻撃力の初期化
-	m_att = 5;
+	m_att = 1;
 
 	//状態の初期化
 	m_nowState = ENEMY_STATE_MOVE;
@@ -50,7 +50,7 @@ void C_ENEMY::Load()
 	//拡大縮小率の設定
 	m_objectData.modelScale = VGet(0.1f, 0.1f, 0.1f);
 
-	m_hp = 1000;
+	m_hp = 10;
 
 	C_3D_HNDL_MANAGER* instance = C_3D_HNDL_MANAGER::GetInstance();
 	C_OBJECT_BASE::DuplicateModel(instance->Get3DModelHndl(ENEMY_MODEL_PATH));
@@ -101,7 +101,7 @@ void C_ENEMY::Step()
 	m_pos = VAdd(m_pos, m_moveVec);
 
 	//リスポーン処理
-	/*RespawnCalc();*/
+	RespawnCalc();
 
 	//アニメーションの更新
 	if (m_prevState != m_nowState)
@@ -347,6 +347,8 @@ void C_ENEMY::SetKonckBackSpeed(VECTOR _knockBackSpeed)
 //ダメージ判定処理
 void C_ENEMY::DamageCalc(int att)
 {
+	m_hp -= att;
+
 	//被弾後の無敵時間が0以下ならダメージ処理を行う
 	if (m_hitWait <= 0)
 	{
