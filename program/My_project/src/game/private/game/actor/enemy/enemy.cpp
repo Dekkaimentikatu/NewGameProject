@@ -3,13 +3,14 @@
 #include "soundmanager/se_manager.h"
 #include "hndlmanager/3Dhndlmanager.h"
 
+C_ENEMY::C_ENEMY()
+{
+	Init();
+}
 
 void C_ENEMY::Init()
 {
-	//グローバルデータのインスタンスを取得する
-	c_globalData = C_GLOBAL_DATA::GetInstace();
-	//プレイヤーデータのポインタを取得する
-	t_playerData = c_globalData->GetPlayerData();
+
 
 	//アクターの初期化
 	C_ACTOR_BASE::Init();
@@ -44,6 +45,11 @@ void C_ENEMY::Init()
 
 void C_ENEMY::Load()
 {
+	//グローバルデータのインスタンスを取得する
+	c_globalData = C_GLOBAL_DATA::GetInstace();
+	//プレイヤーデータのポインタを取得する
+	t_playerData = c_globalData->GetPlayerData();
+
 	//スポーン地点を保存する
 	m_pos = m_objectData.initPos;
 

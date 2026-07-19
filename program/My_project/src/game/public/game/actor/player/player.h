@@ -125,6 +125,10 @@ private:
 	void HitCalcCeiling();
 
 public:
+
+	//コンストラクタ
+	C_PLAYER();
+
 	//デストラクタ
 	~C_PLAYER() {}
 

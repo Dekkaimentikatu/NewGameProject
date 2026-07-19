@@ -2,11 +2,43 @@
 #include "hndlmanager/3Dhndlmanager.h"
 #include "hndlmanager/2Dhndlmanager.h"
 
+C_OBJECT_BASE::C_OBJECT_BASE()
+{
+	Init();
+}
+
 void C_OBJECT_BASE::Init()
 {
-	m_objectData = { 0 };
+	//HP
+	m_hp = 0;
 
-	m_modelHndl = -1;	//モデルハンドル
+	//HP最大値
+	m_hpMax = 0;
 
-	m_isActive = false;	//生存フラグ
+	//グローバルデータクラスのインスタンス取得用変数
+	c_globalData = nullptr;
+
+	//オブジェクト情報
+	m_objectData = {};
+
+	//座標
+	m_pos = {};
+
+	//移動ベクトル
+	m_moveVec = {};
+
+	//オブジェクトの分類
+	m_objectType = OBJECT_TYPE_STATIC;
+
+	//当たり判定の半径
+	m_redius = 0.0f;
+
+	//3Dモデルのハンドル
+	m_modelHndl = 0;
+
+	//エフェクトのハンドル
+	m_effHndl = 0;
+
+	//生存フラグ
+	m_isActive = false;
 }

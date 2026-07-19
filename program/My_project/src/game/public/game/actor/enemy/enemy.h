@@ -124,12 +124,7 @@ private:
 public:
 
 	//コンストラクタ
-	C_ENEMY(ENEMY_STATE _enemyState = ENEMY_STATE_MOVE,  float _fallSpeed = 0.0f,
-		VECTOR _startRot = {0}, float _easingSpeed = 0.0f, int _damageAtt = 0, float _konckBackSubCount = 0.0f, 
-		float _fallSubCount = 0.0f) :
-	m_nowState(_enemyState), m_prevState(_enemyState), m_waitCount(), m_fallSpeed(_fallSpeed), m_effektHndl(),
-	m_startRot(_startRot), m_easingSpeed(_easingSpeed), m_damegeAtt(_damageAtt), t_playerData(nullptr),
-	m_konckBackSubCount(_konckBackSubCount), m_fallSubCount(_fallSubCount){ }
+	C_ENEMY();
 
 	//デストラクタ
 	~C_ENEMY() {}

@@ -93,12 +93,7 @@ protected:
 public:
 
 	//コンストラクタ
-	C_OBJECT_BASE(int _hp = 0, int _hpMax = 0, C_GLOBAL_DATA* _globalData = nullptr, bool _isActive = false,
-		bool _isAttack = false, VECTOR _pos = { 0 }, VECTOR _moveVec = VGet(0.0f, 0.0f, 0.0f), 
-		OBJECT_TYPE _objectType = OBJECT_TYPE_DYNAMIC, int _redius = 0, int _modelHndl = -1, int _effHndl = -1) :
-		m_hp(_hp), m_hpMax(_hpMax), c_globalData(_globalData), m_objectData(), m_isActive(_isActive), m_pos(_pos),
-		m_moveVec(_moveVec), m_objectType(_objectType), m_redius(_redius), m_modelHndl(_modelHndl), 
-		m_effHndl(_effHndl){ }
+	C_OBJECT_BASE();
 
 	//デストラクタ
 	virtual ~C_OBJECT_BASE() {}

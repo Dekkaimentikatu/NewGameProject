@@ -13,9 +13,9 @@ class C_VOXEL_CHUNK;
 
 constexpr int BLOCK_SIZE = 20;
 
-constexpr int CHUNK_NUM_X = 2;
+constexpr int CHUNK_NUM_X = 1;
 
-constexpr int CHUNK_NUM_Y = 2;
+constexpr int CHUNK_NUM_Y = 1;
 
 
 typedef struct T_CHUNK_POS
@@ -55,8 +55,7 @@ typedef struct T_RAYCAST_HIT
 	VECTOR normal;
 };
 
-static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = {{{ -1, -1,} ,{ -1, 1}},
-																	{{ 1, -1}, { 1 , 1}}};
+static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = { 0, 0,};
 
 class C_VOXEL_WORLD
 {

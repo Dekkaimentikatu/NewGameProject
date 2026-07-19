@@ -333,15 +333,6 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 	//player‚Ì”¼Œa‚ðŽæ“¾
 	p_size = _actor.lock()->GetRedius();
 
-	//ƒ`ƒƒƒ“ƒN‚Ì‚Ç‚±‚É‚¢‚é‚©
-	if (p_pos.x > 0) chunkPos.x = 1;
-	else if (p_pos.x < 0) chunkPos.x = -1;
-	if (p_pos.z > 0) chunkPos.z = 1;
-	else if (p_pos.z < 0) chunkPos.z = -1;
-
-	//’†S‚É‚¢‚é‚È‚ç“–‚½‚è”»’è‚ð‚µ‚È‚¢
-	if (chunkPos.x == 0 || chunkPos.z == 0)return;
-
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
 		for (int y = 0; y < CHUNK_SIZE_Y; y++)

@@ -56,9 +56,9 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 			{
 				VECTOR offset = CalcDrawOffset(_chunkPos, VGet(x, y, z));
 				voxelData.size = BLOCK_SIZE * 0.5f;
-				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.x;
+				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - 20.0f * 16.0f;
 				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
-				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.z;
+				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - 20.0f * 16.0f;
 				if(y < 3)voxelData.voxelType = _voxelType;
 				else voxelData.voxelType = C_VOXEL::AIR;
 				voxelData.grapHndl = instance2D->Get2DImageHndl(VOXEL_GRAP_PATH);
