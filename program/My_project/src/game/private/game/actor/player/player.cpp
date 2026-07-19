@@ -4,38 +4,24 @@
 #include "soundmanager/se_manager.h"
 #include "hndlmanager/3Dhndlmanager.h"
 
+C_PLAYER::C_PLAYER()
+{
+	Init();
+}
+
 void C_PLAYER::Init()
 {
-	//グローバルデータの取得
-	c_globalData = C_GLOBAL_DATA::GetInstace();
+	C_ACTOR_BASE::Init();
 
-	//プレイヤーデータの取得
-	m_playerData = c_globalData->GetPlayerData();
+	m_playerData = nullptr;
 
-	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
-	m_objectData.modelRot = VGet(0.0f, 0.0f, 0.0f);	//回転
-	m_objectData.modelScale = VGet(10.0f, 10.0f, 10.0f);	//スケール
-	m_redius = 50;	//当たり判定の半径
 	m_nowState = PLAYER_STATE_WAIT;	//状態を待機に設定
-
-	//HP、スタミナ、攻撃力の初期化
-	m_hp = m_hpMax = m_playerData->hp_max;
-
-	m_stamina = m_staminaMax = m_playerData->stm_max;
-
-	m_att = m_playerData->att;
-
-	//生存フラグの初期化
-	m_isActive = true;
 
 	//ジャンプフラグの初期化
 	m_isJump = false;
 
 	//リスポーンフラグの初期化
 	m_isRespawn = false;
-
-	//アニメーション再生速度の初期化
-	m_animPlaySpeed = 1.0f;
 
 	//ジャンプ中待機時間の初期化
 	m_jumpingWait = 0;
@@ -48,10 +34,25 @@ void C_PLAYER::Request(T_OBJECT_DATA _objectData)
 
 void C_PLAYER::Load()
 {
+	m_isActive = true;
+
+	//グローバルデータの取得
+	c_globalData = C_GLOBAL_DATA::GetInstace();
+
+	//プレイヤーデータの取得
+	m_playerData = c_globalData->GetPlayerData();
+
+	//HP、スタミナ、攻撃力の初期化
+	m_hp = m_hpMax = m_playerData->hp_max;
+
+	m_stamina = m_staminaMax = m_playerData->stm_max;
+
+	m_att = m_playerData->att;
+
 	C_3D_HNDL_MANAGER* incetans = C_3D_HNDL_MANAGER::GetInstance();
 
 	//座標、回転、スケールの設定
-	m_pos = VGet(32.0f, 300.0f, 32.0f);	//位置
+	m_pos = VGet(32.0f, 300.0f, 64.0f);	//位置
 
 	m_objectData.modelScale = VGet(0.2f, 0.2f, 0.2f);
 
@@ -65,6 +66,9 @@ void C_PLAYER::Load()
 
 	//攻撃判定の半径の設定
 	m_attackRedius = 16;
+
+	//アニメーション再生速度の初期化
+	m_animPlaySpeed = 1.0f;
 
 	DuplicateModel(incetans->Get3DModelHndl("data/model/player/character-human.mv1"));
 
@@ -112,7 +116,7 @@ void C_PLAYER::Step()
 	StopCalc();
 
 	//落下処理
-	FallCalc();
+	/*FallCalc();*/
 
 	//現在の座標に移動量を加算
 	m_pos = VAdd(m_pos, m_moveVec);

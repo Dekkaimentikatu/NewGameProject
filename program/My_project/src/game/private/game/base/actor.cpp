@@ -1,15 +1,46 @@
 #include "game/base/actor.h"
 
+C_ACTOR_BASE::C_ACTOR_BASE()
+{
+	Init();
+}
+
 void C_ACTOR_BASE::Init()
 {
 	C_OBJECT_BASE::Init();
 
-	m_hpMax = 0;				//HPの最大値
+	//攻撃力
+	m_att = 0;
 
-	m_hp = 0;					//HP
+	//ジャンプ中フラグ
+	m_isJump = false;
 
-	m_isActive = true;			//生存フラグ
+	//当たり判定フラグ
+	m_isHit = false;
 
+	//攻撃中フラグ
+	m_isAttack = false;
+
+	//目標の座標
+	m_targetPos = { 0 };
+
+	//カメラの回転
+	m_cameraRot = { 0 };
+
+	//押し戻し速度
+	m_knockBackSpeed = { 0 };
+
+	//リスポーンフラグ
+	m_isRespawn = false;
+
+	//当たり判定待機時間
+	m_hitWait = 0;
+
+	//攻撃待機時間
+	m_attackWait = 0.0f;
+
+	//攻撃判定の半径
+	m_attackRedius = 0;
 }
 
 void C_ACTOR_BASE::Request(T_OBJECT_DATA _objectData)

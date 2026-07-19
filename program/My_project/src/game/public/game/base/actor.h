@@ -10,8 +10,6 @@ class C_ACTOR_BASE : public C_OBJECT_BASE
 {
 protected:
 
-
-
 	//攻撃力
 	int m_att;
 
@@ -45,18 +43,10 @@ protected:
 	//攻撃判定の半径
 	int m_attackRedius;
 
-
-
 public:
 
 	//コンストラクタ
-	C_ACTOR_BASE(int _att = 0, bool _isJump = false,
-		bool _isHit = false, bool _isAttack = false,
-		VECTOR _targetPos = { 0 }, VECTOR _modelRot = { 0 }, VECTOR _knockBackSpeed = { 0 },
-		bool _isRespawn = false, int _hitWait = 0, float _attackWait = 0.0f, int _attackRedius = 0) :
-		m_att(_att), m_isJump(_isJump), m_isHit(_isHit), m_isAttack(_isAttack),
-		m_targetPos(_targetPos), m_knockBackSpeed(_knockBackSpeed), m_cameraRot(_modelRot), m_isRespawn(_isRespawn),
-		m_hitWait(_hitWait), m_attackWait(_attackWait), m_attackRedius(_attackRedius){}
+	C_ACTOR_BASE();
 
 	//デストラクタ
 	virtual ~C_ACTOR_BASE() {}
