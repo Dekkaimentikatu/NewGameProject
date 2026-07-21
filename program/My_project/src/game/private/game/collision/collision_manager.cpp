@@ -489,7 +489,7 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 	DrawLine3D(StartPos, EndPos, GetColor(255, 0, 0));
 
 	//ボクセルワールドに対してレイキャストを行う
-	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), 10000.0f);
+	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), VSize(VSub(EndPos, StartPos)));
 
 	//当たっていなければ処理を抜ける
 	if (!hit.isHit)return;

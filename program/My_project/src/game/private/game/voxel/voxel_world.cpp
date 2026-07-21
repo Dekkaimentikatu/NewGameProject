@@ -57,9 +57,9 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 			{
 				VECTOR offset = CalcDrawOffset(_chunkPos, VGet(x, y, z));
 				voxelData.size = BLOCK_SIZE * 0.5f;
-				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - 20.0f * 16.0f;
+				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.x;
 				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
-				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - 20.0f * 16.0f;
+				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.z;
 				if(y < 3)voxelData.voxelType = _voxelType;
 				else voxelData.voxelType = C_VOXEL::AIR;
 				voxelData.grapHndl = instance2D->Get2DImageHndl(VOXEL_GRAP_PATH);
@@ -174,10 +174,9 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 	//チャンク座標を計算
 	int chunkX = 0, chunkZ = 0;
 
-	if (_x > 0) chunkX = 1;
-	else if (_x < 0) chunkX = -1;
-	if (_z > 0) chunkZ = 1;
-	else if (_z < 0) chunkZ = -1;
+	chunkX = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
+	int chunkY = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
+	chunkZ = C_MY_MATH::FloorDiv(_z, CHUNK_SIZE_X);
 
 	//chunkX = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
 	//chunkZ = C_MY_MATH::FloorDiv(_z, CHUNK_SIZE_Z);
@@ -199,9 +198,9 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 	if (chunk.expired())return false;
 
 	//ローカル座標を計算
-	int localX = C_MY_MATH::Mod(_x, CHUNK_SIZE_X);
-	int localY = C_MY_MATH::Mod(_y, CHUNK_SIZE_Y);
-	int localZ = C_MY_MATH::Mod(_z, CHUNK_SIZE_Z);
+	int localX = C_MY_MATH::Mod(_x, CHUNK_SIZE_X - 1);
+	int localY = C_MY_MATH::Mod(_y, CHUNK_SIZE_Y - 1);
+	int localZ = C_MY_MATH::Mod(_z, CHUNK_SIZE_Z - 1);
 
 	_x = localX;
 	_y = localY;
