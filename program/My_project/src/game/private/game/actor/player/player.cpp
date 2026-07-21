@@ -116,7 +116,7 @@ void C_PLAYER::Step()
 	StopCalc();
 
 	//—Ž‰ºˆ—
-	FallCalc();
+	/*FallCalc();*/
 
 	//Œ»Ý‚ÌÀ•W‚ÉˆÚ“®—Ê‚ð‰ÁŽZ
 	m_pos = VAdd(m_pos, m_moveVec);

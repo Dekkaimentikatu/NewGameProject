@@ -10,8 +10,6 @@ C_ENEMY::C_ENEMY()
 
 void C_ENEMY::Init()
 {
-
-
 	//アクターの初期化
 	C_ACTOR_BASE::Init();
 
@@ -38,6 +36,9 @@ void C_ENEMY::Init()
 
 	//被弾待機時間の初期化
 	m_hitWait = 0;
+
+	//
+	m_easingSpeed = ENEMY_SPEED_UP_MAX;
 
 	//各行動のカウントの初期化
 	memset(m_waitCount, 0, sizeof(m_waitCount));

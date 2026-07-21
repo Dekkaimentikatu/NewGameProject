@@ -2,6 +2,7 @@
 #include "game/voxel/voxel.h"
 #include "hndlmanager/2Dhndlmanager.h"
 #include "math/mymath.h"
+#include "collision/3Dcollision.h"
 
 using namespace std;
 
@@ -168,11 +169,19 @@ void C_VOXEL_WORLD::Exit()
 	}
 }
 
-bool C_VOXEL_WORLD::IsSolidVoxel(int x, int y, int z)
+bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 {
 	//チャンク座標を計算
-	int chunkX = C_MY_MATH::FloorDiv(x, CHUNK_SIZE_X);
-	int chunkZ = C_MY_MATH::FloorDiv(z, CHUNK_SIZE_Z);
+	int chunkX = 0, chunkZ = 0;
+
+	if (_x > 0) chunkX = 1;
+	else if (_x < 0) chunkX = -1;
+	if (_z > 0) chunkZ = 1;
+	else if (_z < 0) chunkZ = -1;
+
+	//chunkX = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
+	//chunkZ = C_MY_MATH::FloorDiv(_z, CHUNK_SIZE_Z);
+
 
 	//チャンク座標を作成
 	T_CHUNK_POS chunkPos = { chunkX, chunkZ };
@@ -181,6 +190,8 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int x, int y, int z)
 	if (chunkPos.x > 1 || chunkPos.z > 1)return false;
 	if (chunkPos.x < -1 || chunkPos.z < -1)return false;
 
+	//チャンク座標を返す
+	_pos = chunkPos;
 	//チャンクを取得
 	weak_ptr<C_VOXEL_CHUNK> chunk = GetChunk(chunkPos);
 
@@ -188,9 +199,13 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int x, int y, int z)
 	if (chunk.expired())return false;
 
 	//ローカル座標を計算
-	int localX = C_MY_MATH::Mod(x, CHUNK_SIZE_X);
-	int localY = C_MY_MATH::Mod(y, CHUNK_SIZE_Y);
-	int localZ = C_MY_MATH::Mod(z, CHUNK_SIZE_Z);
+	int localX = C_MY_MATH::Mod(_x, CHUNK_SIZE_X);
+	int localY = C_MY_MATH::Mod(_y, CHUNK_SIZE_Y);
+	int localZ = C_MY_MATH::Mod(_z, CHUNK_SIZE_Z);
+
+	_x = localX;
+	_y = localY;
+	_z = localZ;
 
 	//ローカル座標が範囲外の場合は空のボクセルとみなす
 	return chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR;
@@ -200,6 +215,8 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int x, int y, int z)
 T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
 {
 	T_RAYCAST_HIT hit = {0};
+
+	//if (C_COLLISION::CheckHitAABBToLine());
 
     int x = (int)floor(origin.x);
     int y = (int)floor(origin.y);
@@ -244,9 +261,11 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
 
     VECTOR lastNormal = { 0,0,0 };
 
+	T_CHUNK_POS pos = { 0 };
+
     while (true)
     {
-        if (IsSolidVoxel(x, y, z))
+        if (IsSolidVoxel(x, y, z, pos))
         {
             float hitT;
 
@@ -266,7 +285,7 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
             hit.voxelZ = z;
 
 			//ヒットしたボクセルのチャンク座標を設定
-            hit.pos = VGet(origin.x + dir.x * hitT, origin.y + dir.y * hitT, origin.z + dir.z * hitT);
+            hit.pos = pos;
 
             //ヒットしたボクセルの法線を設定
             hit.normal = lastNormal;

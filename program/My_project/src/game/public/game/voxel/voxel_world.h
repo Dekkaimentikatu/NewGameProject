@@ -13,9 +13,9 @@ class C_VOXEL_CHUNK;
 
 constexpr int BLOCK_SIZE = 20;
 
-constexpr int CHUNK_NUM_X = 1;
+constexpr int CHUNK_NUM_X = 2;
 
-constexpr int CHUNK_NUM_Y = 1;
+constexpr int CHUNK_NUM_Y = 2;
 
 
 typedef struct T_CHUNK_POS
@@ -49,13 +49,14 @@ typedef struct T_RAYCAST_HIT
 	int voxelZ;
 
 	//ヒットしたボクセルのチャンク座標
-	VECTOR pos;
+	T_CHUNK_POS pos;
 
 	//ヒットしたボクセルの法線
 	VECTOR normal;
 };
 
-static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = { 0, 0,};
+static const T_CHUNK_POS DEF_WORLD_POS[CHUNK_NUM_X][CHUNK_NUM_Y] = { {{ -1, -1,} ,{ -1, 1}},
+																	{{ 1, -1}, { 1 , 1}} };
 
 class C_VOXEL_WORLD
 {
@@ -80,7 +81,7 @@ private:
 	//ポリゴンの描画オフセットの計算
 	VECTOR CalcDrawOffset(T_CHUNK_POS _chunkPos, VECTOR _offset);
 	//ボクセルの存在判定
-	bool IsSolidVoxel(int x, int y, int z);
+	bool IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos);
 
 public:
 

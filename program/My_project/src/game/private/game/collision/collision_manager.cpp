@@ -1,4 +1,4 @@
-#include "game/collision/collision_manager.h"
+ï»¿#include "game/collision/collision_manager.h"
 #include "game/data/global_data.h"
 #include "game/voxel/voxel_world.h"
 
@@ -28,29 +28,29 @@ void C_COLLISION_MANAGER::CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player
 {
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_player.lock()->GetIsActive())return;
 	if (!_enemy.lock()->GetIsActive())return;
 
-	//“–‚½‚è”»’è
+	//å½“ãŸã‚Šåˆ¤å®š
 	if (C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetPos(), _enemy.lock()->GetPos(),
 		_player.lock()->GetRedius(), _enemy.lock()->GetRedius()))
 	{
 
-		//ƒAƒNƒ^[‚ÌÀ•W‚Ì·‚ğæ“¾
+		//ã‚¢ã‚¯ã‚¿ãƒ¼ã®åº§æ¨™ã®å·®ã‚’å–å¾—
 		VECTOR vec = VSub(_enemy.lock()->GetPos(), _player.lock()->GetPos());
 		float len = VSize(vec);
 
-		//À•W‚Ì·‚ğ³‹K‰»
+		//åº§æ¨™ã®å·®ã‚’æ­£è¦åŒ–
 		vec = VNorm(vec);
 
-		//‚ß‚è‚ñ‚¾‹——£‚ğŒvZ
+		//ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’è¨ˆç®—
 		len = (_enemy.lock()->GetRedius() + _player.lock()->GetRedius()) - len;
 
-		//ˆÚ“®ƒxƒNƒgƒ‹‚É‚ß‚è‚ñ‚¾‹——£‚ğæZ
+		//ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã«ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’ä¹—ç®—
 		vec = VScale(vec, len);
 
-		//‰Ÿ‚µ–ß‚µƒxƒNƒgƒ‹‚ğÀ•W‚É‰ÁZ
+		//æŠ¼ã—æˆ»ã—ãƒ™ã‚¯ãƒˆãƒ«ã‚’åº§æ¨™ã«åŠ ç®—
 		if (globalData->GetPlayerData()->isStop)
 		{
 			vec = VScale(vec, -1.0f);
@@ -63,16 +63,16 @@ void C_COLLISION_MANAGER::CollisionPlayerToEnemy(weak_ptr<C_OBJECT_BASE> _player
 
 void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _block)
 {
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_player.lock()->GetIsActive())return;
 	if (!_block.lock()->GetIsActive())return;
 
-	VECTOR HitPos = { 0 };	//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğŠi”[‚·‚é•Ï”
-	VECTOR result = { 0 };	//ƒŠƒUƒ‹ƒg‚ğŠi”[‚·‚é•Ï”
-	VECTOR center = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
-	VECTOR moveVec = { 0 };	//ƒuƒƒbƒN‚ÌˆÚ“®
-	float radius = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
-	float len = 0; //‚ß‚è‚ñ‚¾‹——£‚ğŠi”[‚·‚é•Ï”
+	VECTOR HitPos = { 0 };	//ãƒãƒªã‚´ãƒ³ã¨ã®æœ€è¿‘ç‚¹ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR result = { 0 };	//ãƒªã‚¶ãƒ«ãƒˆã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR center = { 0 };	//å½“ãŸã‚Šåˆ¤å®šã®ä¸­å¿ƒã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR moveVec = { 0 };	//ãƒ–ãƒ­ãƒƒã‚¯ã®ç§»å‹•
+	float radius = 0; //å½“ãŸã‚Šåˆ¤å®šã®åŠå¾„ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	float len = 0; //ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
 	MV1_COLL_RESULT_POLY_DIM col;
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
@@ -87,16 +87,16 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 	for (int i = 0; i < col.HitNum; i++)
 	{
 
-		//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğæ“¾
+		//ãƒãƒªã‚´ãƒ³ã¨ã®æœ€è¿‘ç‚¹ã‚’å–å¾—
 		HitPos = col.Dim[i].HitPosition;
 
-		//‚ß‚è‚ñ‚¾‹——£‚ğ‹‚ß‚é
+		//ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ±‚ã‚ã‚‹
 		len = VSize(VSub(HitPos, center));
 
-		//”¼Œa‚©‚ç‚ß‚è‚ñ‚¾‹——£‚ğŒ¸Z‚·‚é
+		//åŠå¾„ã‹ã‚‰ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ¸›ç®—ã™ã‚‹
 		len = radius - len;
 
-		//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
+		//ãƒªã‚¶ãƒ«ãƒˆã«çµæœã‚’åŠ ç®—ã™ã‚‹
 		if (VScale(col.Dim[i].Normal, len).x > result.x &&
 			VScale(col.Dim[i].Normal, len).y > result.y &&
 			VScale(col.Dim[i].Normal, len).z > result.z)
@@ -108,17 +108,17 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 			result = VAdd(result, VScale(col.Dim[i].Normal, len));
 		}
 
-		//•Ç‚Æ‚Ì“–‚½‚è”»’è
+		//å£ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 		if (col.Dim[i].Normal.y < 0.7f && col.Dim[i].Normal.y > -0.7f)
 		{
 			_player.lock()->HitCalcWall();
 		}
-		//“Vˆä‚Æ‚Ì“–‚½‚è”»’è
+		//å¤©äº•ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 		else if (col.Dim[i].Normal.y == -1.0f)
 		{
 			_player.lock()->HitCalcCeiling();
 		}
-		//°‚Æ‚Ì“–‚½‚è”»’è
+		//åºŠã¨ã®å½“ãŸã‚Šåˆ¤å®š
 		else if (col.Dim[i].Normal.y != -1.0f)
 		{
 			_player.lock()->HitCalc();
@@ -128,7 +128,7 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 		break;
 	}
 
-	//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
+	//ãƒªã‚¶ãƒ«ãƒˆã«çµæœã‚’åŠ ç®—ã™ã‚‹
 	if (_block.lock()->GetMoveVec().x > result.x &&
 		_block.lock()->GetMoveVec().y > result.y &&
 		_block.lock()->GetMoveVec().z > result.z)
@@ -155,7 +155,7 @@ void C_COLLISION_MANAGER::CollisionPlayerToBlock(weak_ptr<C_OBJECT_BASE> _player
 
 void C_COLLISION_MANAGER::CollisionPlayerToFlag(weak_ptr<C_OBJECT_BASE> _player, weak_ptr<C_OBJECT_BASE> _flag)
 {
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_player.lock()->GetIsActive())return;
 
 	if (C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetPos(), _flag.lock()->GetPos(),
@@ -167,46 +167,46 @@ void C_COLLISION_MANAGER::CollisionPlayerToFlag(weak_ptr<C_OBJECT_BASE> _player,
 
 void C_COLLISION_MANAGER::CollisionEnemyToEnemy(weak_ptr<C_OBJECT_BASE> _enemy1, weak_ptr<C_OBJECT_BASE> _enemy2)
 {
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_enemy1.lock()->GetIsActive())return;
 	if (!_enemy2.lock()->GetIsActive())return;
 
-	//“–‚½‚è”»’è
+	//å½“ãŸã‚Šåˆ¤å®š
 	if (C_COLLISION::CheckHitSphereToSphere(_enemy1.lock()->GetPos(), _enemy2.lock()->GetPos(),
 		_enemy1.lock()->GetRedius(), _enemy2.lock()->GetRedius()))
 	{
-		//ƒAƒNƒ^[‚ÌÀ•W‚Ì·‚ğæ“¾
+		//ã‚¢ã‚¯ã‚¿ãƒ¼ã®åº§æ¨™ã®å·®ã‚’å–å¾—
 		VECTOR vec = VSub(_enemy2.lock()->GetPos(), _enemy1.lock()->GetPos());
 		vec.y = 0.0f;
 		float len = VSize(vec);
 
-		//À•W‚Ì·‚ğ³‹K‰»
+		//åº§æ¨™ã®å·®ã‚’æ­£è¦åŒ–
 		vec = VNorm(vec);
 
-		//‚ß‚è‚ñ‚¾‹——£‚ğŒvZ
+		//ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’è¨ˆç®—
 		len = (_enemy2.lock()->GetRedius() + _enemy1.lock()->GetRedius()) - len;
 
-		//ˆÚ“®ƒxƒNƒgƒ‹‚É‚ß‚è‚ñ‚¾‹——£‚ğæZ
+		//ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã«ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’ä¹—ç®—
 		vec = VScale(vec, len);
 
-		//‰Ÿ‚µ–ß‚µƒxƒNƒgƒ‹‚ğÀ•W‚É‰ÁZ
+		//æŠ¼ã—æˆ»ã—ãƒ™ã‚¯ãƒˆãƒ«ã‚’åº§æ¨™ã«åŠ ç®—
 		_enemy2.lock()->AddPos(vec);
 	}
 }
 
 void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, weak_ptr<C_OBJECT_BASE> _block)
 {
-	VECTOR HitPos = { 0 };	//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğŠi”[‚·‚é•Ï”
-	VECTOR result = { 0 };	//ƒŠƒUƒ‹ƒg‚ğŠi”[‚·‚é•Ï”
-	VECTOR center = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
-	VECTOR moveVec = { 0 };	//ƒuƒƒbƒN‚ÌˆÚ“®
-	float radius = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
-	float len = 0; //‚ß‚è‚ñ‚¾‹——£‚ğŠi”[‚·‚é•Ï”
+	VECTOR HitPos = { 0 };	//ãƒãƒªã‚´ãƒ³ã¨ã®æœ€è¿‘ç‚¹ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR result = { 0 };	//ãƒªã‚¶ãƒ«ãƒˆã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR center = { 0 };	//å½“ãŸã‚Šåˆ¤å®šã®ä¸­å¿ƒã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR moveVec = { 0 };	//ãƒ–ãƒ­ãƒƒã‚¯ã®ç§»å‹•
+	float radius = 0; //å½“ãŸã‚Šåˆ¤å®šã®åŠå¾„ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	float len = 0; //ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
 	MV1_COLL_RESULT_POLY_DIM col;
 	C_GLOBAL_DATA* globalData = C_GLOBAL_DATA::GetInstace();
 
 
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_enemy.lock()->GetIsActive())return;
 	if (!_block.lock()->GetIsActive())return;
 
@@ -229,16 +229,16 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, 
 
 	for (int i = 0; i < col.HitNum; i++)
 	{
-		//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğæ“¾
+		//ãƒãƒªã‚´ãƒ³ã¨ã®æœ€è¿‘ç‚¹ã‚’å–å¾—
 		HitPos = col.Dim[i].HitPosition;
 
-		//‚ß‚è‚ñ‚¾‹——£‚ğ‹‚ß‚é
+		//ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ±‚ã‚ã‚‹
 		len = VSize(VSub(HitPos, center));
 
-		//”¼Œa‚©‚ç‚ß‚è‚ñ‚¾‹——£‚ğŒ¸Z‚·‚é
+		//åŠå¾„ã‹ã‚‰ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ¸›ç®—ã™ã‚‹
 		len = radius - len;
 
-		//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
+		//ãƒªã‚¶ãƒ«ãƒˆã«çµæœã‚’åŠ ç®—ã™ã‚‹
 		if (VScale(col.Dim[i].Normal, len).x > result.x &&
 			VScale(col.Dim[i].Normal, len).y > result.y &&
 			VScale(col.Dim[i].Normal, len).z > result.z)
@@ -251,7 +251,7 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, 
 		}
 	}
 
-	//ƒŠƒUƒ‹ƒg‚ÉŒ‹‰Ê‚ğ‰ÁZ‚·‚é
+	//ãƒªã‚¶ãƒ«ãƒˆã«çµæœã‚’åŠ ç®—ã™ã‚‹
 	if (_block.lock()->GetMoveVec().x > result.x &&
 		_block.lock()->GetMoveVec().y > result.y &&
 		_block.lock()->GetMoveVec().z > result.z)
@@ -272,19 +272,19 @@ void C_COLLISION_MANAGER::CollisionEnemyToBlock(weak_ptr<C_OBJECT_BASE> _enemy, 
 
 void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, weak_ptr<C_ACTOR_BASE> _enemy)
 {
-	//ƒ}ƒl[ƒWƒƒ[1‚ÌUŒ‚”»’è
+	//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼1ã®æ”»æ’ƒåˆ¤å®š
 	if (_player.lock()->GetIsAttack() &&
 		C_COLLISION::CheckHitSphereToSphere(_player.lock()->GetAttackPos(), _enemy.lock()->GetPos(),
 			_player.lock()->GetAttackRedius(), _enemy.lock()->GetRedius()))
 	{
-		//ƒmƒbƒNƒoƒbƒN‚Ì‘¬“x‚Ìİ’è
+		//ãƒãƒƒã‚¯ãƒãƒƒã‚¯ã®é€Ÿåº¦ã®è¨­å®š
 		_enemy.lock()->SetKonckBackSpeed(_player.lock()->GetPos());
 
-		//“–‚½‚è”»’èˆ—
+		//å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
 		_enemy.lock()->DamageCalc(_player.lock()->GetAtt());
 	}
 
-	//ƒ}ƒl[ƒWƒƒ[2‚ÌUŒ‚”»’è
+	//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼2ã®æ”»æ’ƒåˆ¤å®š
 	if (_enemy.lock()->GetIsAttack() &&
 		C_COLLISION::CheckHitSphereToSphere(_enemy.lock()->GetAttackPos(), _player.lock()->GetCenter(),
 			_enemy.lock()->GetAttackRedius(), _player.lock()->GetRedius()))
@@ -293,17 +293,17 @@ void C_COLLISION_MANAGER::AttackPlayerToEnemy(weak_ptr<C_ACTOR_BASE> _player, we
 	}
 }
 
-//ƒAƒNƒ^[‚Æƒ{ƒNƒZƒ‹
+//ã‚¢ã‚¯ã‚¿ãƒ¼ã¨ãƒœã‚¯ã‚»ãƒ«
 void C_COLLISION_MANAGER::AttackActorToObject(std::weak_ptr<C_ACTOR_BASE> _actor, std::weak_ptr<C_OBJECT_BASE> _object)
 {
-	VECTOR HitPos = { 0 };	//ƒ|ƒŠƒSƒ“‚Æ‚ÌÅ‹ß“_‚ğŠi”[‚·‚é•Ï”
-	VECTOR center1 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
-	float radius1 = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
-	VECTOR center2 = { 0 };	//“–‚½‚è”»’è‚Ì’†S‚ğŠi”[‚·‚é•Ï”
-	float radius2 = 0; //“–‚½‚è”»’è‚Ì”¼Œa‚ğŠi”[‚·‚é•Ï”
-	float len = 0; //‚ß‚è‚ñ‚¾‹——£‚ğŠi”[‚·‚é•Ï”
+	VECTOR HitPos = { 0 };	//ãƒãƒªã‚´ãƒ³ã¨ã®æœ€è¿‘ç‚¹ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR center1 = { 0 };	//å½“ãŸã‚Šåˆ¤å®šã®ä¸­å¿ƒã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	float radius1 = 0; //å½“ãŸã‚Šåˆ¤å®šã®åŠå¾„ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	VECTOR center2 = { 0 };	//å½“ãŸã‚Šåˆ¤å®šã®ä¸­å¿ƒã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	float radius2 = 0; //å½“ãŸã‚Šåˆ¤å®šã®åŠå¾„ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
+	float len = 0; //ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’æ ¼ç´ã™ã‚‹å¤‰æ•°
 
-	//¶‘¶ƒtƒ‰ƒO‚ªÜ‚ê‚Ä‚¢‚é‚È‚çŸ‚Ì—v‘f‚Ö
+	//ç”Ÿå­˜ãƒ•ãƒ©ã‚°ãŒæŠ˜ã‚Œã¦ã„ã‚‹ãªã‚‰æ¬¡ã®è¦ç´ ã¸
 	if (!_actor.lock()->GetIsActive())return;
 	if (!_actor.lock()->GetIsAttack())return;
 	if (!_object.lock()->GetIsActive())return;
@@ -322,16 +322,25 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 {
 	if (!_actor.lock()->GetIsActive())return;
 
-	//ƒ`ƒƒƒ“ƒN‚ÌÀ•W
+	//ãƒãƒ£ãƒ³ã‚¯ã®åº§æ¨™
 	T_CHUNK_POS chunkPos = { 0 };
 
 	VECTOR p_pos = { 0 }, v_pos = { 0 };
 	float p_size = 0.0f, v_size = 0.0f;
 
-	//player‚Ì’†SÀ•W‚ğæ“¾
+	//playerã®ä¸­å¿ƒåº§æ¨™ã‚’å–å¾—
 	p_pos = _actor.lock()->GetCenter();
-	//player‚Ì”¼Œa‚ğæ“¾
+	//playerã®åŠå¾„ã‚’å–å¾—
 	p_size = _actor.lock()->GetRedius();
+
+	//ã©ã®ãƒãƒ£ãƒ³ã‚¯ã«ã„ã‚‹ã‹ã‚’è¨ˆç®—
+	if (p_pos.x > 0) chunkPos.x = 1;
+	else if (p_pos.x < 0) chunkPos.x = -1;
+	if (p_pos.z > 0) chunkPos.z = 1;
+	else if (p_pos.z < 0) chunkPos.z = -1;
+
+	//ãƒãƒ£ãƒ³ã‚¯åº§æ¨™ãŒ0ã®æ™‚ã¯å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã‚ãªã„
+	if (chunkPos.x == 0 || chunkPos.z == 0)return;
 
 	for (int x = 0; x < CHUNK_SIZE_X; x++)
 	{
@@ -343,118 +352,118 @@ void C_COLLISION_MANAGER::CollisionActorToVoxel(std::weak_ptr<C_ACTOR_BASE> _act
 				if (c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetVoxelType() ==
 					C_VOXEL::AIR)continue;
 
-				//ƒ{ƒNƒZƒ‹‚Ì’†SÀ•W
+				//ãƒœã‚¯ã‚»ãƒ«ã®ä¸­å¿ƒåº§æ¨™
 				v_pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
-				//ƒ{ƒNƒZƒ‹‚ÌƒTƒCƒY
+				//ãƒœã‚¯ã‚»ãƒ«ã®ã‚µã‚¤ã‚º
 				v_size = BLOCK_SIZE;
 
-				//Å‹ß“_
+				//æœ€è¿‘ç‚¹
 				VECTOR closest = { 0 };
 
-				//“–‚½‚è”»’è
+				//å½“ãŸã‚Šåˆ¤å®š
 				if (!C_COLLISION::CheckHitAABBToSphere(p_pos, p_size, v_pos, v_size, closest))continue;
 
-				//Å‹ß“_‚ÆÀ•W‚Ì·‚ğŒvZ
+				//æœ€è¿‘ç‚¹ã¨åº§æ¨™ã®å·®ã‚’è¨ˆç®—
 				VECTOR diff = VSub(p_pos, closest);
 
-				//·‚Ì‚Qæ
+				//å·®ã®ï¼’ä¹—
 				float distSq = VSquareSize(diff);
 
-				//–@ü
+				//æ³•ç·š
 				VECTOR normal = { 0 };
 
-				//‰Ÿ‚µ–ß‚µƒxƒNƒgƒ‹
+				//æŠ¼ã—æˆ»ã—ãƒ™ã‚¯ãƒˆãƒ«
 				VECTOR push = { 0 };
 
 				if (distSq > 0.0f)
 				{
-					//•½•ûª‚É’¼‚·
+					//å¹³æ–¹æ ¹ã«ç›´ã™
 					float dist = std::sqrt(distSq);
 
 					if (dist > p_size)break;
 
-					//–@ü‚ğŒvZ
+					//æ³•ç·šã‚’è¨ˆç®—
 					normal = VGet(diff.x / dist,
 						diff.y / dist,
 						diff.z / dist);
 
-					//‚ß‚è‚ñ‚¾‹——£‚ğŒvZ
+					//ã‚ã‚Šè¾¼ã‚“ã è·é›¢ã‚’è¨ˆç®—
 					float penetration = p_size - dist;
 
-					//‰Ÿ‚µ–ß‚µƒxƒNƒgƒ‹‚ğ¶¬
+					//æŠ¼ã—æˆ»ã—ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç”Ÿæˆ
 					push = VScale(normal, penetration);
 					_actor.lock()->HitCalc();
-					//‰Ÿ‚µ–ß‚µˆ—
+					//æŠ¼ã—æˆ»ã—å‡¦ç†
 					_actor.lock()->AddPos(push);
 					return;
 				}
 
-				//ƒ{ƒNƒZƒ‹‚ÌãÀ•W
+				//ãƒœã‚¯ã‚»ãƒ«ã®ä¸Šåº§æ¨™
 				VECTOR AABBMax = VGet(v_pos.x + v_size * 0.5f,
 					v_pos.y + v_size * 0.5f,
 					v_pos.z + v_size * 0.5f);
 
-				//ƒ{ƒNƒZƒ‹‚Ì‰ºÀ•W
+				//ãƒœã‚¯ã‚»ãƒ«ã®ä¸‹åº§æ¨™
 				VECTOR AABBMin = VGet(v_pos.x - v_size * 0.5f,
 					v_pos.y - v_size * 0.5f,
 					v_pos.z - v_size * 0.5f);
 
-				//¶•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//å·¦æ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float left = p_pos.x - AABBMin.x;
-				//‰E•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//å³æ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float right = AABBMax.x - p_pos.x;
 
-				//‰º•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//ä¸‹æ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float down = p_pos.y - AABBMin.y;
-				//ã•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//ä¸Šæ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float up = AABBMax.y - p_pos.y;
 
-				//‘O•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//å‰æ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float back = p_pos.z - AABBMin.z;
-				//Œã•ûŒü‚Ì‚ß‚è‚ñ‚¾‹——£
+				//å¾Œæ–¹å‘ã®ã‚ã‚Šè¾¼ã‚“ã è·é›¢
 				float front = AABBMax.z - p_pos.z;
 
-				//ƒ{ƒbƒNƒX“à‚É‚Ç‚ê‚¾‚¯‚ß‚è‚ñ‚Å‚¢‚é‚©
-				//ˆê’U¶•ûŒü‚É‰Ÿ‚µ–ß‚·‚Æ‰¼’è‚·‚é
+				//ãƒœãƒƒã‚¯ã‚¹å†…ã«ã©ã‚Œã ã‘ã‚ã‚Šè¾¼ã‚“ã§ã„ã‚‹ã‹
+				//ä¸€æ—¦å·¦æ–¹å‘ã«æŠ¼ã—æˆ»ã™ã¨ä»®å®šã™ã‚‹
 				float minDist = left;
 				normal = VGet(-1.0f, 0.0f, 0.0f);
 
-				//‘O‚Ì’l‚æ‚è‘å‚«‚¯‚ê‚Î‰E•ûŒü‚É•ÏX
+				//å‰ã®å€¤ã‚ˆã‚Šå¤§ãã‘ã‚Œã°å³æ–¹å‘ã«å¤‰æ›´
 				if (right < minDist)
 				{
 					minDist = right;
 					normal = VGet(1.0f, 0.0f, 0.0f);
 				}
 
-				//‘O‚Ì’l‚æ‚è‘å‚«‚¯‚ê‚Î‰º•ûŒü‚É•ÏX
+				//å‰ã®å€¤ã‚ˆã‚Šå¤§ãã‘ã‚Œã°ä¸‹æ–¹å‘ã«å¤‰æ›´
 				if (down < minDist)
 				{
 					minDist = down;
 					normal = VGet(0.0f, -1.0f, 0.0f);
 				}
 
-				//‘O‚Ì’l‚æ‚è‘å‚«‚¯‚ê‚Îã•ûŒü‚É•ÏX
+				//å‰ã®å€¤ã‚ˆã‚Šå¤§ãã‘ã‚Œã°ä¸Šæ–¹å‘ã«å¤‰æ›´
 				if (up < minDist)
 				{
 					minDist = up;
 					normal = VGet(0.0f, 1.0f, 0.0f);
 				}
 
-				//‘O‚Ì’l‚æ‚è‘å‚«‚¯‚ê‚ÎŒã•ûŒü‚É•ÏX
+				//å‰ã®å€¤ã‚ˆã‚Šå¤§ãã‘ã‚Œã°å¾Œæ–¹å‘ã«å¤‰æ›´
 				if (back < minDist)
 				{
 					minDist = back;
 					normal = VGet(0.0f, 0.0f, 1.0f);
 				}
 
-				//‘O‚Ì’l‚æ‚è‘å‚«‚¯‚ê‚Î‘O•ûŒü‚É•ÏX
+				//å‰ã®å€¤ã‚ˆã‚Šå¤§ãã‘ã‚Œã°å‰æ–¹å‘ã«å¤‰æ›´
 				if (front < minDist)
 				{
 					minDist = front;
 					normal = VGet(0.0f, 0.0f, -1.0f);
 				}
 
-				//‰Ÿ‚µ–ß‚µƒxƒNƒgƒ‹‚ğ¶¬
+				//æŠ¼ã—æˆ»ã—ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç”Ÿæˆ
 				push = VScale(normal, p_size + minDist);
 				_actor.lock()->HitCalc();
 				_actor.lock()->AddPos(push);
@@ -470,30 +479,46 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 
 	GetMousePoint(&Mx, &My);
 
-	// ƒ}ƒEƒXƒ|ƒCƒ“ƒ^‚ª‚ ‚é‰æ–Êã‚ÌÀ•W‚ÉŠY“–‚·‚é‚R‚c‹óŠÔã‚Ì Near –Ê‚ÌÀ•W‚ğæ“¾
-	VECTOR StartPos = ConvScreenPosToWorldPos(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 0.0f));
+	// ãƒã‚¦ã‚¹ãƒã‚¤ãƒ³ã‚¿ãŒã‚ã‚‹ç”»é¢ä¸Šã®åº§æ¨™ã«è©²å½“ã™ã‚‹ï¼“ï¼¤ç©ºé–“ä¸Šã® Near é¢ã®åº§æ¨™ã‚’å–å¾—
+	VECTOR StartPos = ConvScreenPosToWorldPos(VGet(Mx, My, 0.0f));
 
-	// ƒ}ƒEƒXƒ|ƒCƒ“ƒ^‚ª‚ ‚é‰æ–Êã‚ÌÀ•W‚ÉŠY“–‚·‚é‚R‚c‹óŠÔã‚Ì Far –Ê‚ÌÀ•W‚ğæ“¾
-	VECTOR EndPos = ConvScreenPosToWorldPos(VGet(WINDOW_CENTER_WIDTH, WINDOW_CENTER_HEIGHT, 1.0f));
+	// ãƒã‚¦ã‚¹ãƒã‚¤ãƒ³ã‚¿ãŒã‚ã‚‹ç”»é¢ä¸Šã®åº§æ¨™ã«è©²å½“ã™ã‚‹ï¼“ï¼¤ç©ºé–“ä¸Šã® Far é¢ã®åº§æ¨™ã‚’å–å¾—
+	VECTOR EndPos = ConvScreenPosToWorldPos(VGet(Mx, My, 1.0f));
 
+	//3Dç©ºé–“ä¸Šã®ç·šåˆ†ã‚’æç”»
 	DrawLine3D(StartPos, EndPos, GetColor(255, 0, 0));
 
-	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), 100.0f);
+	//ãƒœã‚¯ã‚»ãƒ«ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«å¯¾ã—ã¦ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆã‚’è¡Œã†
+	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), 10000.0f);
 
+	//å½“ãŸã£ã¦ã„ãªã‘ã‚Œã°å‡¦ç†ã‚’æŠœã‘ã‚‹
 	if (!hit.isHit)return;
 
-	T_CHUNK_POS chunkPos = { hit.pos.x -1 , hit.pos.z -1};
+	//ãƒ’ãƒƒãƒˆã—ãŸãƒœã‚¯ã‚»ãƒ«ã®ãƒãƒ£ãƒ³ã‚¯åº§æ¨™ã‚’å–å¾—
+	T_CHUNK_POS chunkPos = hit.pos;
 
+	//ãƒãƒ£ãƒ³ã‚¯åº§æ¨™ãŒç¯„å›²å¤–ãªã‚‰å‡¦ç†ã‚’æŠœã‘ã‚‹
 	if (chunkPos.x < 0 || chunkPos.z < 0)return;
 	if (chunkPos.x > 1 || chunkPos.z > 1)return;
 
+	//ãƒ’ãƒƒãƒˆã—ãŸãƒœã‚¯ã‚»ãƒ«ã®åº§æ¨™ã«æ³•ç·šã‚’åŠ ç®—ã—ã¦ã€ç½®ãã¹ããƒœã‚¯ã‚»ãƒ«ã®åº§æ¨™ã‚’è¨ˆç®—
 	int placeX = hit.voxelX + (int)hit.normal.x;
 	int placeY = hit.voxelY + (int)hit.normal.y;
 	int placeZ = hit.voxelZ + (int)hit.normal.z;
 
+	//ãƒãƒ£ãƒ³ã‚¯ãŒå­˜åœ¨ã—ãªã‘ã‚Œã°å‡¦ç†ã‚’æŠœã‘ã‚‹
+	if (c_voxelWorldCopy.lock()->GetChunk(chunkPos).expired())return;
+
+	//ç½®ãã¹ããƒœã‚¯ã‚»ãƒ«ã®åº§æ¨™ãŒç¯„å›²å¤–ãªã‚‰å‡¦ç†ã‚’æŠœã‘ã‚‹
+	if (placeX >= CHUNK_SIZE_X || placeX < 0)return;
+	if (placeY >= CHUNK_SIZE_Y || placeY < 0)return;
+	if (placeZ >= CHUNK_SIZE_Z || placeZ < 0)return;
+
+	//ç½®ãã¹ããƒœã‚¯ã‚»ãƒ«ã®åº§æ¨™ã‚’å–å¾—
 	VECTOR pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).
 		lock()->GetVoxel(placeX, placeY, placeZ)->GetPos();
 
+	//3Dç©ºé–“ä¸Šã«çƒä½“ã‚’æç”»
 	DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
 }
 
@@ -521,24 +546,27 @@ void C_COLLISION_MANAGER::EraseActor(list <weak_ptr<C_ACTOR_BASE>>::iterator& _a
 	}
 }
 
-//“–‚½‚è”»’èˆ—
+//å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
 void C_COLLISION_MANAGER::CollisionCalc()
 {
-	//ŠÖ”ƒ|ƒCƒ“ƒ^‚ğì¬
+	//é–¢æ•°ãƒã‚¤ãƒ³ã‚¿ã‚’ä½œæˆ
 	void (*Calc[])(weak_ptr<C_OBJECT_BASE>, weak_ptr<C_OBJECT_BASE>) = { C_COLLISION_MANAGER::CollisionPlayerToEnemy, C_COLLISION_MANAGER::CollisionPlayerToBlock,
 		C_COLLISION_MANAGER::CollisionPlayerToFlag, C_COLLISION_MANAGER::CollisionEnemyToEnemy, C_COLLISION_MANAGER::CollisionEnemyToBlock };
 
 	int funkIndex = -1;
 
-	//ƒ}ƒl[ƒWƒƒ[1‚Ì”z—ñ‚Ì—v‘f”‚¾‚¯forƒ‹[ƒv‚ğ‰ñ‚·
+	//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼1ã®é…åˆ—ã®è¦ç´ æ•°ã ã‘forãƒ«ãƒ¼ãƒ—ã‚’å›ã™
 	for (auto itr1 = m_objectPool.begin(); itr1 != m_objectPool.end(); ++itr1)
 	{
-		//ƒ}ƒl[ƒWƒƒ[2‚Ì”z—ñ‚Ì—v‘f”‚¾‚¯forƒ‹[ƒv‚ğ‰ñ‚·
+		if ((*itr1).expired())continue;
+
+		//ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼2ã®é…åˆ—ã®è¦ç´ æ•°ã ã‘forãƒ«ãƒ¼ãƒ—ã‚’å›ã™
 		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
+			if ((*itr2).expired())continue;
 			if ((*itr1).lock() == (*itr2).lock())continue;
 
-			//‚Ç‚Ìƒ^ƒCƒv‚ÌƒIƒuƒWƒFƒNƒg‚ªQÆ‚³‚ê‚Ä‚¢‚é‚©
+			//ã©ã®ã‚¿ã‚¤ãƒ—ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå‚ç…§ã•ã‚Œã¦ã„ã‚‹ã‹
 			if ((*itr1).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_PLAYER &&
 				(*itr2).lock()->GetObjectType() == C_OBJECT_BASE::OBJECT_TYPE_ENEMY)
 			{
@@ -565,30 +593,34 @@ void C_COLLISION_MANAGER::CollisionCalc()
 				funkIndex = 4;
 			}
 
-			//ƒR[ƒ‹ƒoƒbƒNŠÖ”
+			//ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°
 			if (funkIndex != -1)Calc[funkIndex]((*itr1), (*itr2));
 		}
 	}
 
 	for (auto itr = m_actorPool.begin(); itr != m_actorPool.end(); ++itr)
 	{
-		//ƒ{ƒNƒZƒ‹‚Æ‚Ì“–‚½‚è”»’è
+		if ((*itr).expired())continue;
+		//ãƒœã‚¯ã‚»ãƒ«ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 		CollisionActorToVoxel((*itr));
 	}
 
-	/*CollisionLayToVoxel();*/
+	CollisionLayToVoxel();
 
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{
+		if ((*itr1).expired())continue;
+
 		for (auto itr2 = m_objectPool.begin(); itr2 != m_objectPool.end(); ++itr2)
 		{
+			if ((*itr2).expired())continue;
 			if ((*itr1).lock() == (*itr2).lock())continue;
-			//ƒ{ƒNƒZƒ‹‚Æ‚Ì“–‚½‚è”»’è
+			//ãƒœã‚¯ã‚»ãƒ«ã¨ã®å½“ãŸã‚Šåˆ¤å®š
 			AttackActorToObject((*itr1), (*itr2));
 		}
 	}
 
-	//UŒ‚”»’è
+	//æ”»æ’ƒåˆ¤å®š
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{
 		for (auto itr2 = m_actorPool.begin(); itr2 != m_actorPool.end(); ++itr2)

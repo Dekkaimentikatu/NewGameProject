@@ -74,7 +74,7 @@ void C_PLAYER_MANAGER::Draw()
 {
 	for (auto itr = c_actorArray.begin(); itr != c_actorArray.end(); ++itr)
 	{
-		(*itr)->Draw();
+		//(*itr)->Draw();
 	}
 }
 
