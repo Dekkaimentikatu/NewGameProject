@@ -6,6 +6,7 @@
 
 #include "collision/3Dcollision.h"
 #include "game/base/manager_base.h"
+#include "game/voxel/voxel_world.h"
 
 class C_VOXEL_WORLD;
 
@@ -24,6 +25,10 @@ private:
 
 	//インスタンス
 	static C_COLLISION_MANAGER* m_instance;
+
+	VECTOR m_hitPos;
+
+	T_CHUNK_POS m_chunkPos;
 
 	//オブジェクトの判定用プール
 	std::list<std::weak_ptr<C_OBJECT_BASE>> m_objectPool;
@@ -84,6 +89,8 @@ public:
 
 	//ボクセルを登録
 	void CopyVoxelWorld(std::weak_ptr<C_VOXEL_WORLD> _voxelWorldOrigin) { c_voxelWorldCopy = _voxelWorldOrigin; }
+
+	void Draw();
 
 	//終了処理
 	void Exit();

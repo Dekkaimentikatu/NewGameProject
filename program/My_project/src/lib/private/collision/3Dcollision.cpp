@@ -101,7 +101,7 @@ bool C_COLLISION::CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius,
 bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, float _AABBSize, float& hitT, VECTOR& hitPos)
 {
 	//線分の方向ベクトルを計算
-	VECTOR dir = VSub(_lineStart, _lineStart);
+	VECTOR dir = VSub(_lineStart, _lineEnd);
 
 	//AABBの最大座標と最小座標を計算
 	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };

@@ -249,6 +249,9 @@ void C_SCENE_PLAY::DrawLoading()
 
 void C_SCENE_PLAY::DrawPlay()
 {
+	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
+
+
 	c_enemyManager.Draw();
 
 	c_mapManager.Draw();
@@ -263,7 +266,7 @@ void C_SCENE_PLAY::DrawPlay()
 		break;
 	}
 
-
+	instance->Draw();
 
 	//c_UIManager.DrawDebug();
 

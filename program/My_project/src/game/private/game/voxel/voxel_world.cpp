@@ -17,7 +17,7 @@ void C_VOXEL_WORLD::CreateWorld()
 {
 	for (int x = 0; x < CHUNK_NUM_X; x++)
 	{
-		for (int z = 0; z < CHUNK_NUM_Y; z++)
+		for (int z = 0; z < CHUNK_NUM_Z; z++)
 		{
 			C_VOXEL_WORLD::CreateChunk(DEF_WORLD_POS[x][z], C_VOXEL::BLOCK);
 		}
@@ -25,7 +25,7 @@ void C_VOXEL_WORLD::CreateWorld()
 
 	for (int x = 0; x < CHUNK_NUM_X; x++)
 	{
-		for (int z = 0; z < CHUNK_NUM_Y; z++)
+		for (int z = 0; z < CHUNK_NUM_Z; z++)
 		{
 			CheckDrawFlag(DEF_WORLD_POS[x][z]);
 		}
@@ -60,6 +60,9 @@ void C_VOXEL_WORLD::CreateChunk(T_CHUNK_POS _chunkPos, C_VOXEL::VOXEL_TYPE _voxe
 				voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.x;
 				voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
 				voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f + offset.z;
+				//voxelData.pos.x = static_cast<float>(x) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - BLOCK_SIZE * CHUNK_SIZE_X * 0.5f;
+				//voxelData.pos.y = static_cast<float>(y) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f;
+				//voxelData.pos.z = static_cast<float>(z) * static_cast<float>(BLOCK_SIZE) + static_cast<float>(BLOCK_SIZE) * 0.5f - BLOCK_SIZE * CHUNK_SIZE_Z * 0.5f;
 				if(y < 3)voxelData.voxelType = _voxelType;
 				else voxelData.voxelType = C_VOXEL::AIR;
 				voxelData.grapHndl = instance2D->Get2DImageHndl(VOXEL_GRAP_PATH);
@@ -98,7 +101,7 @@ void C_VOXEL_WORLD::Step()
 {
 	for (int x = 0; x < CHUNK_NUM_X; x++)
 	{
-		for (int z = 0; z < CHUNK_NUM_Y; z++)
+		for (int z = 0; z < CHUNK_NUM_Z; z++)
 		{
 			CheckDrawFlag(DEF_WORLD_POS[x][z]);
 		}
@@ -151,7 +154,7 @@ void C_VOXEL_WORLD::Draw()
 {
 	for (int x = 0; x < CHUNK_NUM_X; x++)
 	{
-		for (int z = 0; z < CHUNK_NUM_Y; z++)
+		for (int z = 0; z < CHUNK_NUM_Z; z++)
 		{
 			DrawVoxel(DEF_WORLD_POS[x][z]);
 		}
@@ -163,7 +166,7 @@ void C_VOXEL_WORLD::Exit()
 {
 	for (int x = 0; x < CHUNK_NUM_X; x++)
 	{
-		for (int z = 0; z < CHUNK_NUM_Y; z++)
+		for (int z = 0; z < CHUNK_NUM_Z; z++)
 		{
 		}
 	}
@@ -202,9 +205,9 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 	int localY = C_MY_MATH::Mod(_y, CHUNK_SIZE_Y - 1);
 	int localZ = C_MY_MATH::Mod(_z, CHUNK_SIZE_Z - 1);
 
-	_x = localX;
-	_y = localY;
-	_z = localZ;
+	//_x = localX;
+	//_y = localY;
+	//_z = localZ;
 
 	//ローカル座標が範囲外の場合は空のボクセルとみなす
 	return chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR;
@@ -214,8 +217,6 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
 {
 	T_RAYCAST_HIT hit = {0};
-
-	//if (C_COLLISION::CheckHitAABBToLine());
 
     int x = (int)floor(origin.x);
     int y = (int)floor(origin.y);

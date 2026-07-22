@@ -1,6 +1,7 @@
 ﻿#include "game/collision/collision_manager.h"
 #include "game/data/global_data.h"
 #include "game/voxel/voxel_world.h"
+#include "math/myMath.h"
 
 using namespace std;
 
@@ -313,7 +314,7 @@ void C_COLLISION_MANAGER::AttackActorToObject(std::weak_ptr<C_ACTOR_BASE> _actor
 	center2 = _object.lock()->GetCenter();
 	radius2 = static_cast<float>(_object.lock()->GetRedius());
 
-	if(!C_COLLISION::CheckHitSphereToSphere(center1, center2, radius1, radius2))return;
+	if (!C_COLLISION::CheckHitSphereToSphere(center1, center2, radius1, radius2))return;
 
 	_object.lock()->SubHp(_actor.lock()->GetAtt());
 }
@@ -479,47 +480,197 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 
 	GetMousePoint(&Mx, &My);
 
-	// マウスポインタがある画面上の座標に該当する３Ｄ空間上の Near 面の座標を取得
+	T_CHUNK_POS chunkPos = { 0 };
+
+	float HitT = 0.0f;
+
+	VECTOR HitPos = { 0 };
+
+	// マウスポインタがある画面上の座標に該当する3D空間上のNear面の座標を取得
 	VECTOR StartPos = ConvScreenPosToWorldPos(VGet(Mx, My, 0.0f));
 
-	// マウスポインタがある画面上の座標に該当する３Ｄ空間上の Far 面の座標を取得
+	// マウスポインタがある画面上の座標に該当する3D空間上のFar面の座標を取得
 	VECTOR EndPos = ConvScreenPosToWorldPos(VGet(Mx, My, 1.0f));
 
 	//3D空間上の線分を描画
 	DrawLine3D(StartPos, EndPos, GetColor(255, 0, 0));
 
-	//ボクセルワールドに対してレイキャストを行う
-	T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), VSize(VSub(EndPos, StartPos)));
+	//for (int x = 0; x < CHUNK_NUM_X; x++)
+	//{
+	//	bool isHit = false;
+	//	for (int z = 0; z < CHUNK_NUM_Z; z++)
+	//	{
+	//		VECTOR AABBPos = { 0 };
 
-	//当たっていなければ処理を抜ける
-	if (!hit.isHit)return;
+	//		chunkPos = DEF_WORLD_POS[x][z];
 
-	//ヒットしたボクセルのチャンク座標を取得
-	T_CHUNK_POS chunkPos = hit.pos;
+	//		AABBPos = VGet(chunkPos.x * CHUNK_SIZE_X * 0.5 * BLOCK_SIZE,
+	//			CHUNK_SIZE_Y * 0.5 * BLOCK_SIZE,
+	//			chunkPos.z * CHUNK_SIZE_Z * 0.5 * BLOCK_SIZE);
 
-	//チャンク座標が範囲外なら処理を抜ける
-	if (chunkPos.x < 0 || chunkPos.z < 0)return;
+	//		if (C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, CHUNK_SIZE_X * BLOCK_SIZE, HitT, HitPos));
+	//		{
+	//			isHit = true;
+	//			break;
+	//		}
+	//	}
+	//	if (isHit)break;
+	//}
+
+	if (EndPos.x > 0.0f)chunkPos.x = 1.0f;
+	else if (EndPos.x < 0.0f)chunkPos.x = -1.0f;
+	if (EndPos.z > 0.0f)chunkPos.z = 1.0f;
+	else if (EndPos.z < 0.0f)chunkPos.z = -1.0f;
+
+	////チャンク座標が範囲外なら処理を抜ける
+	if (chunkPos.x == 0 || chunkPos.z == 0)return;
+	if (chunkPos.x < -1 || chunkPos.z < -1)return;
 	if (chunkPos.x > 1 || chunkPos.z > 1)return;
 
-	//ヒットしたボクセルの座標に法線を加算して、置くべきボクセルの座標を計算
-	int placeX = hit.voxelX + (int)hit.normal.x;
-	int placeY = hit.voxelY + (int)hit.normal.y;
-	int placeZ = hit.voxelZ + (int)hit.normal.z;
+	m_chunkPos = chunkPos;
 
-	//チャンクが存在しなければ処理を抜ける
-	if (c_voxelWorldCopy.lock()->GetChunk(chunkPos).expired())return;
+	for (int x = 0; x < CHUNK_SIZE_X; x++)
+	{
+		for (int y = CHUNK_SIZE_Y - 1; y > 0; y--)
+		{
+			for (int z = 0; z < CHUNK_SIZE_Z; z++)
+			{
+				//そのボクセルが空気なら次の要素へ
+				if(c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetVoxelType() == C_VOXEL::AIR)continue;
 
-	//置くべきボクセルの座標が範囲外なら処理を抜ける
-	if (placeX >= CHUNK_SIZE_X || placeX < 0)return;
-	if (placeY >= CHUNK_SIZE_Y || placeY < 0)return;
-	if (placeZ >= CHUNK_SIZE_Z || placeZ < 0)return;
+				//法線
+				VECTOR normal = { 0 };
+				//ボクセルの中心座標
+				VECTOR AABBPos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
 
-	//置くべきボクセルの座標を取得
-	VECTOR pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).
-		lock()->GetVoxel(placeX, placeY, placeZ)->GetPos();
+				//当たり判定
+				if (!C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, BLOCK_SIZE, HitT, HitPos))continue;
 
-	//3D空間上に球体を描画
-	DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+				//ボクセルの上座標
+				VECTOR AABBMax = VGet(AABBPos.x + BLOCK_SIZE * 0.5f,
+					AABBPos.y + BLOCK_SIZE * 0.5f,
+					AABBPos.z + BLOCK_SIZE * 0.5f);
+
+				//ボクセルの下座標
+				VECTOR AABBMin = VGet(AABBPos.x - BLOCK_SIZE * 0.5f,
+					AABBPos.y - BLOCK_SIZE * 0.5f,
+					AABBPos.z - BLOCK_SIZE * 0.5f);
+
+				//左方向のめり込んだ距離
+				float left = HitPos.x - AABBMin.x;
+				//右方向のめり込んだ距離
+				float right = AABBMax.x - HitPos.x;
+
+				//下方向のめり込んだ距離
+				float down = HitPos.y - AABBMin.y;
+				//上方向のめり込んだ距離
+				float up = AABBMax.y - HitPos.y;
+
+				//前方向のめり込んだ距離
+				float back = HitPos.z - AABBMin.z;
+				//後方向のめり込んだ距離
+				float front = AABBMax.z - HitPos.z;
+
+				//ボックス内にどれだけめり込んでいるか
+				//一旦左方向に押し戻すと仮定する
+				float minDist = left;
+				normal = VGet(-1.0f, 0.0f, 0.0f);
+
+				//前の値より大きければ右方向に変更
+				if (right < minDist)
+				{
+					minDist = right;
+					normal = VGet(1.0f, 0.0f, 0.0f);
+				}
+
+				//前の値より大きければ下方向に変更
+				if (down < minDist)
+				{
+					minDist = down;
+					normal = VGet(0.0f, -1.0f, 0.0f);
+				}
+
+				//前の値より大きければ上方向に変更
+				if (up < minDist)
+				{
+					minDist = up;
+					normal = VGet(0.0f, 1.0f, 0.0f);
+				}
+
+				//前の値より大きければ後方向に変更
+				if (back < minDist)
+				{
+					minDist = back;
+					normal = VGet(0.0f, 0.0f, 1.0f);
+				}
+
+				//前の値より大きければ前方向に変更
+				if (front < minDist)
+				{
+					minDist = front;
+					normal = VGet(0.0f, 0.0f, -1.0f);
+				}
+
+				int x2 = x + static_cast<int>(normal.x);
+				int y2 = y + static_cast<int>(normal.y);
+				int z2 = z + static_cast<int>(normal.z);
+
+				if (x2 >= CHUNK_SIZE_X || x2 < 0)break;
+				if (y2 >= CHUNK_SIZE_Y || y2 < 0)break;
+				if (z2 >= CHUNK_SIZE_Z || z2 < 0)break;
+
+				//置くべきボクセルの座標を取得
+				HitPos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).
+					lock()->GetVoxel(x2, y2, z2)->GetPos();
+
+				m_hitPos = HitPos;
+
+				DrawSphere3D(HitPos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+
+				return;
+			}
+		}
+	}
+
+
+
+
+
+	////ボクセルワールドに対してレイキャストを行う
+	//T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), VSize(VSub(EndPos, StartPos)));
+
+	////当たっていなければ処理を抜ける
+	//if (!hit.isHit)return;
+
+	////ヒットしたボクセルのチャンク座標を取得
+	//T_CHUNK_POS chunkPos = hit.pos;
+
+	////チャンク座標が範囲外なら処理を抜ける
+	//if (chunkPos.x < -1 || chunkPos.z < -1)return;
+	//if (chunkPos.x > 1 || chunkPos.z > 1)return;
+
+	////ヒットしたボクセルの座標に法線を加算して、置くべきボクセルの座標を計算
+	//int placeX = hit.voxelX + (int)hit.normal.x;
+	//int placeY = hit.voxelY + (int)hit.normal.y;
+	//int placeZ = hit.voxelZ + (int)hit.normal.z;
+
+	////チャンクが存在しなければ処理を抜ける
+	//if (c_voxelWorldCopy.lock()->GetChunk(chunkPos).expired())return;
+
+	////置くべきボクセルの座標が範囲外なら処理を抜ける
+	//if (placeX >= CHUNK_SIZE_X || placeX < 0)return;
+	//if (placeY >= CHUNK_SIZE_Y || placeY < 0)return;
+	//if (placeZ >= CHUNK_SIZE_Z || placeZ < 0)return;
+
+	////置くべきボクセルの座標を取得
+	//VECTOR pos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).
+	//	lock()->GetVoxel(placeX, placeY, placeZ)->GetPos();
+
+	////3D空間上に球体を描画
+	//DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
+	//DrawFormatString(32, 16, GetColor(255, 255, 255), "pos.x = %f", pos.x);
+	//DrawFormatString(48, 16, GetColor(255, 255, 255), "pos.y = %f", pos.y);
+	//DrawFormatString(64, 16, GetColor(255, 255, 255), "pos.z = %f", pos.z);
 }
 
 void C_COLLISION_MANAGER::EraseObject(list <weak_ptr<C_OBJECT_BASE>>::iterator& _objectPool)
@@ -644,6 +795,17 @@ void C_COLLISION_MANAGER::CollisionCalc()
 	{
 		EraseActor(itr);
 	}
+}
+
+void C_COLLISION_MANAGER::Draw()
+{
+	//3D空間上に球体を描画
+	DrawFormatString(16, 32, GetColor(255, 255, 255), "pos.x = %f", m_hitPos.x);
+	DrawFormatString(16, 48, GetColor(255, 255, 255), "pos.y = %f", m_hitPos.y);
+	DrawFormatString(16, 64, GetColor(255, 255, 255), "pos.z = %f", m_hitPos.z);
+
+	DrawFormatString(16, 96, GetColor(255, 255, 255), "chunkPos.x = %d", m_chunkPos.x);
+	DrawFormatString(16, 112,  GetColor(255, 255, 255), "chunkPos.z = %d", m_chunkPos.z);
 }
 
 void C_COLLISION_MANAGER::Exit()
