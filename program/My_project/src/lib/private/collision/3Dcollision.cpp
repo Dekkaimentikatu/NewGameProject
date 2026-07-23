@@ -1,5 +1,6 @@
 #include "../public/collision/3Dcollision.h"
 #include <algorithm>
+#include <cmath>
 
 //箱同士の当たり判定
 bool C_COLLISION::CheckHitBoxToBox(VECTOR pos1, VECTOR size1, VECTOR pos2, VECTOR size2)
@@ -101,7 +102,7 @@ bool C_COLLISION::CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius,
 bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, float _AABBSize, float& hitT, VECTOR& hitPos)
 {
 	//線分の方向ベクトルを計算
-	VECTOR dir = VSub(_lineStart, _lineEnd);
+	VECTOR dir = VSub(_lineEnd, _lineStart);
 
 	//AABBの最大座標と最小座標を計算
 	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };
@@ -113,10 +114,10 @@ bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR 
 	//線分とAABBの交差判定
 	for (int axis = 0; axis < 3; axis++)
 	{
-		float s;
-		float d;
-		float minB;
-		float maxB;
+		float s = 0;
+		float d = 0;
+		float minB = 0;
+		float maxB = 0;
 
 		//軸ごとの線分の始点と方向ベクトル、AABBの最小座標と最大座標を取得
 		switch (axis)
@@ -144,13 +145,11 @@ bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR 
 		}
 
 		//線分がこの軸に平行かどうかを判定
-		if (std::abs(d) < 1e-6f)
+		if (std::fabs(d) < 1e-6f)
 		{
 			//線分がこの軸に平行
 			if (s < minB || s > maxB)
 				return false;
-
-			continue;
 		}
 
 		//線分がこの軸に平行でない場合、交差する可能性がある
