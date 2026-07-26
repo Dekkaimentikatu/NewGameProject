@@ -172,6 +172,68 @@ void C_VOXEL_WORLD::Exit()
 	}
 }
 
+bool RayVsAABB(VECTOR origin, VECTOR dir, VECTOR minB, VECTOR maxB, float& tEnter, float& tExit)
+{
+    tEnter = 0.0f;
+    tExit = FLT_MAX;
+
+    for (int axis = 0; axis < 3; axis++)
+    {
+        float o;
+        float d;
+        float minV;
+        float maxV;
+
+        switch (axis)
+        {
+        case 0:
+            o = origin.x;
+            d = dir.x;
+            minV = minB.x;
+            maxV = maxB.x;
+            break;
+
+        case 1:
+            o = origin.y;
+            d = dir.y;
+            minV = minB.y;
+            maxV = maxB.y;
+            break;
+
+        default:
+            o = origin.z;
+            d = dir.z;
+            minV = minB.z;
+            maxV = maxB.z;
+            break;
+        }
+
+        if (fabsf(d) < 1e-6f)
+        {
+            if (o < minV || o > maxV)
+                return false;
+
+            continue;
+        }
+
+        float invD = 1.0f / d;
+
+        float t1 = (minV - o) * invD;
+        float t2 = (maxV - o) * invD;
+
+        if (t1 > t2)
+            std::swap(t1, t2);
+
+        tEnter = (std::max)(tEnter, t1);
+        tExit = (std::min)(tExit, t2);
+
+        if (tEnter > tExit)
+            return false;
+    }
+
+    return true;
+}
+
 bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 {
 	//チャンク座標を計算
@@ -216,6 +278,8 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 
 T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
 {
+    //C_COLLISION::CheckHitAABBToLine();
+
 	T_RAYCAST_HIT hit = {0};
 
     int x = (int)floor(origin.x);

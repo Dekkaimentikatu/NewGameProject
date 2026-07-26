@@ -100,6 +100,8 @@ public:
 	//終了処理
 	void Exit();
 
+	void RaycastWorld();
+
 	//レイキャスト処理
 	T_RAYCAST_HIT RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance);
 

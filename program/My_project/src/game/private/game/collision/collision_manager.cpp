@@ -482,7 +482,8 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 
 	T_CHUNK_POS chunkPos = { 0 };
 
-	float HitT = 0.0f;
+	float HitTMin = 0.0f;
+	float HitTMax = 0.0f;
 
 	VECTOR HitPos = { 0 };
 
@@ -544,7 +545,7 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 				VECTOR AABBPos = c_voxelWorldCopy.lock()->GetChunk(chunkPos).lock()->GetVoxel(x, y, z)->GetPos();
 
 				//当たり判定
-				if (!C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, BLOCK_SIZE, HitT, HitPos))continue;
+				if (!C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, BLOCK_SIZE, HitTMin, HitTMax, HitPos))continue;
 
 				//ボクセルの上座標
 				VECTOR AABBMax = VGet(AABBPos.x + BLOCK_SIZE * 0.5f,

@@ -98,7 +98,8 @@ bool C_COLLISION::CheckHitOBBToSphere(VECTOR _sphereCenter, float _sphereredius,
 	return true;
 }
 
-bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, float _AABBSize, float& hitT, VECTOR& hitPos)
+bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR _AABBPos, 
+									float _AABBSize, float& _hitTMin, float& _hitTMax, VECTOR& _hitPos)
 {
 	//線分の方向ベクトルを計算
 	VECTOR dir = VSub(_lineStart, _lineEnd);
@@ -107,8 +108,9 @@ bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR 
 	VECTOR AABBMax = { _AABBPos.x + _AABBSize * 0.5f, _AABBPos.y + _AABBSize * 0.5f, _AABBPos.z + _AABBSize * 0.5f };
 	VECTOR AABBMin = { _AABBPos.x - _AABBSize * 0.5f, _AABBPos.y - _AABBSize * 0.5f, _AABBPos.z - _AABBSize * 0.5f };
 
-	float tMin = 0.0f;
-	float tMax = 1.0f;
+	_hitTMin = 0.0f;
+	_hitTMax = 1.0f;
+	_hitPos = { 0 };
 
 	//線分とAABBの交差判定
 	for (int axis = 0; axis < 3; axis++)
@@ -164,18 +166,15 @@ bool C_COLLISION::CheckHitAABBToLine(VECTOR _lineStart, VECTOR _lineEnd, VECTOR 
 		if (t1 > t2)std::swap(t1, t2);
 
 		//tMinとtMaxを更新
-		tMin = (std::max)(tMin, t1);
-		tMax = (std::min)(tMax, t2);
+		_hitTMin = (std::max)(_hitTMin, t1);
+		_hitTMax = (std::min)(_hitTMax, t2);
 
 		//tMinがtMaxを超えた場合、交差しない
-		if (tMin > tMax)
+		if (_hitTMin > _hitTMax)
 			return false;
 	}
-
-	//交差する場合、tMinを返す
-	hitT = tMin;
 	//交差点の座標を計算
-	hitPos = VAdd(_lineStart, VScale(dir, hitT));
+	_hitPos = VAdd(_lineStart, VScale(dir, _hitTMin));
 
 	return true;
 }
