@@ -757,7 +757,7 @@ void C_COLLISION_MANAGER::CollisionCalc()
 		CollisionActorToVoxel((*itr));
 	}
 
-	CollisionLayToVoxel();
+	/*CollisionLayToVoxel();*/
 
 	for (auto itr1 = m_actorPool.begin(); itr1 != m_actorPool.end(); ++itr1)
 	{

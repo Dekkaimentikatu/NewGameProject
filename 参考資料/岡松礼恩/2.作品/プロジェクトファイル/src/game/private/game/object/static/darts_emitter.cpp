@@ -1,0 +1,81 @@
+#include "game/object/static/darts_emitter.h"
+#include "game/collision/collision_manager.h"
+#include "game/object/dynamic/darts.h"
+
+void C_DARTS_EMITTER::RequestToObject()
+{
+	shared_ptr<C_OBJECT_BASE> tmp = make_shared<C_DARTS>();
+
+	tmp->Init();
+	tmp->Request(m_objectData);
+	tmp->Load();
+	C_COLLISION_MANAGER::AddObject(tmp);
+	m_objectList.push_back(tmp);
+}
+
+void C_DARTS_EMITTER::Init()
+{
+	C_OBJECT_BASE::Init();
+
+	m_objectList.clear();
+
+	m_objectType = OBJECT_TYPE_STATIC;
+}
+
+void C_DARTS_EMITTER::Load()
+{
+	RequestToObject();
+	auto itr = m_objectList.begin();
+}
+
+void C_DARTS_EMITTER::Step()
+{
+	for (auto itr = m_objectList.begin(); itr != m_objectList.end(); ++itr)
+	{
+		(*itr)->Step();
+	}
+}
+
+void C_DARTS_EMITTER::Update()
+{
+	for (auto itr = m_objectList.begin(); itr != m_objectList.end(); ++itr)
+	{
+		(*itr)->Update();
+	}
+}
+
+void C_DARTS_EMITTER::Draw()
+{
+	for (auto itr = m_objectList.begin(); itr != m_objectList.end(); ++itr)
+	{
+		(*itr)->Draw();
+	}
+
+#ifdef DEBUG_MODE
+
+	DrawSphere3D(m_pos, static_cast<float>(m_redius), 16, GetColor(255, 0, 255), GetColor(255, 0, 255), FALSE);
+
+#endif
+}
+
+void C_DARTS_EMITTER::Exit()
+{
+	for (auto itr = m_objectList.begin(); itr != m_objectList.end(); ++itr)
+	{
+		(*itr)->Exit();
+	}
+
+	m_objectList.clear();
+}
+
+void C_DARTS_EMITTER::Request(T_OBJECT_DATA _objectData)
+{
+	m_pos = _objectData.initPos;
+	m_objectData = _objectData;
+	m_redius = 16;
+}
+
+void C_DARTS_EMITTER::HitCalc()
+{
+
+}

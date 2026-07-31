@@ -1,0 +1,42 @@
+#pragma once
+#include "game/base/object.h"
+#include "game/data/global_data.h"
+
+static const char* HOLO_BLOCK_MODEL_PATH = "data/model/field/holo_block.mv1";
+
+class C_HOLO_BLOCK : public C_OBJECT_BASE
+{
+private:
+
+	C_GLOBAL_DATA* c_globalData;
+	C_GLOBAL_DATA::T_PLAYER_DATA* m_playerData;
+
+	float m_speedUp;
+
+	int m_graphHndl1;
+
+	int m_graphHndl2;
+
+	int m_moveLen;
+
+	bool m_isHit;
+
+public:
+
+	C_HOLO_BLOCK(float _speedUp = 0.0f, int _graphHndl1 = 0, int _graphHndl2 = 0,
+		int _moveLen = 0):
+		m_speedUp(_speedUp), m_graphHndl1(_graphHndl1), m_graphHndl2(_graphHndl2),
+		c_globalData(nullptr), m_playerData(nullptr), m_moveLen(_moveLen), m_isHit(false){ }
+
+	~C_HOLO_BLOCK(){}
+
+	void Init();
+	void Load();
+	void Step();
+	void Update();
+	void Draw();
+	void Exit();
+	void Request(T_OBJECT_DATA _objectData);
+	void HitCalc();
+};
+

@@ -275,10 +275,15 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 	return chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR;
 }
 
+bool C_VOXEL_WORLD::RaycastWorld(VECTOR origin, VECTOR dir, float maxDistance)
+{
+
+}
+
 
 T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
 {
-    //C_COLLISION::CheckHitAABBToLine();
+    /*C_COLLISION::CheckHitAABBToLine();*/
 
 	T_RAYCAST_HIT hit = {0};
 

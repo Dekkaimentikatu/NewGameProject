@@ -1,0 +1,46 @@
+#pragma once
+#include "game/base/object.h"
+#include <list>
+
+static const char* DARTS_MODEL_PATH = "data/model/field/paper_plane.mv1";
+
+using namespace std;
+
+constexpr int OBJECT_MAX = 1;
+
+class C_DARTS_EMITTER : public C_OBJECT_BASE
+{
+private:
+
+	list<shared_ptr<C_OBJECT_BASE>> m_objectList;
+
+	int m_moveDir;
+
+	int m_moveLen;
+
+	void RequestToObject();
+
+public:
+
+	C_DARTS_EMITTER(int _moveDir = 0, int _moveLen = 0):
+	m_moveDir(_moveDir), m_moveLen(_moveLen){}
+	~C_DARTS_EMITTER(){}
+
+	void Init();
+
+	void Load();
+
+	void Step();
+
+	void Update();
+
+	void Draw();
+
+	void Exit();
+
+	void Request(T_OBJECT_DATA _objectData);
+
+	void HitCalc();
+
+};
+
