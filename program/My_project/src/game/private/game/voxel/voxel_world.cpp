@@ -277,7 +277,7 @@ bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
 
 bool C_VOXEL_WORLD::RaycastWorld(VECTOR origin, VECTOR dir, float maxDistance)
 {
-
+    return true;
 }
 
 
