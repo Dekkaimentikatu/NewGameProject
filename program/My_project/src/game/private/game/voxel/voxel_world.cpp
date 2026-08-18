@@ -234,45 +234,33 @@ bool RayVsAABB(VECTOR origin, VECTOR dir, VECTOR minB, VECTOR maxB, float& tEnte
     return true;
 }
 
-bool C_VOXEL_WORLD::IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos)
+bool C_VOXEL_WORLD::IsSolidVoxel(int* _x, int* _y, int* _z, T_CHUNK_POS& _pos)
 {
-	//チャンク座標を計算
-	int chunkX = 0, chunkZ = 0;
-
-	chunkX = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
-	int chunkY = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
-	chunkZ = C_MY_MATH::FloorDiv(_z, CHUNK_SIZE_X);
-
-	//chunkX = C_MY_MATH::FloorDiv(_x, CHUNK_SIZE_X);
-	//chunkZ = C_MY_MATH::FloorDiv(_z, CHUNK_SIZE_Z);
-
-
-	//チャンク座標を作成
-	T_CHUNK_POS chunkPos = { chunkX, chunkZ };
-
-	if (chunkPos.x == 0 || chunkPos.z == 0)return false;
-	if (chunkPos.x > 1 || chunkPos.z > 1)return false;
-	if (chunkPos.x < -1 || chunkPos.z < -1)return false;
-
-	//チャンク座標を返す
-	_pos = chunkPos;
 	//チャンクを取得
-	weak_ptr<C_VOXEL_CHUNK> chunk = GetChunk(chunkPos);
+	weak_ptr<C_VOXEL_CHUNK> chunk = GetChunk(_pos);
 
 	//チャンクが存在しない場合は空のボクセルとみなす
 	if (chunk.expired())return false;
 
 	//ローカル座標を計算
-	int localX = C_MY_MATH::Mod(_x, CHUNK_SIZE_X - 1);
-	int localY = C_MY_MATH::Mod(_y, CHUNK_SIZE_Y - 1);
-	int localZ = C_MY_MATH::Mod(_z, CHUNK_SIZE_Z - 1);
+	int localX = C_MY_MATH::Mod(*_x, CHUNK_SIZE_X - 1);
+	int localY = C_MY_MATH::Mod(*_y, CHUNK_SIZE_Y - 1);
+	int localZ = C_MY_MATH::Mod(*_z, CHUNK_SIZE_Z - 1);
 
-	//_x = localX;
-	//_y = localY;
-	//_z = localZ;
+    //置くべきボクセルの座標が範囲外なら処理を抜ける
+    if (localX >= CHUNK_SIZE_X || localX < 0)return false;
+    if (localY >= CHUNK_SIZE_Y || localY < 0)return false;
+    if (localZ >= CHUNK_SIZE_Z || localZ < 0)return false;
 
 	//ローカル座標が範囲外の場合は空のボクセルとみなす
-	return chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR;
+	if(chunk.lock()->GetVoxel(localX, localY, localZ)->GetVoxelType() != C_VOXEL::AIR)
+    {
+		*_x = localX;
+		*_y = localY;
+		*_z = localZ;
+        return true;
+	}
+    else return false;
 }
 
 bool C_VOXEL_WORLD::RaycastWorld(VECTOR origin, VECTOR dir, float maxDistance)
@@ -281,11 +269,10 @@ bool C_VOXEL_WORLD::RaycastWorld(VECTOR origin, VECTOR dir, float maxDistance)
 }
 
 
-T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance)
+T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance, T_CHUNK_POS _chunkPos)
 {
-    /*C_COLLISION::CheckHitAABBToLine();*/
-
 	T_RAYCAST_HIT hit = {0};
+	hit.isHit = false;
 
     int x = (int)floor(origin.x);
     int y = (int)floor(origin.y);
@@ -330,11 +317,11 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
 
     VECTOR lastNormal = { 0,0,0 };
 
-	T_CHUNK_POS pos = { 0 };
+	T_CHUNK_POS pos = _chunkPos;
 
     while (true)
     {
-        if (IsSolidVoxel(x, y, z, pos))
+        if (IsSolidVoxel(&x, &y, &z, pos))
         {
             float hitT;
 
@@ -401,19 +388,19 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
         {
             if (tMaxY < tMaxZ)
             {
-                y += stepY;
+                y -= stepY;
 
                 lastNormal =
                 {
                     0.0f,
-                    (float)-stepY,
+                    (float)stepY,
                     0.0f
                 };
 
                 if (tMaxY > maxDistance)
                     break;
 
-                tMaxY += tDeltaY;
+                tMaxY -= tDeltaY;
             }
             else
             {
@@ -427,7 +414,7 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
                 };
 
                 if (tMaxZ > maxDistance)
-                    break;
+                    continue;
 
                 tMaxZ += tDeltaZ;
             }

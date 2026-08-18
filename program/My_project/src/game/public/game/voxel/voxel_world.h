@@ -81,7 +81,7 @@ private:
 	//ポリゴンの描画オフセットの計算
 	VECTOR CalcDrawOffset(T_CHUNK_POS _chunkPos, VECTOR _offset);
 	//ボクセルの存在判定
-	bool IsSolidVoxel(int& _x, int& _y, int& _z, T_CHUNK_POS& _pos);
+	bool IsSolidVoxel(int* _x, int* _y, int* _z, T_CHUNK_POS& _pos);
 
 public:
 
@@ -103,7 +103,7 @@ public:
 	bool RaycastWorld(VECTOR origin, VECTOR dir, float maxDistance);
 
 	//レイキャスト処理
-	T_RAYCAST_HIT RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance);
+	T_RAYCAST_HIT RaycastVoxel(VECTOR origin, VECTOR dir, float maxDistance, T_CHUNK_POS _chunkPos);
 
 	// チャンクをポインタで取得（存在しない場合は nullptr を返す）
 	std::weak_ptr<C_VOXEL_CHUNK> GetChunk(const T_CHUNK_POS& _chunkPos)
