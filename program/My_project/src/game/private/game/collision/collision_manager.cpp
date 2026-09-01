@@ -624,10 +624,11 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 		//}
 		
 		//ボクセルワールドに対してレイキャストを行う
-		T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), 10000, (*itr));
+		T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), VSize(VSub(EndPos, StartPos)), (*itr));
 
 		//当たっていなければ処理を抜ける
 		if (!hit.isHit)continue;
+
 
 		//ヒットしたボクセルの座標に法線を加算して、置くべきボクセルの座標を計算
 		int placeX = hit.voxelX + (int)hit.normal.x;
@@ -645,9 +646,11 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 
 		//3D空間上に球体を描画
 		DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
-		DrawFormatString(32, 16, GetColor(255, 255, 255), "pos.x = %f", pos.x);
-		DrawFormatString(48, 16, GetColor(255, 255, 255), "pos.y = %f", pos.y);
-		DrawFormatString(64, 16, GetColor(255, 255, 255), "pos.z = %f", pos.z);
+		m_hitPos = pos;
+		m_chunkPos = (*itr);
+		//DrawFormatString(32, 16, GetColor(255, 255, 255), "pos.x = %f", pos.x);
+		//DrawFormatString(48, 16, GetColor(255, 255, 255), "pos.y = %f", pos.y);
+		//DrawFormatString(64, 16, GetColor(255, 255, 255), "pos.z = %f", pos.z);
 
 		return;
 	}
