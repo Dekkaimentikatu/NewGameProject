@@ -646,7 +646,9 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 
 		//3D空間上に球体を描画
 		DrawSphere3D(pos, 10, 16, GetColor(0, 0, 255), GetColor(0, 0, 255), FALSE);
-		m_hitPos = pos;
+		m_hitPos.x = hit.voxelX;
+		m_hitPos.y = hit.voxelY;
+		m_hitPos.z = hit.voxelZ;
 		m_chunkPos = (*itr);
 		//DrawFormatString(32, 16, GetColor(255, 255, 255), "pos.x = %f", pos.x);
 		//DrawFormatString(48, 16, GetColor(255, 255, 255), "pos.y = %f", pos.y);

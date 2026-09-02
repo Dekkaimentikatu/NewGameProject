@@ -178,13 +178,13 @@ void C_SCENE_PLAY::Step()
 
 	c_UIManager.Step();
 
-	CEffekseerCtrl::SetAutoProjectionMtx();
+	EffekseerManager::SetAutoProjectionMtx();
 
 	C_COLLISION_MANAGER* instance = C_COLLISION_MANAGER::GetInstance();
 	instance->CollisionCalc();
 
 	//当たり判定を行った後に更新確定処理を行う
-	CEffekseerCtrl::UpdateAutoCamera();
+	EffekseerManager::UpdateAutoCamera();
 
 	c_playerManager.Update();
 
@@ -272,6 +272,6 @@ void C_SCENE_PLAY::DrawPlay()
 
 	//c_playerManager.DebugDraw();
 
-	CEffekseerCtrl::Draw();
+	EffekseerManager::Draw();
 	//ここで描画処理を行う
 }

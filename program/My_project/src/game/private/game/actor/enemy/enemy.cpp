@@ -330,8 +330,8 @@ void C_ENEMY::KnockBackCalc()
 		m_knockBackSpeed = { 0 };
 		m_nowState = ENEMY_STATE_MOVE;
 		m_hp -= m_damegeAtt;
-		int tmp = CEffekseerCtrl::Request(m_effektHndl[1], GetCenter(), false);
-		CEffekseerCtrl::SetScale(tmp, VGet(5.0f, 5.0f, 5.0f));
+		int tmp = EffekseerManager::Request(m_effektHndl[1], GetCenter(), false);
+		EffekseerManager::SetScale(tmp, VGet(5.0f, 5.0f, 5.0f));
 	}
 }
 
@@ -368,8 +368,8 @@ void C_ENEMY::DamageCalc(int att)
 		//アニメーションを被弾アニメーションにする
 		m_nowAnimState = ANIM_HIT;
 		//エフェクトを再生する
-		int tmp = CEffekseerCtrl::Request(m_effektHndl[0], GetCenter(), false);
-		CEffekseerCtrl::SetScale(tmp, VGet(5.0f, 5.0f, 5.0f));
+		int tmp = EffekseerManager::Request(m_effektHndl[0], GetCenter(), false);
+		EffekseerManager::SetScale(tmp, VGet(5.0f, 5.0f, 5.0f));
 
 		KnockBackCalc();
 	}

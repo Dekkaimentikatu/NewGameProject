@@ -40,13 +40,13 @@ void C_SCENE_MANAGER::Init()
 
 	c_golobalData->Init();
 
-	CEffekseerCtrl::Init(1000, 20000);
+	EffekseerManager::Init(1000, 20000);
 }
 
 void C_SCENE_MANAGER::Load()
 {
 	//ここに読込処理を書く
-	CEffekseerCtrl::LoadData("data/effect/Blow.efk");
+	EffekseerManager::LoadData("data/effect/Blow.efk");
 
 
 	C_BGM_MANAGER* bgmMgr = C_BGM_MANAGER::GetInstance();
@@ -65,7 +65,7 @@ void C_SCENE_MANAGER::Step()
 
 	C_INPUT_CONFIG::Updata();
 
-	CEffekseerCtrl::UpdateAutoCamera();
+	EffekseerManager::UpdateAutoCamera();
 }
 
 void C_SCENE_MANAGER::Loop()
@@ -94,7 +94,7 @@ void C_SCENE_MANAGER::Draw()
 	//FPS管理クラスの描画
 	C_FPS::Disp();
 
-	CEffekseerCtrl::Draw();
+	EffekseerManager::Draw();
 }
 
 void C_SCENE_MANAGER::Exit()
@@ -126,7 +126,7 @@ void C_SCENE_MANAGER::Exit()
 
 	c_golobalData->DeleteInstance();
 
-	CEffekseerCtrl::Exit();
+	EffekseerManager::Exit();
 }
 
 bool C_SCENE_MANAGER::SceneNowPravTypeCmp()
@@ -150,9 +150,9 @@ void C_SCENE_MANAGER::Next()
 
 	c_scene = C_SCENE_FACTORY::Create(c_sceneData->GetSceneType());	//次のシーンクラスインスタンスの生成
 
-	CEffekseerCtrl::Exit();
+	EffekseerManager::Exit();
 
-	CEffekseerCtrl::Init(10000, 20000);
+	EffekseerManager::Init(10000, 20000);
 
 	m_pravSceneType = c_sceneData->GetSceneType();	//前回のシーンのタイプを現在のシーンのタイプに更新
 	c_sceneData->SetIsEnd(false);

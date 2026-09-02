@@ -27,8 +27,8 @@ void C_ENEMY_MANAGER::LoadSync()
 	shared_ptr<C_ENEMY> enemy = nullptr;
 	C_OBJECT_BASE::T_OBJECT_DATA tmp = {0};
 
-	int eff1 = CEffekseerCtrl::LoadData("data/effect/ToonHit.efk");
-	int eff2 = CEffekseerCtrl::LoadData("data/effect/FireWorks.efk");
+	int eff1 = EffekseerManager::LoadData("data/effect/ToonHit.efk");
+	int eff2 = EffekseerManager::LoadData("data/effect/FireWorks.efk");
 
 	//for (auto itr = c_globalData->GetEnemySpawnPointList()->begin();
 	//	itr != c_globalData->GetEnemySpawnPointList()->end(); ++itr)
