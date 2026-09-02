@@ -485,7 +485,7 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 	float HitTMin = 0.0f;
 	float HitTMax = 0.0f;
 
-	VECTOR HitPos = { 0 };
+	VECTOR HitPos = VGet(0.0f, 0.0f, 0.0f);
 
 	// マウスポインタがある画面上の座標に該当する3D空間上のNear面の座標を取得
 	VECTOR StartPos = ConvScreenPosToWorldPos(VGet(Mx, My, 0.0f));
@@ -510,7 +510,7 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 				CHUNK_SIZE_Y * 0.5 * BLOCK_SIZE,
 				DEF_WORLD_POS[x][z].z * CHUNK_SIZE_Z * 0.5 * BLOCK_SIZE);
 
-			if (C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, CHUNK_SIZE_X * BLOCK_SIZE, HitMin, HitMax, HitPos));
+			if (C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, CHUNK_SIZE_X * BLOCK_SIZE, HitMin, HitMax, HitPos))
 			{
 				chunkPos.push_back(DEF_WORLD_POS[x][z]);
 			}
@@ -622,6 +622,8 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 		//		}
 		//	}
 		//}
+
+
 		
 		//ボクセルワールドに対してレイキャストを行う
 		T_RAYCAST_HIT hit = c_voxelWorldCopy.lock()->RaycastVoxel(StartPos, VNorm(VSub(EndPos, StartPos)), VSize(VSub(EndPos, StartPos)), (*itr));
@@ -650,9 +652,6 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 		m_hitPos.y = hit.voxelY;
 		m_hitPos.z = hit.voxelZ;
 		m_chunkPos = (*itr);
-		//DrawFormatString(32, 16, GetColor(255, 255, 255), "pos.x = %f", pos.x);
-		//DrawFormatString(48, 16, GetColor(255, 255, 255), "pos.y = %f", pos.y);
-		//DrawFormatString(64, 16, GetColor(255, 255, 255), "pos.z = %f", pos.z);
 
 		return;
 	}

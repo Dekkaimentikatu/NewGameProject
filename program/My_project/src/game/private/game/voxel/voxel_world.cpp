@@ -388,19 +388,19 @@ T_RAYCAST_HIT C_VOXEL_WORLD::RaycastVoxel(VECTOR origin, VECTOR dir, float maxDi
         {
             if (tMaxY < tMaxZ)
             {
-                y -= stepY;
+                y += stepY;
 
                 lastNormal =
                 {
                     0.0f,
-                    (float)stepY,
+                    (float)-stepY,
                     0.0f
                 };
 
                 if (tMaxY > maxDistance)
                     break;
 
-                tMaxY -= tDeltaY;
+                tMaxY += tDeltaY;
             }
             else
             {
