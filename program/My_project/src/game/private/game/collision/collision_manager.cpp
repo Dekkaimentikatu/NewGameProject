@@ -2,6 +2,7 @@
 #include "game/data/global_data.h"
 #include "game/voxel/voxel_world.h"
 #include "math/myMath.h"
+#include "draw_polygon/draw_polygon.h"
 
 using namespace std;
 
@@ -506,11 +507,16 @@ void C_COLLISION_MANAGER::CollisionLayToVoxel()
 			float HitMin = 0.0f;
 			float HitMax = 0.0f;
 
-			AABBPos = VGet(DEF_WORLD_POS[x][z].x * CHUNK_SIZE_X * 0.5 * BLOCK_SIZE,
-				CHUNK_SIZE_Y * 0.5 * BLOCK_SIZE,
-				DEF_WORLD_POS[x][z].z * CHUNK_SIZE_Z * 0.5 * BLOCK_SIZE);
+			AABBPos = VGet(DEF_WORLD_POS[x][z].x * CHUNK_SIZE_X * 0.5f * BLOCK_SIZE,
+							CHUNK_SIZE_Y * 0.5f * BLOCK_SIZE,
+							DEF_WORLD_POS[x][z].z * CHUNK_SIZE_Z * 0.5f * BLOCK_SIZE);
 
-			if (C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, CHUNK_SIZE_X * BLOCK_SIZE, HitMin, HitMax, HitPos))
+			C_DRAW_POLYGON::DrawLineBox(AABBPos,
+				VGet(CHUNK_SIZE_X * 0.5f * BLOCK_SIZE,
+				CHUNK_SIZE_Y * 0.5f * BLOCK_SIZE,
+				CHUNK_SIZE_Z * 0.5f * BLOCK_SIZE));
+
+			if (C_COLLISION::CheckHitAABBToLine(StartPos, EndPos, AABBPos, CHUNK_SIZE_X * 0.5f * BLOCK_SIZE, HitMin, HitMax, HitPos))
 			{
 				chunkPos.push_back(DEF_WORLD_POS[x][z]);
 			}

@@ -1,5 +1,32 @@
 #include "../public/draw_polygon/draw_polygon.h"
 
+void C_DRAW_POLYGON::DrawLineBox(VECTOR _pos, VECTOR _size)
+{
+	VECTOR vartex1 = VGet(_size.x, _size.y, _size.z);
+	VECTOR vartex2 = VGet(_size.x, _size.y, -_size.z);
+	VECTOR vartex3 = VGet(-_size.x, _size.y, -_size.z);
+	VECTOR vartex4 = VGet(-_size.x, _size.y, _size.z);
+	VECTOR vartex5 = VGet(-_size.x, -_size.y, _size.z);
+	VECTOR vartex6 = VGet(-_size.x, -_size.y, -_size.z);
+	VECTOR vartex7 = VGet(_size.x, -_size.y,- _size.z);
+	VECTOR vartex8 = VGet(_size.x, -_size.y, _size.z);
+
+	DrawLine3D(VAdd(_pos, vartex1), VAdd(_pos, vartex2), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex2), VAdd(_pos, vartex3), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex3), VAdd(_pos, vartex4), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex4), VAdd(_pos, vartex1), GetColor(255, 255, 255));
+
+	DrawLine3D(VAdd(_pos, vartex5), VAdd(_pos, vartex6), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex6), VAdd(_pos, vartex7), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex7), VAdd(_pos, vartex8), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex8), VAdd(_pos, vartex5), GetColor(255, 255, 255));
+
+	DrawLine3D(VAdd(_pos, vartex1), VAdd(_pos, vartex8), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex2), VAdd(_pos, vartex7), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex3), VAdd(_pos, vartex6), GetColor(255, 255, 255));
+	DrawLine3D(VAdd(_pos, vartex4), VAdd(_pos, vartex5), GetColor(255, 255, 255));
+}
+
 void C_DRAW_POLYGON::DrawPolygonTriangle(VECTOR _pos, VECTOR _vartex1, VECTOR _vartex2, VECTOR _vartex3, int _grapHndl, int _transFlag)
 {
     //í∏ì_èÓïÒÇÃçÏê¨

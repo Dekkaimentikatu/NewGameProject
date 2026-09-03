@@ -5,6 +5,9 @@ class C_DRAW_POLYGON
 {
 public:
 
+	//
+	static void DrawLineBox(VECTOR _pos, VECTOR _size);
+
 	/*ŽOŠpŒ`‚ð•`‰æ
 	* 
 	* 
