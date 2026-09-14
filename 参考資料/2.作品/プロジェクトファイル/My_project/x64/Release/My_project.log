@@ -1,0 +1,100 @@
+﻿  effekseer.cpp
+  enemy.cpp
+  player.cpp
+  actor.cpp
+  character.cpp
+  object.cpp
+  camera.cpp
+  camera_manager.cpp
+  player_camera.cpp
+  collision_manager.cpp
+  global_data.cpp
+  enemy_manager.cpp
+  map_manager.cpp
+  player_manager.cpp
+  block_move.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\object\dynamic\block_move.cpp(28,25): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  car.cpp
+  circular_motion.cpp
+  damage_area.cpp
+  damage_floor.cpp
+  darts.cpp
+  コンパイル中...
+  holo_block.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\object\dynamic\holo_block.cpp(23,25): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  rot_floor.cpp
+  block.cpp
+  board.cpp
+  car_emitter.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\object\static\car_emitter.cpp(78,25): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+  check_point.cpp
+  darts_emitter.cpp
+  enemy_spawn_point.cpp
+  goal.cpp
+  sky.cpp
+  start.cpp
+  stage_loader.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\stage\stage_loader.cpp(105,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  back_ground.cpp
+  button.cpp
+  load_anim.cpp
+  respawn_back.cpp
+  result.cpp
+  select_disp.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\UI\select_disp.cpp(65,37): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  stop_effect.cpp
+  title_back.cpp
+  コンパイル中...
+  UI_hpber.cpp
+  UI_stmber.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\UI\UI_stmber.cpp(14,12): warning C4244: '=': 'const float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\game\private\game\UI\UI_stmber.cpp(15,12): warning C4244: '=': 'const float' から 'int' への変換です。データが失われる可能性があります。
+  imgui.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  easing.cpp
+  2Dcollision.cpp
+  3Dcollision.cpp
+  fade.cpp
+  fps.cpp
+  2Dhndlmanager.cpp
+  3Dhndlmanager.cpp
+  input.cpp
+  mouseinput.cpp
+  Xinput.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(115,50): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(114,66): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(114,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(169,50): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(168,66): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\lib\private\input\Xinput.cpp(168,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+  input_config.cpp
+  mymath.cpp
+  コンパイル中...
+  rand.cpp
+  bgm_manager.cpp
+  se_manager .cpp
+  main.cpp
+  imguiCtrl.cpp
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\system\private\imguiCtrl\imguiCtrl.cpp(19,2): warning C4091: '': 変数が何も宣言されていないときは、'int' の左辺を無視します。
+  editer_camera_point.cpp
+  mapediter.cpp
+  scene.cpp
+  scene_data.cpp
+  scene_editer.cpp
+  scene_factory.cpp
+  scene_manager.cpp
+  scene_play.cpp
+  scene_result.cpp
+  scene_select.cpp
+  scene_title.cpp
+  UI_manager.cpp
+  コード生成しています。
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\src\main.cpp(18): warning C4715: 'WndProc': 値を返さないコントロール パスがあります。
+  All 3833 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  My_project.vcxproj -> C:\Users\2409406\Desktop\GitHub_Desktop\NewGameProject\program\My_project\x64\Release\My_project.exe

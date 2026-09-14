@@ -1,0 +1,91 @@
+#include "game/object/dynamic/damage_floor.h"
+#include "2Ddirection/easing/easing.h"
+#include "block_common.h"
+#include "hndlmanager/3Dhndlmanager.h"
+
+
+C_DAMAGE_FLOOR::~C_DAMAGE_FLOOR()
+{
+
+}
+
+void C_DAMAGE_FLOOR::Init()
+{
+	m_pos = VGet(0.0f, 0.0f, 0.0f);	//位置
+	m_objectData.modelScale = VGet(1.0f, 1.0f, 1.0f);	//スケール
+	m_moveVec = VGet(10.0f, 0.0f, 0.0f);
+	m_modelHndl = -1;	//ハンドル
+	m_speedUp = MAX_TIME;
+	m_isActive = true;
+}
+
+void C_DAMAGE_FLOOR::Request(T_OBJECT_DATA _objectData)
+{
+	C_3D_HNDL_MANAGER* instace = C_3D_HNDL_MANAGER::GetInstance();
+	m_modelHndl = instace->Get3DModelHndl(DAMAGE_FLOOR_MODEL_PATH);
+	m_pos = m_objectData.initPos = _objectData.initPos;
+	m_objectData.modelScale = _objectData.modelScale;
+	m_objectData.modelRot = _objectData.modelRot;
+	m_objectType = OBJECT_TYPE_BLCOK;
+}
+
+void C_DAMAGE_FLOOR::Load()
+{
+	c_globalData = C_GLOBAL_DATA::GetInstace();
+	m_playerData = c_globalData->GetPlayerData();
+	DuplicateModel(m_modelHndl);
+	MV1SetTextureGraphHandle(m_modelHndl, 1, m_grapHndl[m_moveDir], FALSE);
+	UpdateModel();
+	SetUpCollInfo();
+}
+
+void C_DAMAGE_FLOOR::Step()
+{
+	//イージング加減速
+	if (!m_playerData->isStop)
+	{
+		m_speedUp += PLAYBACK_SPEED;
+		if (m_speedUp >= MAX_TIME)m_speedUp = MAX_TIME;
+	}
+	else
+	{
+		m_speedUp -= PLAYBACK_SPEED;
+		if (m_speedUp <= MIN_TIME)m_speedUp = MIN_TIME;
+	}
+
+	//攻撃と待機の切り替え
+	//m_attackWait += C_EASING::InQuad<float>(m_speedUp, MAX_TIME);
+
+	//if (m_attackWait > ATTACK_WAIT_MAX)
+	//{
+	//	m_isAttack = !m_isAttack;
+	//	m_attackWait = 0.0f;
+	//	if (m_isAttack)m_moveDir = ATTACK_MODE;
+	//	else m_moveDir = 0;
+	//}
+
+	//テクスチャ切り替え
+	MV1SetTextureGraphHandle(m_modelHndl, 1, m_grapHndl[m_moveDir], FALSE);
+}
+
+void C_DAMAGE_FLOOR::Update()
+{
+	UpdateModel();
+	UpdataCollInfo();
+}
+
+void C_DAMAGE_FLOOR::Draw()
+{
+	DrawModel();
+}
+
+void C_DAMAGE_FLOOR::Exit()
+{
+	DeleteModel();
+	DeleteCollInfo();
+}
+
+void C_DAMAGE_FLOOR::HitCalc()
+{
+
+}
