@@ -211,7 +211,7 @@
               "RelativeDocumentMoniker": "src\\game\\private\\game\\collision\\collision_manager.cpp",
               "ToolTip": "C:\\Users\\2409406\\Desktop\\NewGameProject\\program\\My_project\\src\\game\\private\\game\\collision\\collision_manager.cpp",
               "RelativeToolTip": "src\\game\\private\\game\\collision\\collision_manager.cpp",
-              "ViewState": "AgIAAPUBAAAAAAAAAAAgwAICAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABwCAAAAAAAAAAAgwAICAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-07-21T03:44:21.642Z",
               "IsPinned": true,
@@ -228,8 +228,7 @@
               "ViewState": "AgIAAAkAAAAAAAAAAAAAADsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-06-22T02:59:14.784Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -242,8 +241,7 @@
               "ViewState": "AgIAADQAAAAAAAAAAAAAAEgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-22T06:06:36.514Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -256,8 +254,7 @@
               "ViewState": "AgIAAD8AAAAAAAAAAAAUwE8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-06-22T06:06:59.178Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -296,8 +293,7 @@
               "ViewState": "AgIAADAAAAAAAAAAAAAQwFAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-23T09:39:52.178Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -494,8 +490,7 @@
               "RelativeToolTip": "src\\lib\\private\\draw_polygon\\draw_polygon.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-07-15T07:03:49.533Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-15T07:03:49.533Z"
             },
             {
               "$type": "Document",
@@ -615,8 +610,7 @@
               "RelativeToolTip": "src\\lib\\public\\draw_polygon\\draw_polygon.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-07-17T06:06:10.43Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-17T06:06:10.43Z"
             },
             {
               "$type": "Document",
